@@ -11,18 +11,28 @@ export function loadBoard() {
     }
 }
 
+export function saveCard() {
+    return async dispatch => {
+        try {
+            const board = await boardService.query()
+            dispatch({ type: 'SET_BOARD', board })
+        } catch (err) {
+            console.log('BoardActions: err in loadBoard', err)
+        }
+    }
+}
 
-// export function onSaveBoard(boardId) {
-//     return async dispatch => {
-//         try {
-//             const board = await boardService.getById(boardId)
-//             dispatch({ type: 'SAVE_BOARD', board })
-//         } catch (err) {
-//             console.log('ToysActions: err in removeToy', err)
-//         }
-//     }
-// }
-// ​
+export function onSaveBoard(board) {
+    return async dispatch => {
+        try {
+            const savedBoard = await boardService.save(board)
+            dispatch({ type: 'SAVE_BOARD', board : savedBoard })
+        } catch (err) {
+            console.log('BoardActions: err in loadBoard', err)
+        }
+    }
+}
+
 
 
 

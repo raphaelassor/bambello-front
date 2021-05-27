@@ -10,12 +10,6 @@
     top: rem(48px);
     transform: translate(50%);
 
-    .card-details-item-header {
-        color: $clr3;
-        font-size: 12px;
-        text-transform: uppercase;
-    }
-
     .close-window-btn {
         color: #42526e;
         background-color: transparent;
@@ -43,27 +37,27 @@
     }
 
     .card-details-header {
-        margin: 12px 40px 8px 56px;
+        margin: rem(12px) rem(40px) rem(22px) rem(56px);
 
         textarea {
             color: $clr4;
             width: 100%;
-            background: transparent;
+            background-color: transparent;
             border: 0;
             border-radius: $borderRad1;
             box-shadow: unset;
             font-size: 20px;
             font-weight: 600;
-            height: 32px;
             line-height: 24px;
             margin: -4px -8px;
             min-height: 24px;
             padding: 4px 8px;
             resize: none;
+            transition: box-shadow 0.3s;
 
             &:focus {
                 background-color: #fff;
-                box-shadow: inset 0 0 0 1px $clr1;
+                box-shadow: inset 0 0 0 2px $clr1;
             }
         }
 
@@ -72,13 +66,31 @@
         }
     }
 
+
+    .card-details-items {
+        margin: rem(8px) 0 rem(22px) rem(40px);
+        .card-details-item-header {
+            color: $clr3;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+    }
+
     .card-details-main {
         width: 552px;
         height: 500px;
-        background-color: turquoise;
-        margin: 0 8px 8px 16px;
+        margin: 0 rem(8px) rem(8px) rem(16px);
     }
 
-    // .card-details-sidebar {
-    // }
+    .window-modal-title {
+        margin-bottom: rem(20px);
+        h3 {
+            font-weight: bold;
+            margin-inline-end: rem(8px);
+        }
+        svg{
+            margin-inline-end: rem(16px);
+        }
+    }
 }
