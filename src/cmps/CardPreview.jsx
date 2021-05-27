@@ -7,7 +7,7 @@ class _CardPreview extends Component {
         const { card, currList } = this.props;
         const { boardId } = this.props.match.params;
         return (
-            <Link to={`/board/${boardId}/${currList.id}/${card.id}`}>
+            <Link to={`/board/${boardId}/${currList.id}/${card.id}`} className="clean-link">
                 <div className="card-preview">
                     <div className="card-preview-menu"></div>
                     {card.title}
