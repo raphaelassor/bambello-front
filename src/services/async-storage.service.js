@@ -13,9 +13,9 @@ var gBoard = board
 window.gBoard = gBoard
 
 function query(entityType, boardId) {
-    var entities = JSON.parse(localStorage.getItem(entityType)) || { ...gBoard }
+    var entities = JSON.parse(localStorage.getItem(entityType)) || {...gBoard}
     return new Promise((resolve, reject) => {
-        resolve(entities)
+       resolve(entities)
     })
 }
 

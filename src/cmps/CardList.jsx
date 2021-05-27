@@ -58,7 +58,7 @@ export class CardList extends Component {
                         </div>
                     </div>
                     <div className="card-list-cards">
-                        {currList.cards.map(card => <CardPreview key={card.id} card={card} />)}
+                        {currList.cards.map(card => <CardPreview key={card.id} card={card} currList={currList}/>)}
                     </div>
 
                     {!isAddCardOpen ?

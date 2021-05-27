@@ -1,18 +1,21 @@
 import { Component } from 'react'
+import { withRouter, Link } from 'react-router-dom'
 
-export class CardPreview extends Component {
-
-    componentDidMount() {
-    }
+class _CardPreview extends Component {
 
     render() {
-        const { card } = this.props
+        const { card, currList } = this.props;
+        const { boardId } = this.props.match.params;
         return (
+            <Link to={`/board/${boardId}/${currList.id}/${card.id}`}>
                 <div className="card-preview">
-                <div className="card-preview-menu"></div>
+                    <div className="card-preview-menu"></div>
                     {card.title}
-                {/* <pre>{JSON.stringify(card, null, 2)}</pre> */}
+                    {/* <pre>{JSON.stringify(card, null, 2)}</pre> */}
                 </div>
+            </Link>
         )
     }
 }
+
+export const CardPreview = withRouter(_CardPreview);

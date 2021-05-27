@@ -2,9 +2,11 @@ import { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { AppHeader } from './cmps/AppHeader';
 import { routes } from './routes'
+import { DetailsActions } from './cmps/DetailsAdds'
 // import { connect } from 'react-redux'
 
 export class App extends Component {
+
   render() {
     return (
       <div>
@@ -14,8 +16,9 @@ export class App extends Component {
 
         <main>
           <Switch>
-            {routes.map(route => <Route key={route.path} exact component={route.component} path={route.path} />)}
+            {routes.map(route => <Route key={route.path} component={route.component} path={route.path} />)}
           </Switch>
+          <DetailsActions />
         </main>
       </div>
     )

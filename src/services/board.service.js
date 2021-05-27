@@ -41,7 +41,7 @@ async function save(board) {
     if (board._id) {
         try {
             // return await httpService.put(`board/${board._id}`, board)
-            return await storageService.put(`board`, board)
+            return await storageService.put('board', board)
         } catch (err) {
             throw err
         }

@@ -5,12 +5,20 @@
 @import "./setup/typography.scss";
 
 // Cmps
+@import "cmps/main-header.scss";
+
 @import "cmps/board-header.scss";
+
 @import "cmps/card-add.scss";
 @import "cmps/card-list.scss";
 @import "cmps/card-preview.scss";
+
 @import "cmps/card-details-labels.scss";
-@import "cmps/main-header.scss";
+@import "cmps/card-details-members.scss";
+@import "cmps/card-description.scss";
+
+@import "cmps/labels-pop-over";
+@import "cmps/members-pop-over";
 // @import "components/main-nav.scss";
 // @import "components/screen-overlay.scss";
 
