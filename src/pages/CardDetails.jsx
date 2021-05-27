@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TextareaAutosize } from '@material-ui/core';
 import { connect } from 'react-redux'
 import { boardService } from '../services/board.service'
-import { LabelsCardDetails } from '../cmps/LabelsCardDetails'
+import { CardDetailsLabels } from '../cmps/CardDetailsLabels'
 
 
 class _CardDetails extends Component {
@@ -54,7 +54,7 @@ class _CardDetails extends Component {
                     <p className="bottom-list-name">in list {currListTitle}</p>
                 </div>
                 <div className="card-details-main">
-                    <LabelsCardDetails labels={this.getCardLabels()} />
+                    <CardDetailsLabels labels={this.getCardLabels()} />
                 </div>
                 <div className="card-details-sidebar">
                 </div>

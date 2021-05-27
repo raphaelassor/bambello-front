@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-export class BoardListAdd extends Component {
+export class CardListAdd extends Component {
     state = {
         isOpen: false
     }
