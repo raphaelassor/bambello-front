@@ -19,8 +19,8 @@ export class AppHeader extends Component{
 
     toggleInput=()=>{
         this.setState({isPrevInput:!this.state.isPrevInput ,currOpenModal:!this.state.isPrevInput? '':'search' })
- 
     }
+    
     toggleCurModal=(modalName='')=>{
         if(this.state.currOpenModal=== modalName) this.setState({currOpenModal:''})
         else this.setState({currOpenModal:modalName})

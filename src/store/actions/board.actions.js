@@ -11,18 +11,17 @@ export function loadBoard() {
     }
 }
 
+export function onSaveBoard(board) {
+    return async dispatch => {
+        try {
+            const savedBoard = await boardService.save(board)
+            dispatch({ type: 'SAVE_BOARD', board: savedBoard })
+        } catch (err) {
+            console.log('boardActions: err in onSaveBoard', err)
+        }
+    }
+}
 
-// export function onSaveBoard(boardId) {
-//     return async dispatch => {
-//         try {
-//             const board = await boardService.getById(boardId)
-//             dispatch({ type: 'SAVE_BOARD', board })
-//         } catch (err) {
-//             console.log('ToysActions: err in removeToy', err)
-//         }
-//     }
-// }
-// ​
 
 
 

@@ -1,13 +1,13 @@
-.board-list-wrapper {
+.card-list-wrapper {
     width: 272px;
-    margin: 0 4px;
+    margin: 0 8px;
     height: 100%;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
 
-    .board-list {
+    .card-list {
         background-color: #ebecf0;
         border-radius: $borderRad1;
         box-sizing: border-box;
@@ -16,19 +16,30 @@
         max-height: 100%;
         position: relative;
         white-space: normal;
-        .board-list-header {
+        .card-list-header-input {
+            height: 100%;
+            padding: rem(5px) rem(10px);
+            border: 2px solid $clr1;
+            flex: 1;
+            border-radius: $borderRad1;
+            font-size: 14px;
+            transition: all 2s;
+            font-size: rem(16px);
+            font-weight: 600;
+        }
+        .card-list-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: rem(5px) rem(5px);
             h2 {
                 flex: 1;
-                margin-inline-start: 5px;
+                margin-inline-start: 10px;
                 cursor: pointer;
                 font-size: rem(16px);
                 font-weight: 600;
             }
-            .board-list-btn-menu {
+            .card-list-btn-menu {
                 border-radius: $borderRad1;
                 width: 32px;
                 height: 32px;
@@ -37,10 +48,14 @@
                 align-items: center;
                 cursor: pointer;
                 i:before {
+                    color: #6b778c;
                     font-size: 12px;
                 }
                 &:hover {
                     background-color: rgba(9, 30, 66, 0.08);
+                    i:before{
+                        color: $clr4;
+                    }
                 }
                 &:active {
                     background-color: rgba(9, 30, 66, 0.13);
@@ -48,12 +63,38 @@
             }
         }
 
-        .board-list-cards {
+        .card-list-cards {
             flex: 1 1 auto;
             overflow-y: auto;
             overflow-x: hidden;
             margin: 0 4px;
             padding: 0 4px;
+        }
+
+        .card-list-footer {
+            border-radius: $borderRad1;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: #6b778c;
+            margin: 5px 8px;
+            padding: 5px;
+            width: 228px;
+            padding-left: 6px;
+            svg {
+                margin-inline-end: 5px;
+                width: 14px;
+                height: 14px;
+            }
+
+            &:hover {
+                color: $clr4;
+                background-color: rgba(9, 30, 66, 0.08);
+            }
+            &:active {
+                background-color: rgba(9, 30, 66, 0.13);
+            }
         }
     }
 }

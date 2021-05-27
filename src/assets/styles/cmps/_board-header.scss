@@ -1,17 +1,22 @@
 /* BOARD PAGE */
-.board-header-btn {
-    border-radius: 3px;
-    color: #fff;
-    cursor: default;
-    float: left;
-    font-size: 14px;
-    height: 32px;
-    line-height: 32px;
-    margin: 0 4px 4px 0;
-    max-width: 400px;
-    overflow: hidden;
-    padding-left: 32px;
-    position: relative;
-    text-decoration: none;
-    text-overflow: ellipsis;
+.board-header {
+    padding: 8px 4px 10px 8px;
+    .btn {
+        display: flex;
+        padding: 5px;
+        align-items: center;
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: $borderRad1;
+        outline: unset;
+        border: unset;
+        height: 32px;
+        color: $clr2;
+        *:not(:last-child){
+            margin-inline-end: 5px;
+        }
+    }
+    path {
+        font-size: 16px;
+    }
 }

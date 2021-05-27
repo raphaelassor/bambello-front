@@ -12,12 +12,10 @@ var gBoard = board
 
 window.gBoard = gBoard
 
-function query(entityType, boardId, delay = 1200) {
-    var entities = JSON.parse(localStorage.getItem(entityType)) || {...gBoard}
+function query(entityType, boardId) {
+    var entities = JSON.parse(localStorage.getItem(entityType)) || { ...gBoard }
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(entities)
-        }, delay)
+        resolve(entities)
     })
 }
 
@@ -40,9 +38,9 @@ function post(entityType, newEntity) {
 function put(entityType, updatedEntity) {
     return query(entityType)
         .then(entities => {
-            const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
-            entities.splice(idx, 1, updatedEntity)
-            _save(entityType, entities)
+            // const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
+            // entities.splice(idx, 1, updatedEntity)
+            _save(entityType, updatedEntity)
             return updatedEntity
         })
 }

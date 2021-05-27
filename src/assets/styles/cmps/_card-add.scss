@@ -1,0 +1,45 @@
+.card-add {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0 4px;
+    padding: 0 4px;
+    margin-bottom: 5px;
+
+    .card-add-input{
+        transition: height .5s;
+        resize: none;
+        background-color: #fff;
+        border-radius: 3px;
+        outline: unset;
+        border: unset;
+        cursor: pointer;
+        margin-bottom: 4px;
+        min-height: 70px;
+        width: 100%;
+        position: relative;
+        text-decoration: none;
+        z-index: 0;
+    
+        overflow: hidden;
+        padding: rem(6px) rem(8px) rem(6px);
+        box-shadow: 0px 1px 0 #c0c6d0;
+    }
+
+    div{
+        display: flex;
+        align-items: center;
+        button{
+            margin-inline-end: 5px;
+        }
+
+        svg{
+            cursor: pointer;
+            color: #6b778c;
+            font-size: 24px;
+            &:hover {
+                color: $clr4;
+            }
+        }
+    }
+}

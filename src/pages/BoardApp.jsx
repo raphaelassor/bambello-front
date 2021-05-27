@@ -1,25 +1,24 @@
 import { Component } from "react";
 import { connect } from 'react-redux'
-import { loadBoard } from '../store/actions/board.actions'
+import { loadBoard, onSaveBoard } from '../store/actions/board.actions'
 import { CardList } from '../cmps/CardList'
 import { CardListAdd } from '../cmps/CardListAdd'
+import { BoardHeader } from '../cmps/BoardHeader'
 
 class _BoardApp extends Component {
 
     componentDidMount() {
         this.props.loadBoard();
-        console.log(this.props.loadBoard)
     }
 
     render() {
-        const { board } = this.props
+        const { board, onSaveBoard } = this.props
         if (!board) return <div></div>
-        console.log(board);
         return (
-            <section className="board-app">
-
+            <section className="board-app flex column">
+                <BoardHeader/>
                 <div className="board-list-container">
-                    {board.lists.map(list => <CardList key={list.id} list={list} />)}
+                    {board.lists.map(currList => <CardList key={currList.id} currList={currList} onSaveBoard={onSaveBoard} board={board}/>)}
                 </div>
                 {/* <CardListAdd /> */}
                 {/* <pre>{JSON.stringify(board, null, 2)}</pre> */}
@@ -35,7 +34,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    loadBoard
+    loadBoard,
+    onSaveBoard
 }
 
 export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)

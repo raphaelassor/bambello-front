@@ -1,8 +1,6 @@
 
 export const utilsService = {
-    getCurrencySymbol,
     makeId,
-    makeLorem,
     getRandomIntInclusive
 }
 
