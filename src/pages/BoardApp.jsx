@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { connect } from 'react-redux'
 import { loadBoard } from '../store/actions/board.actions'
-import { BoardList } from '../cmps/BoardList'
-import { BoardListAdd } from '../cmps/BoardListAdd'
+import { CardList } from '../cmps/CardList'
+import { CardListAdd } from '../cmps/CardListAdd'
 
 class _BoardApp extends Component {
 
@@ -19,9 +19,9 @@ class _BoardApp extends Component {
             <section className="board-app">
 
                 <div className="board-list-container">
-                    {board.lists.map(list => <BoardList key={list.id} list={list} />)}
+                    {board.lists.map(list => <CardList key={list.id} list={list} />)}
                 </div>
-                {/* <BoardListAdd /> */}
+                {/* <CardListAdd /> */}
                 {/* <pre>{JSON.stringify(board, null, 2)}</pre> */}
             </section>
         )

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card } from './Card'
+import { CardPreview } from './CardPreview'
 // import menu from '../assets/img/cmps/board-list/menu.svg'
 
-export function BoardList({ list }) {
+export function CardList({ list }) {
 
     return (
         <div className="board-list-wrapper">
@@ -14,7 +14,7 @@ export function BoardList({ list }) {
                     </div>
                 </div>
                 <div className="board-list-cards">
-                    {list.cards.map(card => <Card key={card.id} card={card} />)}
+                    {list.cards.map(card => <CardPreview key={card.id} card={card} />)}
                 </div>
             </div>
         </div>

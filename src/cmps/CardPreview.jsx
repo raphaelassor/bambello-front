@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-export class Card extends Component {
+export class CardPreview extends Component {
 
     componentDidMount() {
     }

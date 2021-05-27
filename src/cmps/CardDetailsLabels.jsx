@@ -1,6 +1,6 @@
 
 
-export function LabelsCardDetails({ labels }) {
+export function CardDetailsLabels({ labels }) {
     return (
         <div className="labels-card-details flex column align-flex-end">
             <h3 className="card-details-item-header">Labels</h3>
