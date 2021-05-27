@@ -20,7 +20,7 @@ class _BoardApp extends Component {
             <section className="board-app flex column">
                 <BoardHeader />
                 <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
-                <div className="board-list-container">
+                <div className="card-list-container">
                     {board.lists.map(currList => <CardList key={currList.id} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
                 </div>
                 {/* <CardListAdd /> */}
