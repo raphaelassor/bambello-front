@@ -9,10 +9,9 @@ export class App extends Component {
     return (
       <div>
         <header>
-          <h1>YA NOOBIM</h1>
-      <AppHeader/>
+          <AppHeader />
         </header>
-        
+
         <main>
           <Switch>
             {routes.map(route => <Route key={route.path} exact component={route.component} path={route.path} />)}
