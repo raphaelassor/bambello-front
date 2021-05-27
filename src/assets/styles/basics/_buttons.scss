@@ -2,7 +2,7 @@
     background-color: $clr1;
     box-shadow: none;
     border: none;
-    color: $clr6;
+    color: $clr2;
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
@@ -28,7 +28,6 @@
     transition-property: background-color, border-color, box-shadow;
     transition-duration: 85ms;
     transition-timing-function: ease;
-
     &:hover {
         background-color: rgba(9, 30, 66, 0.08);
         box-shadow: none;

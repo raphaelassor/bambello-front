@@ -26,7 +26,7 @@
         }
     ],
     "members": [
-        {
+        { 
             "_id": "ERQW!sad213121dsadsa",
             "fullname": "Rephael Assor",
             "imgUrl": "https://www.google.com"
@@ -41,6 +41,7 @@
             "fullname": "Asaf Cohen",
             "imgUrl": "https://www.google.com"
         }
+        
     ],
     "lists": [
         {
