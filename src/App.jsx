@@ -9,7 +9,6 @@ export class App extends Component {
     return (
       <div>
         <header>
-          <h1>YA NOOBIM</h1>
       <AppHeader/>
         </header>
         
