@@ -1,0 +1,32 @@
+// Setup
+@import "./setup/variables.scss";
+@import "./setup/functions.scss";
+@import "./setup/mixins.scss";
+@import "./setup/typography.scss";
+
+// Cmps
+@import "cmps/board-header.scss";
+@import "cmps/board-list.scss";
+@import "cmps/card.scss";
+@import "cmps/labels-card-details.scss";
+@import "cmps/main-header.scss";
+// @import "components/main-nav.scss";
+// @import "components/screen-overlay.scss";
+
+// Pages
+// @import "./pages/homepage.scss";
+@import "./pages/board-app.scss";
+@import "./pages/card-details.scss";
+
+// Basics
+@import "./basics/helpers.scss";
+@import "./basics/layout.scss";
+@import "./basics/base.scss";
+@import "./basics/buttons.scss";
+
+
+// Font awesome
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/regular.scss";
+@import "./fontawesome/brands.scss";
+@import "./fontawesome/solid.scss";

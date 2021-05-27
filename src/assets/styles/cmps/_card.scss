@@ -1,0 +1,41 @@
+.card {
+    background-color: #fff;
+    border-radius: 3px;
+    // box-shadow: 0 1px 0 rgb(9 30 66 / 25%); // TODO: FIX
+    cursor: pointer;
+    display: block;
+    margin-bottom: 8px;
+    max-width: 300px;
+    min-height: 20px;
+    position: relative;
+    text-decoration: none;
+    z-index: 0;
+
+    overflow: hidden;
+    padding: rem(6px) rem(8px) rem(6px);
+    box-shadow: 0px 1px 0 #c0c6d0;
+
+    .card-menu {
+        opacity: 0;
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        top: 4px;
+        right: 4px;
+        bottom: 2x;
+        background-color: #f4f5f7;
+
+        i {
+            color: $clr3;
+        }
+        &:hover {
+            background: darken(#fff, 25%);
+            // border-bottom-color: rgba(9, 30, 66, 0.25);
+        }
+    }
+
+    &:hover,
+    :active {
+        background-color: #f4f5f7;
+    }
+}

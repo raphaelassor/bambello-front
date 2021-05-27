@@ -1,0 +1,66 @@
+.board-list-wrapper {
+    width: 272px;
+    margin: 0 4px;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+
+    .board-list {
+        background-color: #ebecf0;
+        border-radius: $borderRad1;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        position: relative;
+        white-space: normal;
+        .board-list-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: rem(5px) rem(5px);
+            h2 {
+                flex: 1;
+                margin-inline-start: 5px;
+                cursor: pointer;
+                font-size: rem(16px);
+                font-weight: 600;
+            }
+            .board-list-btn-menu {
+                border-radius: $borderRad1;
+                width: 32px;
+                height: 32px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                i:before {
+                    font-size: 12px;
+                }
+                &:hover {
+                    background-color: rgba(9, 30, 66, 0.08);
+                }
+                &:active {
+                    background-color: rgba(9, 30, 66, 0.13);
+                }
+            }
+        }
+
+        .board-list-cards {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin: 0 4px;
+            padding: 0 4px;
+        }
+    }
+}
+
+// .list-card-details {
+//     overflow: hidden;
+//     padding: 6px 8px 2px;
+//     position: relative;
+//     z-index: 10;
+// }

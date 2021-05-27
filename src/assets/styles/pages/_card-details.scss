@@ -1,0 +1,84 @@
+.card-details {
+    position: relative;
+    background-color: $bgClr1;
+    border-radius: $borderRad1;
+    width: 768px;
+    min-height: 600px;
+    position: fixed;
+    z-index: 2;
+    right: 50%;
+    top: rem(48px);
+    transform: translate(50%);
+
+    .card-details-item-header {
+        color: $clr3;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .close-window-btn {
+        color: #42526e;
+        background-color: transparent;
+        border-radius: 50%;
+        border: none;
+        position: absolute;
+        font-size: 25px;
+        width: 32px;
+        height: 32px;
+        top: 4px;
+        right: 4px;
+        transition: background-color 85ms, color 85ms;
+
+        &:hover {
+            background-color: #efefef;
+            cursor: pointer;
+        }
+    }
+
+    .window-icon {
+        position: absolute;
+        top: 15px;
+        left: 16px;
+        font-size: 18px;
+    }
+
+    .card-details-header {
+        margin: 12px 40px 8px 56px;
+
+        textarea {
+            color: $clr4;
+            width: 100%;
+            background: transparent;
+            border: 0;
+            border-radius: $borderRad1;
+            box-shadow: unset;
+            font-size: 20px;
+            font-weight: 600;
+            height: 32px;
+            line-height: 24px;
+            margin: -4px -8px;
+            min-height: 24px;
+            padding: 4px 8px;
+            resize: none;
+
+            &:focus {
+                background-color: #fff;
+                box-shadow: inset 0 0 0 1px $clr1;
+            }
+        }
+
+        .bottom-list-name {
+            color: $clr3;
+        }
+    }
+
+    .card-details-main {
+        width: 552px;
+        height: 500px;
+        background-color: turquoise;
+        margin: 0 8px 8px 16px;
+    }
+
+    // .card-details-sidebar {
+    // }
+}
