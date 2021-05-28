@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { TextareaAutosize } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { utilsService } from '../services/utils.service'
@@ -9,16 +9,20 @@ export class CardAdd extends Component {
         titleTxt: ''
     }
 
-    handleChange = ({ target }) => {
-        const { value } = target;
+    handleChange = (ev) => {
+        if (ev.key === 'Enter') {
+            this.onAddCard()
+            return
+        }
+        const { value } = ev.target;
         this.setState({ titleTxt: value });
     }
 
-    onAdd = () => {
+    onAddCard = () => {
         const { toggleCardAdd } = this.props;
         const { titleTxt } = this.state;
         if (!titleTxt) {
-            this.addInput.focus();
+            this.textArea.focus();
             return;
         }
 
@@ -44,18 +48,20 @@ export class CardAdd extends Component {
 
         board.lists[listIdx].cards.push(card)
         onSaveBoard(board)
-        toggleCardAdd()
+        this.setState({ titleTxt: '' }, () => this.textArea.focus())
+        // toggleCardAdd()
     }
 
     render() {
         const { titleTxt } = this.state
         const { toggleCardAdd } = this.props;
+        // onBlur={() => toggleCardAdd()}
         return (
             <div className="card-add">
-                <TextareaAutosize className="card-add-input" ref={(input) => { this.addInput = input; }} value={titleTxt} autoFocus onChange={this.handleChange} placeholder="Enter a title for this card..." aria-label="empty textarea" />
+                <TextareaAutosize className="card-add-input" ref={(textArea) => this.textArea = textArea} value={titleTxt} autoFocus onChange={this.handleChange} onKeyUp={this.handleChange} placeholder="Enter a title for this card..." aria-label="empty textarea" />
                 <div>
-                    <button className="primary-btn" onClick={this.onAdd}>Add card</button>
-                    <CloseRoundedIcon onClick={() => toggleCardAdd()} />
+                    <button className="primary-btn" onMouseDown={this.onAddCard}>Add card</button>
+                    <CloseRoundedIcon onMouseDown={() => toggleCardAdd()} />
                 </div>
             </div>
         )

@@ -15,6 +15,9 @@
         *:not(:last-child){
             margin-inline-end: 5px;
         }
+        &:hover{
+            background-color: rgba(255, 255, 255, 0.3)
+        }
     }
     path {
         font-size: 16px;

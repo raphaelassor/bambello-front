@@ -1,6 +1,6 @@
 .card-list-wrapper {
     width: 272px;
-    margin: 0 8px;
+    margin: 0 4px;
     height: 100%;
     box-sizing: border-box;
     display: inline-block;
@@ -16,16 +16,18 @@
         max-height: 100%;
         position: relative;
         white-space: normal;
+        
         .card-list-header-input {
             height: 100%;
-            padding: rem(5px) rem(10px);
+            padding: rem(5px) rem(5px);
             border: 2px solid $clr1;
             flex: 1;
             border-radius: $borderRad1;
             font-size: 14px;
-            transition: all 2s;
+            transition: all 1s;
             font-size: rem(16px);
             font-weight: 600;
+            margin-inline-start: 3px;
         }
         .card-list-header {
             display: flex;
@@ -53,7 +55,7 @@
                 }
                 &:hover {
                     background-color: rgba(9, 30, 66, 0.08);
-                    i:before{
+                    i:before {
                         color: $clr4;
                     }
                 }
@@ -69,6 +71,19 @@
             overflow-x: hidden;
             margin: 0 4px;
             padding: 0 4px;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+                // margin-bottom: 8px;
+            }
+            &::-webkit-scrollbar-track {
+                border-radius: $borderRad2;
+                background-color: #dadbe2;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: $borderRad2;
+                background-color: #bfc4ce;
+            }
         }
 
         .card-list-footer {

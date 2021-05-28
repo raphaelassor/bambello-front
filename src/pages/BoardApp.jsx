@@ -22,8 +22,8 @@ class _BoardApp extends Component {
                 <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
                 <div className="card-list-container">
                     {board.lists.map(currList => <CardList key={currList.id} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
+                    <CardListAdd board={board} onSaveBoard={onSaveBoard}/>
                 </div>
-                {/* <CardListAdd /> */}
                 {/* <pre>{JSON.stringify(board, null, 2)}</pre> */}
             </section>
         )
