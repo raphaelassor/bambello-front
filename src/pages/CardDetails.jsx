@@ -7,6 +7,7 @@ import { CardDetailsLabels } from '../cmps/CardDetailsLabels'
 import { CardDetailsMembers } from '../cmps/CardDetailsMembers'
 import { CardDescription } from '../cmps/CardDescription'
 import { CardChecklists } from '../cmps/CardChecklists'
+import { CardDetailsActions } from '../cmps/CardDetailsActions'
 
 
 class _CardDetails extends Component {
@@ -55,6 +56,10 @@ class _CardDetails extends Component {
         this.props.onSaveBoard(board)
     }
 
+    onSaveCardFromActions = (card) => {
+        this.setState({ card }, this.onSaveCard())
+    }
+
     onSaveCardDescription = (description) => {
         const { card } = this.state
         if (card.description === description) return
@@ -76,6 +81,7 @@ class _CardDetails extends Component {
 
 
     render() {
+        const { board, onSaveBoard } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists } = card
@@ -96,6 +102,7 @@ class _CardDetails extends Component {
                     <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                 </div>
                 <div className="card-details-sidebar">
+                    <CardDetailsActions board={board} card={card} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
                 </div>
             </section>
         )
