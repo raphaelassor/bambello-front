@@ -1,5 +1,5 @@
 import CloseIcon from '@material-ui/icons/Close';
-export function EditPopOver({ children, title }) {
+export function PopOver({ children, title }) {
 
     return <div className=" pop-over">
         <div className="pop-over-header">

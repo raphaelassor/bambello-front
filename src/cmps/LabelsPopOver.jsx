@@ -1,52 +1,67 @@
 import { Component } from "react"
 import { LabelPopOverPreview } from "./LabelPopOverPreview"
-import {EditPopOver} from './EditPopOver'
+import { PopOver } from './PopOver'
+import { LabelEditPopOver } from "./LabelEditPopOver"
 
-export class LabelsPopOver extends Component{
+export class LabelsPopOver extends Component {
 
     state = {
         inputTxt: '',
         presentedLabels: '',
+        labelToEdit: null,
+        isEditMode: false,
     }
-    
+
     componentDidMount() {
         this.setState({ presentedLabels: this.props.boardLabels }, () => {
         })
-        
+
     }
-    
+
     handleChange = ({ target }) => {
         this.setState({ inputTxt: target.value }, () => {
             const filterRegex = new RegExp(this.state.inputTxt, 'i')
-            this.setState({ labels: this.props.boardlabels.filter(label => filterRegex.test(label.title)) })
+            this.setState({ presentedLabels: this.props.boardLabels.filter(label => filterRegex.test(label.title)) })
         })
     }
-    // NEEDS TO BE IN CARD DETALS
-    
-    //save to backend and get the new board from the store
-    
-    
+
+    // setLabelEdit = (label = null) => {
+    //     this.setState({ labelToEdit: label , isEditMode:true })
+    // }
+    toggleEditMode = (label = null) => {
+        this.setState({ isEditMode: !this.state.isEditMode, labelToEdit: label })
+    }
+
     isLabelInCard = (label) => {
         return this.props.card.labelIds.some(labelId => labelId === label.id)
     }
     render() {
-        const { presentedLabels, inputTxt } = this.state
+        const { presentedLabels, inputTxt, isEditMode, labelToEdit } = this.state
         if (!presentedLabels) return '';
-        return <EditPopOver title={"Labels"}>
-        <div className="labels-pop-over">
-            <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search Labels"} />
-            <h4>LABELS</h4>
-            <ul className="clean-list">
+        return (<>
+            {isEditMode ?
+                <LabelEditPopOver removeLabel={this.props.removeLabel} labelToEdit={labelToEdit} saveLabel={this.props.saveLabel} toggleEditMode={this.toggleEditMode} />
+                :
+                <PopOver title={"Labels"}>
+                    <div className="labels-pop-over">
+                        <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search Labels"} />
+                        <h4>LABELS</h4>
+                        <ul className="clean-list">
 
-            {presentedLabels.map(label => <LabelPopOverPreview label={label}
-                toggleLabel={this.props.toggleLabel} isInCard={this.isLabelInCard(label)} />)}
-                </ul>
+                            {presentedLabels.map(label => <LabelPopOverPreview label={label}
+                                toggleLabel={this.props.toggleLabel} isInCard={this.isLabelInCard(label)} toggleEditMode={this.toggleEditMode} />)}
+                        </ul>
+                        <button className="secondary-btn" onClick={this.toggleEditMode}>Create a new label</button>
+                    </div>
+                </PopOver>
+            }
+        </>
+        )
 
-                <button className="secondary-btn">Create a new label</button>
-        </div>
-    </EditPopOver>
 
 
-}
+
+
+    }
 
 }
