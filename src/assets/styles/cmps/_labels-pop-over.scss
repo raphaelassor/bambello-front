@@ -1,49 +1,61 @@
-.labels-pop-over{
-    width:20rem;
-   .label-pop-over-preview{
-    border-radius: 3px;
-    cursor: pointer;
-    font-weight: 700;
-    margin: 0 0 rem(4px);
-    min-height: rem(20px);
-    padding: rem(6px) rem(12px);
-    position: relative;
-    transition: padding 85ms,margin 85ms,box-shadow 85ms;
-    .icon-check{
-        line-height: 1rem;
-    }
-   }
-   .secondary-btn{
-       width: 100%;
-       margin: 1rem 0;
-   }
-}
-.label-add-content{
-    width:20rem;
-    span{
-        
-        width:100%;
-        height: 100%;
-        width:3rem;
-        height: 2rem;
+.labels-pop-over {
+    width: 20rem;
+    max-height: calc(100vh-40px);
+    .label-pop-over-preview {
+        align-items: center;
         border-radius: 3px;
-        display: inline-block;
-        background-color: brown;
-    }
-    label[name="label-color"]{
-       
-        svg{
-            position:absolute;
+        cursor: pointer;
+        font-weight: 700;
+        min-height: rem(20px);
+        padding: rem(6px) rem(12px);
+        position: relative;
+        transition: padding 85ms, margin 85ms, box-shadow 85ms;
+        flex-grow: 1;
+        .icon-check {
+            line-height: 1rem;
+        }
+        &:hover{
+            padding-inline-start: 14px;
+            margin-left: 4px;
+            // box-shadow: -8px 0 
         }
     }
-    input[type="radio"]{
-        opacity: 0.1;
-        position: absolute;
-        width: 1px;
-        height: 1px;
+    .secondary-btn {
+        width: 100%;
+        margin: 1rem 0;
     }
-    .color-selection{
-       
-    
+    li {
+        margin: 0 0 rem(4px);
+        div:last-child{
+            svg{
+                cursor: pointer;
+            }
+        padding:8px
+        }
+    }
+}
+.label-add-content {
+    width: 20rem;
+    label[name="label-color"]{
+        width: 100%;
+        height: 100%;
+        width: 48px;
+        height: 32px;
+        margin: 0 rem(8px) rem(8px) 0;
+        border-radius: 3px;
+       cursor:pointer;
+    }
+    input[type="radio"]{
+        opacity: 0;
+        position: absolute;
+        width:0;
+        height:0;
+    }
+    svg {
+        z-index: 2;
+    }
+    .color-selection {
+        width: 100%;
+        margin-bottom: 1.5rem;
     }
 }
