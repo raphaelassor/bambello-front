@@ -6,6 +6,7 @@ import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
 import { CardListAdd } from '../cmps/CardListAdd'
 import { BoardHeader } from '../cmps/BoardHeader'
+import { EditPopOvers } from "../cmps/EditPopOvers";
 
 class _BoardApp extends Component {
 
@@ -24,7 +25,6 @@ class _BoardApp extends Component {
                     {board.lists.map(currList => <CardList key={currList.id} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
                     <CardListAdd board={board} onSaveBoard={onSaveBoard}/>
                 </div>
-                {/* <pre>{JSON.stringify(board, null, 2)}</pre> */}
             </section>
         )
     }

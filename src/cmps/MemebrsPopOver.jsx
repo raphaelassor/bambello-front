@@ -1,5 +1,5 @@
 import { Component } from "react";
-import {EditPopOver } from "./EditPopOver";
+import {PopOver } from "./PopOver";
 
 import { MemberPopOverPreview } from './MemeberPopOverPreview'
 
@@ -34,7 +34,7 @@ export class MembersPopOver extends Component {
     render() {
         const { presentedMembers, inputTxt } = this.state
         if (!presentedMembers) return '';
-        return <EditPopOver title={"Members"}>
+        return <PopOver title={"Members"}>
             <div className="members-pop-over-content">
                 <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search members"} />
                 <h4>BOARD MEMBERS</h4>
@@ -44,7 +44,7 @@ export class MembersPopOver extends Component {
                     toggleMember={this.props.toggleMember} isInCard={this.isMemberInCard(member)} />)}
                     </ul>
             </div>
-        </EditPopOver>
+        </PopOver>
 
 
     }

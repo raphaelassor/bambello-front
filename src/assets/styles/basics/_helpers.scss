@@ -29,6 +29,7 @@
     > *.full {
         flex: 1;
     }
+    
     &.column {
         flex-direction: column;
     }
@@ -107,6 +108,7 @@
     position: absolute;
     z-index: 70;
     padding: 0 12px 12px;
+    min-width: 20rem;
     .pop-over-header {
         display: flex;
         align-items: center;
@@ -115,7 +117,7 @@
         display: block;
         line-height: 40px;
         border-bottom: 1px solid rgba(9, 30, 66, 0.13);
-        margin: 0;
+        margin: 0 0 12px;
         overflow: hidden;
         padding: 0 32px;
         position: relative;
@@ -129,44 +131,61 @@
             right: 0;
             border: none;
             background-color: transparent;
-            padding:0;
-            margin:0;
+            padding: 0;
+            margin: 0;
             outline: none;
             cursor: pointer;
             transform: translateY(-50%);
             line-height: 16px;
         }
     }
-    .pop-over-content{
-        h4{
+    .pop-over-content {
+        h4 {
             color: $clr3;
             font-weight: 500;
-            letter-spacing: .04em;
+            letter-spacing: 0.04em;
             font-size: 12px;
             margin-bottom: 0.5rem;
         }
-        input{
-            margin:4px 0 12px 0;
-            width:100%;
-            &::placeholder{
-                color:$clr3;
+<<<<<<< HEAD
+        input {
+            margin: 4px 0 12px 0;
+            width: 100%;
+            &::placeholder {
+                color: $clr3;
             }
         }
     }
 }
+
 //INPUT TRELLO
+=======
+      
+    }
+}
+
+>>>>>>> 058f52c2ca3ce64ab9ff5595d74ef8d7e949c8fa
 .pop-over-input {
+    margin:4px 0 12px 0;
+    width:100%;
     outline: none;
     border: none;
     box-shadow: inset 0 0 0 2px #dfe1e6;
     background-color: #fafbfc;
-    box-sizing: border-box;
-    -webkit-appearance: none;
     border-radius: 3px;
     display: block;
     line-height: 20px;
     padding: 8px 12px;
+    &::placeholder{
+        color:$clr3;
+    }
 }
 
-//CLEAN BTN
+//HIDDEN - SHOW
+.hidden {
+    display: none;
+}
 
+.show {
+    display: flex;
+}

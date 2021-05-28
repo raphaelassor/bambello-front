@@ -33,7 +33,22 @@
     transition-timing-function: ease;
     &:hover {
         background-color: rgba(9, 30, 66, 0.08);
-        box-shadow: none;
-        border: none;
     }
+    &:active{
+        background-color: #e4f0f6;
+        color: $clr1;
+    }
+}
+.danger-btn{
+    background-color: #b04632;
+    border: none;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 6px 12px;
+}
+
+.wide-btn{
+    padding-left: 24px;
+    padding-right: 24px;
 }

@@ -50,7 +50,7 @@
             "cards": [
                 {
                     "id": "c101",
-                    "title": "Help me",
+                    "title": "Backlog",
                     "description": "description",
                     "comments": [
                         {
@@ -66,13 +66,23 @@
                     ],
                     "checklists": [
                         {
-                            "id": "YEhmF",
+                            "id": "s101",
                             "title": "Checklist",
                             "todos": [
                                 {
-                                    "id": "212jX",
+                                    "id": "o101",
                                     "title": "To Do 1",
                                     "isDone": false
+                                },
+                                {
+                                    "id": "o102",
+                                    "title": "To Do 2",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "o103",
+                                    "title": "To Do 3",
+                                    "isDone": true
                                 }
                             ]
                         }

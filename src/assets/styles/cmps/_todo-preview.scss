@@ -1,0 +1,56 @@
+.todo-preview-container {
+    .todo-preview {
+        width: 100%;
+        min-height: 36px;
+        border-radius: $borderRad1;
+        // align-items: center;
+
+        &:hover {
+            background-color: rgba(9, 30, 66, 0.04);
+        }
+
+        .checked,
+        .non-checked {
+            margin: 8px 12px 6px 6px;
+            cursor: pointer;
+            path {
+                font-size: 30px;
+            }
+            transition: opacity 0.3s;
+            &:hover {
+                opacity: 60%;
+            }
+        }
+
+        .checked {
+            path {
+                color: $clr1;
+            }
+        }
+        .non-checked {
+            path {
+                color: #dfe1e6;
+            }
+        }
+
+        textarea {
+            cursor: pointer;
+            width: 100%;
+            border: 0;
+            background-color: transparent;
+            overflow: hidden;
+            border-radius: $borderRad1;
+            box-shadow: unset;
+            margin: 6px;
+            font-size: 14px;
+            resize: none;
+
+            &:focus {
+                min-height: 56px;
+                padding: 8px 12px;
+                background: rgba(9, 30, 66, 0.04);
+                border: 0.1em solid rgba(9, 30, 66, 0.13);
+            }
+        }
+    }
+}
