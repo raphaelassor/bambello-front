@@ -29,6 +29,7 @@
     > *.full {
         flex: 1;
     }
+    
     &.column {
         flex-direction: column;
     }
@@ -129,31 +130,32 @@
             right: 0;
             border: none;
             background-color: transparent;
-            padding:0;
-            margin:0;
+            padding: 0;
+            margin: 0;
             outline: none;
             cursor: pointer;
             transform: translateY(-50%);
             line-height: 16px;
         }
     }
-    .pop-over-content{
-        h4{
+    .pop-over-content {
+        h4 {
             color: $clr3;
             font-weight: 500;
-            letter-spacing: .04em;
+            letter-spacing: 0.04em;
             font-size: 12px;
             margin-bottom: 0.5rem;
         }
-        input{
-            margin:4px 0 12px 0;
-            width:100%;
-            &::placeholder{
-                color:$clr3;
+        input {
+            margin: 4px 0 12px 0;
+            width: 100%;
+            &::placeholder {
+                color: $clr3;
             }
         }
     }
 }
+
 //INPUT TRELLO
 .pop-over-input {
     outline: none;
@@ -168,5 +170,11 @@
     padding: 8px 12px;
 }
 
-//CLEAN BTN
+//HIDDEN - SHOW
+.hidden {
+    display: none;
+}
 
+.show {
+    display: flex;
+}

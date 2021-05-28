@@ -1,31 +1,35 @@
 .card-details {
+    color: $clr7;
     position: relative;
     background-color: $bgClr1;
     border-radius: $borderRad1;
     width: 768px;
     min-height: 600px;
-    position: fixed;
+    position: absolute;
     z-index: 2;
     right: 50%;
     top: rem(48px);
     transform: translate(50%);
 
     .close-window-btn {
-        color: #42526e;
+        cursor: pointer;
+        color: $clr7;
         background-color: transparent;
         border-radius: 50%;
         border: none;
         position: absolute;
-        font-size: 25px;
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
         top: 4px;
         right: 4px;
         transition: background-color 85ms, color 85ms;
-
+        
         &:hover {
-            background-color: #efefef;
-            cursor: pointer;
+            background-color: rgba(9, 30, 66, 0.08);
+        }
+
+        &:active {
+            background-color: rgba(9, 30, 66, 0.25);
         }
     }
 
@@ -40,7 +44,7 @@
         margin: rem(12px) rem(40px) rem(22px) rem(56px);
 
         textarea {
-            color: $clr4;
+            color: $clr7;
             width: 100%;
             background-color: transparent;
             border: 0;
@@ -66,7 +70,6 @@
         }
     }
 
-
     .card-details-items {
         margin: rem(8px) 0 rem(22px) rem(40px);
         .card-details-item-header {
@@ -84,7 +87,8 @@
     }
 
     .window-modal-title {
-        margin-bottom: rem(20px);
+        height: 32px;
+        margin-bottom: rem(12px);
         h3 {
             font-weight: bold;
             margin-inline-end: rem(8px);
