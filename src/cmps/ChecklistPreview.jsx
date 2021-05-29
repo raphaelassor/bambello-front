@@ -65,7 +65,7 @@ export class ChecklistPreview extends Component {
             <div className="window-modal-title flex align-center justify-space-between">
                 <div className="flex">
                     <CheckBoxOutlinedIcon />
-                    <h3>Checklist</h3>
+                    <h3>{checklist.title}</h3>
                 </div>
                 <button onClick={() => onRemoveChecklist(checklist)} className="secondary-btn">Delete</button>
             </div>
