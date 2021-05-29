@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { MembersPopOver } from './MemebrsPopOver'
+import { MembersPopOver } from './MembersPopOver'
 import { LabelsPopOver } from './LabelsPopOver'
 import { ChecklistPopOver } from './ChecklistPopOver'
 import { DatePopOver } from './DatePopOver'
@@ -92,31 +92,28 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
         onSaveCardFromActions(card)
     }
 
-    toggleArchive = () => {
+    toggleArchive=()=>{
         const { card, onSaveCardFromActions } = this.props
-        card.isArchived = !card.isArchived;
+        card.isArchived=!card.isArchived;
         onSaveCardFromActions(card)
     }
-
-    removeCard = () => {
-        const { board, onSaveBoard, card, goBackToBoard } = this.props
-        board.lists.forEach(list => {
-            list.cards.forEach((boardCard, idx) => {
-                if (boardCard.id === card.id) list.cards.splice(idx, 1)
+    removeCard=()=>{
+        const { board, onSaveBoard,card } = this.props
+        board.lists.forEach(list=>{
+            list.cards.forEach((boardCard,idx)=>{
+                if(boardCard.id===card.id) list.cards.splice(idx,1)
             })
         })
         onSaveBoard(board)
-        goBackToBoard()
     }
-
     togglePopOver = (popOver = '') => {
         if (this.state.popOver === popOver) this.setState({ popOver: '', isPopOverMode: false })
         else this.setState({ popOver, isPopOverMode: true })
     }
-
     render() {
         const { popOver } = this.state
         const { card, board } = this.props
+
         return <div className="details-actions-wrapper flex column">
             <h4>ADD TO CARD</h4>
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('members')}>
@@ -149,7 +146,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
                     <span>Date</span>
                 </div>
             </button>
-            {popOver === 'date' && <DatePopOver saveDate={this.saveDueDate} togglePopOver={this.togglePopOver} />}
+            {popOver === 'date' && <DatePopOver saveDueDate={this.saveDueDate} togglePopOver={this.togglePopOver} />}
 
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('attach')}>
                 <div className="actions-btn-content flex align-center">
@@ -168,30 +165,30 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
             {popOver === 'cover' && <CoverPopOver togglePopOver={this.togglePopOver} saveCover={this.saveCover} card={card} />}
             <h4>ACTIONS</h4>
 
-            {!card.isArchived ?
+               {!card.isArchived? 
                 <button className="secondary-btn actions-btn" onClick={this.toggleArchive}>
                     <div className="actions-btn-content flex align-center">
-                        <i className="fas fa-archive icon-sm"></i>
+                    <i className="fas fa-archive icon-sm"></i>
                         <span>Archive</span>
                     </div>
                 </button>
                 :
                 <>
-                    <button className="secondary-btn actions-btn" onClick={this.toggleArchive} >
-                        <div className="actions-btn-content flex align-center">
-                            <i className="fas fa-undo icon-sm"></i>
-                            <span>Return To Board</span>
-                        </div>
-                    </button>
-                    <button className="secondary-btn actions-btn danger-btn" onClick={this.removeCard} >
-                        <div className="actions-btn-content  flex align-center">
-                            <MinusIcon className="remove" />
-                            <span>Delete</span>
-                        </div>
-                    </button>
+             <button className="secondary-btn actions-btn" onClick={this.toggleArchive} >
+                    <div className="actions-btn-content flex align-center">
+                    <i className="fas fa-undo icon-sm"></i>
+                        <span>Return To Board</span>
+                    </div>
+                </button>
+                <button className="secondary-btn actions-btn danger-btn" onClick={this.removeCard} >
+                    <div className="actions-btn-content  flex align-center">
+                        <MinusIcon className="remove"/>
+                        <span>Delete</span>
+                    </div>
+                </button>
                 </>}
 
-
+           
         </div>
     }
 

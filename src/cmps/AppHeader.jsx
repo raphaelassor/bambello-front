@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import {ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import {ReactComponent as BoardIcon} from '../assets/img/icons/board.svg'
 import {ReactComponent as AppsIcon} from '../assets/img/icons/apps.svg'
@@ -8,13 +8,19 @@ import {ReactComponent as AddIcon} from '../assets/img/icons/add.svg'
 import {ReactComponent as InfoIcon} from '../assets/img/icons/info.svg'
 import {ReactComponent as BellIcon} from '../assets/img/icons/notific-bell.svg'
 import Avatar from '@material-ui/core/Avatar';
-export class AppHeader extends Component{
+ class _AppHeader extends Component{
  
     state={
         filterTxt:'',
         currOpenModal:'',
         isPrevInput:true,
         isNewNotific:false,
+        isFullStyle:false
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.match.url==='/' && this.props.match.url!=='/') this.setState({isFullStyle:false})
+        if(prevProps.match.url!=='/' && this.props.match.url==='/') this.setState ({isFullStyle:true})
     }
 
     toggleInput=()=>{
@@ -27,8 +33,8 @@ export class AppHeader extends Component{
     }
     
     render(){
-        const{isPrevInput,currOpenModal}=this.state
-        return <div className="main-header flex justify-space-between">
+        const{isPrevInput,currOpenModal,isFullStyle}=this.state
+        return <div className={`main-header flex justify-space-between ${isFullStyle? '': 'opacity'} `}>
             <div className="btn-header-container flex">
                 <button className="btn-header">
                 <AppsIcon/>
@@ -94,3 +100,4 @@ export class AppHeader extends Component{
     }
 
 }
+export const AppHeader=withRouter(_AppHeader)

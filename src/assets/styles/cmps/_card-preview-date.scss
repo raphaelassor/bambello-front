@@ -40,7 +40,7 @@
         }
     }
 
-    &.over-due {
+    &.overdue {
         color: $clr2;
         background-color: #ec9488;
         .card-preview-date-icon::before {
@@ -65,7 +65,7 @@
         }
     }
 
-    &.finished {
+    &.done {
         color: $clr2;
         background-color: #61bd4f;
 
