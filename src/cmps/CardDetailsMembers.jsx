@@ -1,7 +1,7 @@
 import Avatar from '@material-ui/core/Avatar';
 export function CardDetailsMembers({ members }) {
     return (
-        <div className="card-details-members flex column">
+        <div className="card-details-members item-container flex column">
             <h3 className="card-details-item-header">Members</h3>
             <div className="members-container flex wrap">
                 {members.map(member => {

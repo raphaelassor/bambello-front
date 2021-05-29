@@ -2,7 +2,7 @@
 
 export function CardDetailsLabels({ labels }) {
     return (
-        <div className="card-details-labels flex column align-flex-end">
+        <div className="card-details-labels item-container flex column align-flex-end">
             <h3 className="card-details-item-header">Labels</h3>
             <div className="labels-container flex wrap">
                 {labels.map(label => {
