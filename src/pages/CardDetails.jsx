@@ -21,6 +21,7 @@ class _CardDetails extends Component {
         // SETTING LIST AND CARD FROM PARAMS
         const { cardId, listId } = this.props.match.params
         const { board: { lists } } = this.props
+        console.log(lists)
         const list = lists.find(list => list.id === listId)
         const { cards } = list;
         const card = cards.find(card => card.id === cardId)
@@ -92,6 +93,7 @@ class _CardDetails extends Component {
                     <TextareaAutosize value={title} aria-label="empty textarea" onBlur={this.onSaveCard} onChange={this.cardTitleHandleChange} />
                     <p className="bottom-list-name">in list {list.title}</p>
                 </div>
+                <div className="flex">
                 <div className="card-details-main flex column">
                     <div className="card-details-items flex">
                         <CardDetailsMembers members={members} />
@@ -100,8 +102,9 @@ class _CardDetails extends Component {
                     <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
                     <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                 </div>
-                <div className="card-details-sidebar">
+                <div className="card-details-sidebar flex column full">
                     <CardDetailsActions board={board} card={card} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
+                </div>
                 </div>
             </section>
         )

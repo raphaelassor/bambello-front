@@ -19,12 +19,14 @@ export class DatePopOver extends Component {
     }
 
     onSaveDate=()=>{
-        this.props.saveDate(this.state.date)
+        this.props.saveDueDate(this.state.date)
+        this.props.togglePopOver()
         //close popover
     }
     onRemoveDate=()=>{
-        this.props.removeDate()
-        //close popover
+        this.props.saveDueDate()
+        this.props.togglePopOver()
+        
     }
 
     render() {

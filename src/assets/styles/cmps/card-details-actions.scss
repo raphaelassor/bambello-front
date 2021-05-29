@@ -1,3 +1,35 @@
  .details-actions-wrapper{
-     
+     padding:0 16px 0 0;
+     h4{
+        color: $clr3;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        font-size: 12px;
+        margin-bottom: 0.5rem;
+     }
+     .actions-btn{
+         
+         margin-bottom: 8px;
+         svg{
+             width: 16px;
+             height:16px;
+         }
+         .actions-btn-content{
+            align-items: flex-end;
+             justify-content: flex-start;
+             min-height: 20px;
+             i,svg{
+                 color: #172b4dcc;
+                path{
+                    fill: #172b4dcc;
+                }
+                 margin: 0 8px 0 -4px;
+             }
+             span{
+                line-height: 17px;
+             }
+             
+         }
+     }
+
  }

@@ -26,19 +26,23 @@ class _CardPreview extends Component {
 
     render() {
         const { card, currList } = this.props;
+        const { coverMode, bgColor } = card.style
         const { boardId } = this.props.match.params;
+        const cardStyles = coverMode === 'full' ? { backgroundColor: bgColor, borderTopLeftRadius: '3px', borderTopRightRadius: '3px', minHeight: '52px'} : {};
 
         return (
             <Link to={`/board/${boardId}/${currList.id}/${card.id}`} className="clean-link">
-                <div className="card-preview">
+                {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
+                <div className="card-preview" style={cardStyles}>
                     <div className="card-preview-menu"><EditIcon /></div>
                     <div className="card-preview-name">{card.title}</div>
-                    <div className="card-preview-icons">
+                    {coverMode !== 'full' && <div className="card-preview-icons">
                         {/* {isUserWatched && <RemoveRedEyeOutlinedIcon/>} */} {/*TODO: try to change cmp name to WatchIcon, implement user watched*/}
                         {!!card.dueDate && <CardPreviewDate card={card} onToggleCardFinish={this.onToggleCardFinish} />}
                         {card.description && <div><SubjectIcon /></div>}
                         {!this.isChecklistsEmpty(card) && <CardPreviewChecklist checklists={card.checklists} />}
                     </div>
+                    }
                 </div>
             </Link>
         )
