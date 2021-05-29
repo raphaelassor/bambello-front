@@ -72,11 +72,16 @@
 
     .card-details-items {
         margin: rem(8px) 0 rem(22px) rem(40px);
+        align-items: flex-start;
         .card-details-item-header {
             color: $clr3;
             font-size: 12px;
             font-weight: 500;
+            margin: 0 8px 4px 0;
             text-transform: uppercase;
+        }
+        .item-container{
+            margin:0 8px 8px 0;
         }
     }
 

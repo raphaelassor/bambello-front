@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { CardPreview } from './CardPreview'
 import { CardAdd } from './CardAdd'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
+import { ListMenu } from './ListMenu'
 // import menu from '../assets/img/cmps/board-list/menu.svg'
 
 export class CardList extends Component {
@@ -9,7 +10,8 @@ export class CardList extends Component {
     state = {
         isEditTitle: false,
         titleTxt: '',
-        isAddCardOpen: false
+        isAddCardOpen: false,
+        isMenuOpen:false
     }
 
     toggleEditTitle = () => {
@@ -41,9 +43,13 @@ export class CardList extends Component {
         this.setState({ titleTxt: value });
     }
 
+    toggleMenu=()=>{
+        this.setState({isMenuOpen:!this.state.isMenuOpen})
+    }
+
     render() {
         const { board, currList, onSaveBoard } = this.props
-        const { isEditTitle, isAddCardOpen, titleTxt } = this.state
+        const { isEditTitle, isAddCardOpen, titleTxt ,isMenuOpen} = this.state
         return (
             <div className="card-list-wrapper">
                 <div className="card-list">
@@ -53,8 +59,9 @@ export class CardList extends Component {
                             :
                             <h2 onClick={this.toggleEditTitle}>{currList.title}</h2>
                         }
-                        <div className="card-list-btn-menu">
+                        <div className="card-list-btn-menu" onClick={this.toggleMenu}>
                             <i className="fas fa-ellipsis-h"></i>
+                            {isMenuOpen&&<ListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu}/>}
                         </div>
                     </div>
                     <div className="card-list-cards">
