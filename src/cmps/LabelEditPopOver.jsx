@@ -33,7 +33,7 @@ export class LabelEditPopOver extends Component {
     render() {
         const { title, color } = this.state
         const {labelToEdit} = this.props
-        const colorCode = '121212'
+        
         return <PopOver togglePopOver={this.props.togglePopOver} title={labelToEdit.title? 'Edit a label':'Create a label'}>
             <div className="label-add-content">
                 <label htmlFor="label-inout">Name</label>

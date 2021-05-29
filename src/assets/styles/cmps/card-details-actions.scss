@@ -14,8 +14,13 @@
              width: 16px;
              height:16px;
          }
+         &.danger-btn{
+             path{
+                 fill: white;
+             }
+         }
          .actions-btn-content{
-            align-items: flex-end;
+            align-items: center;
              justify-content: flex-start;
              min-height: 20px;
              i,svg{
@@ -28,7 +33,17 @@
              span{
                 line-height: 17px;
              }
+             .remove{
+                 &.MuiSvgIcon-root path{
+                     fill:white;
+                 }
+             }
              
+         }
+         .danger-btn{
+            &:hover{
+                background-color:darken($clr8,10%);
+            }
          }
      }
 

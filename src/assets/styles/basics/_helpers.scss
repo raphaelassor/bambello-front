@@ -81,7 +81,10 @@
 .icon-sm{
     height: 16px;
     width:16px;
-    line-height: 16px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon-lg {
