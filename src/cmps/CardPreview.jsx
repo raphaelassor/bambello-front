@@ -7,6 +7,10 @@ import RemoveRedEyeOutlinedIcon from '@material-ui/icons/RemoveRedEyeOutlined';
 
 class _CardPreview extends Component {
 
+    isChecklistsEmpty = ({ checklists }) => {
+        return checklists.every(checklist => !checklist.todos.length)
+    }
+
     render() {
         const { card, currList } = this.props;
         const { boardId } = this.props.match.params;
@@ -20,7 +24,7 @@ class _CardPreview extends Component {
                         {/* {isUserWatched && <RemoveRedEyeOutlinedIcon/>} */} {/*TODO: try to change cmp name to WatchIcon, implement user watched*/}
                         {!!card.dueDate && <CardPreviewDate dueDate={card.dueDate} />}
                         {card.description && <div><SubjectIcon /></div>}
-                        {card.checklists.length && <CardPreviewChecklist checklists={card.checklists}/>}
+                        {!this.isChecklistsEmpty(card) && <CardPreviewChecklist checklists={card.checklists} />}
                     </div>
                 </div>
             </Link>
