@@ -29,7 +29,7 @@ export class CardListAdd extends Component {
         const { titleTxt } = this.state
         if (!titleTxt) {
             this.textArea.focus();
-            return;
+            return
         }
 
         const { board, onSaveBoard } = this.props
@@ -40,7 +40,7 @@ export class CardListAdd extends Component {
         }
 
         board.lists.push(list);
-        onSaveBoard(board);
+        this.setState({ titleTxt: '' }, () => onSaveBoard(board))
     }
 
 
@@ -59,8 +59,8 @@ export class CardListAdd extends Component {
                         </div>
                     </div>
                     :
-                        <div className="card-list-add" onClick={this.toggleListAdd}>
-                            <AddIcon /> Add {lists.length > 1 ? 'another' : 'a'} list
+                    <div className="card-list-add" onClick={this.toggleListAdd}>
+                        <AddIcon /> Add {lists.length > 1 ? 'another' : 'a'} list
                         </div>
                 }
             </div>
