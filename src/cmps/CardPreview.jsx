@@ -2,9 +2,9 @@ import { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { CardPreviewDate } from './CardPreviewDate'
 import { CardPreviewChecklist } from './CardPreviewChecklist'
-import { Subject as SubjectIcon } from '@material-ui/icons';
-import EditIcon from '@material-ui/icons/CreateOutlined';
-import RemoveRedEyeOutlinedIcon from '@material-ui/icons/RemoveRedEyeOutlined';
+import { Subject as SubjectIcon } from '@material-ui/icons'
+import EditIcon from '@material-ui/icons/CreateOutlined'
+import { Draggable } from 'react-beautiful-dnd'
 
 class _CardPreview extends Component {
 
@@ -30,28 +30,34 @@ class _CardPreview extends Component {
     }
 
     render() {
-        const { card, currList } = this.props;
+        const { card, currList, cardIdx } = this.props;
 
         const { coverMode, bgColor } = card.style
         const { boardId } = this.props.match.params;
 
         return (
-            <Link to={`/board/${boardId}/${currList.id}/${card.id}`} className="clean-link">
-                <div className="card-preview-container">
-                    <div className="card-preview-edit"><EditIcon /></div>
-                    {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
-                    <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
-                        <div className="card-preview-name">{card.title}</div>
-                        {coverMode !== 'full' && <div className="card-preview-icons">
-                            {/* {isUserWatched && <RemoveRedEyeOutlinedIcon/>} */} {/*TODO: try to change cmp name to WatchIcon, implement user watched*/}
-                            {!!card.dueDate && <CardPreviewDate card={card} onToggleCardFinish={this.onToggleCardFinish} />}
-                            {card.description && <div><SubjectIcon /></div>}
-                            {!this.isChecklistsEmpty(card) && <CardPreviewChecklist checklists={card.checklists} />}
-                        </div>
-                        }
+            <Draggable draggableId={card.id} index={cardIdx}>
+                {provided => (
+                    <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                        <Link to={`/board/${boardId}/${currList.id}/${card.id}`} className="clean-link">
+                            <div className="card-preview-container">
+                                <div className="card-preview-edit"><EditIcon /></div>
+                                {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
+                                <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
+                                    <div className="card-preview-name">{card.title}</div>
+                                    {coverMode !== 'full' && <div className="card-preview-icons">
+                                        {/* {isUserWatched && <RemoveRedEyeOutlinedIcon/>} */} {/*TODO: try to change cmp name to WatchIcon, implement user watched*/}
+                                        {!!card.dueDate && <CardPreviewDate card={card} onToggleCardFinish={this.onToggleCardFinish} />}
+                                        {card.description && <div><SubjectIcon /></div>}
+                                        {!this.isChecklistsEmpty(card) && <CardPreviewChecklist checklists={card.checklists} />}
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </Link>
                     </div>
-                </div>
-            </Link>
+                )}
+            </Draggable>
         )
     }
 }
