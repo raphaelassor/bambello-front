@@ -8,7 +8,7 @@ export function ColorPallette({ handleChange,selectedColor }) {
         {colorCodes.map(colorCode => {
             return <label className="flex align-center justify-center" style={{ backgroundColor: colorCode }} name="label-color" htmlFor={`color-${colorCode}`}>
                 <input type="radio" name="color" id={`color-${colorCode}`} value={colorCode} onClick={handleChange} />
-                {selectedColor === colorCode && <CheckIcon style={{ width: '16px', height: '16px', color: 'white' }} />}
+                {selectedColor === colorCode && <CheckIcon key={colorCode} style={{ width: '16px', height: '16px', color: 'white' }} />}
             </label>
         })}
     </div>

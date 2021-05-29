@@ -1,7 +1,7 @@
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from '@date-io/moment';
 
-import React, { Component, useState } from "react";
+import React, { Component} from "react";
 
 import { PopOver } from "./PopOver";
 export class DatePopOver extends Component {

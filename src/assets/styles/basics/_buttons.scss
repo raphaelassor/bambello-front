@@ -40,12 +40,15 @@
     }
 }
 .danger-btn{
-    background-color: #b04632;
+    background-color: $clr8;
     border: none;
     color: #fff;
     border-radius: 3px;
     cursor: pointer;
     padding: 6px 12px;
+    &:hover{
+        background-color: darken($clr8, 5%);
+    }
 }
 
 .wide-btn{

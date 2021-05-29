@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import { MembersPopOver } from './MemebrsPopOver'
 import { LabelsPopOver } from './LabelsPopOver'
-import { LabelEditPopOver } from './LabelEditPopOver'
 import { ChecklistPopOver } from './ChecklistPopOver'
 import { DatePopOver } from './DatePopOver'
 import { AttachPopOver } from './AttachPopOver'
@@ -10,6 +9,7 @@ import { utilsService } from '../services/utils.service'
 import LabelIcon from '@material-ui/icons/LocalOfferOutlined';
 import CheckboxIcon from '@material-ui/icons/CheckBoxOutlined'
 import CoverIcon from '@material-ui/icons/VideoLabel';
+import MinusIcon from '@material-ui/icons/RemoveOutlined';
 export class CardDetailsActions extends Component {//{board,card,toggleMember}
 
     state = {
@@ -62,7 +62,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
             todos: []
         }
         card.checklists.push(checklist)
-        console.log('card- checklists', card.checklists)
+
         onSaveCardFromActions(card)
 
     }
@@ -78,7 +78,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
         const { card, onSaveCardFromActions } = this.props
         if (!card.attachs) card.attachs = []
         card.attachs.push(fileUrl)
-        console.log('fileUrl', fileUrl)
+
         onSaveCardFromActions(card)
     }
 
@@ -92,14 +92,31 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
         onSaveCardFromActions(card)
     }
 
+    toggleArchive = () => {
+        const { card, onSaveCardFromActions } = this.props
+        card.isArchived = !card.isArchived;
+        onSaveCardFromActions(card)
+    }
+
+    removeCard = () => {
+        const { board, onSaveBoard, card, goBackToBoard } = this.props
+        board.lists.forEach(list => {
+            list.cards.forEach((boardCard, idx) => {
+                if (boardCard.id === card.id) list.cards.splice(idx, 1)
+            })
+        })
+        onSaveBoard(board)
+        goBackToBoard()
+    }
+
     togglePopOver = (popOver = '') => {
         if (this.state.popOver === popOver) this.setState({ popOver: '', isPopOverMode: false })
         else this.setState({ popOver, isPopOverMode: true })
     }
+
     render() {
-        const { popOver, isPopOverMode } = this.state
+        const { popOver } = this.state
         const { card, board } = this.props
-        console.log(card)
         return <div className="details-actions-wrapper flex column">
             <h4>ADD TO CARD</h4>
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('members')}>
@@ -144,11 +161,37 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
 
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('cover')}>
                 <div className="actions-btn-content flex align-center">
-                   <CoverIcon/>
+                    <CoverIcon />
                     <span>Cover</span>
                 </div>
             </button>
-            {popOver === 'cover' && <CoverPopOver togglePopOver={this.togglePopOver} saveCover={this.saveCover} />}
+            {popOver === 'cover' && <CoverPopOver togglePopOver={this.togglePopOver} saveCover={this.saveCover} card={card} />}
+            <h4>ACTIONS</h4>
+
+            {!card.isArchived ?
+                <button className="secondary-btn actions-btn" onClick={this.toggleArchive}>
+                    <div className="actions-btn-content flex align-center">
+                        <i className="fas fa-archive icon-sm"></i>
+                        <span>Archive</span>
+                    </div>
+                </button>
+                :
+                <>
+                    <button className="secondary-btn actions-btn" onClick={this.toggleArchive} >
+                        <div className="actions-btn-content flex align-center">
+                            <i className="fas fa-undo icon-sm"></i>
+                            <span>Return To Board</span>
+                        </div>
+                    </button>
+                    <button className="secondary-btn actions-btn danger-btn" onClick={this.removeCard} >
+                        <div className="actions-btn-content  flex align-center">
+                            <MinusIcon className="remove" />
+                            <span>Delete</span>
+                        </div>
+                    </button>
+                </>}
+
+
         </div>
     }
 
