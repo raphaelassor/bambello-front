@@ -95,8 +95,8 @@ class _CardDetails extends Component {
                 <div className="flex">
                 <div className="card-details-main flex column">
                     <div className="card-details-items flex">
-                        <CardDetailsMembers members={members} />
-                        <CardDetailsLabels labels={this.cardLabels} />
+                        {members.length &&<CardDetailsMembers members={members} />}
+                        {!!this.cardLabels.length &&<CardDetailsLabels labels={this.cardLabels} />}
                     </div>
                     <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
                     <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />

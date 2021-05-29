@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined'
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import { TextareaAutosize } from '@material-ui/core';
 import { TodoList } from '../cmps/TodoList'
 import { TodoAdd } from '../cmps/TodoAdd'
 import { ProgressBar } from '../cmps/ProgressBar'
@@ -7,11 +9,25 @@ import { ProgressBar } from '../cmps/ProgressBar'
 export class ChecklistPreview extends Component {
 
     state = {
-        checklist: null
+        checklist: null,
+        isTitleEdit: false
     }
 
     componentDidMount() {
         const { checklist } = this.props
+        this.setState({ checklist })
+    }
+
+    onToggleTitleEdit = () => {
+        const { isTitleEdit } = this.state
+        this.setState({ isTitleEdit: !isTitleEdit }, () => {
+            if (this.state.isTitleEdit) this.selectedInput.select()
+        })
+    }
+
+    titleHandleChange = ({ target: { value } }) => {
+        const { checklist } = this.state
+        checklist.title = value
         this.setState({ checklist })
     }
 
@@ -56,22 +72,36 @@ export class ChecklistPreview extends Component {
         onSaveChecklist(checklist)
     }
 
-    // onSaveChecklistTitle = (title)
-
     render() {
-        const { onRemoveChecklist } = this.props
-        const { checklist } = this.state
+        const { onRemoveChecklist, onSaveChecklist } = this.props
+        const { checklist, isTitleEdit } = this.state
         if (!checklist) return '' //loader
         const { todos } = checklist
-        console.log(checklist)
         return (<div className="checklist-preview">
-            <div className="window-modal-title flex align-center justify-space-between">
+            {!isTitleEdit && <div className="window-modal-title flex align-center justify-space-between">
                 <div className="flex">
                     <CheckBoxOutlinedIcon />
-                    <h3>{checklist.title}</h3>
+                    <h3 onClick={() => this.onToggleTitleEdit()}>{checklist.title}</h3>
                 </div>
                 <button onClick={() => onRemoveChecklist(checklist)} className="secondary-btn">Delete</button>
-            </div>
+            </div>}
+            {isTitleEdit && <div className="title-editor flex">
+                <CheckBoxOutlinedIcon />
+                <div className="flex column">
+                    <TextareaAutosize
+                        onBlur={() => this.onToggleTitleEdit()}
+                        onChange={this.titleHandleChange}
+                        value={checklist.title}
+                        placeholder="Add an item"
+                        ref={(input) => { this.selectedInput = input }}
+                        autoFocus
+                        aria-label="empty textarea" />
+                    <div className="checklist-controllers flex align-center">
+                        <button className="primary-btn" onMouseDown={() => onSaveChecklist(checklist)}>Save</button>
+                        <CloseRoundedIcon className="close-svg" />
+                    </div >
+                </div>
+            </div>}
             <ProgressBar completed={this.doneTodosProgress} />
             <TodoList todos={todos} onSaveTodo={this.onSaveTodo} onRemoveTodo={this.onRemoveTodo} />
             <TodoAdd onAddTodo={this.onAddTodo} />
