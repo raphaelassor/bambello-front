@@ -29,18 +29,27 @@ class _CardPreview extends Component {
         return coverMode === 'full' ? { backgroundColor: bgColor, borderTopLeftRadius: '3px', borderTopRightRadius: '3px', minHeight: '52px' } : {};
     }
 
+     draggableStyle = (style, snapshot) => {
+        if (!snapshot.isDropAnimating) {
+            return style;
+        }
+        return {
+            ...style,
+            transform: 'rotate(0.5turn)',
+            transitionDuration: `0.001s`,
+        }
+    }
+
     render() {
         const { card, currList, cardIdx } = this.props;
-
         const { coverMode, bgColor } = card.style
         const { boardId } = this.props.match.params;
-
         return (
             <Draggable draggableId={card.id} index={cardIdx}>
-                {provided => (
-                    <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                {(provided, snapshot) => (
+                    <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)}>
                         <Link to={`/board/${boardId}/${currList.id}/${card.id}`} className="clean-link">
-                            <div className="card-preview-container">
+                            <div  className="card-preview-container">
                                 <div className="card-preview-edit"><EditIcon /></div>
                                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
