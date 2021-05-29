@@ -31,14 +31,16 @@
         }
         .card-list-header {
             display: flex;
-            align-items: center;
+            // align-items: center;
             justify-content: space-between;
             padding: rem(5px) rem(5px);
             h2 {
                 flex: 1;
                 margin-inline-start: 10px;
+                word-break: break-all;
                 cursor: pointer;
                 font-size: rem(16px);
+                padding-top: 7px;
                 font-weight: 600;
             }
             .card-list-btn-menu {

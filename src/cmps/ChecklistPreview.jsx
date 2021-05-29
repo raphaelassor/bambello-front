@@ -63,7 +63,6 @@ export class ChecklistPreview extends Component {
         const { checklist } = this.state
         if (!checklist) return '' //loader
         const { todos } = checklist
-        console.log(checklist)
         return (<div className="checklist-preview">
             <div className="window-modal-title flex align-center justify-space-between">
                 <div className="flex">

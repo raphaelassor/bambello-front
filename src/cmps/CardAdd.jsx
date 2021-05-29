@@ -43,7 +43,10 @@ export class CardAdd extends Component {
             startDate: 0,
             dueDate: 0,
             attachs: [],
-            style: null
+            style: {
+                coverMode: '',
+                bgColor: ''
+            }
         }
 
         board.lists[listIdx].cards.push(card)
