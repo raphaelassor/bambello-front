@@ -206,9 +206,19 @@
                             "title": "Checklist",
                             "todos": [
                                 {
-                                    "id": "212jX",
-                                    "title": "To Do 1",
-                                    "isDone": false
+                                    "id": "26712jX",
+                                    "title": "To Do 3",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "212jX11",
+                                    "title": "To Do 4",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "212j67X",
+                                    "title": "To Do 5",
+                                    "isDone": true
                                 }
                             ]
                         }
@@ -224,7 +234,7 @@
                     "labelIds": ["l101","l102"],
                     "createdAt": 1590999730348,
                     "startDate": 1590999730348,
-                    "dueDate": 16156215211,
+                    "dueDate": 1615621521133,
                     "byMember": {
                         "_id": "u101",
                         "username": "Tal",
