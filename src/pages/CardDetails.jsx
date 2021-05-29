@@ -7,6 +7,7 @@ import { CardDetailsLabels } from '../cmps/CardDetailsLabels'
 import { CardDetailsMembers } from '../cmps/CardDetailsMembers'
 import { CardDescription } from '../cmps/CardDescription'
 import { CardChecklists } from '../cmps/CardChecklists'
+import { CardDetailsActions } from '../cmps/CardDetailsActions'
 
 
 class _CardDetails extends Component {
@@ -47,12 +48,15 @@ class _CardDetails extends Component {
         const { card, list } = this.state;
         const { board, board: { lists } } = this.props
         const { cards } = list
-        console.log('cards in savecard', cards)
         const listIdx = lists.indexOf(list)
         const cardIdx = list.cards.indexOf(card)
         cards[cardIdx] = card // deploy card into cards
         board.lists[listIdx].cards = cards // saving cards to the currlist
         this.props.onSaveBoard(board)
+    }
+
+    onSaveCardFromActions = (card) => {
+        this.setState({ card }, this.onSaveCard())
     }
 
     onSaveCardDescription = (description) => {
@@ -76,6 +80,7 @@ class _CardDetails extends Component {
 
 
     render() {
+        const { board, onSaveBoard } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists } = card
@@ -95,8 +100,9 @@ class _CardDetails extends Component {
                     <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
                     <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                 </div>
-                <div className="card-details-sidebar">
-                </div>
+                {/* <div className="card-details-sidebar">
+                    <CardDetailsActions board={board} card={card} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
+                </div> */}
             </section>
         )
     }

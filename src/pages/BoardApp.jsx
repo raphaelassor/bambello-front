@@ -6,7 +6,6 @@ import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
 import { CardListAdd } from '../cmps/CardListAdd'
 import { BoardHeader } from '../cmps/BoardHeader'
-import { EditPopOvers } from "../cmps/EditPopOvers";
 
 class _BoardApp extends Component {
 

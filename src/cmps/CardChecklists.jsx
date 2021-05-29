@@ -9,12 +9,22 @@ export class CardChecklists extends Component {
         onSaveCardChecklists(checklists)
     }
 
+    onRemoveChecklist = (checklist) => {
+        let { onSaveCardChecklists, checklists } = this.props
+        checklists = checklists.filter(currChecklist => currChecklist.id !== checklist.id)
+        onSaveCardChecklists(checklists)
+    }
+
     render() {
         const { checklists } = this.props
         return (
             <div className="card-checklists" >
                 { checklists.map(checklist => {
-                    return <ChecklistPreview key={checklist.id} checklist={checklist} onSaveChecklist={this.onSaveChecklist} />
+                    return <ChecklistPreview
+                        key={checklist.id}
+                        checklist={checklist}
+                        onRemoveChecklist={this.onRemoveChecklist}
+                        onSaveChecklist={this.onSaveChecklist} />
                 })}
             </div>
         )
