@@ -95,14 +95,14 @@ class _CardDetails extends Component {
                 <div className="flex">
                 <div className="card-details-main flex column">
                     <div className="card-details-items flex">
-                        {members.length &&<CardDetailsMembers members={members} />}
+                        {!!members.length &&<CardDetailsMembers members={members} />}
                         {!!this.cardLabels.length &&<CardDetailsLabels labels={this.cardLabels} />}
                     </div>
                     <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
                     <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                 </div>
                 <div className="card-details-sidebar flex column full">
-                    <CardDetailsActions board={board} card={card} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
+                    <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
                 </div>
                 </div>
             </section>

@@ -8,18 +8,23 @@ import { PopOver } from './PopOver';
 export class CoverPopOver extends Component {
 
     state = {
-        bgColor: '',
-        coverMode: null,
-        bgImgUrl:'',
+        bgColor: this.props.card.style?.bgColor||'',
+        coverMode:this.props.card.style?.coverMode|| null,
+        bgImgUrl:this.props.card.style?.bgImgUrl|| '',
+    }
+    componentDidMount(){
+        this.setState({})
     }
 
     handleChange = ({ target }) => {
-        this.setState({ bgColor: target.value ,bgImgUrl:''},this.onSaveCover)
+        let {coverMode}= this.state
+        if(!coverMode) coverMode='header';
+        this.setState({ bgColor: target.value ,bgImgUrl:'',coverMode:coverMode},this.onSaveCover)
     }
 
     onRemoveCover = () => {
-        this.setState({ bgColor: '', coverMode: '',bgImgUrl:'' },this.props.removeCover())
-        // this.props.removeCoverBg()
+        this.setState({ bgColor: '', coverMode: '',bgImgUrl:'' },this.onSaveCover)
+                // this.props.removeCoverBg()
     }
 
     onSetMode = (mode) => {
@@ -27,7 +32,7 @@ export class CoverPopOver extends Component {
     }
     onSaveCover=()=>{
         const {bgColor,bgImgUrl,coverMode}=this.state
-        if((coverMode&&bgImgUrl)||(coverMode&&bgColor || (!coverMode&&!bgColor&&!bgImgUrl))) this.props.saveCover(this.state)
+        if((coverMode&&bgImgUrl)||(coverMode&&bgColor) || (!coverMode&&!bgColor&&!bgImgUrl)) this.props.saveCover(this.state)
         else return
     }
     onFileUpload=(fileUrl)=>{

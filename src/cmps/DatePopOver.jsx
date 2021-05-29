@@ -1,7 +1,7 @@
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from '@date-io/moment';
 
-import React, { Component, useState } from "react";
+import React, { Component} from "react";
 
 import { PopOver } from "./PopOver";
 export class DatePopOver extends Component {
@@ -19,12 +19,14 @@ export class DatePopOver extends Component {
     }
 
     onSaveDate=()=>{
-        this.props.saveDate(this.state.date)
+        this.props.saveDueDate(this.state.date)
+        this.props.togglePopOver()
         //close popover
     }
     onRemoveDate=()=>{
-        this.props.removeDate()
-        //close popover
+        this.props.saveDueDate()
+        this.props.togglePopOver()
+        
     }
 
     render() {

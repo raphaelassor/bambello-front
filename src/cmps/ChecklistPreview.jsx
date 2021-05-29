@@ -19,7 +19,8 @@ export class ChecklistPreview extends Component {
     }
 
     onToggleTitleEdit = () => {
-        const { isTitleEdit } = this.state
+        const { isTitleEdit ,checklist} = this.state
+        if(!checklist.title) return
         this.setState({ isTitleEdit: !isTitleEdit }, () => {
             if (this.state.isTitleEdit) this.selectedInput.select()
         })
@@ -92,7 +93,6 @@ export class ChecklistPreview extends Component {
                         onBlur={() => this.onToggleTitleEdit()}
                         onChange={this.titleHandleChange}
                         value={checklist.title}
-                        placeholder="Add an item"
                         ref={(input) => { this.selectedInput = input }}
                         autoFocus
                         aria-label="empty textarea" />

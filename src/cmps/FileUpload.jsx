@@ -23,8 +23,6 @@ export class FileUpload extends Component {
     return isUploading ? 'Uploading...' : 'Upload Image'
   }
   render() {
-    const { fileUrl, width, height } = this.state
-    
     return (
       <div className="upload-preview" >
         <label htmlFor="file-upload">Computer</label>
