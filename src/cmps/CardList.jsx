@@ -58,15 +58,16 @@ export class CardList extends Component {
                         </div>
                     </div>
                     <div className="card-list-cards">
-                        {currList.cards.map(card => <CardPreview key={card.id} card={card} currList={currList}/>)}
+                        {currList.cards.map(card => <CardPreview key={card.id} card={card} currList={currList} board={board} onSaveBoard={onSaveBoard} />)}
+                        {isAddCardOpen &&
+                            <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
+                        }
                     </div>
 
-                    {!isAddCardOpen ?
+                    {!isAddCardOpen &&
                         <div className="card-list-footer" onClick={this.toggleCardAdd}>
                             <AddIcon /> Add {currList.cards.length > 1 ? 'another' : ''} card
                         </div>
-                        :
-                        <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
                     }
                 </div>
             </div>

@@ -74,10 +74,10 @@
 
             &::-webkit-scrollbar {
                 width: 8px;
-                // margin-bottom: 8px;
             }
             &::-webkit-scrollbar-track {
                 border-radius: $borderRad2;
+                margin-bottom: 2px;
                 background-color: #dadbe2;
             }
             &::-webkit-scrollbar-thumb {

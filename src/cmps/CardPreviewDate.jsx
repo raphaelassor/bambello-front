@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import { ScheduleOutlined as TimeIcon } from '@material-ui/icons';
 
 export class CardPreviewDate extends Component {
 
@@ -13,13 +12,16 @@ export class CardPreviewDate extends Component {
     }
 
     render() {
-        const isOverDue = true;
-        const isFinished = false;
+        // TODO: IMPLEMENT TIME TRACKING
+        const isOverDue = false;
+        const isDueSoon = false;
+
+        const { card, onToggleCardFinish } = this.props
         return (
-            <div className={`card-preview-date ${isOverDue && 'over-due'} ${isFinished && 'finished'}`}>
+            <div className={`card-preview-date${isOverDue ? 'over-due' : ''} ${isDueSoon ? 'due-soon' : ''} ${card.isDone ? 'finished' : ''}`} onClick={onToggleCardFinish}>
                 <div className="card-preview-date-icon"></div>
                 <div>
-                    {this.dueDateFormat(this.props.dueDate)}
+                    {this.dueDateFormat(card.dueDate)}
                 </div>
             </div>
         )

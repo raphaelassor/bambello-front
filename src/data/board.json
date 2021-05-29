@@ -162,6 +162,7 @@
                     "createdAt": 1590999730348,
                     "startDate": 1590999730348,
                     "dueDate": 16156215211,
+                    "isDone": false,
                     "byMember": {
                         "_id": "u101",
                         "username": "Tal",
@@ -223,6 +224,7 @@
                     "createdAt": 1590999730348,
                     "startDate": 1590999730348,
                     "dueDate": 16156215211,
+                    "isDone": false,
                     "byMember": {
                         "_id": "u101",
                         "username": "Tal",
@@ -299,6 +301,7 @@
                     "createdAt": 1590999730348,
                     "startDate": 1590999730348,
                     "dueDate": 1615621521133,
+                    "isDone": false,
                     "byMember": {
                         "_id": "u101",
                         "username": "Tal",

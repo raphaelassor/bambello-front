@@ -89,7 +89,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
         console.log(card)
         return <div className="details-actions-wrapper flex column">
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('members')}>
-            <i class="far fa-user icon-sm "></i>
+            <i className="far fa-user icon-sm "></i>
                 <span>Members</span>
             </button>
             {popOver==='members'&& <MembersPopOver togglePopOver={this.togglePopOver} boardMembers={board.members} card={card} toggleMember={this.toggleMember} />}
@@ -104,7 +104,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
             {popOver==='checklist'&&  <ChecklistPopOver togglePopOver={this.togglePopOver} addChecklist={this.addChecklist} />}
             
             <button className="secondary-btn" onClick={() => this.togglePopOver('date')}>
-                <i class="far fa-clock icon-sm "></i>
+                <i className="far fa-clock icon-sm "></i>
                 <span>Date</span>
             </button>
             {popOver==='date'&&<DatePopOver togglePopOver={this.togglePopOver}/>}
