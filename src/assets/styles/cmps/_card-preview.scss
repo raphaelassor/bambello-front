@@ -1,65 +1,95 @@
-.card-preview {
-    background-color: #fff;
-    border-radius: 3px;
-    // box-shadow: 0 1px 0 rgb(9 30 66 / 25%); // TODO: FIX
-    cursor: pointer;
-    display: block;
-    margin-bottom: 8px;
-    max-width: 300px;
-    min-height: 20px;
+.card-preview-container {
     position: relative;
-    text-decoration: none;
-    z-index: 0;
-
-    overflow: hidden;
-    padding: rem(6px) rem(10px) rem(10px);
-    box-shadow: 0px 1px 0 #c0c6d0;
-
     &:hover {
-        background-color: #f4f5f7;
+        .card-preview-edit {
+            background-color: rgba(#f4f5f7, 0.8);
+            opacity: 1;
+        }
     }
-
-    .card-preview-name {
-        margin-bottom: 6px;
+    .card-preview-header {
+        height: 32px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
     }
-    .card-preview-menu {
-        opacity: 0;
+    .card-preview-edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: absolute;
+        opacity: 0;
+
+        border-radius: $borderRad1;
         width: 28px;
         height: 28px;
-        top: 4px;
-        right: 4px;
+        z-index: 1;
+        top: 2px;
+        right: 2px;
         bottom: 2x;
-        background-color: #f4f5f7;
 
-        i {
+        svg {
+            color: #6b778c;
+            height: 16px;
+            width: 16px;
+            line-height: 16px;
             color: $clr3;
         }
         &:hover {
-            background: darken(#fff, 25%);
-            // border-bottom-color: rgba(9, 30, 66, 0.25);
+            svg {
+                color: #172b4d;
+            }
+            background-color: #ebecf0;
         }
     }
+    .card-preview {
+        background-color: #fff;
+        border-radius: 3px;
+        // box-shadow: 0 1px 0 rgb(9 30 66 / 25%); // TODO: FIX
+        cursor: pointer;
+        display: block;
+        margin-bottom: 8px;
+        max-width: 300px;
+        min-height: 20px;
+        position: relative;
+        text-decoration: none;
+        z-index: 0;
 
-    .card-preview-icons {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        
-        >* {margin-bottom: 6px;}
-        
-        >*:not(:last-child) {
-            // TODO: fix so it won't affect the svg icon inside card-preview-date 
-            margin-inline-end: 5px; 
+        overflow: hidden;
+        padding: rem(6px) rem(10px) rem(1px);
+        box-shadow: 0px 1px 0 #c0c6d0;
+        &.cover-full {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 500;
+        }
+        &:hover {
+            filter: brightness(95%);
         }
 
-        svg {
+        .card-preview-name {
+            word-wrap: break-word;
+            margin-bottom: 6px;
+        }
+
+        .card-preview-icons {
             display: flex;
-            justify-content: center;
-            color: #6b778c;
-            width: 16px;
-            height: 16px;
-        }
+            align-items: center;
+            flex-wrap: wrap;
 
+            > * {
+                margin-bottom: 6px;
+            }
+
+            > *:not(:last-child) {
+                margin-inline-end: 5px;
+            }
+
+            svg {
+                display: flex;
+                justify-content: center;
+                color: #6b778c;
+                width: 16px;
+                height: 16px;
+            }
+        }
     }
 }

@@ -1,16 +1,47 @@
-.checklist-preview{
+.checklist-preview {
     margin-bottom: rem(40px);
-    .checklist-controllers {
-        margin-bottom: 9px;
-        .primary-btn {
-            margin-inline-start: rem(40px);
-            margin-inline-end: 4px;
-        }
+
+    h3 {
         cursor: pointer;
-        color: #6b778c;
-        font-size: 24px;
-        &:hover {
-            color: $clr4;
+        word-break: break-all;
+    }
+
+    svg {
+        margin-left: 6px;
+    }
+
+    .title-editor {
+        margin-bottom: 21px;
+        svg {
+            margin: 3px 3px 6px 6px;
+        }
+        textarea {
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            color: $clr7;
+            background-color: transparent;
+            overflow: hidden;
+            border-radius: $borderRad1;
+            box-shadow: unset;
+            margin-left: 6px;
+            margin-bottom: 6px;
+            resize: none;
+            min-height: 56px;
+            padding: 8px 12px;
+            background-color: rgba(9, 30, 66, 0.04);
+            border: 0.1em solid rgba(9, 30, 66, 0.13);
+        }
+        .checklist-controllers {
+            margin-left: 6px;
+            color: #6b778c;
+            font-size: 24px;
+            .close-svg {
+                cursor: pointer;
+                &:hover {
+                    color: $clr4;
+                }
+            }
         }
     }
 }

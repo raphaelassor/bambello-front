@@ -12,7 +12,7 @@
         transition-duration: 0.14s;
         transition-timing-function: ease-in;
 
-        &:hover{
+        &:hover {
             .delete-svg {
                 display: flex;
             }
@@ -56,7 +56,7 @@
                 cursor: text;
                 min-height: 56px;
                 padding: 8px 12px;
-                background: rgba(9, 30, 66, 0.04);
+                background-color: rgba(9, 30, 66, 0.04);
                 border: 0.1em solid rgba(9, 30, 66, 0.13);
             }
 
@@ -73,6 +73,21 @@
             &:hover {
                 background-color: rgba(9, 30, 66, 0.08);
                 border-radius: $borderRad1;
+            }
+        }
+    }
+    .checklist-controllers {
+        margin-bottom: 9px;
+        color: #6b778c;
+        font-size: 24px;
+        .primary-btn {
+            margin-inline-start: rem(40px);
+            margin-inline-end: 4px;
+        }
+        .close-svg {
+            cursor: pointer;
+            &:hover {
+                color: $clr4;
             }
         }
     }

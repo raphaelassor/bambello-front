@@ -90,4 +90,9 @@
             }
         }
     }
+
+    &.due-soon {
+        color: $clr2;
+        background-color: #f2d600;
+    }
 }

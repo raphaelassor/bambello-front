@@ -1,6 +1,6 @@
 .card-list-add-wrapper {
     width: 272px;
-    margin: 0 8px;
+    margin: 0 4px;
     height: 100%;
     box-sizing: border-box;
     display: inline-block;
@@ -49,7 +49,7 @@
         border-radius: $borderRad1;
         background-color: hsla(0, 0%, 100%, 0.24);
         padding: 10px 12px;
-        transition: color 85ms ease-in;
+        transition: background-color 85ms ease-in;
         svg {
             margin-inline-end: 5px;
             width: 16px;

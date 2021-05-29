@@ -48,7 +48,7 @@ export class LabelsPopOver extends Component {
                         <h4>LABELS</h4>
                         <ul className="clean-list">
 
-                            {presentedLabels.map(label => <LabelPopOverPreview label={label}
+                            {presentedLabels.map(label => <LabelPopOverPreview key={label.id} label={label}
                                 toggleLabel={this.props.toggleLabel} isInCard={this.isLabelInCard(label)} toggleEditMode={this.toggleEditMode} />)}
                         </ul>
                         <button className="secondary-btn" onClick={this.toggleEditMode}>Create a new label</button>

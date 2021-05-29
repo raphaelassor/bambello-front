@@ -3,6 +3,7 @@ import { ChecklistPreview } from '../cmps/ChecklistPreview'
 export class CardChecklists extends Component {
 
     onSaveChecklist = (checklist) => {
+        if (!checklist.title) return
         const { onSaveCardChecklists, checklists } = this.props
         const checklistIdx = checklists.indexOf(checklist)
         checklists[checklistIdx] = checklist

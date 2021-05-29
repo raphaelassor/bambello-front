@@ -67,7 +67,7 @@ export class TodoPreview extends Component {
                         value={title}
                         ref={(input) => { this.selectedInput = input }}
                         aria-label="empty textarea" />
-                    <DeleteIcon className="delete-svg" onClick={() => onRemoveTodo(todo.id)} />
+                    {!isInputSelected && <DeleteIcon className="delete-svg" onClick={() => onRemoveTodo(todo.id)} />}
                 </div>
                 <div className={`checklist-controllers flex align-center ${isInputSelected ? 'show' : 'hidden'}`}>
                     <button className="primary-btn" onClick={() => this.onFinishEditing()}>Save</button>

@@ -5,7 +5,7 @@ import { utilsService } from '../services/utils.service'
 
 export class TodoAdd extends Component {
     state = {
-        isEditMode: true,
+        isEditMode: false,
         todo: {
             title: ''
         }
@@ -24,6 +24,7 @@ export class TodoAdd extends Component {
         if (ev.type === 'keydown' && ev.key !== 'Enter') return
         const { onAddTodo } = this.props
         const { todo } = this.state
+        if(!todo.title) return
         todo.id = utilsService.makeId()
         todo.isDone = false
         this.setState({ todo: { title: '' } }, onAddTodo(todo))

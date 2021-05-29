@@ -21,6 +21,7 @@ class _CardDetails extends Component {
         // SETTING LIST AND CARD FROM PARAMS
         const { cardId, listId } = this.props.match.params
         const { board: { lists } } = this.props
+        console.log(lists)
         const list = lists.find(list => list.id === listId)
         const { cards } = list;
         const card = cards.find(card => card.id === cardId)
@@ -95,14 +96,14 @@ class _CardDetails extends Component {
                 <div className="flex">
                 <div className="card-details-main flex column">
                     <div className="card-details-items flex">
-                        <CardDetailsMembers members={members} />
-                        <CardDetailsLabels labels={this.cardLabels} />
+                        {!!members.length &&<CardDetailsMembers members={members} />}
+                        {!!this.cardLabels.length &&<CardDetailsLabels labels={this.cardLabels} />}
                     </div>
                     <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
                     <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                 </div>
                 <div className="card-details-sidebar flex column full">
-                    <CardDetailsActions board={board} card={card} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
+                    <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
                 </div>
                 </div>
             </section>
