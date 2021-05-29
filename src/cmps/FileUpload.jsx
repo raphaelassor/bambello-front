@@ -8,7 +8,13 @@ export class FileUpload extends Component {
   uploadFile = async (ev) => {
     this.setState({ isUploading: true })
     console.log('file is', ev )
-    // const { secure_url} = await cloudinaryService.uploadFile(ev)
+    try{
+      const {secure_url} = await cloudinaryService.uploadFile(ev)
+      this.props.onFileUpload(secure_url)
+    }catch (err){
+      console.log('error in getting fileUrl From Cloudinary')
+      //Error MSG from store 
+    }
     this.setState({ isUploading: false})
   }
   get uploadMsg() {
@@ -21,7 +27,7 @@ export class FileUpload extends Component {
     
     return (
       <div className="upload-preview" >
-        <label htmlFor="file-upload">{ this.uploadMsg }</label>
+        <label htmlFor="file-upload">Computer</label>
         <input type="file" onChange={ this.uploadFile } accept="img/*" id="file-upload" />
       </div>
     )

@@ -18,13 +18,17 @@
 @import "cmps/card-details-members.scss";
 @import "cmps/card-description.scss";
 
-
+@import "cmps/pop-over";
 @import "cmps/labels-pop-over";
 @import "cmps/members-pop-over";
+@import "cmps/date-pop-over";
+@import "cmps/checklist-pop-over";
+@import "cmps/attach-pop-over";
+@import "cmps/cover-pop-over";
+@import "cmps/color-palette";
+
 @import "cmps/progress-bar.scss";
 @import "cmps/todo-preview.scss";
-@import "cmps/checklist-pop-over";
-@import "cmps/date-pop-over";
 // @import "components/main-nav.scss";
 // @import "components/screen-overlay.scss";
 

@@ -40,9 +40,9 @@ export class LabelsPopOver extends Component {
         if (!presentedLabels) return '';
         return (<>
             {isEditMode ?
-                <LabelEditPopOver removeLabel={this.props.removeLabel} labelToEdit={labelToEdit} saveLabel={this.props.saveLabel} toggleEditMode={this.toggleEditMode} />
+                <LabelEditPopOver togglePopOver={this.props.togglePopOver} removeLabel={this.props.removeLabel} labelToEdit={labelToEdit} saveLabel={this.props.saveLabel} toggleEditMode={this.toggleEditMode} />
                 :
-                <PopOver title={"Labels"}>
+                <PopOver title={"Labels"} togglePopOver={this.props.togglePopOver}>
                     <div className="labels-pop-over">
                         <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search Labels"} />
                         <h4>LABELS</h4>

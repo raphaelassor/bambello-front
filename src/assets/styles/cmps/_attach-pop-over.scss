@@ -1,0 +1,30 @@
+.attach-pop-over-content {
+    .upload-preview {
+        @include upload-file-preview
+    //     margin-bottom: 8px;
+    //     border-bottom:1px solid rgba(9, 30, 66, 0.13);
+    //     label {
+    //         display: block;
+    //         padding: 6px 12px;
+    //         margin-bottom: 8px;
+    //         cursor: pointer;
+    //         height: 32px;
+    //         line-height: 32px;
+    //         width: 20rem;
+    //         font-size: 1rem;
+    //         display: flex;
+    //         align-items: center;
+    //         &:hover{
+    //             background-color:#091e420a;
+    //         }
+    //     }
+    //     input {
+    //         opacity: 0;
+    //         height: 0;
+    //         width: 0;
+    //         position: absolute;
+    //     }
+    // }
+    }
+    
+}

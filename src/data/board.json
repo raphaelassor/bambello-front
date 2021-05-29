@@ -113,7 +113,8 @@
                             "createdAt": 16156215211
                         }
                     ],
-                    "style": {
+                    "cover": {
+                        "coverMode":null,
                         "bgColor": "#26de81",
                         "bgImgUrl": "https://trello-attachments.s3.amazonaws.com/60ae3acf882c2e1f0f1fbb25/60ae3acf882c2e1f0f1fbb9e/671ab3f89a507725fa544a2e4408c078/v2021005.swatlantic.crop_.small_.jpg"
                     }

@@ -28,7 +28,7 @@ export class DatePopOver extends Component {
     }
 
     render() {
-        return <PopOver title="Date">
+        return <PopOver togglePopOver={this.props.togglePopOver} title="Date">
             <div className="date-pop-over-content">
 
                 <MuiPickersUtilsProvider utils={MomentUtils}>

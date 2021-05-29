@@ -5,11 +5,13 @@ import { LabelEditPopOver } from './LabelEditPopOver'
 import { ChecklistPopOver } from './ChecklistPopOver'
 import { DatePopOver } from './DatePopOver'
 import { AttachPopOver } from './AttachPopOver'
-
+import { CoverPopOver } from './CoverPopOver'
+import LabelIcon from '@material-ui/icons/LocalOfferOutlined';
 export class CardDetailsActions extends Component {//{board,card,toggleMember}
 
     state = {
-        isPopOver: false,
+        popOver:null,
+        isPopOver:false,
     }
 
     toggleMember = (member) => {//DATA IS DIFFERENT SO DIFFERENT FUNCTION FOR NOW
@@ -49,7 +51,11 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
     }
 
     addChecklist = (checklist) => {
-        console.log(checklist)
+        const { card, onSaveCardFromActions } = this.props
+        if (!card.checklists) card.checklists = []
+        card.checklists.push(checklist)
+        onSaveCardFromActions(card)
+
     }
 
     addFile = (fileUrl) => {
@@ -64,16 +70,50 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
         this.setState({ isPopOver: true })
     }
 
+    saveCover = ({ bgImgUrl, bgColor, coverMode }) => {
+        const { card, onSaveCardFromActions } = this.props
+        card.style = {
+            coverMode,
+            bgImgUrl,
+            bgColor,
+        }
+        onSaveCardFromActions(card)
+    }
+    togglePopOver=(popOver='')=>{
+        if(this.state.popOver=== popOver) this.setState({popOver:'',isPopOverMode:false})
+        else this.setState({popOver,isPopOverMode:true})
+    }
     render() {
-        const { isPopOver } = this.state
+        const { popOver,isPopOverMode } = this.state
         const { card, board } = this.props
-        return <div className="details-adds-wrapper">
-            <button onClick={() => this.togglePopOver()}>TEST POPOVER</button>
-             {/* <MembersPopOver boardMembers={board.members} card={card} toggleMember={this.toggleMember} /> */}
-            {/* <LabelsPopOver removeLabel={this.removeLabel} saveLabel={this.saveLabel} boardLabels={board.labels} card={card} toggleLabel={this.toggleLabel}/> */}
-            {/* // <ChecklistPopOver addChecklist={this.addChecklist} />
-            // <DatePopOver />
-            // <AttachPopOver addFile={this.addFile} /> */} 
+        console.log(card)
+        return <div className="details-actions-wrapper flex column">
+            <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('members')}>
+            <i class="far fa-user icon-sm "></i>
+                <span>Members</span>
+            </button>
+            {popOver==='members'&& <MembersPopOver togglePopOver={this.togglePopOver} boardMembers={board.members} card={card} toggleMember={this.toggleMember} />}
+
+            <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('labels')}>
+            <span>Labels</span>
+            <LabelIcon/> 
+            </button>
+            {popOver==='labels'&&  <LabelsPopOver togglePopOver={this.togglePopOver} removeLabel={this.removeLabel} saveLabel={this.saveLabel} boardLabels={board.labels} card={card} toggleLabel={this.toggleLabel}/>}
+
+            <button className="secondary-btn" onClick={() => this.togglePopOver('checklist')}>Checklist</button>
+            {popOver==='checklist'&&  <ChecklistPopOver togglePopOver={this.togglePopOver} addChecklist={this.addChecklist} />}
+            
+            <button className="secondary-btn" onClick={() => this.togglePopOver('date')}>
+                <i class="far fa-clock icon-sm "></i>
+                <span>Date</span>
+            </button>
+            {popOver==='date'&&<DatePopOver togglePopOver={this.togglePopOver}/>}
+
+            <button className="secondary-btn" onClick={() => this.togglePopOver('attach')}>Attach</button>
+            {popOver==='attach'&&<AttachPopOver togglePopOver={this.togglePopOver} addFile={this.addFile}/>}
+
+            <button className="secondary-btn" onClick={() => this.togglePopOver('cover')}>Cover</button>
+            {popOver==='cover'&& <CoverPopOver togglePopOver={this.togglePopOver} saveCover={this.saveCover} />}
         </div>
     }
 

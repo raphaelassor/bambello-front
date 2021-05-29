@@ -12,8 +12,7 @@ export class MembersPopOver extends Component {
     }
 
     componentDidMount() {
-        this.setState({ presentedMembers: this.props.boardMembers }, () => {
-        })
+        this.setState({ presentedMembers: this.props.boardMembers })
 
     }
 
@@ -23,18 +22,14 @@ export class MembersPopOver extends Component {
             this.setState({ presentedMembers: this.props.boardMembers.filter(member => filterRegex.test(member.fullname)) })
         })
     }
-     // NEEDS TO BE IN CARD DETALS
      
-        //save to backend and get the new board from the store
-  
-
     isMemberInCard = (member) => {
         return this.props.card.members.some(cardMember => cardMember._id === member._id)
     }
     render() {
         const { presentedMembers, inputTxt } = this.state
         if (!presentedMembers) return '';
-        return <PopOver title={"Members"}>
+        return <PopOver title={"Members"} togglePopOver={this.props.togglePopOver}>
             <div className="members-pop-over-content">
                 <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search members"} />
                 <h4>BOARD MEMBERS</h4>
