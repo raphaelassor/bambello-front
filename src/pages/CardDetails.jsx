@@ -48,7 +48,6 @@ class _CardDetails extends Component {
         const { card, list } = this.state;
         const { board, board: { lists } } = this.props
         const { cards } = list
-        console.log('cards in savecard', cards)
         const listIdx = lists.indexOf(list)
         const cardIdx = list.cards.indexOf(card)
         cards[cardIdx] = card // deploy card into cards
@@ -101,9 +100,9 @@ class _CardDetails extends Component {
                     <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
                     <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                 </div>
-                <div className="card-details-sidebar">
+                {/* <div className="card-details-sidebar">
                     <CardDetailsActions board={board} card={card} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
-                </div>
+                </div> */}
             </section>
         )
     }

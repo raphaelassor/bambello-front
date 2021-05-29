@@ -1,21 +1,27 @@
 .todo-preview-container {
+    border-radius: $borderRad1;
+    &:hover {
+        background-color: rgba(9, 30, 66, 0.04);
+    }
     .todo-preview {
         width: 100%;
         min-height: 36px;
         border-radius: $borderRad1;
-        // align-items: center;
+        transform-origin: left bottom;
+        transition-property: transform, opacity, height, padding, margin;
+        transition-duration: 0.14s;
+        transition-timing-function: ease-in;
 
-        &:hover {
-            background-color: rgba(9, 30, 66, 0.04);
+        &:hover{
+            .delete-svg {
+                display: flex;
+            }
         }
 
         .checked,
         .non-checked {
-            margin: 8px 12px 6px 6px;
+            margin: 8px 3px 6px 6px;
             cursor: pointer;
-            path {
-                font-size: 30px;
-            }
             transition: opacity 0.3s;
             &:hover {
                 opacity: 60%;
@@ -36,6 +42,7 @@
         textarea {
             cursor: pointer;
             width: 100%;
+            height: 100%;
             border: 0;
             background-color: transparent;
             overflow: hidden;
@@ -46,10 +53,26 @@
             resize: none;
 
             &:focus {
+                cursor: text;
                 min-height: 56px;
                 padding: 8px 12px;
                 background: rgba(9, 30, 66, 0.04);
                 border: 0.1em solid rgba(9, 30, 66, 0.13);
+            }
+
+            &.done:not(:focus) {
+                text-decoration-line: line-through;
+                color: $clr3;
+            }
+        }
+
+        .delete-svg {
+            margin-top: 8px;
+            cursor: pointer;
+            display: none;
+            &:hover {
+                background-color: rgba(9, 30, 66, 0.08);
+                border-radius: $borderRad1;
             }
         }
     }
