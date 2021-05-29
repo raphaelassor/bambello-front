@@ -101,8 +101,10 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
         console.log(card)
         return <div className="details-actions-wrapper flex column">
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('members')}>
+                <div className="actions-btn-content flex align-center">
             <i className="far fa-user icon-sm "></i>
                 <span>Members</span>
+                </div>
             </button>
             {popOver==='members'&& <MembersPopOver togglePopOver={this.togglePopOver} boardMembers={board.members} card={card} toggleMember={this.toggleMember} />}
 
@@ -124,10 +126,17 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
             </button>
             {popOver==='date'&&<DatePopOver  saveDate={this.saveDueDate}togglePopOver={this.togglePopOver}/>}
 
-            <button className="secondary-btn" onClick={() => this.togglePopOver('attach')}>Attach</button>
+            <button className="secondary-btn" onClick={() => this.togglePopOver('attach')}>
+            <i class="fas fa-paperclip icon-sm"></i>
+                <span>Attachment</span>
+            </button>
             {popOver==='attach'&&<AttachPopOver togglePopOver={this.togglePopOver} addFile={this.addFile}/>}
 
-            <button className="secondary-btn" onClick={() => this.togglePopOver('cover')}>Cover</button>
+            <button className="secondary-btn" onClick={() => this.togglePopOver('cover')}>
+            <i class="fas fa-window-maximize icon-sm"></i> 
+                <span>Cover</span>
+
+            </button>
             {popOver==='cover'&& <CoverPopOver togglePopOver={this.togglePopOver} saveCover={this.saveCover} />}
         </div>
     }

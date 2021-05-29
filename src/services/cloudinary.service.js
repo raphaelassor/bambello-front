@@ -4,7 +4,7 @@ export const cloudinaryService = {
 function uploadFile(ev) {
     const CLOUD_NAME = 'plcrased'
     const PRESET_NAME = 'suhu9tpl'
-    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
     const formData = new FormData();
     formData.append('file', ev.target.files[0])
     formData.append('upload_preset', PRESET_NAME);
