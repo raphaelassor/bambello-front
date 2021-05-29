@@ -48,7 +48,6 @@ class _CardDetails extends Component {
         const { card, list } = this.state;
         const { board, board: { lists } } = this.props
         const { cards } = list
-        console.log('cards in savecard', cards)
         const listIdx = lists.indexOf(list)
         const cardIdx = list.cards.indexOf(card)
         cards[cardIdx] = card // deploy card into cards

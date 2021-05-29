@@ -13,6 +13,8 @@
 @import "cmps/card-list.scss";
 @import "cmps/card-list-add.scss";
 @import "cmps/card-preview.scss";
+@import "cmps/card-preview-date.scss";
+@import "cmps/card-preview-checklist.scss";
 
 @import "cmps/card-details-labels";
 @import "cmps/card-details-members.scss";
@@ -28,7 +30,12 @@
 @import "cmps/color-palette";
 
 @import "cmps/progress-bar.scss";
+@import "cmps/checklist-pop-over";
+@import "cmps/date-pop-over";
+@import "cmps/checklist-preview.scss";
+@import "cmps/todo-list.scss";
 @import "cmps/todo-preview.scss";
+@import "cmps/todo-add.scss";
 // @import "components/main-nav.scss";
 // @import "components/screen-overlay.scss";
 

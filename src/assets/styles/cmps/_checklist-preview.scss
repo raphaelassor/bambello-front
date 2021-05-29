@@ -1,0 +1,16 @@
+.checklist-preview{
+    margin-bottom: rem(40px);
+    .checklist-controllers {
+        margin-bottom: 9px;
+        .primary-btn {
+            margin-inline-start: rem(40px);
+            margin-inline-end: 4px;
+        }
+        cursor: pointer;
+        color: #6b778c;
+        font-size: 24px;
+        &:hover {
+            color: $clr4;
+        }
+    }
+}
