@@ -1,6 +1,6 @@
 
 import { Component } from 'react';
-import { PopOver } from './PopOver';
+import { PopOver } from './PopOver/PopOver';
 export class ChecklistPopOver extends Component{
 
     state={

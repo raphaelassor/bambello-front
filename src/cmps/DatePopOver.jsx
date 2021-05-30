@@ -3,7 +3,7 @@ import MomentUtils from '@date-io/moment';
 
 import React, { Component} from "react";
 
-import { PopOver } from "./PopOver";
+import { PopOver } from "./PopOver/PopOver";
 export class DatePopOver extends Component {
 
     state = {

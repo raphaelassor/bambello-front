@@ -4,7 +4,7 @@ import { LabelsPopOver } from './LabelsPopOver'
 import { ChecklistPopOver } from './ChecklistPopOver'
 import { DatePopOver } from './DatePopOver'
 import { AttachPopOver } from './AttachPopOver'
-import { CoverPopOver } from './CoverPopOver'
+import { PopOverCover } from './PopOver/PopOverCover'
 import { utilsService } from '../services/utils.service'
 import LabelIcon from '@material-ui/icons/LocalOfferOutlined';
 import CheckboxIcon from '@material-ui/icons/CheckBoxOutlined'
@@ -113,7 +113,6 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
     render() {
         const { popOver } = this.state
         const { card, board } = this.props
-        console.log(card)
         return <div className="details-actions-wrapper flex column">
             <h4>ADD TO CARD</h4>
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('members')}>
@@ -162,7 +161,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
                     <span>Cover</span>
                 </div>
             </button>
-            {popOver === 'cover' && <CoverPopOver togglePopOver={this.togglePopOver} saveCover={this.saveCover} card={card} />}
+            {popOver === 'cover' && <PopOverCover togglePopOver={this.togglePopOver} saveCover={this.saveCover} card={card} />}
             <h4>ACTIONS</h4>
 
                {!card.isArchived? 

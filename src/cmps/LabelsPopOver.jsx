@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { LabelPopOverPreview } from "./LabelPopOverPreview"
-import { PopOver } from './PopOver'
+import { PopOver } from './PopOver/PopOver'
 import { LabelEditPopOver } from "./LabelEditPopOver"
 
 export class LabelsPopOver extends Component {

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { PopOver } from "./PopOver";
+import { PopOver } from "./PopOver/PopOver";
 
 export class ListMenu extends Component{
 
