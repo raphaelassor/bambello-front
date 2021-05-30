@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { TextareaAutosize } from '@material-ui/core';
-import { TodoList } from '../cmps/TodoList'
-import { TodoAdd } from '../cmps/TodoAdd'
-import { ProgressBar } from '../cmps/ProgressBar'
+import { TodoList } from './TodoList'
+import { TodoAdd } from './TodoAdd'
+import { ProgressBar } from '../ProgressBar'
 
 export class ChecklistPreview extends Component {
 

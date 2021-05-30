@@ -1,62 +1,57 @@
+// Font awesome
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/regular.scss";
+@import "./fontawesome/brands.scss";
+@import "./fontawesome/solid.scss";
+
 // Setup
 @import "./setup/variables.scss";
 @import "./setup/functions.scss";
 @import "./setup/mixins.scss";
 @import "./setup/typography.scss";
 
-// Cmps
-@import "cmps/main-header.scss";
+// Basics
+@import "./basics/base.scss";
+@import "./basics/helpers.scss";
+@import "./basics/layout.scss";
+@import "./basics/buttons.scss";
 
-@import "cmps/board-header.scss";
-
-@import "cmps/card-add.scss";
-@import "cmps/card-list.scss";
-@import "cmps/card-list-add.scss";
-@import "cmps/card-preview.scss";
-@import "cmps/card-preview-date.scss";
-@import "cmps/card-preview-checklist.scss";
-@import "cmps/list-menu";
-
-@import "cmps/card-details-labels";
-@import "cmps/card-details-members.scss";
-@import "cmps/card-description.scss";
-@import "cmps/card-details-actions.scss";
-@import "cmps/card-details-date.scss";
-
-@import "cmps/pop-over";
-@import "cmps/labels-pop-over";
-@import "cmps/members-pop-over";
-@import "cmps/date-pop-over";
-@import "cmps/checklist-pop-over";
-@import "cmps/attach-pop-over";
-@import "cmps/cover-pop-over";
-@import "cmps/color-palette";
-
-@import "cmps/progress-bar.scss";
-@import "cmps/checklist-pop-over";
-@import "cmps/date-pop-over";
-@import "cmps/checklist-preview.scss";
-@import "cmps/todo-list.scss";
-@import "cmps/todo-preview.scss";
-@import "cmps/todo-add.scss";
-@import "cmps/screen-overlay.scss";
-// @import "components/main-nav.scss";
-// @import "components/screen-overlay.scss";
-
-// Pages
+// PAGES
 // @import "./pages/homepage.scss";
 @import "./pages/board-app.scss";
 @import "./pages/card-details.scss";
 
-// Basics
-@import "./basics/helpers.scss";
-@import "./basics/layout.scss";
-@import "./basics/base.scss";
-@import "./basics/buttons.scss";
+// CMPS
+@import "cmps/main-header.scss";
+@import "cmps/board-header.scss";
+@import "cmps/card-add.scss";
+@import "cmps/card-list.scss";
+@import "cmps/card-list-add.scss";
+@import "cmps/color-palette";
 
+// CardPreview
+@import "cmps/card-preview/card-preview.scss";
+@import "cmps/card-preview/card-preview-date.scss";
+@import "cmps/card-preview/card-preview-checklist.scss";
 
-// Font awesome
-@import "./fontawesome/fontawesome.scss";
-@import "./fontawesome/regular.scss";
-@import "./fontawesome/brands.scss";
-@import "./fontawesome/solid.scss";
+// CardDetails
+@import "cmps/card-details/card-description.scss";
+@import "cmps/card-details/card-details-labels";
+@import "cmps/card-details/card-details-members.scss";
+@import "cmps/card-details/card-details-date.scss";
+@import "cmps/card-details/card-details-actions.scss";
+@import "cmps/card-details/checklist-preview.scss";
+@import "cmps/card-details/todo-list.scss";
+@import "cmps/card-details/todo-preview.scss";
+@import "cmps/card-details/progress-bar.scss";
+@import "cmps/card-details/screen-overlay.scss"; // ??
+
+// PopOvers
+@import "cmps/pop-overs/pop-over";
+@import "cmps/pop-overs/labels-pop-over";
+@import "cmps/pop-overs/members-pop-over";
+@import "cmps/pop-overs/date-pop-over";
+@import "cmps/pop-overs/checklist-pop-over";
+@import "cmps/pop-overs/attach-pop-over";
+@import "cmps/pop-overs/cover-pop-over";
+@import "cmps/pop-overs/list-menu";

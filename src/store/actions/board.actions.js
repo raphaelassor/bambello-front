@@ -14,6 +14,7 @@ export function loadBoard() {
 export function onSaveBoard(board) {
     return async dispatch => {
         try {
+            console.log('in Save board')
             const savedBoard = await boardService.save(board)
             dispatch({ type: 'SAVE_BOARD', board: savedBoard })
         } catch (err) {

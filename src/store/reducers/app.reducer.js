@@ -4,7 +4,9 @@
 const initialState = {
     workspace: [],
     // loggedInUser: userService.getLoggedinUser(),
-    loginErr: null
+    loginErr: null,
+    currPopOver: '',
+    isOverlayOpen: false,
 }
 
 export function appReducer(state = initialState, action) {
@@ -15,6 +17,12 @@ export function appReducer(state = initialState, action) {
             return { ...state, loggedInUser: action.user, loginErr: null }
         case 'LOGIN_ERR':
             return { ...state, loginErr: action.err }
+        case 'SET_POPOVER':
+            console.log('previous state is',state)
+            return { ...state, currPopOver: action.popOverName, isOverlayOpen: true }
+        case 'CLOSE_POPOVER':
+            console.log(state,' previous state is')
+            return { ...state, currPopOver: '', isOverlayOpen: false }
         default:
             return state
     }

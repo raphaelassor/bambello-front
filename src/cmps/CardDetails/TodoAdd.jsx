@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TextareaAutosize } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import { utilsService } from '../services/utils.service'
+import { utilsService } from '../../services/utils.service'
 
 export class TodoAdd extends Component {
     state = {

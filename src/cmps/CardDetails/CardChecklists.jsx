@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ChecklistPreview } from '../cmps/ChecklistPreview'
+import { ChecklistPreview } from './ChecklistPreview'
 export class CardChecklists extends Component {
 
     onSaveChecklist = (checklist) => {

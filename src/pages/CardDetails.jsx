@@ -3,14 +3,14 @@ import { TextareaAutosize } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { connect } from 'react-redux'
 import { onSaveBoard } from '../store/actions/board.actions'
-import { CardDetailsLabels } from '../cmps/CardDetailsLabels'
-import { CardDetailsMembers } from '../cmps/CardDetailsMembers'
-import { CardDescription } from '../cmps/CardDescription'
-import { CardChecklists } from '../cmps/CardChecklists'
-import { CardDetailsActions } from '../cmps/CardDetailsActions'
-import { CardDetailsDate } from '../cmps/CardDetailsDate'
 import { DueDateDisplay } from '../cmps/DueDateDisplay';
 import { ScreenOverlay } from '../cmps/ScreenOverlay'
+import { CardDetailsLabels } from '../cmps/CardDetails/CardDetailsLabels'
+import { CardDetailsMembers } from '../cmps/CardDetails/CardDetailsMembers'
+import { CardDescription } from '../cmps/CardDetails/CardDescription'
+import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
+import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
+
 
 
 class _CardDetails extends Component {

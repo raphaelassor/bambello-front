@@ -32,3 +32,23 @@ export function onLogout() {
         }
     }
 }
+
+export function openPopOver(popOverName) {
+    return dispatch => {
+        const action = {
+            type: 'SET_POPOVER',
+            popOverName
+        }
+        dispatch(action)
+    }
+}
+
+export function closePopOver() {
+    console.log('in close popOver')
+    return dispatch => {
+        const action = {
+            type: 'CLOSE_POPOVER',
+        }
+        dispatch(action)
+    }
+}

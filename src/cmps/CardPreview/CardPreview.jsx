@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { DueDateDisplay } from './DueDateDisplay'
+import { DueDateDisplay } from '../DueDateDisplay'
 import { CardPreviewChecklist } from './CardPreviewChecklist'
 import { Subject as SubjectIcon } from '@material-ui/icons'
 import EditIcon from '@material-ui/icons/CreateOutlined'
@@ -46,14 +46,15 @@ class _CardPreview extends Component {
                 {(provided, snapshot) => (
                     <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)} >
                         <Link to={`/board/${boardId}/${currList.id}/${card.id}`} className="clean-link">
-                            <div  className="card-preview-container">
+                            <div className="card-preview-container">
                                 <div className="card-preview-edit"><EditIcon /></div>
                                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
                                     <div className="card-preview-name">{card.title}</div>
                                     {coverMode !== 'full' && <div className="card-preview-icons">
                                         {/* {isUserWatched && <RemoveRedEyeOutlinedIcon/>} */} {/*TODO: try to change cmp name to WatchIcon, implement user watched*/}
-                                        {!!card.dueDate && <DueDateDisplay card={card} toggleCardDone={this.toggleCardDone} displayType="preview" />}                                        {card.description && <div><SubjectIcon /></div>}
+                                        {!!card.dueDate && <DueDateDisplay card={card} toggleCardDone={this.toggleCardDone} displayType="preview" />}
+                                        {card.description && <div><SubjectIcon /></div>}
                                         {!this.isChecklistsEmpty(card) && <CardPreviewChecklist checklists={card.checklists} />}
                                     </div>
                                     }

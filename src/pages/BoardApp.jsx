@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-import ScrollContainer from 'react-indiana-drag-scroll'
+// import ScrollContainer from 'react-indiana-drag-scroll'
 import { loadBoard, onSaveBoard } from '../store/actions/board.actions'
 import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
@@ -54,6 +54,7 @@ class _BoardApp extends Component {
             lists[listStartIdx] = listStart
             lists[listEndIdx] = listEnd
         }
+        
         board.lists = lists
         onSaveBoard(board)
     }

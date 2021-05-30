@@ -1,10 +1,10 @@
 import { Component } from 'react'
-import { CardPreview } from './CardPreview'
+import { CardPreview } from './CardPreview/CardPreview'
 import { CardAdd } from './CardAdd'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ListMenu } from './ListMenu'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-// import menu from '../assets/img/cmps/board-list/menu.svg'
+
 export class CardList extends Component {
 
     state = {

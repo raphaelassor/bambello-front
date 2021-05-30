@@ -1,4 +1,4 @@
-import { TodoPreview } from '../cmps/TodoPreview'
+import { TodoPreview } from './TodoPreview'
 export function TodoList({ todos, onSaveTodo, onRemoveTodo }) {
     return (
         <div className="todo-list">

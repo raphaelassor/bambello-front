@@ -1,10 +1,12 @@
 import CloseIcon from '@material-ui/icons/Close';
-export function PopOver({ children, title ,togglePopOver}) {
+import { connect } from 'react-redux'
+import {closePopOver} from '../../store/actions/app.actions'
+export function _PopOver({ children, title ,closePopOver}) {
 
     return <div className=" pop-over">
         <div className="pop-over-header">
             <span>{title}</span>
-            <button className="clean-btn" onClick={togglePopOver}>
+            <button className="clean-btn" onClick={closePopOver}>
                 <CloseIcon style={{ width: '16px', height: '16px' }} />
             </button>
         </div>
@@ -14,3 +16,10 @@ export function PopOver({ children, title ,togglePopOver}) {
     </div>
 
 }
+
+
+const mapDispatchToProps = {
+   closePopOver
+}
+
+export const PopOver = connect(null, mapDispatchToProps)(_PopOver)
