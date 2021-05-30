@@ -1,11 +1,8 @@
 
 
-export function ScreenOverlay({onToggleMobileNav, isMobileNavOpen}) {
+export function ScreenOverlay({ goBackToBoard }) {
     return (
-        <div
-            className={`screen-overlay ${isMobileNavOpen ? 'show' : ''}`}
-            onClick={() => onToggleMobileNav()}
-        >
+        <div className="screen-overlay" onClick={() => goBackToBoard()}>
         </div>
     )
 }

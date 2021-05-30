@@ -8,8 +8,9 @@ import { CardDetailsMembers } from '../cmps/CardDetailsMembers'
 import { CardDescription } from '../cmps/CardDescription'
 import { CardChecklists } from '../cmps/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetailsActions'
-import {CardDetailsDate} from '../cmps/CardDetailsDate'
+import { CardDetailsDate } from '../cmps/CardDetailsDate'
 import { DueDateDisplay } from '../cmps/DueDateDisplay';
+import { ScreenOverlay } from '../cmps/ScreenOverlay'
 
 
 class _CardDetails extends Component {
@@ -58,7 +59,7 @@ class _CardDetails extends Component {
     }
 
     onSaveCardFromActions = (card) => {
-        this.setState({ card },this.onSaveCard())
+        this.setState({ card }, this.onSaveCard())
     }
 
     onSaveCardDescription = (description) => {
@@ -74,12 +75,13 @@ class _CardDetails extends Component {
         this.setState({ card }, this.onSaveCard())
     }
 
-    toggleCardDone=()=>{
+    toggleCardDone = () => {
         const { card } = this.state
-        card.isDone=!card.isDone
-        this.setState({card},()=>{
-            console.log('card is ',this.state.card)
-            this.onSaveCard()})
+        card.isDone = !card.isDone
+        this.setState({ card }, () => {
+            console.log('card is ', this.state.card)
+            this.onSaveCard()
+        })
     }
 
 
@@ -93,30 +95,32 @@ class _CardDetails extends Component {
         const { board, onSaveBoard } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
-        const { title, members, description, checklists,dueDate } = card
-        return (
-            <section className="card-details flex-column">
-                <button onClick={() => this.goBackToBoard()} className="close-window-btn flex align-center justify-center"><CloseRoundedIcon /></button>
-                <i className="far fa-window-maximize window-icon icon-lg"></i>
-                <div className="card-details-header">
-                    <TextareaAutosize value={title} aria-label="empty textarea" onBlur={this.onSaveCard} onChange={this.cardTitleHandleChange} />
-                    <p className="bottom-list-name">in list {list.title}</p>
-                </div>
-                <div className="flex">
-                    <div className="card-details-main flex column">
-                        <div className="card-details-items flex wrap">
-                            {!!members.length && <CardDetailsMembers members={members} />}
-                            {!!this.cardLabels.length && <CardDetailsLabels labels={this.cardLabels} />}
-                            {!!dueDate && <DueDateDisplay displayType="details" card={card} toggleCardDone={this.toggleCardDone} onSaveCardFromActions={this.onSaveCardFromActions}/>    }
+        const { title, members, description, checklists, dueDate } = card
+        return (<>
+            <ScreenOverlay goBackToBoard={this.goBackToBoard}/> 
+                <section className="card-details flex-column">
+                    <button onClick={() => this.goBackToBoard()} className="close-window-btn flex align-center justify-center"><CloseRoundedIcon /></button>
+                    <i className="far fa-window-maximize window-icon icon-lg"></i>
+                    <div className="card-details-header">
+                        <TextareaAutosize value={title} aria-label="empty textarea" onBlur={this.onSaveCard} onChange={this.cardTitleHandleChange} />
+                        <p className="bottom-list-name">in list {list.title}</p>
+                    </div>
+                    <div className="flex">
+                        <div className="card-details-main flex column">
+                            <div className="card-details-items flex wrap">
+                                {!!members.length && <CardDetailsMembers members={members} />}
+                                {!!this.cardLabels.length && <CardDetailsLabels labels={this.cardLabels} />}
+                                {!!dueDate && <DueDateDisplay displayType="details" card={card} toggleCardDone={this.toggleCardDone} onSaveCardFromActions={this.onSaveCardFromActions} />}
+                            </div>
+                            <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
+                            <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                         </div>
-                        <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
-                        <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
+                        <div className="card-details-sidebar flex column full">
+                            <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
+                        </div>
                     </div>
-                    <div className="card-details-sidebar flex column full">
-                        <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
-                    </div>
-                </div>
-            </section>
+                </section>
+                </>
         )
     }
 }

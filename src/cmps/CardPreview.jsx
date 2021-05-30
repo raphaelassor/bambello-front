@@ -27,7 +27,7 @@ class _CardPreview extends Component {
         return coverMode === 'full' ? { backgroundColor: bgColor, borderTopLeftRadius: '3px', borderTopRightRadius: '3px', minHeight: '52px' } : {};
     }
 
-     draggableStyle = (style, snapshot) => {
+    draggableStyle = (style, snapshot) => {
         if (!snapshot.isDropAnimating) {
             return style;
         }
@@ -44,7 +44,7 @@ class _CardPreview extends Component {
         return (
             <Draggable draggableId={card.id} index={cardIdx}>
                 {(provided, snapshot) => (
-                    <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)}>
+                    <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)} >
                         <Link to={`/board/${boardId}/${currList.id}/${card.id}`} className="clean-link">
                             <div  className="card-preview-container">
                                 <div className="card-preview-edit"><EditIcon /></div>
@@ -53,7 +53,7 @@ class _CardPreview extends Component {
                                     <div className="card-preview-name">{card.title}</div>
                                     {coverMode !== 'full' && <div className="card-preview-icons">
                                         {/* {isUserWatched && <RemoveRedEyeOutlinedIcon/>} */} {/*TODO: try to change cmp name to WatchIcon, implement user watched*/}
-                                        {!!card.dueDate && <DueDateDisplay card={card} toggleCardDone={this.toggleCardDone} displayType="preview"/>}                                        {card.description && <div><SubjectIcon /></div>}
+                                        {!!card.dueDate && <DueDateDisplay card={card} toggleCardDone={this.toggleCardDone} displayType="preview" />}                                        {card.description && <div><SubjectIcon /></div>}
                                         {!this.isChecklistsEmpty(card) && <CardPreviewChecklist checklists={card.checklists} />}
                                     </div>
                                     }

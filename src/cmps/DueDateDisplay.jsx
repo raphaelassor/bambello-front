@@ -59,7 +59,6 @@ export class DueDateDisplay extends Component {
         const { card, toggleCardDone, displayType } = this.props
         const { isPopOver } = this.state
         const dueStatus = this.getDueStatus();
-
         return <> { displayType === 'preview' ?
             <div className={`card-preview-date ${dueStatus}`} onClick={toggleCardDone}>
                 <div className="card-preview-date-icon"></div>
@@ -83,10 +82,10 @@ export class DueDateDisplay extends Component {
                             <DropdownIcon />
                         </div>
                     </button>
-                    {isPopOver && <DatePopOver togglePopOver={this.togglePopOver} saveDueDate={this.saveDueDate} />}
+                    {isPopOver && <DatePopOver togglePopOver={this.togglePopOver} saveDueDate={this.saveDueDate} card={card} />}
                 </div>
-            </div>
-        }</>
+            </div >
+    }</>
 
     }
 }
