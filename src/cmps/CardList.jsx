@@ -12,7 +12,7 @@ export class CardList extends Component {
         isEditTitle: false,
         titleTxt: '',
         isAddCardOpen: false,
-        isMenuOpen:false
+        isMenuOpen: false
     }
 
     toggleEditTitle = () => {
@@ -44,8 +44,8 @@ export class CardList extends Component {
         this.setState({ titleTxt: value });
     }
 
-    toggleMenu=()=>{
-        this.setState({isMenuOpen:!this.state.isMenuOpen})
+    toggleMenu = () => {
+        this.setState({ isMenuOpen: !this.state.isMenuOpen })
     }
 
     render() {
@@ -67,7 +67,7 @@ export class CardList extends Component {
                                             }
                                             <div className="card-list-btn-menu">
                                                 <i className="fas fa-ellipsis-h"></i>
-                                                {isMenuOpen&&<ListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu}/>}
+                                                {isMenuOpen && <ListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu} />}
                                             </div>
                                         </div>
                                         <div className="card-list-cards" >
@@ -80,12 +80,14 @@ export class CardList extends Component {
                                         {!isAddCardOpen &&
                                             <div className="card-list-footer" onClick={this.toggleCardAdd}>
                                                 <AddIcon /> Add {currList.cards.length > 1 ? 'another' : ''} card
-                                </div>
+                                            </div>
                                         }
                                     </div>
-                                </div>)}
+                                </div>
+                            )}
                         </Droppable>
-                    </div>)}
+                    </div>
+                )}
             </Draggable>
         )
     }
