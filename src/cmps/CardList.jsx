@@ -6,18 +6,20 @@ import { ListMenu } from './ListMenu'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 // import menu from '../assets/img/cmps/board-list/menu.svg'
 export class CardList extends Component {
-    
+
     state = {
         isEditTitle: false,
         titleTxt: '',
         isAddCardOpen: false,
         isMenuOpen: false
     }
+
     toggleEditTitle = () => {
         const { isEditTitle } = this.state
         const { currList } = this.props
         this.setState({ isEditTitle: !isEditTitle, titleTxt: currList.title });
     }
+
     onSaveTitle = () => {
         this.toggleEditTitle();
         const { titleTxt } = this.state
@@ -26,10 +28,12 @@ export class CardList extends Component {
         board.lists[listIdx].title = titleTxt
         onSaveBoard(board)
     }
+
     toggleCardAdd = () => {
         const { isAddCardOpen } = this.state
         this.setState({ isAddCardOpen: !isAddCardOpen })
     }
+
     handleChange = (ev) => {
         if (ev.key === 'Enter') {
             this.onSaveTitle()
@@ -71,7 +75,6 @@ export class CardList extends Component {
                                             <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
                                         }
                                         {provided.placeholder}
-                                        {/* (Parameter) provided: DroppableProvided */}
                                     </div>
                                     {!isAddCardOpen &&
                                         <div className="card-list-footer" onClick={this.toggleCardAdd}>

@@ -1,6 +1,6 @@
 {
     "_id": "ERQW!123qweASD3",
-    "title": "Robot dev proj",
+    "title": "Sprint 4",
     "createdAt": 1589983468418,
     "createdBy": {
         "_id": "u101",
@@ -86,11 +86,7 @@
                             "id": "ZdPnm",
                             "txt": "also @yaronb please CR this",
                             "createdAt": 1590999817436,
-                            "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                            }
+                            "byMember": {}
                         }
                     ],
                     "checklists": [
@@ -113,12 +109,6 @@
                     ],
                     "members": [
                         {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                        },
-                        {
                             "_id": "sad1223!sad213121dsadsa",
                             "fullname": "Adiv Versano",
                             "imgUrl": "https://www.google.com"
@@ -138,12 +128,7 @@
                     "startDate": 1590999730348,
                     "dueDate": 1622674200000,
                     "isDone": false,
-                    "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                    },
+                    "byMember": {},
                     "attachs": [
                         {
                             "id": "a101",
@@ -332,11 +317,7 @@
                             "id": "ZdPnm",
                             "txt": "also @yaronb please CR this",
                             "createdAt": 1590999817436,
-                            "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                            }
+                            "byMember": {}
                         }
                     ],
                     "checklists": [
@@ -408,9 +389,6 @@
                             "txt": "also @yaronb please CR this",
                             "createdAt": 1590999817436,
                             "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                             }
                         }
                     ],
@@ -464,10 +442,6 @@
                     "dueDate": 1622587800000,
                     "isDone": false,
                     "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                     },
                     "attachs": [
                         {
