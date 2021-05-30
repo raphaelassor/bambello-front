@@ -33,7 +33,6 @@ class _CardPreview extends Component {
         }
         return {
             ...style,
-            transform: 'rotate(0.5turn)',
             transitionDuration: `0.001s`,
         }
     }
