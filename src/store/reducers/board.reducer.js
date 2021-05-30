@@ -1,5 +1,6 @@
 const initialState = {
-    board: null
+    board: null,
+    
 }
 
 export function boardReducer(state = initialState, action) {
@@ -8,10 +9,6 @@ export function boardReducer(state = initialState, action) {
             return { ...state, board: action.board }
         case 'SAVE_BOARD':
             return { ...state, board: { ...action.board } }
-        case 'UPDATE_CARD':
-            return {}
-        case 'ADD_CARD':
-            return {}
         case 'REMOVE_CARD':
             return {}
         default:
