@@ -8,11 +8,6 @@ export class DueDateDisplay extends Component {
 
     state = {
         isPopOver: false,
-        dueStatus: '',
-    }
-
-    componentDidMount() {
-        this.setDueStatus()
     }
 
     dueDateFormat = (dueDate) => {
@@ -27,15 +22,15 @@ export class DueDateDisplay extends Component {
     togglePopOver = () => {
         this.setState({ isPopOver: !this.state.isPopOver })
     }
+
     saveDueDate = (date) => {
         const { card, onSaveCardFromActions } = this.props
         const dueDate = date ? card.dueDate = Date.parse(date) : 0;
         card.dueDate = dueDate;
         onSaveCardFromActions(card)
-        this.setDueStatus()
     }
 
-    setDueStatus = () => {
+    getDueStatus = () => {
         const now = Date.now()
         const { card } = this.props
         let dueStatus = '';
@@ -45,16 +40,14 @@ export class DueDateDisplay extends Component {
             const timeDiff = card.dueDate - now;
             if (timeDiff < 86400000) dueStatus = 'due-soon'
         }
-        // console.log("due status", dueStatus)
-        this.setState({ dueStatus })
+        return dueStatus
 
     }
     onToggleCardDone = () => {
         this.props.toggleCardDone()
-        this.setDueStatus()
     }
     get dueMsg() {
-        switch (this.state.dueStatus) {
+        switch (this.getDueStatus()) {
             case 'done': return 'COMPLETE';
             case 'due-soon': return 'DUE SOON';
             case 'overdue': return 'OVERDUE';
@@ -64,8 +57,9 @@ export class DueDateDisplay extends Component {
     render() {
         // TODO: IMPLEMENT TIME TRACKING
         const { card, toggleCardDone, displayType } = this.props
-        const { isPopOver, dueStatus } = this.state
-        console.log(dueStatus)
+        const { isPopOver } = this.state
+        const dueStatus = this.getDueStatus();
+
         return <> { displayType === 'preview' ?
             <div className={`card-preview-date ${dueStatus}`} onClick={toggleCardDone}>
                 <div className="card-preview-date-icon"></div>
