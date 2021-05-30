@@ -37,44 +37,46 @@ export class CardList extends Component {
         const { value } = ev.target;
         this.setState({ titleTxt: value });
     }
+
     toggleMenu = () => {
         this.setState({ isMenuOpen: !this.state.isMenuOpen })
     }
+
+
     render() {
         const { board, currList, onSaveBoard, currListIdx } = this.props
         const { isEditTitle, isAddCardOpen, titleTxt, isMenuOpen } = this.state
         return (
             <Draggable draggableId={currList.id} index={currListIdx}>
                 {provided => (
-                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="card-list-wrapper">
+                    <div className="card-list-wrapper" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
                         <Droppable droppableId={currList.id}>
                             {provided => (
-                                <div ref={provided.innerRef} {...provided.droppableProps}>
-                                    <div className="card-list">
-                                        <div className="card-list-header">
-                                            {isEditTitle ?
-                                                <input type="text" className="card-list-header-input" value={titleTxt} autoFocus onFocus={(ev) => ev.target.select()} onBlur={this.onSaveTitle} onChange={this.handleChange} onKeyDown={this.handleChange} />
-                                                :
-                                                <h2 onClick={this.toggleEditTitle}>{currList.title}</h2>
-                                            }
-                                            <div className="card-list-btn-menu">
-                                                <i className="fas fa-ellipsis-h"></i>
-                                                {isMenuOpen && <ListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu} />}
-                                            </div>
-                                        </div>
-                                        <div className="card-list-cards" >
-                                            {currList.cards.map((card, idx) => <CardPreview key={card.id} card={card} cardIdx={idx} currList={currList} board={board} onSaveBoard={onSaveBoard} />)}
-                                            {isAddCardOpen &&
-                                                <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
-                                            }
-                                            {provided.placeholder}
-                                        </div>
-                                        {!isAddCardOpen &&
-                                            <div className="card-list-footer" onClick={this.toggleCardAdd}>
-                                                <AddIcon /> Add {currList.cards.length > 1 ? 'another' : ''} card
-                                            </div>
+                                <div className="card-list" ref={provided.innerRef} {...provided.droppableProps}>
+                                    <div className="card-list-header">
+                                        {isEditTitle ?
+                                            <input type="text" className="card-list-header-input" value={titleTxt} autoFocus onFocus={(ev) => ev.target.select()} onBlur={this.onSaveTitle} onChange={this.handleChange} onKeyDown={this.handleChange} />
+                                            :
+                                            <h2 onClick={this.toggleEditTitle}>{currList.title}</h2>
                                         }
+                                        <div className="card-list-btn-menu">
+                                            <i className="fas fa-ellipsis-h"></i>
+                                            {isMenuOpen && <ListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu} />}
+                                        </div>
                                     </div>
+                                    <div className="card-list-cards">
+                                        {currList.cards.map((card, idx) => <CardPreview key={card.id} card={card} cardIdx={idx} currList={currList} board={board} onSaveBoard={onSaveBoard} />)}
+                                        {isAddCardOpen &&
+                                            <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
+                                        }
+                                        {provided.placeholder}
+                                        {/* (Parameter) provided: DroppableProvided */}
+                                    </div>
+                                    {!isAddCardOpen &&
+                                        <div className="card-list-footer" onClick={this.toggleCardAdd}>
+                                            <AddIcon /> Add {currList.cards.length > 1 ? 'another' : ''} card
+                                </div>
+                                    }
                                 </div>
                             )}
                         </Droppable>

@@ -13,6 +13,7 @@ export class CardListAdd extends Component {
 
     handleChange = (ev) => {
         if (ev.key === 'Enter') {
+            ev.preventDefault();
             this.onAddList()
             return
         }

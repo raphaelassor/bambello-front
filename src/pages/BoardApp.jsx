@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-// import ScrollContainer from 'react-indiana-drag-scroll'
+import ScrollContainer from 'react-indiana-drag-scroll'
 import { loadBoard, onSaveBoard } from '../store/actions/board.actions'
 import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
@@ -64,11 +64,11 @@ class _BoardApp extends Component {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <section className="board-app flex column">
-                    <BoardHeader />
+                    <BoardHeader board={board} onSaveBoard={onSaveBoard}/>
                     <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
                     <Droppable droppableId="all-lists" direction="horizontal" type="list">
                         {provided => (
-                            // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`}>
+                            // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
                             <div {...provided.droppableProps} ref={provided.innerRef} className="card-list-container flex">
                                 {board.lists.map((currList, idx) => <CardList key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
                                 {provided.placeholder}
@@ -77,7 +77,7 @@ class _BoardApp extends Component {
                             // </ScrollContainer>
                         )}
                     </Droppable>
-                    
+
                 </section>
             </DragDropContext>
         )
