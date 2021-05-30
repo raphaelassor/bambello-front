@@ -77,6 +77,7 @@ class _BoardApp extends Component {
                             // </ScrollContainer>
                         )}
                     </Droppable>
+                    
                 </section>
             </DragDropContext>
         )

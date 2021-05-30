@@ -5,22 +5,18 @@ import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ListMenu } from './ListMenu'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 // import menu from '../assets/img/cmps/board-list/menu.svg'
-
 export class CardList extends Component {
-
     state = {
         isEditTitle: false,
         titleTxt: '',
         isAddCardOpen: false,
         isMenuOpen: false
     }
-
     toggleEditTitle = () => {
         const { isEditTitle } = this.state
         const { currList } = this.props
         this.setState({ isEditTitle: !isEditTitle, titleTxt: currList.title });
     }
-
     onSaveTitle = () => {
         this.toggleEditTitle();
         const { titleTxt } = this.state
@@ -29,12 +25,10 @@ export class CardList extends Component {
         board.lists[listIdx].title = titleTxt
         onSaveBoard(board)
     }
-
     toggleCardAdd = () => {
         const { isAddCardOpen } = this.state
         this.setState({ isAddCardOpen: !isAddCardOpen })
     }
-
     handleChange = (ev) => {
         if (ev.key === 'Enter') {
             this.onSaveTitle()
@@ -92,3 +86,9 @@ export class CardList extends Component {
         )
     }
 }
+
+
+
+
+
+

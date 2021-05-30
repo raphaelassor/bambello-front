@@ -1,11 +1,11 @@
 import { Component } from 'react';
-import { utilsService } from '../services/utils.service';
-import { ColorPallette } from './ColorPalette';
-import { FileUpload } from './FileUpload';
+import { utilsService } from '../../services/utils.service';
+import { ColorPallette } from '../ColorPalette';
+import { FileUpload } from '../FileUpload';
 import { PopOver } from './PopOver';
 
 
-export class CoverPopOver extends Component {
+export class PopOverCover extends Component {
 
     state = {
         bgColor: this.props.card.style?.bgColor||'',
