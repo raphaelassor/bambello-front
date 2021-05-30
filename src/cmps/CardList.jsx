@@ -43,6 +43,7 @@ export class CardList extends Component {
         this.setState({ isMenuOpen: !this.state.isMenuOpen })
     }
 
+
     render() {
         const { board, currList, onSaveBoard, currListIdx } = this.props
         const { isEditTitle, isAddCardOpen, titleTxt, isMenuOpen } = this.state

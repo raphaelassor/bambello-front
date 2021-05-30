@@ -4,13 +4,17 @@ import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.sv
 
 export class BoardHeader extends Component {
     render() {
+        const { board } = this.props
         return (
             <div className="board-header">
-                <button className="btn">
+                <button className="board-btn">
                     <BoardsIcon />
                     <span>Board</span>
                     <ArrowDown />
                 </button>
+                <div className="board-title">
+                    <h1>{board.title}</h1>
+                </div>
             </div>
         )
     }

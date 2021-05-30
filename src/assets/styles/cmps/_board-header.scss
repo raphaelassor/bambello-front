@@ -1,7 +1,22 @@
 /* BOARD PAGE */
 .board-header {
     padding: 8px 4px 10px 8px;
-    .btn {
+    display: flex;
+    >*:not(:last-child) {
+        margin-right: 4px;
+    }
+    .board-title {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: $borderRad1;
+        color: $clr2;
+        h1 {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 32px;
+            padding: 0 12px;
+        }
+    }
+    button {
         display: flex;
         padding: 5px;
         align-items: center;
@@ -12,11 +27,11 @@
         border: unset;
         height: 32px;
         color: $clr2;
-        *:not(:last-child){
+        *:not(:last-child) {
             margin-inline-end: 5px;
         }
-        &:hover{
-            background-color: rgba(255, 255, 255, 0.3)
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.3);
         }
     }
     path {
