@@ -1,190 +1,34 @@
-{
-    "_id": "ERQW!123qweASD3",
+const board = {
+    "_id": "ERQW!123qweASD3", //mongoId
     "title": "Robot dev proj",
     "createdAt": 1589983468418,
-    "createdBy": {
+    "createdBy": { // mini user
         "_id": "u101",
         "fullname": "Abi Abambi",
         "imgUrl": "http://some-img"
     },
-    "style": {}, 
-    "labels": [
+    "style": {}, // background-imgs
+    "labels": [ // data of labels of current board
         {
             "id": "l101",
             "title": "Done",
             "color": "#61bd4f"
-        },
-        {
-            "id": "l102",
-            "title": "Stuck",
-            "color": "#eb5a46"
-        },
-        {
-            "id": "l103",
-            "title": "In Progress",
-            "color": "#ff9e1a"
         }
     ],
-    "members": [
-        { 
-            "_id": "ERQW!sad213121dsadsa",
-            "fullname": "Rephael Assor",
-            "imgUrl": "https://www.google.com"
-        },
+    "members": [ // members that subscribed to the board
         {
-            "_id": "sad1223!sad213121dsadsa",
-            "fullname": "Adiv Versano",
-            "imgUrl": "https://www.google.com"
-        },
-        {
-            "_id": "roghroe313124112",
-            "fullname": "Asaf Cohen",
+            "_id": "u101",
+            "fullname": "Tal Tarablus",
             "imgUrl": "https://www.google.com"
         }
-        
     ],
     "lists": [
         {
             "id": "g101",
-            "title": "Backlog",
+            "title": "Group 1",
             "cards": [
                 {
                     "id": "c101",
-                    "title": "Backlog",
-                    "description": "description",
-                    "comments": [
-                        {
-                            "id": "ZdPnm",
-                            "txt": "also @yaronb please CR this",
-                            "createdAt": 1590999817436.0,
-                            "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                            }
-                        }
-                    ],
-                    "checklists": [
-                        {
-                            "id": "r101",
-                            "title": "Checklist1",
-                            "todos": [
-                                {
-                                    "id": "r101",
-                                    "title": "To Do 1",
-                                    "isDone": false
-                                },
-                                {
-                                    "id": "r102",
-                                    "title": "To Do 2",
-                                    "isDone": true
-                                },
-                                {
-                                    "id": "r103",
-                                    "title": "To Do 3",
-                                    "isDone": true
-                                }
-                            ]
-                        },
-                        {
-                            "id": "s101",
-                            "title": "Checklist2",
-                            "todos": [
-                                {
-                                    "id": "o101",
-                                    "title": "To Do 1",
-                                    "isDone": false
-                                },
-                                {
-                                    "id": "o102",
-                                    "title": "To Do 2",
-                                    "isDone": true
-                                },
-                                {
-                                    "id": "o103",
-                                    "title": "To Do 3",
-                                    "isDone": true
-                                }
-                            ]
-                        },
-                        {
-                            "id": "ku76",
-                            "title": "Checklist3",
-                            "todos": [
-                                {
-                                    "id": "v131",
-                                    "title": "To Do 1",
-                                    "isDone": false
-                                },
-                                {
-                                    "id": "v151",
-                                    "title": "To Do 2",
-                                    "isDone": true
-                                },
-                                {
-                                    "id": "v121",
-                                    "title": "To Do 3",
-                                    "isDone": true
-                                }
-                            ]
-                        },
-                        {
-                            "id": "s104",
-                            "title": "Checklist",
-                            "todos": [
-                                {
-                                    "id": "j976",
-                                    "title": "To Do 1",
-                                    "isDone": false
-                                },
-                                {
-                                    "id": "j9276",
-                                    "title": "To Do 2",
-                                    "isDone": true
-                                },
-                                {
-                                    "id": "j9279",
-                                    "title": "To Do 3",
-                                    "isDone": true
-                                }
-                            ]
-                        }
-                    ],
-                    "members": [
-                        {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                        }
-                    ],
-                    "labelIds": ["l101", "l102"],
-                    "createdAt": 1590999730348,
-                    "startDate": 1590999730348,
-                    "dueDate": 16156215211,
-                    "isDone": false,
-                    "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                    },
-                    "attachs": [
-                        {
-                            "id": "a101",
-                            "fileName": "borsa.pdf",
-                            "url": "https://trello-attachments.s3.amazonaws.com/60ae3acf882c2e1f0f1fbb25/60ae3acf882c2e1f0f1fbb9e/671ab3f89a507725fa544a2e4408c078/v2021005.swatlantic.crop_.small_.jpg",
-                            "createdAt": 16156215211
-                        }
-                    ],
-                    "style": {
-                        "coverMode": "",
-                        "bgColor": "#26de81",
-                        "bgImgUrl": "https://trello-attachments.s3.amazonaws.com/60ae3acf882c2e1f0f1fbb25/60ae3acf882c2e1f0f1fbb9e/671ab3f89a507725fa544a2e4408c078/v2021005.swatlantic.crop_.small_.jpg"
-                    }
-                },
-                {
-                    "id": "c102",
                     "title": "Help me",
                     "description": "description",
                     "comments": [
@@ -202,7 +46,7 @@
                     "checklists": [
                         {
                             "id": "YEhmF",
-                            "title": "Checklist 2",
+                            "title": "Checklist",
                             "todos": [
                                 {
                                     "id": "212jX",
@@ -224,7 +68,6 @@
                     "createdAt": 1590999730348,
                     "startDate": 1590999730348,
                     "dueDate": 16156215211,
-                    "isDone": false,
                     "byMember": {
                         "_id": "u101",
                         "username": "Tal",
@@ -240,97 +83,18 @@
                         }
                     ],
                     "style": {
-                        "coverMode":null,
-                        "bgColor": "#26de81",
-                        "bgImgUrl": "https://trello-attachments.s3.amazonaws.com/60ae3acf882c2e1f0f1fbb25/60ae3acf882c2e1f0f1fbb9e/671ab3f89a507725fa544a2e4408c078/v2021005.swatlantic.crop_.small_.jpg"
-                    }
-                } 
-            ]
-        },
-        {
-            "id": "g102",
-            "title": "Progress",
-            "cards": [
-                {
-                    "id": "c104",
-                    "title": "Help me",
-                    "description": "description",
-                    "comments": [
-                        {
-                            "id": "ZdPnm",
-                            "txt": "also @yaronb please CR this",
-                            "createdAt": 1590999817436.0,
-                            "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                            }
-                        }
-                    ],
-                    "checklists": [
-                        {
-                            "id": "YEhmF",
-                            "title": "Checklist1",
-                            "todos": [
-                                {
-                                    "id": "26712jX",
-                                    "title": "To Do 3",
-                                    "isDone": true
-                                },
-                                {
-                                    "id": "212jX11",
-                                    "title": "To Do 4",
-                                    "isDone": true
-                                },
-                                {
-                                    "id": "212j67X",
-                                    "title": "To Do 5",
-                                    "isDone": true
-                                }
-                            ]
-                        }
-                    ],
-                    "members": [
-                        {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                        }
-                    ],
-                    "labelIds": ["l101","l102"],
-                    "createdAt": 1590999730348,
-                    "startDate": 1590999730348,
-                    "dueDate": 1615621521133,
-                    "isDone": false,
-                    "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                    },
-                    "attachs": [
-                        {
-                            "id": "a101",
-                            "fileName": "borsa.pdf",
-                            "url": "https://trello-attachments.s3.amazonaws.com/60ae3acf882c2e1f0f1fbb25/60ae3acf882c2e1f0f1fbb9e/671ab3f89a507725fa544a2e4408c078/v2021005.swatlantic.crop_.small_.jpg",
-                            "createdAt": 16156215211
-                        }
-                    ],
-                    "style": {
-                        "coverMode": "",
                         "bgColor": "#26de81",
                         "bgImgUrl": "https://trello-attachments.s3.amazonaws.com/60ae3acf882c2e1f0f1fbb25/60ae3acf882c2e1f0f1fbb9e/671ab3f89a507725fa544a2e4408c078/v2021005.swatlantic.crop_.small_.jpg"
                     }
                 }
-            ]
+            ],
         }
     ],
     "activities": [
         {
             "id": "a101",
-            "actionType": "changed",
-            "txt": "the background of this board",
+            "actionType": "changed", // ?
+            "txt": "the background of this board", // ?
             "createdAt": 1589983468418,
             "byMember": {
                 "_id": "u101",
@@ -344,3 +108,19 @@
         }
     ]
 }
+
+const user = {
+    "_id": "u101",
+    "fullname": "Abi Abambi",
+    "username": "abi@ababmi.com",
+    "password": "aBambi123",
+    "imgUrl": "http://some-img.jpg",
+    "mentions": [ // for notifications
+        { 
+            "id": "m101",
+            "boardId": "m101",
+            "taskId": "t101"
+        }
+    ]
+}
+
