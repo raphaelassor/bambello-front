@@ -113,7 +113,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
     render() {
         const { popOver } = this.state
         const { card, board } = this.props
-
+        console.log(card)
         return <div className="details-actions-wrapper flex column">
             <h4>ADD TO CARD</h4>
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('members')}>
@@ -146,7 +146,7 @@ export class CardDetailsActions extends Component {//{board,card,toggleMember}
                     <span>Date</span>
                 </div>
             </button>
-            {popOver === 'date' && <DatePopOver saveDueDate={this.saveDueDate} togglePopOver={this.togglePopOver} />}
+            {popOver === 'date' && <DatePopOver saveDueDate={this.saveDueDate} togglePopOver={this.togglePopOver} card={card} />}
 
             <button className="secondary-btn actions-btn" onClick={() => this.togglePopOver('attach')}>
                 <div className="actions-btn-content flex align-center">

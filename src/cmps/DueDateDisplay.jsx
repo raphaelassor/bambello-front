@@ -91,7 +91,7 @@ export class DueDateDisplay extends Component {
                     <DropdownIcon/>
                 </div>
                 </button>
-                {isPopOver&&<DatePopOver togglePopOver={this.togglePopOver} saveDueDate={this.saveDueDate}/>}
+                {isPopOver&&<DatePopOver togglePopOver={this.togglePopOver} saveDueDate={this.saveDueDate} card={card}/>}
                     </div>
             </div>
         }</>

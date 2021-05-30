@@ -7,12 +7,15 @@ import { PopOver } from "./PopOver";
 export class DatePopOver extends Component {
 
     state = {
-        date: new Date()
+        date:null
     }
 
-    componentDidMount() {
-        console.log(this.state.date)
+    componentDidMount(){
+        const date = this.props.card.dueDate ? new Date(this.props.card.dueDate).toLocaleString() : new Date()
+
+        this.setState({date})
     }
+
 
     handleChange = (ev) => {
         this.setState({ date: ev._d })
@@ -30,6 +33,8 @@ export class DatePopOver extends Component {
     }
 
     render() {
+        const {date}=this.state
+        if(!date) return ''//loading
         return <PopOver togglePopOver={this.props.togglePopOver} title="Date">
             <div className="date-pop-over-content">
 
@@ -38,7 +43,7 @@ export class DatePopOver extends Component {
                         autoOk
                         variant="static"
                         openTo="date"
-                        value={this.state.date}
+                        value={date}
                         onChange={this.handleChange}
 
                     />
