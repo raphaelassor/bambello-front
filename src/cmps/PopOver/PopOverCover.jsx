@@ -3,9 +3,11 @@ import { utilsService } from '../../services/utils.service';
 import { ColorPallette } from '../ColorPalette';
 import { FileUpload } from '../FileUpload';
 import { PopOver } from './PopOver';
+import {boardService} from '../../services/board.service'
+import {onSaveBoard} from '../../store/actions/board.actions'
+import { connect } from 'react-redux';
 
-
-export class PopOverCover extends Component {
+class _PopOverCover extends Component {
 
     state = {
         bgColor: this.props.card.style?.bgColor||'',
@@ -15,6 +17,17 @@ export class PopOverCover extends Component {
     componentDidMount(){
         this.setState({})
     }
+
+    saveCover = ({ bgImgUrl, bgColor, coverMode }) => {
+            const { card, onSaveBoard ,board} = this.props
+            card.style = {
+                coverMode,
+                bgImgUrl,
+                bgColor,
+            }
+        const updatedBoard = boardService.updateCardInBoard(board, card)
+        onSaveBoard(updatedBoard)
+        }
 
     handleChange = ({ target }) => {
         let {coverMode}= this.state
@@ -32,7 +45,7 @@ export class PopOverCover extends Component {
     }
     onSaveCover=()=>{
         const {bgColor,bgImgUrl,coverMode}=this.state
-        if((coverMode&&bgImgUrl)||(coverMode&&bgColor) || (!coverMode&&!bgColor&&!bgImgUrl)) this.props.saveCover(this.state)
+        if((coverMode&&bgImgUrl)||(coverMode&&bgColor) || (!coverMode&&!bgColor&&!bgImgUrl)) this.saveCover(this.state)
         else return
     }
     onFileUpload=(fileUrl)=>{
@@ -42,7 +55,7 @@ export class PopOverCover extends Component {
 
     render() {
         const { bgColor, coverMode,bgImgUrl } = this.state
-        return <PopOver togglePopOver={this.props.togglePopOver} title="Cover">
+        return <PopOver  title="Cover">
             <div className="cover-pop-over-content">
                 <h4>SIZE</h4>
                 <div className="cover-options flex justify-space-between align-center">
@@ -62,3 +75,14 @@ export class PopOverCover extends Component {
         </PopOver>
     }
 }
+const mapDispatchToProps = {
+    onSaveBoard,
+}
+function mapStateToProps(state){
+    return{
+        board:state.boardModule.board
+    }
+}
+
+
+export const PopOverCover = connect(mapStateToProps, mapDispatchToProps)(_PopOverCover)

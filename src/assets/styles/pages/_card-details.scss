@@ -1,15 +1,12 @@
 .card-details {
     color: $clr7;
-    position: relative;
     background-color: $bgClr1;
     border-radius: $borderRad1;
     width: 768px;
     position: absolute;
     z-index: 2;
-    right: 50%;
-    top: rem(48px);
-    transform: translate(50%);
-
+    right: 0;
+    left: 0;
     .close-window-btn {
         cursor: pointer;
         color: $clr7;

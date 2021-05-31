@@ -42,7 +42,15 @@ function _saveLocalUser(user) {
 }
 
 function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null')
+    // return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null')
+ const user=   {
+        _id: 'roghroe313124112',
+        fullname: 'Asaf Cohen',
+        userName:'asafco',
+        imgUrl: 'https://www.google.com'
+    
+}
+    return user
 }
 
 // function getUsers() {

@@ -11,8 +11,13 @@ import { CardDetailsMembers } from '../cmps/CardDetails/CardDetailsMembers'
 import { CardDescription } from '../cmps/CardDetails/CardDescription'
 import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
+<<<<<<< HEAD
 import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
+=======
+import {closePopOver} from '../store/actions/app.actions'
+
+>>>>>>> eec9f31e540255746f3445d9efc4de734aeb8c25
 
 
 class _CardDetails extends Component {
@@ -97,6 +102,7 @@ class _CardDetails extends Component {
 
     goBackToBoard = () => {
         const { board } = this.props
+        this.props.closePopOver()
         this.props.history.push(`/board/${board._id}`)
     }
 
@@ -107,7 +113,7 @@ class _CardDetails extends Component {
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style: { bgColor }, attachs } = card
         return (<>
-            <ScreenOverlay goBackToBoard={this.goBackToBoard} />
+            <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken"/> 
             <section className="card-details flex-column">
                 <button onClick={() => this.goBackToBoard()} className={`close-window-btn ${bgColor ? 'cover-mode' : ''} flex align-center justify-center`}>
                     <CloseRoundedIcon />
@@ -149,7 +155,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    onSaveBoard
+    onSaveBoard,
+    closePopOver,
 }
 
 export const CardDetails = connect(mapStateToProps, mapDispatchToProps)(_CardDetails)
