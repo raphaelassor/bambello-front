@@ -1,6 +1,6 @@
 .screen-overlay {
-    align-items: flex-start;
-    background-color: rgba(0, 0, 0, 0.64);
+    
+    
     height: 100%;
     justify-content: center;
     left: 0;
@@ -9,4 +9,10 @@
     top: 0;
     width: 100%;
     z-index: 1;
+    &.darken{
+        background-color: rgba(0, 0, 0, 0.64);
+    }
+    &.transparent{
+        background-color: transparent;
+    }
 }

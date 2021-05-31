@@ -1,9 +1,9 @@
 import { Component } from "react"
-import { FileUpload } from "./FileUpload"
-import { PopOver } from "./PopOver/PopOver"
-import {utilsService} from '../services/utils.service'
+import { FileUpload } from "../FileUpload"
+import { PopOver } from "./PopOver"
+import {utilsService} from '../../services/utils.service'
 
-export class AttachPopOver extends Component{
+export class PopOverAttach extends Component{
 
     state={
         file:null,
@@ -27,12 +27,14 @@ this.props.addFile(fileUrl)
 
 render(){
     const {inputTxt}=this.state
-    return <PopOver  togglePopOver={this.props.togglePopOver} title="Attach from...">
+    return <PopOver  title="Attach from...">
     <div className="attach-pop-over-content">
     <FileUpload onFileUpload={this.onFileUpload}/>
+    <form onSubmit={this.onAttachLink}>
     <label className="pop-over-label" htmlFor="attach-input">Attach a link</label>
     <input type="text"  className="pop-over-input" value={inputTxt} id="attach-input" onChange={this.handleChange} placeholder="Attach any link here..." />
-    <button className="primary-btn btn-wide" onClick={this.onAttachLink}>Attach</button>
+    <button className="primary-btn btn-wide">Attach</button>
+    </form>
         </div>
     </PopOver>
 }

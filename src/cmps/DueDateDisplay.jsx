@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { DatePopOver } from './DatePopOver'
+import { PopOverDate } from '../cmps/PopOver/PopOverDate'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { ReactComponent as DropdownIcon } from '../assets/img/icons/dropdown.svg'
+import { openPopOver } from '../store/actions/app.actions';
+import { connect } from 'react-redux';
+import {boardService} from '../services/board.service'
+import {onSaveBoard} from '../store/actions/board.actions'
 
-export class DueDateDisplay extends Component {
+class _DueDateDisplay extends Component {
 
-    state = {
-        isPopOver: false,
-    }
 
     dueDateFormat = (dueDate) => {
         const currYear = new Date().getFullYear()
@@ -19,16 +20,7 @@ export class DueDateDisplay extends Component {
         else return new Date(dueDate).toLocaleString('en-GB', { month: 'short', day: 'numeric' })
     }
 
-    togglePopOver = () => {
-        this.setState({ isPopOver: !this.state.isPopOver })
-    }
-
-    saveDueDate = (date) => {
-        const { card, onSaveCardFromActions } = this.props
-        const dueDate = date ? card.dueDate = Date.parse(date) : 0;
-        card.dueDate = dueDate;
-        onSaveCardFromActions(card)
-    }
+   
 
     getDueStatus = () => {
         const now = Date.now()
@@ -44,7 +36,12 @@ export class DueDateDisplay extends Component {
 
     }
     onToggleCardDone = () => {
-        this.props.toggleCardDone()
+        // this.props.toggleCardDone()
+        const {card,board,onSaveBoard}=this.props
+        card.isDone=!card.isDone;
+        const updatedBoard = boardService.updateCardInBoard(board, card)
+        onSaveBoard(updatedBoard)
+
     }
     get dueMsg() {
         switch (this.getDueStatus()) {
@@ -56,8 +53,7 @@ export class DueDateDisplay extends Component {
 
     render() {
         // TODO: IMPLEMENT TIME TRACKING
-        const { card, toggleCardDone, displayType } = this.props
-        const { isPopOver } = this.state
+        const { card, toggleCardDone, displayType, openPopOver,currPopOver } = this.props
         const dueStatus = this.getDueStatus();
         return <> { displayType === 'preview' ?
             <div className={`card-preview-date ${dueStatus}`} onClick={toggleCardDone}>
@@ -74,7 +70,7 @@ export class DueDateDisplay extends Component {
                     {card.isDone ?
                         <CheckBoxIcon className="checked" onClick={this.onToggleCardDone} /> :
                         <CheckBoxOutlineBlankIcon className="non-checked" onClick={this.onToggleCardDone} />}
-                    <button className="secondary-btn" onClick={this.togglePopOver}>
+                    <button className="secondary-btn" onClick={()=>openPopOver('date-item')}>
                         <div className="flex align-center">
 
                             <span> {this.dueDateFormat(card.dueDate)}</span>
@@ -82,10 +78,25 @@ export class DueDateDisplay extends Component {
                             <DropdownIcon />
                         </div>
                     </button>
-                    {isPopOver && <DatePopOver togglePopOver={this.togglePopOver} saveDueDate={this.saveDueDate} card={card} />}
+                    {currPopOver==='date-item' && <PopOverDate card={card} />}
                 </div>
             </div >
     }</>
 
     }
 }
+function mapStateToProps(state) {
+    return {
+        currPopOver: state.appModule.currPopOver,
+        board:state.boardModule.board
+    }
+}
+
+const mapDispatchToProps = {
+    openPopOver,
+    onSaveBoard
+}
+
+export const DueDateDisplay = connect(mapStateToProps, mapDispatchToProps)(_DueDateDisplay)
+
+

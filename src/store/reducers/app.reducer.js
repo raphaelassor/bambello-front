@@ -1,9 +1,9 @@
-// import { userService } from '../../services/user.service.js'
+import { userService } from '../../services/user.service.js'
 
 
 const initialState = {
     workspace: [],
-    // loggedInUser: userService.getLoggedinUser(),
+    loggedInUser: userService.getLoggedinUser(),
     loginErr: null,
     currPopOver: '',
     isOverlayOpen: false,

@@ -1,9 +1,9 @@
 import { Component } from "react";
-import {PopOver } from "./PopOver";
-import {boardService} from '../../services/board.service'
+import { PopOver } from "./PopOver";
+import { boardService } from '../../services/board.service'
 import { MemberPopOverPreview } from '../MemeberPopOverPreview'
 import { onSaveBoard } from "../../store/actions/board.actions";
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 
 class _PopOverMembers extends Component {
@@ -25,18 +25,18 @@ class _PopOverMembers extends Component {
         })
     }
     toggleMember = (member) => {
-        const {card,board} = this.props
-        
+        const { card, board } = this.props
+
         const idx = card.members.findIndex(cardMember => cardMember._id === member._id)
         console.log('index is:', idx)
         if (idx === -1) card.members.push(member)
         else card.members.splice(idx, 1)
-        console.log('card is:' ,card)
-       const updatedBoard= boardService.updateCardInBoard(board,card)
-       this.props.onSaveBoard(updatedBoard)
+        console.log('card is:', card)
+        const updatedBoard = boardService.updateCardInBoard(board, card)
+        this.props.onSaveBoard(updatedBoard)
         // onSaveCardFromActions(card)
     }
-     
+
     isMemberInCard = (member) => {
         return this.props.card.members.some(cardMember => cardMember._id === member._id)
     }
@@ -49,9 +49,9 @@ class _PopOverMembers extends Component {
                 <h4>BOARD MEMBERS</h4>
                 <ul className="clean-list">
 
-                {presentedMembers.map(member => <MemberPopOverPreview key={member._id} member={member}
-                    toggleMember={this.toggleMember} isInCard={this.isMemberInCard(member)} />)}
-                    </ul>
+                    {presentedMembers.map(member => <MemberPopOverPreview key={member._id} member={member}
+                        toggleMember={this.toggleMember} isInCard={this.isMemberInCard(member)} />)}
+                </ul>
             </div>
         </PopOver>
 
@@ -60,16 +60,16 @@ class _PopOverMembers extends Component {
 
 }
 
-function mapStateToProps(state){
-    return{
-        board:state.boardModule.board,
+function mapStateToProps(state) {
+    return {
+        board: state.boardModule.board,
     }
 }
 
-const mapDispatchToProps={
+const mapDispatchToProps = {
     onSaveBoard
 }
 
 
-export const PopOverMembers=connect(mapStateToProps, mapDispatchToProps)(_PopOverMembers)
+export const PopOverMembers = connect(mapStateToProps, mapDispatchToProps)(_PopOverMembers)
 

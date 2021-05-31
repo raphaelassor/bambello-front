@@ -10,6 +10,7 @@ import { CardDetailsMembers } from '../cmps/CardDetails/CardDetailsMembers'
 import { CardDescription } from '../cmps/CardDetails/CardDescription'
 import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
+import {closePopOver} from '../store/actions/app.actions'
 
 
 
@@ -87,6 +88,7 @@ class _CardDetails extends Component {
 
     goBackToBoard = () => {
         const { board } = this.props
+        this.props.closePopOver()
         this.props.history.push(`/board/${board._id}`)
     }
 
@@ -97,7 +99,7 @@ class _CardDetails extends Component {
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate } = card
         return (<>
-            <ScreenOverlay goBackToBoard={this.goBackToBoard}/> 
+            <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken"/> 
                 <section className="card-details flex-column">
                     <button onClick={() => this.goBackToBoard()} className="close-window-btn flex align-center justify-center"><CloseRoundedIcon /></button>
                     <i className="far fa-window-maximize window-icon icon-lg"></i>
@@ -133,7 +135,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    onSaveBoard
+    onSaveBoard,
+    closePopOver,
 }
 
 export const CardDetails = connect(mapStateToProps, mapDispatchToProps)(_CardDetails)
