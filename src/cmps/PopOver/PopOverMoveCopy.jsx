@@ -43,7 +43,7 @@ class _PopOverMoveCopy extends Component {
             if (list.id === listId) list.cards.splice(cardIdx, 0, cardToMove)
         })
         const updatedBoard=JSON.parse(JSON.stringify(board))
-        onSaveBoard(board)
+        onSaveBoard(updatedBoard)
         //message that the card moved
         closePopOver()
     }
