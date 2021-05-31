@@ -13,7 +13,7 @@ import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
 import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
-import {closePopOver} from '../store/actions/app.actions'
+import { closePopOver } from '../store/actions/app.actions'
 
 
 
@@ -79,7 +79,7 @@ class _CardDetails extends Component {
         this.setState({ card }, this.onSaveCard())
     }
 
-    onDeleteCardAttachment = (ev,attachId) => {
+    onDeleteCardAttachment = (ev, attachId) => {
         ev.preventDefault()
         let { card, card: { attachs } } = this.state
         attachs = attachs.filter(currAttach => currAttach.id !== attachId)
@@ -110,7 +110,8 @@ class _CardDetails extends Component {
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style: { bgColor }, attachs } = card
         return (<>
-            <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken"/> 
+            <section className="card-details-container">
+            <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
             <section className="card-details flex-column">
                 <button onClick={() => this.goBackToBoard()} className={`close-window-btn ${bgColor ? 'cover-mode' : ''} flex align-center justify-center`}>
                     <CloseRoundedIcon />
@@ -131,13 +132,14 @@ class _CardDetails extends Component {
                             {!!dueDate && <DueDateDisplay displayType="details" card={card} toggleCardDone={this.toggleCardDone} onSaveCardFromActions={this.onSaveCardFromActions} />}
                         </div>
                         <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
-                        {!!attachs.length && <CardAttachments attachs={attachs} onDeleteCardAttachment={this.onDeleteCardAttachment}/>}
+                        {!!attachs.length && <CardAttachments attachs={attachs} onDeleteCardAttachment={this.onDeleteCardAttachment} />}
                         <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                     </div>
                     <div className="card-details-sidebar flex column full">
                         <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
                     </div>
                 </div>
+            </section>
             </section>
         </>
         )
