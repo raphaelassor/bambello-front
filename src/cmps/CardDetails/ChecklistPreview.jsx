@@ -80,7 +80,7 @@ export class ChecklistPreview extends Component {
         const { todos } = checklist
         return (<div className="checklist-preview">
             {!isTitleEdit && <div className="window-modal-title flex align-center justify-space-between">
-                <div className="flex">
+                <div className="flex align-center">
                     <CheckBoxOutlinedIcon />
                     <h3 onClick={() => this.onToggleTitleEdit()}>{checklist.title}</h3>
                 </div>

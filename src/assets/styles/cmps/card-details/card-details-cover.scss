@@ -1,0 +1,34 @@
+
+.card-details-cover{
+    height: 116px;
+    border-top-left-radius: $borderRad1;
+    border-top-right-radius: $borderRad1;
+    position: relative;
+    z-index: -10;
+
+    .cover-menu-btn{
+        cursor: pointer;
+        display: flex;
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        align-items: center;
+        background-color: rgba(0,0,0,.08);
+        color: $clr4;
+        border: none;
+        border-radius: $borderRad1;
+        padding: 6px 12px 6px 6px;
+
+        &:hover{
+            background-color: rgba(0,0,0,.16);
+            color: #091e42;
+        }
+
+        svg{
+            width: 16px;
+            height: 16px;
+            margin-inline-end: 8px;
+        }
+
+    }
+}

@@ -22,9 +22,10 @@ export class TodoAdd extends Component {
 
     onCreateTodo = (ev) => {
         if (ev.type === 'keydown' && ev.key !== 'Enter') return
+        if (ev.type === 'keydown') ev.preventDefault()
         const { onAddTodo } = this.props
         const { todo } = this.state
-        if(!todo.title) return
+        if (!todo.title) return
         todo.id = utilsService.makeId()
         todo.isDone = false
         this.setState({ todo: { title: '' } }, onAddTodo(todo))
@@ -41,12 +42,14 @@ export class TodoAdd extends Component {
                     <TextareaAutosize
                         onBlur={() => this.onEditMode()}
                         onChange={this.handleChange}
-                        value={title}
+                        onKeyDown={(ev) => this.onCreateTodo(ev)}
+                        defaultValue={title}
                         autoFocus
                         placeholder="Add an item"
+                        autoCorrect="false"
                         aria-label="empty textarea" />
                     <div className="checklist-controllers flex align-center">
-                        <button className="primary-btn" onKeyDown={(ev) => this.onCreateTodo(ev)} onMouseDown={(ev) => this.onCreateTodo(ev)}>Save</button>
+                        <button className="primary-btn" onMouseDown={(ev) => this.onCreateTodo(ev)}>Save</button>
                         <CloseRoundedIcon className="close-svg" />
                     </div >
                 </>

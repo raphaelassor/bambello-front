@@ -55,7 +55,7 @@ export class TodoPreview extends Component {
         const { title, isDone } = todo
         return (
             <div className="todo-preview-container flex column">
-                <div className="todo-preview flex">
+                <div className="todo-preview flex align-center">
                     {isDone ?
                         <CheckBoxIcon className="checked" onClick={() => this.onToggleDone()} /> :
                         <CheckBoxOutlineBlankIcon className="non-checked" onClick={() => this.onToggleDone()} />}
@@ -65,6 +65,8 @@ export class TodoPreview extends Component {
                         onKeyDown={(ev) => this.onFinishEditing(ev)}
                         onChange={this.handleChange}
                         value={title}
+                        autoCorrect="false"
+                        autoComplete="false"
                         ref={(input) => { this.selectedInput = input }}
                         aria-label="empty textarea" />
                     {!isInputSelected && <DeleteIcon className="delete-svg" onClick={() => onRemoveTodo(todo.id)} />}

@@ -1,7 +1,7 @@
 .card-description {
+    margin-bottom: 28px ;
     .card-description-edit {
-        margin-left: rem(40px);
-        margin-bottom: rem(32px);
+        margin-inline-start: 40px;
 
         textarea {
             cursor: pointer;
@@ -18,14 +18,14 @@
             margin-bottom: 8px;
             padding: 4px 8px;
             resize: none;
-            transition: all 0.3s;
+            transition: min-height 0.5s, box-shadow 0.3s;
 
             &::placeholder {
                 color: $clr4;
                 font-weight: unset;
                 font-size: 14px;
             }
-            
+
             &:focus {
                 cursor: text;
                 background-color: #fff;
@@ -33,6 +33,10 @@
                 margin-top: unset;
                 margin-right: unset;
                 min-height: 108px;
+            }
+
+            &:not(:focus) {
+                padding: unset;
             }
 
             &.placeholder-mode {
@@ -52,6 +56,10 @@
                     min-height: 108px;
                     background-color: $clr2;
                     box-shadow: inset 0 0 0 2px $clr1;
+                }
+
+                &:not(:focus) {
+                    padding: 4px 8px;
                 }
             }
         }
