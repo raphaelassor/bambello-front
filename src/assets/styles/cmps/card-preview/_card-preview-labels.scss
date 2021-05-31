@@ -20,14 +20,10 @@
         animation: label-text-disappear 0.45s ease-in forwards;
     }
     .label-text {
-        // display: none;
         font-size: 12px;
         font-weight: 700;
         white-space: nowrap;
         -webkit-font-smoothing: antialiased;
-        // &.open {
-        //     display: block;
-        // }
     }
 }
 
@@ -70,7 +66,6 @@
     }
     25% {
         color: transparent;
-        // height: 8px;
         padding-right: 8px;
     }
 
