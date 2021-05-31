@@ -8,15 +8,15 @@ import { PopOverChecklist } from "./PopOverChecklist";
 import { PopOverMoveCopy } from './PopOverMoveCopy'
 export function _DynamicPopOver({ currPopOver }) {
 
-    const { name, elPos, props } = currPopOver
+    const { name, props } = currPopOver
 
     switch (name) {
         case 'MEMBERS': return <PopOverMembers {...props} />;
         case 'LABELS': return <PopOverLabels {...props} />;
         case 'COVER': return <PopOverCover {...props} />;
         case 'DATE': return <PopOverDate {...props} />;
-        case 'COPY': return <PopOverMoveCopy type="copy" {...props} />;
-        case 'MOVE': return <PopOverMoveCopy type="move" {...props} />;
+        case 'COPY': return <PopOverMoveCopy popOverType="copy" {...props} />;
+        case 'MOVE': return <PopOverMoveCopy popOverType="move" {...props} />;
         case 'ATTACH': return <PopOverAttach {...props} />;
         case 'CHECKLIST': return <PopOverChecklist {...props} />;
         default: return '';
