@@ -1,12 +1,12 @@
 .screen-overlay {
+    display: flex;
     height: 100%;
-    justify-content: center;
     left: 0;
     overflow-y: auto;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 20;
     &.darken{
         background-color: rgba(0, 0, 0, 0.64);
     }

@@ -16,13 +16,13 @@ class _PopOverMoveCopy extends Component {
         board: null,
         listId: '',
         cardIdx: 0,
-        title :''
+        title: ''
     }
 
     componentDidMount() {
         const { board, card } = this.props
         const listIdx = board.lists.findIndex(list => list.cards.some(boardCard => boardCard.id === card.id))
-        this.setState({ board, listId: board.lists[listIdx].id, title:card.title })//this.props.currboard
+        this.setState({ board, listId: board.lists[listIdx].id, title: card.title })//this.props.currboard
     }
     onBoardSelect = (boardId) => {
         //const board=boardService.getBoardById(boardId)
@@ -35,7 +35,7 @@ class _PopOverMoveCopy extends Component {
 
     onMoveCard = (cardToMove = null) => {
         const { card, closePopOver } = this.props
-        if(!cardToMove) cardToMove=card;
+        if (!cardToMove) cardToMove = card
         const { board, listId, cardIdx } = this.state
         board.lists.forEach(list => {
             list.cards.forEach((boardCard, idx) => {
@@ -52,7 +52,7 @@ class _PopOverMoveCopy extends Component {
         const { card } = this.props
         const duplicateCard = JSON.parse(JSON.stringify(card))
         duplicateCard.id = utilsService.makeId()
-        duplicateCard.title=this.state.title
+        duplicateCard.title = this.state.title
         this.onMoveCard(duplicateCard)
     }
 
@@ -63,16 +63,16 @@ class _PopOverMoveCopy extends Component {
 
     render() {
         // const {board}=this.props// will need to bring the workspace, not only the current board
-        const { board, listId, cardIdx,title } = this.state
+        const { board, listId, cardIdx, title } = this.state
         const { popOverType } = this.props
         if (!board) return ''
         const listIdx = this.chosenListIdx
         const chosenCards = board.lists[listIdx].cards
-        return <PopOver title={popOverType==='move'? 'Move card':'Copy card'}>
-            {popOverType==='copy' && <>
-            <label htmlFor="title-copy">Title</label>
-            <input type="text" className="pop-over-input" onChange={this.handleChange} value={title} name="title" id="title-copy" autoFocus />
-            <label>Copy To...</label>
+        return <PopOver title={popOverType === 'move' ? 'Move card' : 'Copy card'}>
+            {popOverType === 'copy' && <>
+                <label htmlFor="title-copy">Title</label>
+                <input type="text" className="pop-over-input" onChange={this.handleChange} value={title} name="title" id="title-copy" autoFocus />
+                <label>Copy To...</label>
             </>}
             <div className="pop-over-move-content ">
                 <div className="move-selection flex wrap">

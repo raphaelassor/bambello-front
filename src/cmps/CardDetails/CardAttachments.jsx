@@ -13,8 +13,8 @@ export function CardAttachments({ attachs, onDeleteCardAttachment }) {
             </div>
             <div className="attachments-container">
                 {attachs.map(attach => {
-                    return <a target="_blank" href={attach.url} className="clean-link">
-                        <div key={attach.id} className="attach-preview flex">
+                    return <a key={attach.id} target="_blank" href={attach.url} className="clean-link">
+                        <div className="attach-preview flex">
                             <div className="img-container">
                                 <img src={attach.url} alt="" />
                             </div>
@@ -25,7 +25,7 @@ export function CardAttachments({ attachs, onDeleteCardAttachment }) {
                                     <span>-</span>
                                     <button>Comment</button>
                                     <span>-</span>
-                                    <button onClick={(ev) => onDeleteCardAttachment(ev,attach.id)}>Delete</button>
+                                    <button onClick={(ev) => onDeleteCardAttachment(ev, attach.id)}>Delete</button>
                                     <span>-</span>
                                     <button>Edit</button>
                                 </div>
