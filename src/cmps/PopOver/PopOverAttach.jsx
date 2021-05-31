@@ -16,14 +16,15 @@ export class PopOverAttach extends Component {
         this.setState({ linkTxt: target.value })
     }
 
-    onAttachLink = () => {
-        if (!this.state.linkTxt) return //message "please inser a link"
-        const isValid = utilsService.isValidUrl(this.state.linkTxt)
-        if (isValid) this.props.addFile(this.state.linkTxt) //else: Link is Invalid. Please Insert a Valid Link
-    }
-    onFileUpload = (fileUrl) => {
-        this.props.addFile(fileUrl)
-    }
+onAttachLink=()=>{
+    if(!this.state.linkTxt) return //message "please inser a link"
+    const isValid=utilsService.isValidUrl(this.state.linkTxt)
+    if(isValid) this.props.addFile(this.state.linkTxt) //else: Link is Invalid. Please Insert a Valid Link
+}
+onFileUpload=(fileUrl)=>{
+this.props.addFile(fileUrl)
+
+}
 
     render() {
         const { inputTxt } = this.state

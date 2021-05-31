@@ -33,12 +33,14 @@ export function onLogout() {
     }
 }
 
-export function openPopOver(popOverName) {
-    console.log('in open popover')
+export function openPopOver(popOverName,elPos,props) {
+    
     return dispatch => {
         const action = {
             type: 'SET_POPOVER',
-            popOverName
+            popOverName,
+            elPos,
+            props
         }
         dispatch(action)
     }

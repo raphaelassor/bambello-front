@@ -4,7 +4,7 @@
     padding: 48px;
     height: 100%;
     width: 100%;
-    z-index: 40;
+    z-index: 4;
     position: fixed;
 
     .card-details {
@@ -13,7 +13,7 @@
         border-radius: $borderRad1;
         width: 768px;
         position: absolute;
-        z-index: 40;
+        z-index: 4;
         top: 48px;
         right: 0;
         left: 0;
