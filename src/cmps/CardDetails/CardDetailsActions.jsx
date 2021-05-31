@@ -14,14 +14,22 @@ import CopyIcon from '@material-ui/icons/FileCopyOutlined';
 import WatchIcon from '@material-ui/icons/VisibilityOutlined';
 import { openPopOver,closePopOver } from '../../store/actions/app.actions'
 import { connect } from 'react-redux'
+import { utilsService } from '../../services/utils.service'
 class _CardDetailsActions extends Component {//{board,card,toggleMember}
 
 
     addFile = (fileUrl) => {
-        const { card, onSaveCardFromActions } = this.props
+        const { card, onSaveCardFromActions, closePopOver } = this.props
         if (!card.attachs) card.attachs = []
-        card.attachs.push(fileUrl)
+        const attach={
+            id:utilsService.makeId(),
+            createdAt:Date.now(),
+            fileName:`${utilsService.makeId(12)}.png`,
+            url:fileUrl
+        }
+        card.attachs.push(attach)
         onSaveCardFromActions(card)
+        closePopOver()
     }
 
     joinCard=()=>{
@@ -56,85 +64,94 @@ class _CardDetailsActions extends Component {//{board,card,toggleMember}
         onSaveBoard(board)
         this.props.goBackToBoard()
     }
+    onOpenPopOver=(ev,popOverName)=>{
+        const elPos=ev.target.getBoundingClientRect()
+        const props={
+            card:this.props.card
+        }
+        this.props.openPopOver(popOverName,elPos,props)
+    }
    
     render() {
-        const { card, board, currPopOver, openPopOver ,loggedInUser} = this.props
+        const { card, board, currPopOverName, openPopOver ,loggedInUser} = this.props
         return <div className="details-actions-wrapper flex column">
           {!this.isUserMember() && <div className="suggested flex column"> <h4>SUGGESTED</h4>
             <button className="secondary-btn actions-btn " onClick={this.joinCard}>
                 <div className="actions-btn-content flex align-center">
                     <i className="far fa-user icon-sm "></i>
                     <span>Join</span>
+                  
                 </div>
             </button></div>}
             <h4>ADD TO CARD</h4>
             <div className="add-section flex column">
-            <button className="secondary-btn actions-btn " onClick={() => openPopOver('members')}>
+            <button className="secondary-btn actions-btn " onClick={(ev) => this.onOpenPopOver(ev,'members')}>
                 <div className="actions-btn-content flex align-center">
                     <i className="far fa-user icon-sm "></i>
                     <span>Members</span>
                 </div>
+                    <span className="element-overlay"></span>
             </button>
-            {currPopOver === 'members' && <PopOverMembers card={card} />}
+            {/* {currPopOverName === 'members-actions-details' && <PopOverMembers card={card} />} */}
 
-            <button className="secondary-btn actions-btn" onClick={() => openPopOver('labels')}>
+            <button className="secondary-btn actions-btn" onClick={() => openPopOver('labels-actions-details')}>
                         <div className="actions-btn-content flex align-center">
                             <LabelIcon />
                             <span>Labels</span>
                         </div>
                     </button>
-            {currPopOver === 'labels' && <PopOverLabels  card={card} />}
+            {/* {currPopOverName === 'labels-actions-details' && <PopOverLabels  card={card} />} */}
 
-            <button className="secondary-btn actions-btn" onClick={() => openPopOver('checklist')}>
+            <button className="secondary-btn actions-btn" onClick={() => openPopOver('checklist-actions-details')}>
                 <div className="actions-btn-content flex align-center">
                     <CheckboxIcon />
                     <span>Checklist</span>
                 </div>
             </button>
-            {currPopOver === 'checklist' && <PopOverChecklist  card={card} />}
+            {/* {currPopOverName === 'checklist-actions-details' && <PopOverChecklist  card={card} />} */}
 
-            <button className="secondary-btn actions-btn" onClick={() => openPopOver('date')}>
+            <button className="secondary-btn actions-btn" onClick={() => openPopOver('date-actions-details')}>
                 <div className="actions-btn-content flex align-center">
                     <i className="far fa-clock icon-sm "></i>
                     <span>Date</span>
                 </div>
             </button>
-            {currPopOver === 'date' && <PopOverDate  card={card} />}
+            {/* {currPopOverName === 'date-actions-details' && <PopOverDate  card={card} />} */}
 
-            <button className="secondary-btn actions-btn" onClick={() => openPopOver('attach')}>
+            <button className="secondary-btn actions-btn" onClick={() => openPopOver('attach-actions-details')}>
                 <div className="actions-btn-content flex align-center">
                     <i className="fas fa-paperclip icon-sm"></i>
                     <span>Attachment</span>
                 </div>
             </button>
-            {currPopOver === 'attach' && <PopOverAttach  addFile={this.addFile} />}
+            {/* {currPopOverName === 'attach-actions-details' && <PopOverAttach  addFile={this.addFile} />} */}
 
-            <button className="secondary-btn actions-btn" onClick={() => openPopOver('cover')}>
+            <button className="secondary-btn actions-btn" onClick={() => openPopOver('cover-actions-details')}>
                 <div className="actions-btn-content flex align-center">
                     <CoverIcon />
                     <span>Cover</span>
                 </div>
             </button>
-            {currPopOver === 'cover' && <PopOverCover card={card} />}
+            {/* {currPopOverName === 'cover-actions-details' && <PopOverCover card={card} />} */}
 
             </div>
           
             <h4>ACTIONS</h4>
-            <button className="secondary-btn actions-btn" onClick={() => openPopOver('move')}>
+            <button className="secondary-btn actions-btn" onClick={() => openPopOver('move-actions-details')}>
                 <div className="actions-btn-content flex align-center">
                 <i className="fas fa-arrow-right icon-sm"></i>
                     <span>Move</span>
                 </div>
             </button>
-            {currPopOver === 'move' && <PopOverMoveCopy card={card}  popOverType="move"/>}
+            {/* {currPopOverName === 'move-actions-details' && <PopOverMoveCopy card={card}  popOverType="move"/>} */}
 
-            <button className="secondary-btn actions-btn" onClick={() => openPopOver('copy')}>
+            <button className="secondary-btn actions-btn" onClick={() => openPopOver('copy-actions-details')}>
                 <div className="actions-btn-content flex align-center">
                 <CopyIcon/>
                     <span>Copy</span>
                 </div>
             </button>
-            {currPopOver === 'copy' && <PopOverMoveCopy card={card}  popOverType="copy"/>}
+            {/* {currPopOverName === 'copy-actions-details' && <PopOverMoveCopy card={card}  popOverType="copy"/>} */}
 
             <button className="secondary-btn actions-btn" onClick={this.toggelWatch}>
                 <div className="actions-btn-content flex align-center">
@@ -174,7 +191,7 @@ class _CardDetailsActions extends Component {//{board,card,toggleMember}
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
-        currPopOver: state.appModule.currPopOver,
+        currPopOverName: state.appModule.currPopOver.name,
         loggedInUser:state.appModule.loggedInUser
     }
 }

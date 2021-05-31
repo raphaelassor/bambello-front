@@ -23,6 +23,7 @@ onAttachLink=()=>{
 }
 onFileUpload=(fileUrl)=>{
 this.props.addFile(fileUrl)
+
 }
 
 render(){
