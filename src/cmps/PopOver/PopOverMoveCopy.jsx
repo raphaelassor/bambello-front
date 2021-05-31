@@ -34,7 +34,7 @@ class _PopOverMoveCopy extends Component {
     }
 
     onMoveCard = (cardToMove) => {
-        const { closePopOver } = this.props
+        const { closePopOver, onSaveBoard } = this.props
         const { board, listId, cardIdx } = this.state
         board.lists.forEach(list => {
             list.cards.forEach((boardCard, idx) => {
@@ -42,7 +42,7 @@ class _PopOverMoveCopy extends Component {
             })
             if (list.id === listId) list.cards.splice(cardIdx, 0, cardToMove)
         })
-        const updatedBoard=JSON.parse(JSON.stringify(board))
+        const updatedBoard = JSON.parse(JSON.stringify(board))
         onSaveBoard(updatedBoard)
         //message that the card moved
         closePopOver()
@@ -63,8 +63,8 @@ class _PopOverMoveCopy extends Component {
 
     render() {
         // const {board}=this.props// will need to bring the workspace, not only the current board
-        const { board, listId, cardIdx,title } = this.state
-        const { popOverType ,card} = this.props
+        const { board, listId, cardIdx, title } = this.state
+        const { popOverType, card } = this.props
         if (!board) return ''
         const listIdx = this.chosenListIdx
         const chosenCards = board.lists[listIdx].cards
@@ -118,7 +118,7 @@ class _PopOverMoveCopy extends Component {
                     </FormControl>
                 </div>
                 {popOverType === 'move' ?
-                    <button className="primary-btn wide-btn" onClick={()=>this.onMoveCard(card)}>Move</button>
+                    <button className="primary-btn wide-btn" onClick={() => this.onMoveCard(card)}>Move</button>
                     :
                     <button className="primary-btn wide-btn" onClick={this.onCopyCard}>Create card</button>
                 }
