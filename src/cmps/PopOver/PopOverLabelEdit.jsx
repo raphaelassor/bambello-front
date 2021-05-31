@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { ColorPallette } from "./ColorPalette";
+import { ColorPallette } from "../ColorPalette";
 
-import { PopOver } from './PopOver/PopOver'
-export class LabelEditPopOver extends Component {
+import { PopOver } from './PopOver'
+export class PopOverLabelEdit extends Component {
 
     state = {
         title: '',
