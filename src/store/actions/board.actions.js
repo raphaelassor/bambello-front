@@ -1,9 +1,9 @@
 import { boardService } from '../../services/board.service.js'
 
-export function loadBoard() {
+export function loadBoard(boardId = '60b5066cbe7ef41ea52f6eff') {
     return async dispatch => {
         try {
-            const board = await boardService.query()
+            const board = await boardService.getById(boardId)
             dispatch({ type: 'SET_BOARD', board })
         } catch (err) {
             console.log('BoardActions: err in loadBoard', err)
@@ -14,7 +14,6 @@ export function loadBoard() {
 export function onSaveBoard(board) {
     return async dispatch => {
         try {
-            console.log('in Save board')
             const savedBoard = await boardService.save(board)
             dispatch({ type: 'SAVE_BOARD', board: savedBoard })
         } catch (err) {

@@ -53,6 +53,8 @@ function getLoggedinUser() {
     return user
 }
 
+
+// admin panel
 // function getUsers() {
 //     return storageService.query('user')
 //     // return httpService.get(`user`)

@@ -27,7 +27,7 @@ class _CardDetails extends Component {
     componentDidMount() {
         // SETTING LIST AND CARD FROM PARAMS
         const { cardId, listId } = this.props.match.params
-        const { board: { lists } } = this.props
+        const { board,board: { lists } } = this.props
         const list = lists.find(list => list.id === listId)
         const { cards } = list;
         const card = cards.find(card => card.id === cardId)
@@ -54,8 +54,11 @@ class _CardDetails extends Component {
     onSaveCard = () => {
         const { card, list } = this.state;
         const { board, board: { lists } } = this.props
+        console.log('board in onSaveCard:',board)
         const { cards } = list
-        const listIdx = lists.indexOf(list)
+        if(!cards) cards = []
+        const listIdx = lists.findIndex(currList => currList.id === list.id)
+        console.log('list idx on save card:',listIdx)
         const cardIdx = list.cards.indexOf(card)
         cards[cardIdx] = card // deploy card into cards
         board.lists[listIdx].cards = cards // saving cards to the currlist
@@ -118,7 +121,7 @@ class _CardDetails extends Component {
                 </button>
                 {bgColor && <CardDetailsCover bgColor={bgColor} />}
                 <div className="card-details-header">
-                    <div className="header-content flex align-center">
+                    <div className="header-content flex">
                         <WebAssetIcon />
                         <TextareaAutosize value={title} aria-label="empty textarea" onBlur={this.onSaveCard} onChange={this.cardTitleHandleChange} />
                     </div>
