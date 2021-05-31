@@ -85,24 +85,15 @@ class _CardDetailsActions extends Component {
                 </button></div>}
             <h4>ADD TO CARD</h4>
             <div className="add-section flex column">
-<<<<<<< HEAD
             <button className="secondary-btn actions-btn " onClick={(ev) => this.onOpenPopOver(ev,'MEMBERS')}>
                 <div className="actions-btn-content flex align-center">
                     <i className="far fa-user icon-sm "></i>
                     <span>Members</span>
                 </div>
-=======
-                <button className="secondary-btn actions-btn " onClick={(ev) => this.onOpenPopOver(ev, 'members')}>
-                    <div className="actions-btn-content flex align-center">
-                        <i className="far fa-user icon-sm "></i>
-                        <span>Members</span>
-                    </div>
->>>>>>> f0863ec9cb749a36c3cd950fb4f178745307f5c3
                     <span className="element-overlay"></span>
                 </button>
                 {/* {currPopOverName === 'members-actions-details' && <PopOverMembers card={card} />} */}
 
-<<<<<<< HEAD
             <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev,'LABELS')}>
                         <div className="actions-btn-content flex align-center">
                             <LabelIcon />
@@ -147,47 +138,6 @@ class _CardDetailsActions extends Component {
                 <span className="element-overlay"></span>
             </button>
             {/* {currPopOverName === 'cover-actions-details' && <PopOverCover card={card} />} */}
-=======
-                <button className="secondary-btn actions-btn" onClick={() => openPopOver('labels-actions-details')}>
-                    <div className="actions-btn-content flex align-center">
-                        <LabelIcon />
-                        <span>Labels</span>
-                    </div>
-                </button>
-                {/* {currPopOverName === 'labels-actions-details' && <PopOverLabels  card={card} />} */}
-
-                <button className="secondary-btn actions-btn" onClick={() => openPopOver('checklist-actions-details')}>
-                    <div className="actions-btn-content flex align-center">
-                        <CheckboxIcon />
-                        <span>Checklist</span>
-                    </div>
-                </button>
-                {/* {currPopOverName === 'checklist-actions-details' && <PopOverChecklist  card={card} />} */}
-
-                <button className="secondary-btn actions-btn" onClick={() => openPopOver('date-actions-details')}>
-                    <div className="actions-btn-content flex align-center">
-                        <i className="far fa-clock icon-sm "></i>
-                        <span>Date</span>
-                    </div>
-                </button>
-                {/* {currPopOverName === 'date-actions-details' && <PopOverDate  card={card} />} */}
-
-                <button className="secondary-btn actions-btn" onClick={() => openPopOver('attach-actions-details')}>
-                    <div className="actions-btn-content flex align-center">
-                        <i className="fas fa-paperclip icon-sm"></i>
-                        <span>Attachment</span>
-                    </div>
-                </button>
-                {/* {currPopOverName === 'attach-actions-details' && <PopOverAttach  addFile={this.addFile} />} */}
-
-                <button className="secondary-btn actions-btn" onClick={() => openPopOver('cover-actions-details')}>
-                    <div className="actions-btn-content flex align-center">
-                        <CoverIcon />
-                        <span>Cover</span>
-                    </div>
-                </button>
-                {/* {currPopOverName === 'cover-actions-details' && <PopOverCover card={card} />} */}
->>>>>>> f0863ec9cb749a36c3cd950fb4f178745307f5c3
 
             </div>
 
