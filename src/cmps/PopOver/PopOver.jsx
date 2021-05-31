@@ -13,7 +13,7 @@ export class _PopOver extends Component {
     
     componentDidMount() {
         window.addEventListener('resize',()=>{
-            if(window.visualViewport.width>975)return
+            if(window.visualViewport.width>1000)return
             this.setPopOverPos()
         });
         this.setPopOverPos()
@@ -23,6 +23,7 @@ export class _PopOver extends Component {
     setPopOverPos=()=>{
         let { left,top } = this.props.elPos
         top+=38
+        if(!this.selectedDiv) return
         const popOverRect=this.selectedDiv.getBoundingClientRect()
         const {height,width}=popOverRect
         const viewportWidth=window.visualViewport.width

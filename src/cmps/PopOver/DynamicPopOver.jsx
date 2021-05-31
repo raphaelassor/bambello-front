@@ -1,12 +1,24 @@
 import { PopOverMembers } from "./PopOverMembers";
 import {connect} from 'react-redux'
-
+import { PopOverLabels } from "./PopOverLabels";
+import { PopOverCover } from "./PopOverCover";
+import { PopOverDate } from "./PopOverDate";
+import { PopOverAttach } from "./PopOverAttach";
+import { PopOverChecklist } from "./PopOverChecklist";
+import {PopOverMoveCopy} from './PopOverMoveCopy'
 export function _DynamicPopOver({currPopOver}){
 
     const {name,elPos,props}=currPopOver
 
     switch(name){
-        case 'members': return <PopOverMembers {...props} />;
+        case 'MEMBERS': return <PopOverMembers {...props} />;
+        case 'LABELS': return <PopOverLabels {...props} />;
+        case 'COVER': return <PopOverCover {...props} />;
+        case 'DATE': return <PopOverDate {...props} />;
+        case 'COPY': return <PopOverMoveCopy type="copy" {...props} />;
+        case 'MOVE': return <PopOverMoveCopy type="move" {...props} />;
+        case 'ATTACH': return <PopOverAttach {...props} />;
+        case 'CHECKLIST': return <PopOverChecklist {...props} />;
         default: return '';
     }
 
