@@ -28,6 +28,7 @@
 @import "cmps/card-list.scss";
 @import "cmps/card-list-add.scss";
 @import "cmps/color-palette";
+@import "cmps/screen-overlay.scss";
 
 // CardPreview
 @import "cmps/card-preview/card-preview.scss";
@@ -46,7 +47,6 @@
 @import "cmps/card-details/todo-preview.scss";
 @import "cmps/card-details/todo-add.scss";
 @import "cmps/card-details/progress-bar.scss";
-@import "cmps/card-details/screen-overlay.scss"; // ??
 @import "cmps/card-details/card-details-cover.scss";
 @import "cmps/card-details//card-attachments.scss";
 
