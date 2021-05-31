@@ -11,13 +11,10 @@ import { CardDetailsMembers } from '../cmps/CardDetails/CardDetailsMembers'
 import { CardDescription } from '../cmps/CardDetails/CardDescription'
 import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
-<<<<<<< HEAD
 import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
-=======
 import {closePopOver} from '../store/actions/app.actions'
 
->>>>>>> eec9f31e540255746f3445d9efc4de734aeb8c25
 
 
 class _CardDetails extends Component {
