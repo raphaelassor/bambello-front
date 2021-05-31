@@ -65,10 +65,10 @@
             font-weight: 500;
         }
 
-        .card-preview-labels{
+        .card-preview-labels {
             display: flex;
-            margin-bottom: 4px;
-            >*:not(:last-child) {
+            flex-wrap: wrap;
+            > *:not(:last-child) {
                 margin-inline-end: 4px;
             }
         }
