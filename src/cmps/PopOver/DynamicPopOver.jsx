@@ -1,16 +1,16 @@
 import { PopOverMembers } from "./PopOverMembers";
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { PopOverLabels } from "./PopOverLabels";
 import { PopOverCover } from "./PopOverCover";
 import { PopOverDate } from "./PopOverDate";
 import { PopOverAttach } from "./PopOverAttach";
 import { PopOverChecklist } from "./PopOverChecklist";
-import {PopOverMoveCopy} from './PopOverMoveCopy'
-export function _DynamicPopOver({currPopOver}){
+import { PopOverMoveCopy } from './PopOverMoveCopy'
+export function _DynamicPopOver({ currPopOver }) {
 
-    const {name,elPos,props}=currPopOver
+    const { name, elPos, props } = currPopOver
 
-    switch(name){
+    switch (name) {
         case 'MEMBERS': return <PopOverMembers {...props} />;
         case 'LABELS': return <PopOverLabels {...props} />;
         case 'COVER': return <PopOverCover {...props} />;
@@ -26,7 +26,7 @@ export function _DynamicPopOver({currPopOver}){
 function mapStateToProps(state) {
     return {
         isOverlayOpen: state.appModule.isOverlayOpen,
-        currPopOver:state.appModule.currPopOver
+        currPopOver: state.appModule.currPopOver
     }
 }
 export const DynamicPopOver = connect(mapStateToProps, null)(_DynamicPopOver)

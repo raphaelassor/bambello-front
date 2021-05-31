@@ -6,6 +6,7 @@ export const boardService = {
     remove,
     getById,
     save,
+    updateCardInBoard,
 }
 
 async function query(filterBy) {
@@ -46,4 +47,15 @@ async function save(board) {
             throw err
         }
     }
+}
+
+// sync functions 
+
+export function updateCardInBoard(board, updatedCard) {
+    board.lists.forEach(list => {
+        list.cards.forEach((card, idx) => {
+            if (card.id === updatedCard.id) list.cards[idx] = updatedCard
+        })
+    })
+    return board
 }
