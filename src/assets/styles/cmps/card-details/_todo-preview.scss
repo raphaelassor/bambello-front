@@ -20,9 +20,13 @@
 
         .checked,
         .non-checked {
-            margin: 8px 3px 6px 6px;
+            margin: 6px 18px 6px 2px;
             cursor: pointer;
             transition: opacity 0.3s;
+            path {
+                width: 16px;
+                height: 16px;
+            }
             &:hover {
                 opacity: 60%;
             }
@@ -40,6 +44,7 @@
         }
 
         textarea {
+            align-self: center;
             cursor: pointer;
             width: 100%;
             height: 100%;
@@ -48,16 +53,22 @@
             overflow: hidden;
             border-radius: $borderRad1;
             box-shadow: unset;
-            margin: 6px;
             font-size: 14px;
             resize: none;
 
             &:focus {
                 cursor: text;
                 min-height: 56px;
+                // margin-inline-start: 8px;
                 padding: 8px 12px;
+                margin-bottom: 6px;
                 background-color: rgba(9, 30, 66, 0.04);
                 border: 0.1em solid rgba(9, 30, 66, 0.13);
+
+                .checked,
+                .non-checked {
+                    align-self: unset;
+                }
             }
 
             &.done:not(:focus) {
@@ -67,6 +78,7 @@
         }
 
         .delete-svg {
+            align-self: center;
             margin-top: 8px;
             cursor: pointer;
             display: none;
@@ -77,11 +89,10 @@
         }
     }
     .checklist-controllers {
-        margin-bottom: 9px;
         color: #6b778c;
         font-size: 24px;
         .primary-btn {
-            margin-inline-start: rem(40px);
+            margin-inline-start: 40px;
             margin-inline-end: 4px;
         }
         .close-svg {

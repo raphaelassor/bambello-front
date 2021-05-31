@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TextareaAutosize } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import WebAssetIcon from '@material-ui/icons/WebAsset';
 import { connect } from 'react-redux'
 import { onSaveBoard } from '../store/actions/board.actions'
 import { DueDateDisplay } from '../cmps/DueDateDisplay';
@@ -10,7 +11,8 @@ import { CardDetailsMembers } from '../cmps/CardDetails/CardDetailsMembers'
 import { CardDescription } from '../cmps/CardDetails/CardDescription'
 import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
-
+import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
+import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
 
 
 class _CardDetails extends Component {
@@ -75,6 +77,14 @@ class _CardDetails extends Component {
         this.setState({ card }, this.onSaveCard())
     }
 
+    onDeleteCardAttachment = (ev,attachId) => {
+        ev.preventDefault()
+        let { card, card: { attachs } } = this.state
+        attachs = attachs.filter(currAttach => currAttach.id !== attachId)
+        card.attachs = attachs
+        this.setState({ card }, this.onSaveCard())
+    }
+
     toggleCardDone = () => {
         const { card } = this.state
         card.isDone = !card.isDone
@@ -95,32 +105,38 @@ class _CardDetails extends Component {
         const { board, onSaveBoard } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
-        const { title, members, description, checklists, dueDate } = card
+        const { title, members, description, checklists, dueDate, style: { bgColor }, attachs } = card
         return (<>
-            <ScreenOverlay goBackToBoard={this.goBackToBoard}/> 
-                <section className="card-details flex-column">
-                    <button onClick={() => this.goBackToBoard()} className="close-window-btn flex align-center justify-center"><CloseRoundedIcon /></button>
-                    <i className="far fa-window-maximize window-icon icon-lg"></i>
-                    <div className="card-details-header">
+            <ScreenOverlay goBackToBoard={this.goBackToBoard} />
+            <section className="card-details flex-column">
+                <button onClick={() => this.goBackToBoard()} className={`close-window-btn ${bgColor ? 'cover-mode' : ''} flex align-center justify-center`}>
+                    <CloseRoundedIcon />
+                </button>
+                {bgColor && <CardDetailsCover bgColor={bgColor} />}
+                <div className="card-details-header">
+                    <div className="header-content flex align-center">
+                        <WebAssetIcon />
                         <TextareaAutosize value={title} aria-label="empty textarea" onBlur={this.onSaveCard} onChange={this.cardTitleHandleChange} />
-                        <p className="bottom-list-name">in list {list.title}</p>
                     </div>
-                    <div className="flex">
-                        <div className="card-details-main flex column">
-                            <div className="card-details-items flex wrap">
-                                {!!members.length && <CardDetailsMembers members={members} />}
-                                {!!this.cardLabels.length && <CardDetailsLabels labels={this.cardLabels} />}
-                                {!!dueDate && <DueDateDisplay displayType="details" card={card} toggleCardDone={this.toggleCardDone} onSaveCardFromActions={this.onSaveCardFromActions} />}
-                            </div>
-                            <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
-                            <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
+                    <p className="bottom-list-name">in list <span>{list.title}</span></p>
+                </div>
+                <div className="flex">
+                    <div className="card-details-main flex column">
+                        <div className="card-details-items flex wrap">
+                            {!!members.length && <CardDetailsMembers members={members} />}
+                            {!!this.cardLabels.length && <CardDetailsLabels labels={this.cardLabels} />}
+                            {!!dueDate && <DueDateDisplay displayType="details" card={card} toggleCardDone={this.toggleCardDone} onSaveCardFromActions={this.onSaveCardFromActions} />}
                         </div>
-                        <div className="card-details-sidebar flex column full">
-                            <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
-                        </div>
+                        <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
+                        {!!attachs.length && <CardAttachments attachs={attachs} onDeleteCardAttachment={this.onDeleteCardAttachment}/>}
+                        <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
                     </div>
-                </section>
-                </>
+                    <div className="card-details-sidebar flex column full">
+                        <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
+                    </div>
+                </div>
+            </section>
+        </>
         )
     }
 }

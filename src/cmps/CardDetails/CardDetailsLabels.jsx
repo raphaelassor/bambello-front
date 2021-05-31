@@ -1,4 +1,4 @@
-
+import { ReactComponent as AddIcon } from '../../assets/img/icons/add.svg'
 
 export function CardDetailsLabels({ labels }) {
     return (
@@ -8,6 +8,7 @@ export function CardDetailsLabels({ labels }) {
                 {labels.map(label => {
                     return <span key={label.id} style={{ backgroundColor: label.color }} className="label">{label.title}</span>
                 })}
+                <button className="secondary-btn"><AddIcon/></button>
             </div>
         </div>
     )

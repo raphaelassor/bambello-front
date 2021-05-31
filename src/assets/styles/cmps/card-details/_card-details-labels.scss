@@ -14,5 +14,22 @@
             padding: 0 12px;
             width: auto;
         }
+        .secondary-btn {
+            display: flex;
+            border-radius: $borderRad1;
+            border: none;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            padding: 0;
+            height: 32px;
+            svg {
+                width: 16px;
+                height: 16px;
+                path {
+                    color: $clr4;
+                }
+            }
+        }
     }
 }
