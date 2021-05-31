@@ -27,32 +27,32 @@
         {
             "title": "Requires Attention ",
             "color": "#eb5a46",
-            "id": 0.8698639778953094
+            "id": "l104"
         },
         {
             "title": "Have Not Started",
             "color": "#c377e0",
-            "id": 0.5801593786219037
+            "id": "l105"
         },
         {
             "title": "Flagged ",
             "color": "#eb5a46",
-            "id": 0.2853413905607882
+            "id": "l106"
         },
         {
             "title": "Has to be discussed 📳",
             "color": "#c377e0",
-            "id": 0.6367387168726368
+            "id": "l107"
         },
         {
             "title": "Committed to Repo ⏫",
             "color": "#51e898",
-            "id": 0.6013862434654915
+            "id": "l108"
         },
         {
             "title": "Not clear ⏸",
             "color": "#ff9f1a",
-            "id": 0.239890461361574
+            "id": "l109"
         }
     ],
     "members": [
@@ -120,10 +120,8 @@
                         }
                     ],
                     "labelIds": [
-                        "101",
-                        "l102",
-                        0.8698639778953094
-                    ],
+                        "l101",
+                        "l102"],
                     "createdAt": 1590999730348,
                     "startDate": 1590999730348,
                     "dueDate": 1622674200000,
@@ -210,11 +208,7 @@
                         }
                     ],
                     "byMember": "loggedinUser",
-                    "labelIds": [
-                        0.6367387168726368,
-                        0.8698639778953094,
-                        "l102"
-                    ],
+                    "labelIds": ["l102"],
                     "createdAt": 1622368075130,
                     "startDate": 0,
                     "dueDate": 0,
@@ -269,11 +263,7 @@
                     ],
                     "byMember": "loggedinUser",
                     "labelIds": [
-                        "l102",
-                        0.6367387168726368,
-                        0.2853413905607882,
-                        0.8698639778953094
-                    ],
+                        "l102"],
                     "createdAt": 1622369572076,
                     "startDate": 0,
                     "dueDate": 1622369580000,
@@ -620,9 +610,7 @@
                         }
                     ],
                     "byMember": "loggedinUser",
-                    "labelIds": [
-                        0.5801593786219037
-                    ],
+                    "labelIds": [],
                     "createdAt": 1622367398207,
                     "startDate": 0,
                     "dueDate": 1622453820000,
@@ -662,9 +650,7 @@
                     ],
                     "members": [],
                     "byMember": "loggedinUser",
-                    "labelIds": [
-                        0.5801593786219037
-                    ],
+                    "labelIds": [],
                     "createdAt": 1622368239863,
                     "startDate": 0,
                     "dueDate": 1622454720000,
@@ -682,10 +668,7 @@
                     "checklists": [],
                     "members": [],
                     "byMember": "loggedinUser",
-                    "labelIds": [
-                        0.5801593786219037,
-                        0.239890461361574
-                    ],
+                    "labelIds": [],
                     "createdAt": 1622368453154,
                     "startDate": 0,
                     "dueDate": 1622541300000,
@@ -863,10 +846,7 @@
                         }
                     ],
                     "byMember": "loggedinUser",
-                    "labelIds": [
-                        0.5801593786219037,
-                        0.239890461361574
-                    ],
+                    "labelIds": [],
                     "createdAt": 1622369069842,
                     "startDate": 0,
                     "dueDate": 1622628480000,
@@ -932,11 +912,7 @@
                     ],
                     "members": [],
                     "byMember": "loggedinUser",
-                    "labelIds": [
-                        0.5801593786219037,
-                        0.239890461361574,
-                        0.6367387168726368
-                    ],
+                    "labelIds": [],
                     "createdAt": 1622369156838,
                     "startDate": 0,
                     "dueDate": 1621937280000,
@@ -1016,9 +992,7 @@
                         }
                     ],
                     "byMember": "loggedinUser",
-                    "labelIds": [
-                        0.5801593786219037
-                    ],
+                    "labelIds": [],
                     "createdAt": 1622368740767,
                     "startDate": 0,
                     "dueDate": 0,

@@ -18,10 +18,8 @@ export function appReducer(state = initialState, action) {
         case 'LOGIN_ERR':
             return { ...state, loginErr: action.err }
         case 'SET_POPOVER':
-            console.log('previous state is',state)
             return { ...state, currPopOver: action.popOverName, isOverlayOpen: true }
         case 'CLOSE_POPOVER':
-            console.log(state,' previous state is')
             return { ...state, currPopOver: '', isOverlayOpen: false }
         default:
             return state

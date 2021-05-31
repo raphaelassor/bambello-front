@@ -23,6 +23,11 @@ export function onSaveBoard(board) {
     }
 }
 
+export function togglePreviewLabels() {
+    return dispatch => {
+        dispatch({ type: 'TOGGLE_LABELS' })
+    }
+}
 
 
 

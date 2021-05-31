@@ -1,6 +1,7 @@
 const initialState = {
     board: null,
-    
+    isPreviewLabelsOpen: false
+
 }
 
 export function boardReducer(state = initialState, action) {
@@ -9,6 +10,8 @@ export function boardReducer(state = initialState, action) {
             return { ...state, board: action.board }
         case 'SAVE_BOARD':
             return { ...state, board: { ...action.board } }
+        case 'TOGGLE_LABELS':
+            return { ...state, isPreviewLabelsOpen: !state.isPreviewLabelsOpen }
         case 'REMOVE_CARD':
             return {}
         default:
