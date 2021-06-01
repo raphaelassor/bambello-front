@@ -16,6 +16,7 @@ export class _PopOver extends Component {
             if(window.visualViewport.width>1000)return
             this.setPopOverPos()
         });
+        // add remove event 
         this.setPopOverPos()
 
     }
