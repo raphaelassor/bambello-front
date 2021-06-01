@@ -7,6 +7,7 @@ import { PopoverAttach } from "./PopoverAttach";
 import { PopoverChecklist } from "./PopoverChecklist";
 import { PopoverMoveCopy } from './PopoverMoveCopy';
 import { PopoverProfile } from './PopoverProfile';
+import { PopoverInvite } from "./PopoverInvite";
 
 export function _DynamicPopover({ currPopover }) {
 
@@ -22,6 +23,7 @@ export function _DynamicPopover({ currPopover }) {
         case 'ATTACH': return <PopoverAttach {...props} />;
         case 'CHECKLIST': return <PopoverChecklist {...props} />;
         case 'PROFILE': return <PopoverProfile {...props} />
+        case 'INVITE': return <PopoverInvite {...props} />
         default: return '';
     }
 

@@ -1,0 +1,8 @@
+.invite-details{
+    width:20rem;
+    min-height:300px;
+    overflow:auto ;
+    .members{
+        flex-grow: 1;
+    }
+}

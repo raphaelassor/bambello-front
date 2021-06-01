@@ -33,11 +33,11 @@ class _CardPreview extends Component {
         onSaveBoard(board);
     }
 
-    onProfilePopover = (ev, member) => {
+    onProfilePopover = (ev,popOverName ,member) => {
         ev.preventDefault();
         const elPos = ev.target.getBoundingClientRect();
         const props = { member }
-        this.props.openPopover('PROFILE', elPos, props)
+        this.props.openPopover(popOverName, elPos, props)
     }
 
     toggleCardEdit = (ev) => {

@@ -12,4 +12,4 @@ export function PopoverLabelPreview({ label, toggleLabel, isInCard, toggleEditMo
             <EditIcon style={{ width: '16px', height: '16px', color: '#42526e' }} onClick={() => toggleEditMode(label)} />
         </div>
     </li>
-}
+} 

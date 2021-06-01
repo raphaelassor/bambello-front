@@ -1,11 +1,14 @@
 import { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
-import { openPopover} from '../store/actions/app.actions.js'
+import { openPopover } from '../store/actions/app.actions.js'
 import AutosizeInput from 'react-input-autosize';
-import {ProfileAvatar} from './ProfileAvatar'
- class _BoardHeader extends Component {
+import { ProfileAvatar } from './ProfileAvatar'
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+
+
+class _BoardHeader extends Component {
 
     state = {
         title: '',
@@ -13,7 +16,7 @@ import {ProfileAvatar} from './ProfileAvatar'
         inputWidth: 0,
 
     }
-
+ 
     componentDidMount() {
         this.setState({ title: this.props.board.title })
     }
@@ -35,22 +38,24 @@ import {ProfileAvatar} from './ProfileAvatar'
     }
     onTitleSave = (ev) => {
         ev.preventDefault()
+        const {title}=this.state
+        if(!title) return // error msg to user: must enter title 
         const { board, onSaveBoard } = this.props
-        board.title = this.state.title
+        board.title = title
         onSaveBoard(board)
         this.toggleEdit()
     }
-    onToggleFav=()=>{
-        const {board,onSaveBoard}= this.props
-        board.isFavorite=!board.isFavorite
+    onToggleFav = () => {
+        const { board, onSaveBoard } = this.props
+        board.isFavorite = !board.isFavorite
         onSaveBoard(board)
     }
-    openProfilePopover=(ev,member)=>{
+    onOpenPopover = (ev, popOverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
-        const props={member}
-        this.props.openPopover('PROFILE', elPos, props)
+        const props = { member }
+        this.props.openPopover(popOverName, elPos, props)
     }
-    
+
 
     render() {
         const { board } = this.props
@@ -63,27 +68,31 @@ import {ProfileAvatar} from './ProfileAvatar'
                     <ArrowDown />
                 </button>
                 <div className="board-title" >
-                    {isEdit?
-                    <form onSubmit={this.onTitleSave}>
-                        {/* <input type="text" value={title}  ref={(input) => { this.titleInput = input }} /> */}
-                        <AutosizeInput
-                            name="form-field-name"
-                            value={title}
-                            onChange={this.handleChange}
-                            ref={(input) => { this.titleInput = input }}
-                            onBlur={this.onTitleSave}
+                    {isEdit ?
+                        <form onSubmit={this.onTitleSave}>
+                            {/* <input type="text" value={title}  ref={(input) => { this.titleInput = input }} /> */}
+                            <AutosizeInput
+                                name="form-field-name"
+                                value={title}
+                                onChange={this.handleChange}
+                                ref={(input) => { this.titleInput = input }}
+                                onBlur={this.onTitleSave}
                             />
-                    </form>
-                    :
-                    <h1 onClick={this.toggleEdit} ref={(h1) => { this.h1Title = h1 }}>{board.title} </h1>
-                }
+                        </form>
+                        :
+                        <h1 onClick={this.toggleEdit} ref={(h1) => { this.h1Title = h1 }}>{board.title} </h1>
+                    }
                 </div>
                 <button className="board-btn" onClick={this.onToggleFav}>
-                <i className={`far fa-star icon-sm star-icon ${board.isFavorite? 'favorite':''}`}></i>
+                    <i className={`far fa-star icon-sm star-icon ${board.isFavorite ? 'favorite' : ''}`}></i>
                 </button>
+                <span className="divider"></span>
 
                 <div className="board-header-members flex">
-                    {board.members.map(member=><ProfileAvatar member={member} onOpenPopover={this.openProfilePopover}  />)}
+                    <AvatarGroup max={4}>
+                        {board.members.map(member => <ProfileAvatar member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
+                    </AvatarGroup>
+                <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
             </div>
         )
