@@ -73,9 +73,10 @@ class _CardPreview extends Component {
                                 {isCardEditOpen && <CardPreviewEdit />}
                                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
-                                    <div className="card-preview-labels">
+                                    {coverMode !== 'full' && <div className="card-preview-labels">
                                         {!!card.labelIds.length && card.labelIds.map(labelId => <CardPreviewLabel key={labelId} labelId={labelId} labels={board.labels} />)}
                                     </div>
+                                    }
                                     <div className="card-preview-name">{card.title}</div>
                                     {coverMode !== 'full' &&
                                         <div className="card-preview-bagdes">
@@ -83,7 +84,7 @@ class _CardPreview extends Component {
                                                 {/* {isUserWatched && <RemoveRedEyeOutlinedIcon/>} */} {/*TODO: try to change cmp name to WatchIcon, implement user watched*/}
                                                 {!!card.dueDate && <DueDateDisplay card={card} toggleCardDone={this.toggleCardDone} displayType="preview" />}
                                                 {card.description && <div><SubjectIcon /></div>}
-                                                {!!card.comments.length && <CardPreviewComments commentsCount={card.comments.length}/>}
+                                                {!!card.comments.length && <CardPreviewComments commentsCount={card.comments.length} />}
                                                 {/* attachment */}
                                                 {!this.isChecklistsEmpty(card) && <CardPreviewChecklist checklists={card.checklists} />}
                                             </div>
