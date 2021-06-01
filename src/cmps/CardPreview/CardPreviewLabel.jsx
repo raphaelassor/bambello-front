@@ -19,6 +19,12 @@ class _CardPreviewLabel extends Component {
         this.props.togglePreviewLabels()
     }
 
+    //TODO: 
+    // get labelState() {
+    //     const { isPreviewLabelsOpen } = this.props;
+    //     if (isPreviewLabelsOpen === 'open') return 'open'
+    //     if (isPreviewLabelsOpen === 'close')
+    // }
 
     render() {
 
