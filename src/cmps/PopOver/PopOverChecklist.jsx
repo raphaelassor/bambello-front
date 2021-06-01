@@ -12,11 +12,13 @@ class _PopoverChecklist extends Component {
     state = {
         title: ''
     }
+    
     handlechange = ({ target }) => {
         this.setState({ title: target.value })
     }
 
-    addChecklist = () => {
+    addChecklist = (ev) => {
+        ev.preventDefault() 
         const { card, onSaveBoard, board } = this.props
         if (!card.checklists) card.checklists = []
         const checklist = {

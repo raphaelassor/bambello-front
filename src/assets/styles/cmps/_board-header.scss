@@ -9,12 +9,19 @@
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: $borderRad1;
         color: $clr2;
-        h1 {
+        h1,input {
             font-size: 18px;
             font-weight: 700;
             line-height: 32px;
             padding: 0 12px;
         }
+        input{
+            border-radius: $borderRad1;
+            border:none;
+        
+        }
+        
+        
     }
     button {
         display: flex;
@@ -34,7 +41,11 @@
             background-color: rgba(255, 255, 255, 0.3);
         }
     }
-    path {
-        font-size: 16px;
+    // path {
+    //     font-size: 16px;
+    // }
+    .star-icon{
+        margin:0 3px
+        
     }
 }
