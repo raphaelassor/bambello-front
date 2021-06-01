@@ -42,6 +42,7 @@ class _PopoverMoveCopy extends Component {
             })
             if (list.id === listId) list.cards.splice(cardIdx, 0, cardToMove)
         })
+        //create activity ('move','')
         const updatedBoard = JSON.parse(JSON.stringify(board))
         onSaveBoard(updatedBoard)
         //message that the card moved

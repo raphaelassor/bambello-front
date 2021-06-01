@@ -7,7 +7,8 @@ export const boardService = {
     getById,
     save,
     updateCardInBoard,
-    createActivity
+    createActivity,
+    setPopoverPos
 }
 
 async function query(filterBy) {
@@ -82,4 +83,18 @@ export function createActivity(actionType, txt, loggedInUser, card) {
         card
     }
     return savedActivity
+}
+
+
+//move to app service
+
+function setPopoverPos(pos, elRect, diff = 38) {
+    let { left, top } = pos
+    top += diff
+    const { height, width } = elRect
+    const viewportWidth = window.visualViewport.width
+    const viewportHeight = window.visualViewport.height
+    if (left + width > viewportWidth) left = viewportWidth - width - 10
+    if (top + height > viewportHeight) top = viewportHeight - height - 10
+    return { left, top }
 }

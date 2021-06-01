@@ -2,23 +2,18 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Draggable } from 'react-beautiful-dnd'
+import { openPopover } from '../../store/actions/app.actions'
 import { DueDateDisplay } from '../DueDateDisplay'
 import { CardPreviewChecklist } from './CardPreviewChecklist'
 import { CardPreviewLabel } from './CardPreviewLabel'
+import { CardPreviewComments } from './CardPreviewComments'
 import { Subject as SubjectIcon } from '@material-ui/icons'
 import EditIcon from '@material-ui/icons/CreateOutlined'
-import Avatar from '@material-ui/core/Avatar';
-import { openPopover } from '../../store/actions/app.actions'
-import { CardPreviewEdit } from './CardPreviewEdit'
-import { CardPreviewComments } from './CardPreviewComments'
+import { ProfileAvatar } from '../ProfileAvatar'
 
 class _CardPreview extends Component {
 
-    state = {
-        isCardEditOpen: false
-    }
-
-    isChecklistsEmpty = ({checklists}) => {
+    isChecklistsEmpty = ({ checklists }) => {
         return checklists.every(checklist => !checklist.todos.length)
     }
 
@@ -31,16 +26,27 @@ class _CardPreview extends Component {
         onSaveBoard(board);
     }
 
-    // setProfilePopover = (ev, cardId, memberId) => {
-    //     ev.preventDefault();
-    //     this.setState({ currProfilePopover: `${cardId}-${memberId}` });
-    // }
-
-    toggleCardEdit = (ev) => {
+    onOpenPopover = (ev, type, member) => {
         ev.preventDefault();
-        const { isCardEditOpen } = this.state;
-        this.setState({ isCardEditOpen: !isCardEditOpen });
+        const { card, openPopover } = this.props;
+        let elPos;
+        let props;
+        if (type === 'PROFILE') {
+            elPos = ev.target.getBoundingClientRect();
+            props = { member, card }
+        } else if (type === 'EDIT') {
+            elPos = this.cardContainer.getBoundingClientRect();
+            props = { card }
+        }
+
+        openPopover(type, elPos, props)
     }
+
+    // onEditPopover = (ev) => {
+    //     ev.preventDefault();
+    //     const { isCardEditOpen } = this.state;
+    //     this.setState({ isCardEditOpen: !isCardEditOpen });
+    // }
 
 
     draggableStyle = (style, snapshot) => {
@@ -60,17 +66,14 @@ class _CardPreview extends Component {
 
     render() {
         const { board, card, currList, cardIdx } = this.props;
-        const { isCardEditOpen } = this.state
         const { coverMode, bgColor } = card.style;
-
         return (
             <Draggable draggableId={card.id} index={cardIdx}>
                 {(provided, snapshot) => (
                     <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)} >
-                        <Link to={`/board/${board._id}/${currList.id}/${card.id}`} className="clean-link" onContextMenu={this.toggleCardEdit}>
-                            <div className="card-preview-container">
-                                <div className="card-preview-edit-btn" onClick={this.toggleCardEdit}><EditIcon /></div>
-                                {isCardEditOpen && <CardPreviewEdit />}
+                        <Link to={`/board/${board._id}/${currList.id}/${card.id}`} className="clean-link" onContextMenu={this.openCardEdit}>
+                            <div className="card-preview-container" ref={(div) => { this.cardContainer = div }}>
+                                <div className="card-preview-edit-btn" onClick={this.openCardEdit}><EditIcon /></div>
                                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
                                     {coverMode !== 'full' && <div className="card-preview-labels">
@@ -90,9 +93,7 @@ class _CardPreview extends Component {
                                             </div>
                                             {!!card.members.length && <div className="card-preview-members">
                                                 {card.members.map(member => {
-                                                    return <div key={member._id}>
-                                                        <Avatar className='avatar' onClick={(ev) => ev.preventDefault()}>{member.fullname.split(' ').map(x => x.charAt(0)).join('')}</Avatar>
-                                                    </div>
+                                                    return <ProfileAvatar member={member} key={member._id} size={28} onOpenPopover={this.onOpenPopover} />
                                                 })}
                                             </div>
                                             }

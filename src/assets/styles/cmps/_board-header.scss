@@ -2,18 +2,27 @@
 .board-header {
     padding: 8px 4px 10px 8px;
     display: flex;
-    >*:not(:last-child) {
+    > *:not(:last-child) {
         margin-right: 4px;
     }
     .board-title {
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: $borderRad1;
         color: $clr2;
-        h1 {
-            font-size: 18px;
-            font-weight: 700;
+        h1{
+
             line-height: 32px;
             padding: 0 12px;
+        }
+        h1,
+        input {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        input {
+            padding: 6px 10px 6px 12px;
+            border-radius: $borderRad1;
+            border: none;
         }
     }
     button {
@@ -34,7 +43,44 @@
             background-color: rgba(255, 255, 255, 0.3);
         }
     }
-    path {
-        font-size: 16px;
+    // path {
+    //     font-size: 16px;
+    // }
+    .star-icon {
+        margin: 0 3px;
+        &.favorite {
+            color: #f2d600;
+        }
+    }
+
+    .board-header-members {
+        .MuiAvatar-root {
+            width: 28px;
+            height: 28px;
+        }
+        .MuiAvatarGroup-avatar {
+            border: none;
+            background-color: rgb(223, 225, 230);
+        }
+        .MuiAvatarGroup-root {
+            align-items: center;
+            .profile-avatar {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+        .MuiAvatar-colorDefault {
+            color: rgb(23, 43, 77);
+        }
+        button{
+            margin-left: 8px;
+            padding:5px 14px;
+        }
+    }
+    .divider{
+        border-left: 1px solid hsla(0,0%,100%,.24);
+        height: 16px;
+        margin: 8px 6px 8px 4px;
     }
 }

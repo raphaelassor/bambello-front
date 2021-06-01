@@ -1,8 +1,8 @@
-import { Component } from "react";
-import { Popover } from "./Popover";
+import { Component } from 'react';
+import { Popover } from './Popover';
 import { boardService } from '../../services/board.service'
-import { MemberPopoverPreview } from './PopoverMemberPreview'
-import { onSaveBoard } from "../../store/actions/board.actions";
+import { PopoverMemberPreview} from './PopoverMemberPreview'
+import { onSaveBoard } from '../../store/actions/board.actions';
 import { connect } from 'react-redux'
 
 
@@ -26,9 +26,7 @@ class _PopoverMembers extends Component {
     }
     toggleMember = (member) => {
         const { card, board } = this.props
-
         const idx = card.members.findIndex(cardMember => cardMember._id === member._id)
-        console.log('index is:', idx)
         if (idx === -1) card.members.push(member)
         else card.members.splice(idx, 1)
         console.log('card is:', card)
@@ -48,9 +46,8 @@ class _PopoverMembers extends Component {
                 <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search members"} />
                 <h4>BOARD MEMBERS</h4>
                 <ul className="clean-list">
-
-                    {presentedMembers.map(member => <MemberPopoverPreview key={member._id} member={member}
-                        toggleMember={this.toggleMember} isInCard={this.isMemberInCard(member)} />)}
+                    {presentedMembers.map(member => <PopoverMemberPreview key={member._id} member={member}
+                        toggleMember={this.toggleMember} isJoined={this.isMemberInCard(member)} />)}
                 </ul>
             </div>
         </Popover>

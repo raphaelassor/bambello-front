@@ -16,7 +16,8 @@ export class PopoverAttach extends Component {
         this.setState({ linkTxt: target.value })
     }
 
-onAttachLink=()=>{
+onAttachLink=(ev)=>{
+    ev.preventDefault()
     if(!this.state.linkTxt) return //message "please inser a link"
     const isValid=utilsService.isValidUrl(this.state.linkTxt)
     if(isValid) this.props.addFile(this.state.linkTxt) //else: Link is Invalid. Please Insert a Valid Link

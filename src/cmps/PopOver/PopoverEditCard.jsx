@@ -1,10 +1,10 @@
-import CloseIcon from '@material-ui/icons/Close';
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { closePopover } from '../../store/actions/app.actions'
-import { Component } from 'react'
 import { boardService } from '../../services/board.service';
+import CloseIcon from '@material-ui/icons/Close';
 
-export class _Popover extends Component {
+export class _PopoverEditCard extends Component {
 
     state = {
         top: null,

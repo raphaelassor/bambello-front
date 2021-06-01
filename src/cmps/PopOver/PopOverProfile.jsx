@@ -1,29 +1,48 @@
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import CloseIcon from '@material-ui/icons/Close';
+import { ProfileAvatar } from '../ProfileAvatar'
+import { Popover } from './Popover'
+import { boardService } from '../../services/board.service'
+import { onSaveBoard } from '../../store/actions/board.actions'
 import { closePopover } from '../../store/actions/app.actions'
-import Avatar from '@material-ui/core/Avatar';
 
-function _PopoverProfile({ member, closePopover }) {
+function _PopoverProfile({ board, card, member, onSaveBoard, closePopover }) {
+
+    const onRemoveMember = () => {
+        const memberIdx = card.members.findIndex(currMember => currMember._id === member._id)
+        card.members.splice(memberIdx, 1)
+        const savedBoard = boardService.updateCardInBoard(board, card);
+        onSaveBoard(savedBoard)
+        closePopover()
+    }
+
     return (
-        <div className="pop-over">
-            <button className="clean-btn" onClick={closePopover}>
-                <CloseIcon style={{ width: '16px', height: '16px' }} />
-            </button>
-            <div className="mini-profile">
-                <span><Avatar key={member._id}>{member.fullname.split(' ').map(x => x.charAt(0)).join('')}</Avatar></span>
-                <h2>{member.fullname}</h2>
-                <span>@{member.username}</span>
-                 {/* TODO: show only if it's user mini-profile */}
-                {/* <Link>Edit profile info</Link> */}
+        <Popover styleMode={'clean'} overlay={'none'}>
+            <div className="mini-profile-container">
+                <div className="mini-profile">
+                    <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50} /></div>
+                    <div className="mini-profile-info">
+                        <a>{member.fullname}</a>
+                        <p>@{member.username.toLowerCase()}</p>
+                        <a className="mini-profile-info-edit">Edit profile info</a>
+                        {/* TODO: show only if it's the user mini-profile */}
+                        {/* <Link>Edit profile info</Link> */}
+                    </div>
+                </div>
+                <span className="remove clean-btn" onClick={() => onRemoveMember()}>Remove from card</span>
             </div>
-            <button>Remove from card</button>
-        </div>
+        </Popover >
     )
 }
 
+function mapStateToProps(state) {
+    return {
+        board: state.boardModule.board
+    }
+}
+
 const mapDispatchToProps = {
+    onSaveBoard,
     closePopover
 }
 
-export const PopoverProfile = connect(null, mapDispatchToProps)(_PopoverProfile)
+export const PopoverProfile = connect(mapStateToProps, mapDispatchToProps)(_PopoverProfile)
