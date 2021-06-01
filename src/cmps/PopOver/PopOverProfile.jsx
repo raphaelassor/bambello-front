@@ -1,15 +1,10 @@
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import CloseIcon from '@material-ui/icons/Close';
-import { closePopover } from '../../store/actions/app.actions'
+// import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
+import { Popover } from './Popover';
 
-function _PopoverProfile({ member, closePopover }) {
+export function PopoverProfile({ member }) {
     return (
-        <div className="pop-over">
-            <button className="clean-btn" onClick={closePopover}>
-                <CloseIcon style={{ width: '16px', height: '16px' }} />
-            </button>
+        <Popover>
             <div className="mini-profile">
                 <span><Avatar key={member._id}>{member.fullname.split(' ').map(x => x.charAt(0)).join('')}</Avatar></span>
                 <h2>{member.fullname}</h2>
@@ -18,12 +13,6 @@ function _PopoverProfile({ member, closePopover }) {
                 {/* <Link>Edit profile info</Link> */}
             </div>
             <button>Remove from card</button>
-        </div>
+        </Popover>
     )
 }
-
-const mapDispatchToProps = {
-    closePopover
-}
-
-export const PopoverProfile = connect(null, mapDispatchToProps)(_PopoverProfile)

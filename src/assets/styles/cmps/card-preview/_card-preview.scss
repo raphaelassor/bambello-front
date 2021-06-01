@@ -106,29 +106,8 @@
                 flex: 1;
                 justify-content: flex-end;
                 margin-bottom: 4px;
-                div {
-                    &:not(:last-child) {
-                        margin-right: 4px;
-                    }
-                    .avatar {
-                        display: flex;
-                        background-color: #dfe1e6;
-                        // float: right;
-                        font-size: 12px;
-                        font-weight: 700;
-                        color: $clr4;
-                        width: 28px;
-                        height: 28px;
-                        // line-height: 28px;
-                        &:hover {
-                            background-color: darken(#dfe1e6, 10%);
-                        }
-                    }
-
-                    .pop-over {
-                        position: fixed;
-                        z-index: 999;
-                    }
+                > *:not(:last-child) {
+                    margin-right: 4px;
                 }
             }
         }

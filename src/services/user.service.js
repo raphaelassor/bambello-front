@@ -43,13 +43,12 @@ function _saveLocalUser(user) {
 
 function getLoggedinUser() {
     // return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null')
- const user=   {
+    const user = {
         _id: 'roghroe313124112',
         fullname: 'Asaf Cohen',
-        userName:'asafco',
-        imgUrl: 'https://www.google.com'
-    
-}
+        userName: 'asafco',
+        imgUrl: 'https://www.google.comhttps://thumbs.dreamstime.com/b/happy-person-portrait-smiling-woman-tanned-skin-curly-hair-happy-person-portrait-smiling-young-friendly-woman-197501184.jpg'
+    }
     return user
 }
 
