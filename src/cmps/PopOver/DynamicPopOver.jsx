@@ -5,7 +5,8 @@ import { PopOverCover } from "./PopOverCover";
 import { PopOverDate } from "./PopOverDate";
 import { PopOverAttach } from "./PopOverAttach";
 import { PopOverChecklist } from "./PopOverChecklist";
-import { PopOverMoveCopy } from './PopOverMoveCopy'
+import { PopOverMoveCopy } from './PopOverMoveCopy';
+
 export function _DynamicPopOver({ currPopOver }) {
 
     const { name, elPos, props } = currPopOver
