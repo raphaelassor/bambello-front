@@ -27,8 +27,7 @@ class _CardPreview extends Component {
     }
 
     openCardEdit = (ev) => {
-        ev.preventDefault();
-
+        ev.preventDefault(); 
         this.onOpenPopover(ev, 'EDIT')
     }
 
@@ -71,7 +70,7 @@ class _CardPreview extends Component {
                 {(provided, snapshot) => (
                     <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)} >
                         <Link to={`/board/${board._id}/${currList.id}/${card.id}`} className="clean-link" onContextMenu={this.openCardEdit}>
-                            <div className="card-preview-container" ref={(div) => { this.cardContainer = div }}>
+                            <div className="card-preview-container" ref={(div) => { this.cardContainer = div }} >
                                 <div className="card-preview-edit-btn" onClick={this.openCardEdit}><EditIcon /></div>
                                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
