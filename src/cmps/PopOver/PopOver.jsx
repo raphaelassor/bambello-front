@@ -35,14 +35,13 @@ export class _Popover extends Component {
     }
 
     render() {
-        const { children, title, closePopover, isOverlayOpen } = this.props
+        const { children, title, closePopover, isOverlayOpen,overlay ,styleMode } = this.props
         const { top, left } = this.state
         return <>
             {/* {isOverlayOpen && <ScreenOverlay goBack={closePopover} styleMode="transparent" />} */}
-            {isOverlayOpen && <div className="overlay" onClick={closePopover} />}
-
+            {overlay !=='none' && isOverlayOpen && <div className="overlay" onClick={closePopover} />}
             <div className=" pop-over" style={{ top: `${top}px`, left: `${left}px` }} ref={(div) => { this.selectedDiv= div }} >
-                <div className="pop-over-header">
+                <div className={`pop-over-header ${styleMode==='clean'? 'clean' : ''} `}>
                     <span>{title}</span>
                     <button className="clean-btn" onClick={closePopover}>
                         <CloseIcon style={{ width: '16px', height: '16px' }} />

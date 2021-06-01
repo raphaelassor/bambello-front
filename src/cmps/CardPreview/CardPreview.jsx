@@ -62,7 +62,6 @@ class _CardPreview extends Component {
         const { board, card, currList, cardIdx } = this.props;
         const { isCardEditOpen } = this.state
         const { coverMode, bgColor } = card.style;
-
         return (
             <Draggable draggableId={card.id} index={cardIdx}>
                 {(provided, snapshot) => (

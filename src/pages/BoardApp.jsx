@@ -75,7 +75,7 @@ class _BoardApp extends Component {
                                 {provided.placeholder}
                                 <CardListAdd board={board} onSaveBoard={onSaveBoard} />
                             </div>
-                            // </ScrollContainer>
+                            // </ScrollContainer> 
                         )}
                     </Droppable>
                 </section>

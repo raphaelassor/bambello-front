@@ -6,7 +6,7 @@
     z-index: 70;
     padding: 0 12px 12px;
     min-width: 20rem;
-    margin-right:4px;
+    margin-right: 4px;
     .pop-over-header {
         display: flex;
         align-items: center;
@@ -35,6 +35,20 @@
             cursor: pointer;
             transform: translateY(-50%);
             line-height: 16px;
+            color: #6b778c;
+            &:hover{
+                color:$clr4;
+            }
+        }
+        &.clean {
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-bottom: none;
+            padding: 12px;
+            button {
+                position: static;
+            }
         }
     }
     .pop-over-content {
@@ -46,16 +60,16 @@
             margin-bottom: 0.5rem;
         }
     }
-    .pop-over-label{
-        font-size:12px;
-        font-weight:700;
+    .pop-over-label {
+        font-size: 12px;
+        font-weight: 700;
         color: $clr3;
     }
 }
 
 .pop-over-input {
-    margin:4px 0 12px 0;
-    width:100%;
+    margin: 4px 0 12px 0;
+    width: 100%;
     outline: none;
     border: none;
     box-shadow: inset 0 0 0 2px #dfe1e6;
@@ -64,19 +78,19 @@
     display: block;
     line-height: 20px;
     padding: 8px 12px;
-    &::placeholder{
-        color:$clr3;
+    &::placeholder {
+        color: $clr3;
     }
 }
-.overlay{
-    position:fixed;
+.overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 9;
 }
-.element-overlay{
+.element-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
