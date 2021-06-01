@@ -1,6 +1,6 @@
 import { Home } from './pages/Home.jsx'
 import { BoardApp } from './pages/BoardApp.jsx'
-// import { EditPopOvers } from './cmps/CardDetailsActions.jsx'
+// import { EditPopovers } from './cmps/CardDetailsActions.jsx'
 
 
 export const routes = [
@@ -10,7 +10,7 @@ export const routes = [
     },
     
     //     path: '/edits',
-    //     component: EditPopOvers,
+    //     component: EditPopovers,
     // },
 
     {

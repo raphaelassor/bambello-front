@@ -1,12 +1,12 @@
 import { Component } from "react"
-import { PopOverLabelPreview } from "./PopOverLabelPreview"
-import { PopOver } from './PopOver'
-import { PopOverLabelEdit } from "./PopOverLabelEdit"
+import { PopoverLabelPreview } from "./PopoverLabelPreview"
+import { Popover } from './Popover'
+import { PopoverLabelEdit } from "./PopoverLabelEdit"
 import { onSaveBoard } from "../../store/actions/board.actions";
 import { connect } from 'react-redux'
 import { boardService } from '../../services/board.service'
 import { utilsService } from "../../services/utils.service";
-class _PopOverLabels extends Component {
+class _PopoverLabels extends Component {
 
     state = {
         inputTxt: '',
@@ -69,20 +69,20 @@ class _PopOverLabels extends Component {
         if (!presentedLabels) return '';
         return (<>
             {isEditMode ?
-                <PopOverLabelEdit removeLabel={this.removeLabel} labelToEdit={labelToEdit} saveLabel={this.saveLabel} toggleEditMode={this.toggleEditMode} />
+                <PopoverLabelEdit removeLabel={this.removeLabel} labelToEdit={labelToEdit} saveLabel={this.saveLabel} toggleEditMode={this.toggleEditMode} />
                 :
-                <PopOver title={"Labels"} >
+                <Popover title={"Labels"} >
                     <div className="labels-pop-over">
                         <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search Labels"} />
                         <h4>LABELS</h4>
                         <ul className="clean-list">
 
-                            {this.presentedLabels.map(label => <PopOverLabelPreview key={label.id} label={label}
+                            {this.presentedLabels.map(label => <PopoverLabelPreview key={label.id} label={label}
                                 toggleLabel={this.toggleLabel} isInCard={this.isLabelInCard(label)} toggleEditMode={this.toggleEditMode} />)}
                         </ul>
                         <button className="secondary-btn" onClick={this.toggleEditMode}>Create a new label</button>
                     </div>
-                </PopOver>
+                </Popover>
             }
         </>
         )
@@ -100,4 +100,4 @@ const mapDispatchToProps = {
 }
 
 
-export const PopOverLabels = connect(mapStateToProps, mapDispatchToProps)(_PopOverLabels)
+export const PopoverLabels = connect(mapStateToProps, mapDispatchToProps)(_PopoverLabels)

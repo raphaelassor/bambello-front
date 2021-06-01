@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CloseIcon from '@material-ui/icons/Close';
-import { closePopOver } from '../../store/actions/app.actions'
+import { closePopover } from '../../store/actions/app.actions'
 import Avatar from '@material-ui/core/Avatar';
 
-function _PopOverProfile({ member, closePopOver }) {
+function _PopoverProfile({ member, closePopover }) {
     return (
         <div className="pop-over">
-            <button className="clean-btn" onClick={closePopOver}>
+            <button className="clean-btn" onClick={closePopover}>
                 <CloseIcon style={{ width: '16px', height: '16px' }} />
             </button>
             <div className="mini-profile">
@@ -23,7 +23,7 @@ function _PopOverProfile({ member, closePopOver }) {
 }
 
 const mapDispatchToProps = {
-    closePopOver
+    closePopover
 }
 
-export const PopOverProfile = connect(null, mapDispatchToProps)(_PopOverProfile)
+export const PopoverProfile = connect(null, mapDispatchToProps)(_PopoverProfile)

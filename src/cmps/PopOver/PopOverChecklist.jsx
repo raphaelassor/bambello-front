@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { utilsService } from '../../services/utils.service';
 import { Component } from 'react';
 import { boardService } from '../../services/board.service';
-import { closePopOver } from '../../store/actions/app.actions';
+import { closePopover } from '../../store/actions/app.actions';
 import { onSaveBoard } from "../../store/actions/board.actions";
-import { PopOver } from './PopOver';
+import { Popover } from './Popover';
 
-class _PopOverChecklist extends Component {
+class _PopoverChecklist extends Component {
 
     state = {
         title: ''
@@ -27,12 +27,12 @@ class _PopOverChecklist extends Component {
         card.checklists.push(checklist)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
-        this.props.closePopOver()
+        this.props.closePopover()
 
     }
 
     render() {
-        return <PopOver title={"Add A Checklist"}>
+        return <Popover title={"Add A Checklist"}>
             <div className="checklist-pop-over-content">
                 <form onSubmit={this.addChecklist}>
                 <label htmlFor="checklist-input" className="pop-over-label">Title</label>
@@ -40,7 +40,7 @@ class _PopOverChecklist extends Component {
                 <button className="primary-btn wide-btn">Add</button>
                 </form>
             </div>
-        </PopOver>
+        </Popover>
     }
 }
 
@@ -52,9 +52,9 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     onSaveBoard,
-    closePopOver
+    closePopover
 }
 
 
-export const PopOverChecklist = connect(mapStateToProps, mapDispatchToProps)(_PopOverChecklist)
+export const PopoverChecklist = connect(mapStateToProps, mapDispatchToProps)(_PopoverChecklist)
 

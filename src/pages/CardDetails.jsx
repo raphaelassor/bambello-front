@@ -14,7 +14,7 @@ import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
 import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
-import { closePopOver } from '../store/actions/app.actions'
+import { closePopover } from '../store/actions/app.actions'
 
 
 
@@ -70,7 +70,7 @@ class _CardDetails extends Component {
         this.setState({ card }, this.onSaveCard())
     }
 
-    onSaveCardChecklists = (checklists) => {
+    onSaveCardChecklists = (field,checklists) => {
         const { card } = this.state
         card.checklists = checklists
         this.setState({ card }, this.onSaveCard())
@@ -96,7 +96,7 @@ class _CardDetails extends Component {
 
     goBackToBoard = () => {
         const { board } = this.props
-        this.props.closePopOver()
+        this.props.closePopover()
         this.props.history.push(`/board/${board._id}`)
     }
 
@@ -152,7 +152,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     onSaveBoard,
-    closePopOver,
+    closePopover,
 }
 
 export const CardDetails = connect(mapStateToProps, mapDispatchToProps)(_CardDetails)
