@@ -30,6 +30,7 @@ class _CardPreviewLabel extends Component {
 
         const { isPreviewLabelsOpen } = this.props
         const label = this.label
+        console.log(label)
         return (
             <div className={`card-preview-label ${isPreviewLabelsOpen ? 'open' : 'close'}`} style={{ backgroundColor: label.color }} onClick={this.onTogglePreviewLabels}>
                 <span className={`label-text ${isPreviewLabelsOpen ? 'open' : ''}`}>{label.title}</span>

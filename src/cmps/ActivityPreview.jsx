@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Avatar from '@material-ui/core/Avatar'
+import { ProfileAvatar } from './ProfileAvatar'
 import Moment from 'react-moment'
 
 
@@ -36,7 +36,7 @@ export class ActivityPreview extends Component {
         const { activity: { actionType, txt, createdAt, byMember, card }, isGeneral } = this.props
         return (
             <div className="activity-preview flex">
-                <Avatar style={{ backgroundColor: '#DFE1E6', color: '#172b4d', width: '32px', height: '32px', fontWeight: 'bold', fontSize: '14px' }}>{byMember.fullname.charAt(0)}</Avatar>
+                <ProfileAvatar member={byMember} size={32} />
                 {actionType === 'comment' &&
                     <div className="comment-content">
                         <div className="main flex align-center">

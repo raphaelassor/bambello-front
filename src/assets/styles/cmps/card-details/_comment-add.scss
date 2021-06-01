@@ -1,7 +1,6 @@
 .comment-add {
     margin-bottom: 24px;
-
-    :first-child {
+    > *:first-child {
         margin-inline-end: 10px;
     }
 
@@ -10,7 +9,7 @@
         box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
         border-radius: $borderRad1;
         min-height: 36px;
-    
+
         &.edit-open {
             min-height: 84px;
             padding: 8px 12px;
@@ -24,7 +23,7 @@
             width: 100%;
             resize: none;
 
-            &:hover:not(:focus){
+            &:hover:not(:focus) {
                 box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
             }
 
@@ -33,7 +32,7 @@
                 padding: 8px 12px;
             }
 
-            &::placeholder{
+            &::placeholder {
                 color: $clr3;
             }
         }

@@ -15,7 +15,7 @@ import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
 import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
 import { CardActivities } from '../cmps/CardDetails/CardActivities'
-import { closePopover } from '../store/actions/app.actions'
+import { closePopover, openPopover } from '../store/actions/app.actions'
 
 
 
@@ -28,8 +28,9 @@ class _CardDetails extends Component {
 
     componentDidMount() {
         // SETTING LIST AND CARD FROM PARAMS
+        const { board: { lists }, closePopover } = this.props
         const { cardId, listId } = this.props.match.params
-        const { board: { lists } } = this.props
+        closePopover()
         const list = lists.find(list => list.id === listId)
         const { cards } = list;
         const card = cards.find(card => card.id === cardId)
@@ -103,7 +104,7 @@ class _CardDetails extends Component {
 
 
     render() {
-        const { board, board: { activities }, loggedInUser, onSaveBoard } = this.props
+        const { board, board: { activities }, onSaveBoard, openPopover } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style: { bgColor }, attachs } = card
@@ -116,7 +117,7 @@ class _CardDetails extends Component {
                         className={`close-window-btn ${bgColor ? 'cover-mode' : ''} flex align-center justify-center`}>
                         <CloseRoundedIcon />
                     </button>
-                    {bgColor && <CardDetailsCover bgColor={bgColor} />}
+                    {bgColor && <CardDetailsCover bgColor={bgColor} openPopover={openPopover} card={card} />}
                     <div className="card-details-header">
                         <div className="header-content flex">
                             <WebAssetIcon />
@@ -131,13 +132,21 @@ class _CardDetails extends Component {
                     <div className="flex">
                         <div className="card-details-main flex column">
                             <div className="card-details-items flex wrap">
-                                {!!members.length && <CardDetailsMembers members={members} />}
-                                {!!this.cardLabels.length && <CardDetailsLabels labels={this.cardLabels} />}
+                                {!!members.length && <CardDetailsMembers
+                                    members={members}
+                                    openPopover={openPopover}
+                                    card={card} />}
+                                {!!this.cardLabels.length && <CardDetailsLabels
+                                    labels={this.cardLabels}
+                                    openPopover={openPopover}
+                                    card={card} />}
                                 {!!dueDate &&
                                     <DueDateDisplay
                                         displayType="details"
-                                        card={card} toggleCardDone={this.toggleCardDone}
-                                        onSaveCardFromActions={this.onSaveCardFromActions} />}
+                                        toggleCardDone={this.toggleCardDone}
+                                        openPopover={openPopover}
+                                        card={card}
+                                    />}
                             </div>
                             <CardDescription
                                 description={description}
@@ -148,7 +157,7 @@ class _CardDetails extends Component {
                             <CardChecklists
                                 checklists={checklists}
                                 onSaveCardChecklists={this.onSaveCardChecklists} />
-                            <CardActivities card={card} activities={activities}/>
+                            <CardActivities card={card} activities={activities} />
                             {/* {!!this.cardActivities && <ActivitiesList activities={this.cardActivities} />} */}
                         </div>
                         <div className="card-details-sidebar flex column full">
@@ -178,6 +187,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
     onSaveBoard,
     closePopover,
+    openPopover
 }
 
 export const CardDetails = connect(mapStateToProps, mapDispatchToProps)(_CardDetails)

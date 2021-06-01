@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { boardService } from '../../services/board.service'
 import { connect } from 'react-redux'
 import { TextareaAutosize } from '@material-ui/core'
-import Avatar from '@material-ui/core/Avatar'
+import { ProfileAvatar } from '../ProfileAvatar'
 import { onSaveBoard } from '../../store/actions/board.actions'
 
 
@@ -39,7 +39,7 @@ class _CommentAdd extends Component {
         const { loggedInUser } = this.props
         return (
             <div className="comment-add flex">
-                <Avatar style={{ backgroundColor: '#DFE1E6', color: '#172b4d', width: '32px', height: '32px', fontWeight: 'bold', fontSize: '14px' }}>{loggedInUser.fullname.charAt(0)}</Avatar>
+                <ProfileAvatar member={loggedInUser} size={32} />
                 <div className={`comment-editor flex column justify-space-between full ${isEdit ? 'edit-open' : ''}`}>
                     <TextareaAutosize
                         onBlur={this.onToggleEdit}

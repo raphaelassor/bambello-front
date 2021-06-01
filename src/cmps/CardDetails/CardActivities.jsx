@@ -19,7 +19,6 @@ export class CardActivities extends Component {
             }
             return (currActivity.card.id === card.id)
         })
-        console.log('card activities in get', cardActivities)
         return cardActivities
     }
 

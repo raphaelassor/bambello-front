@@ -61,10 +61,8 @@ export class ChecklistPreview extends Component {
     onAddTodo = (todo) => {
         const { onSaveChecklist } = this.props
         const { checklist } = this.state
-        console.log('onAddTodo',checklist)
         if(!checklist.todos) checklist.todos = []
         checklist.todos.push(todo)
-        console.log('onAddTodo',checklist)
         onSaveChecklist(checklist)
     }
 

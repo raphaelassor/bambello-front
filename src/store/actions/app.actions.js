@@ -47,7 +47,6 @@ export function openPopover(PopoverName, elPos, props) {
 }
 
 export function closePopover() {
-    console.log('in close Popover')
     return dispatch => {
         const action = {
             type: 'CLOSE_Popover',

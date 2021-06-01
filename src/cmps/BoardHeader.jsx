@@ -49,12 +49,10 @@ class _BoardHeader extends Component {
     handleChange = ({ target }) => {
         const { value } = target
         let { inputWidth } = this.state
-        console.dir(this.titleInput)
         this.setState({ title: target.value, inputWidth })
     }
 
     toggleEdit = () => {
-        console.log('is edit toggle')
         const { isEdit } = this.state
         if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
 
@@ -91,7 +89,6 @@ class _BoardHeader extends Component {
         const { board, loggedInUser } = this.props
         const { users, isEdit, title } = this.state
         if (!users.length) return ''
-        console.log(users)
         return (
             <div className="board-header">
                 <button className="board-btn">
@@ -122,7 +119,7 @@ class _BoardHeader extends Component {
 
                 <div className="board-header-members flex">
                     <AvatarGroup max={4}>
-                        {board.members.map(member => <ProfileAvatar member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
+                        {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
                     </AvatarGroup>
                     <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
