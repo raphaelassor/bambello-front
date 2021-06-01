@@ -1,9 +1,11 @@
 import { Component } from 'react'
+import {connect} from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
-import { ReactComponent as StarIcon } from '../assets/img/icons/star.svg'
+import { openPopover} from '../store/actions/app.actions.js'
 import AutosizeInput from 'react-input-autosize';
-export class BoardHeader extends Component {
+import {ProfileAvatar} from './ProfileAvatar'
+ class _BoardHeader extends Component {
 
     state = {
         title: '',
@@ -38,7 +40,17 @@ export class BoardHeader extends Component {
         onSaveBoard(board)
         this.toggleEdit()
     }
-
+    onToggleFav=()=>{
+        const {board,onSaveBoard}= this.props
+        board.isFavorite=!board.isFavorite
+        onSaveBoard(board)
+    }
+    openProfilePopover=(ev,member)=>{
+        const elPos = ev.target.getBoundingClientRect()
+        const props={member}
+        this.props.openPopover('PROFILE', elPos, props)
+    }
+    
 
     render() {
         const { board } = this.props
@@ -66,11 +78,20 @@ export class BoardHeader extends Component {
                     <h1 onClick={this.toggleEdit} ref={(h1) => { this.h1Title = h1 }}>{board.title} </h1>
                 }
                 </div>
-                <button className="board-btn">
-                <i class={`far fa-star icon-sm star-icon ${board.isFavorite? 'favorite':''}`}></i>
-              
+                <button className="board-btn" onClick={this.onToggleFav}>
+                <i className={`far fa-star icon-sm star-icon ${board.isFavorite? 'favorite':''}`}></i>
                 </button>
+
+                <div className="board-header-members flex">
+                    {board.members.map(member=><ProfileAvatar member={member} onOpenPopover={this.openProfilePopover}  />)}
+                </div>
             </div>
         )
     }
 }
+
+const mapDispatchToProps = {
+    openPopover,
+}
+
+export const BoardHeader = connect(null, mapDispatchToProps)(_BoardHeader)
