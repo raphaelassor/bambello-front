@@ -1,12 +1,12 @@
 import { Component } from "react";
-import { PopOver } from "./PopOver";
+import { Popover } from "./Popover";
 import { boardService } from '../../services/board.service'
-import { MemberPopOverPreview } from '../MemeberPopOverPreview'
+import { MemberPopoverPreview } from './PopoverMemberPreview'
 import { onSaveBoard } from "../../store/actions/board.actions";
 import { connect } from 'react-redux'
 
 
-class _PopOverMembers extends Component {
+class _PopoverMembers extends Component {
 
     state = {
         inputTxt: '',
@@ -43,17 +43,17 @@ class _PopOverMembers extends Component {
     render() {
         const { presentedMembers, inputTxt } = this.state
         if (!presentedMembers) return '';
-        return <PopOver title={"Members"} >
+        return <Popover title={"Members"} >
             <div className="members-pop-over-content">
                 <input className="pop-over-input" type="text" value={inputTxt} onChange={this.handleChange} placeholder={"Search members"} />
                 <h4>BOARD MEMBERS</h4>
                 <ul className="clean-list">
 
-                    {presentedMembers.map(member => <MemberPopOverPreview key={member._id} member={member}
+                    {presentedMembers.map(member => <MemberPopoverPreview key={member._id} member={member}
                         toggleMember={this.toggleMember} isInCard={this.isMemberInCard(member)} />)}
                 </ul>
             </div>
-        </PopOver>
+        </Popover>
 
 
     }
@@ -71,5 +71,5 @@ const mapDispatchToProps = {
 }
 
 
-export const PopOverMembers = connect(mapStateToProps, mapDispatchToProps)(_PopOverMembers)
+export const PopoverMembers = connect(mapStateToProps, mapDispatchToProps)(_PopoverMembers)
 

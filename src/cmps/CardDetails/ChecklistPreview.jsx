@@ -52,7 +52,7 @@ export class ChecklistPreview extends Component {
             onSaveChecklist(checklist)
             return
         }
-        const todoIdx = todos.indexOf(todo)
+        const todoIdx = todos.findIndex(currTodo=> todo.id === currTodo.id)
         todos[todoIdx] = todo
         checklist.todos = todos
         onSaveChecklist(checklist)
@@ -61,7 +61,10 @@ export class ChecklistPreview extends Component {
     onAddTodo = (todo) => {
         const { onSaveChecklist } = this.props
         const { checklist } = this.state
+        console.log('onAddTodo',checklist)
+        if(!checklist.todos) checklist.todos = []
         checklist.todos.push(todo)
+        console.log('onAddTodo',checklist)
         onSaveChecklist(checklist)
     }
 

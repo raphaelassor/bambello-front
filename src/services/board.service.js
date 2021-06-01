@@ -1,4 +1,4 @@
-
+import { utilsService } from './utils.service'
 import { httpService } from './http.service'
 
 export const boardService = {
@@ -7,6 +7,7 @@ export const boardService = {
     getById,
     save,
     updateCardInBoard,
+    createActivity
 }
 
 async function query(filterBy) {
@@ -57,5 +58,28 @@ export function updateCardInBoard(board, updatedCard) {
             if (card.id === updatedCard.id) list.cards[idx] = updatedCard
         })
     })
-    return board
+    return { ...board }
+}
+
+export function createActivity(actionType, txt, loggedInUser, card) {
+    const { _id, fullname, imgUrl } = loggedInUser
+    const { id, title } = card
+    const byMember = {
+        _id,
+        fullname,
+        imgUrl
+    }
+    card = {
+        id,
+        title
+    }
+    const savedActivity = {
+        id: utilsService.makeId(),
+        actionType,
+        txt,
+        createdAt: Date.now(),
+        byMember,
+        card
+    }
+    return savedActivity
 }

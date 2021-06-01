@@ -1,32 +1,33 @@
-import { PopOverMembers } from "./PopOverMembers";
+import { PopoverMembers } from "./PopoverMembers";
 import { connect } from 'react-redux'
-import { PopOverLabels } from "./PopOverLabels";
-import { PopOverCover } from "./PopOverCover";
-import { PopOverDate } from "./PopOverDate";
-import { PopOverAttach } from "./PopOverAttach";
-import { PopOverChecklist } from "./PopOverChecklist";
-import { PopOverMoveCopy } from './PopOverMoveCopy'
-import { PopOverProfile } from './PopOverProfile'
+import { PopoverLabels } from "./PopoverLabels";
+import { PopoverCover } from "./PopoverCover";
+import { PopoverDate } from "./PopoverDate";
+import { PopoverAttach } from "./PopoverAttach";
+import { PopoverChecklist } from "./PopoverChecklist";
+import { PopoverMoveCopy } from './PopoverMoveCopy';
+import {PopoverProfile} from './PopoverProfile';
 
-export function _DynamicPopOver({ currPopOver }) {
-    const { name, props } = currPopOver
+
+export function _DynamicPopover({ currPopover }) {
+    const { name, props } = currPopover
     switch (name) {
-        case 'MEMBERS': return <PopOverMembers {...props} />;
-        case 'LABELS': return <PopOverLabels {...props} />;
-        case 'COVER': return <PopOverCover {...props} />;
-        case 'DATE': return <PopOverDate {...props} />;
-        case 'COPY': return <PopOverMoveCopy popOverType="copy" {...props} />;
-        case 'MOVE': return <PopOverMoveCopy popOverType="move" {...props} />;
-        case 'ATTACH': return <PopOverAttach {...props} />;
-        case 'CHECKLIST': return <PopOverChecklist {...props} />;
-        case 'PROFILE': return <PopOverProfile {...props} />;
+        case 'MEMBERS': return <PopoverMembers {...props} />;
+        case 'LABELS': return <PopoverLabels {...props} />;
+        case 'COVER': return <PopoverCover {...props} />;
+        case 'DATE': return <PopoverDate {...props} />;
+        case 'COPY': return <PopoverMoveCopy PopoverType="copy" {...props} />;
+        case 'MOVE': return <PopoverMoveCopy PopoverType="move" {...props} />;
+        case 'ATTACH': return <PopoverAttach {...props} />;
+        case 'CHECKLIST': return <PopoverChecklist {...props} />;
+        case 'PROFILE': return <PopoverProfile {...props} />
         default: return '';
     }
 }
 function mapStateToProps(state) {
     return {
         isOverlayOpen: state.appModule.isOverlayOpen,
-        currPopOver: state.appModule.currPopOver
+        currPopover: state.appModule.currPopover
     }
 }
-export const DynamicPopOver = connect(mapStateToProps, null)(_DynamicPopOver)
+export const DynamicPopover = connect(mapStateToProps, null)(_DynamicPopover)

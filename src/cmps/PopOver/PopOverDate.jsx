@@ -1,12 +1,12 @@
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import { boardService } from '../../services/board.service';
-import { closePopOver } from '../../store/actions/app.actions';
+import { closePopover } from '../../store/actions/app.actions';
 import { connect } from 'react-redux';
 import { onSaveBoard } from '../../store/actions/board.actions';
 import React, { Component} from 'react';
-import { PopOver } from './PopOver';
-class _PopOverDate extends Component {
+import { Popover } from './Popover';
+class _PopoverDate extends Component {
 
     state = {
         date:null
@@ -23,12 +23,12 @@ class _PopOverDate extends Component {
         this.setState({ date: ev._d })
     }
     saveDueDate = (date) => {
-        const { card, onSaveBoard ,closePopOver,board } = this.props
+        const { card, onSaveBoard ,closePopover,board } = this.props
         card.dueDate = date ? Date.parse(date) : 0;
         console.log(card)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
-        closePopOver()
+        closePopover()
     }
     onRemoveDate=()=>{
         this.saveDueDate(null)
@@ -37,7 +37,7 @@ class _PopOverDate extends Component {
     render() {
         const {date}=this.state
         if(!date) return ''//loading
-        return <PopOver title="Date">
+        return <Popover title="Date">
             <div className="date-pop-over-content">
 
                 <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -56,7 +56,7 @@ class _PopOverDate extends Component {
                 </div>
             </div>
 
-        </PopOver>
+        </Popover>
     }
 }
 function mapStateToProps(state) {
@@ -67,8 +67,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     onSaveBoard,
-    closePopOver
+    closePopover
 }
 
 
-export const PopOverDate = connect(mapStateToProps, mapDispatchToProps)(_PopOverDate)
+export const PopoverDate = connect(mapStateToProps, mapDispatchToProps)(_PopoverDate)

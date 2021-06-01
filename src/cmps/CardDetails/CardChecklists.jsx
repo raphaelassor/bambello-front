@@ -5,7 +5,7 @@ export class CardChecklists extends Component {
     onSaveChecklist = (checklist) => {
         if (!checklist.title) return
         const { onSaveCardChecklists, checklists } = this.props
-        const checklistIdx = checklists.indexOf(checklist)
+        const checklistIdx = checklists.findIndex(currChecklist => currChecklist.id === checklist.id)
         checklists[checklistIdx] = checklist
         onSaveCardChecklists(checklists)
     }
@@ -20,7 +20,7 @@ export class CardChecklists extends Component {
         const { checklists } = this.props
         return (
             <div className="card-checklists" >
-                { checklists.map(checklist => {
+                {checklists.map(checklist => {
                     return <ChecklistPreview
                         key={checklist.id}
                         checklist={checklist}

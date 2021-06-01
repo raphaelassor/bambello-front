@@ -6,8 +6,9 @@ export const userService = {
     logout,
     signup,
     getLoggedinUser,
+    getUsers,
+    getById,
 }
-
 
 async function login(credentials) {
     try {
@@ -43,27 +44,34 @@ function _saveLocalUser(user) {
 
 function getLoggedinUser() {
     // return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null')
- const user=   {
+    const user = {
         _id: 'roghroe313124112',
         fullname: 'Asaf Cohen',
-        userName:'asafco',
+        userName: 'asafco',
         imgUrl: 'https://www.google.com'
-    
-}
+
+    }
     return user
 }
 
 
-// admin panel
-// function getUsers() {
-//     return storageService.query('user')
-//     // return httpService.get(`user`)
-// }
 
-// function getById(userId) {
-//     return storageService.get('user', userId)
-//     // return httpService.get(`user/${userId}`)
-// }
+async function getUsers() {
+    try {
+        return await httpService.get(`user`)
+    } catch (err) {
+        throw err
+    }
+}
+
+async function getById(userId) {
+    try {
+        return httpService.get(`user/${userId}`)
+    } catch (err) {
+        throw err
+    }
+}
+
 // function remove(userId) {
 //     return storageService.remove('user', userId)
 //     // return httpService.delete(`user/${userId}`)

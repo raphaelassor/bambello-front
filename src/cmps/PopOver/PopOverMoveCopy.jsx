@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { PopOver } from "./PopOver";
+import { Popover } from "./Popover";
 import { boardService } from '../../services/board.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
 import { connect } from 'react-redux';
@@ -7,10 +7,10 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { closePopOver } from '../../store/actions/app.actions'
+import { closePopover } from '../../store/actions/app.actions'
 import { utilsService } from "../../services/utils.service";
 
-class _PopOverMoveCopy extends Component {
+class _PopoverMoveCopy extends Component {
 
     state = {
         board: null,
@@ -34,7 +34,7 @@ class _PopOverMoveCopy extends Component {
     }
 
     onMoveCard = (cardToMove) => {
-        const { closePopOver, onSaveBoard } = this.props
+        const { closePopover, onSaveBoard } = this.props
         const { board, listId, cardIdx } = this.state
         board.lists.forEach(list => {
             list.cards.forEach((boardCard, idx) => {
@@ -45,7 +45,7 @@ class _PopOverMoveCopy extends Component {
         const updatedBoard = JSON.parse(JSON.stringify(board))
         onSaveBoard(updatedBoard)
         //message that the card moved
-        closePopOver()
+        closePopover()
     }
 
     onCopyCard = () => {
@@ -64,12 +64,12 @@ class _PopOverMoveCopy extends Component {
     render() {
         // const {board}=this.props// will need to bring the workspace, not only the current board
         const { board, listId, cardIdx, title } = this.state
-        const { popOverType, card } = this.props
+        const { PopoverType, card } = this.props
         if (!board) return ''
         const listIdx = this.chosenListIdx
         const chosenCards = board.lists[listIdx].cards
-        return <PopOver title={popOverType === 'move' ? 'Move card' : 'Copy card'}>
-            {popOverType === 'copy' && <>
+        return <Popover title={PopoverType === 'move' ? 'Move card' : 'Copy card'}>
+            {PopoverType === 'copy' && <>
                 <label htmlFor="title-copy">Title</label>
                 <input type="text" className="pop-over-input" onChange={this.handleChange} value={title} name="title" id="title-copy" autoFocus />
                 <label>Copy To...</label>
@@ -117,18 +117,18 @@ class _PopOverMoveCopy extends Component {
                         </Select>
                     </FormControl>
                 </div>
-                {popOverType === 'move' ?
+                {PopoverType === 'move' ?
                     <button className="primary-btn wide-btn" onClick={() => this.onMoveCard(card)}>Move</button>
                     :
                     <button className="primary-btn wide-btn" onClick={this.onCopyCard}>Create card</button>
                 }
             </div>
-        </PopOver>
+        </Popover>
     }
 }
 const mapDispatchToProps = {
     onSaveBoard,
-    closePopOver
+    closePopover
 }
 function mapStateToProps(state) {
     return {
@@ -137,4 +137,4 @@ function mapStateToProps(state) {
 }
 
 
-export const PopOverMoveCopy = connect(mapStateToProps, mapDispatchToProps)(_PopOverMoveCopy)
+export const PopoverMoveCopy = connect(mapStateToProps, mapDispatchToProps)(_PopoverMoveCopy)

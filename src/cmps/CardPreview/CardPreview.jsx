@@ -8,7 +8,7 @@ import { CardPreviewLabel } from './CardPreviewLabel'
 import { Subject as SubjectIcon } from '@material-ui/icons'
 import EditIcon from '@material-ui/icons/CreateOutlined'
 import Avatar from '@material-ui/core/Avatar';
-import { openPopOver } from '../../store/actions/app.actions'
+import { openPopover } from '../../store/actions/app.actions'
 import { CardPreviewEdit } from './CardPreviewEdit'
 import { CardPreviewComments } from './CardPreviewComments'
 
@@ -18,7 +18,7 @@ class _CardPreview extends Component {
         isCardEditOpen: false
     }
 
-    isChecklistsEmpty = ({ checklists }) => {
+    isChecklistsEmpty = ({checklists}) => {
         return checklists.every(checklist => !checklist.todos.length)
     }
 
@@ -109,7 +109,7 @@ class _CardPreview extends Component {
 }
 
 const mapDispatchToProps = {
-    openPopOver
+    openPopover
 }
 
 export const CardPreview = connect(null, mapDispatchToProps)(_CardPreview)

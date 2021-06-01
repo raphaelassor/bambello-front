@@ -5,15 +5,15 @@ import CoverIcon from '@material-ui/icons/VideoLabel';
 import MinusIcon from '@material-ui/icons/RemoveOutlined';
 import CopyIcon from '@material-ui/icons/FileCopyOutlined';
 import WatchIcon from '@material-ui/icons/VisibilityOutlined';
-import { openPopOver, closePopOver } from '../../store/actions/app.actions'
+import { openPopover, closePopover } from '../../store/actions/app.actions'
 import { connect } from 'react-redux'
 import { utilsService } from '../../services/utils.service'
-import { ElementOverlay } from '../PopOver/ElementOverlay'
+import { ElementOverlay } from '../Popover/ElementOverlay'
 
 class _CardDetailsActions extends Component {
 
     addFile = (fileUrl) => {
-        const { card, onSaveCardFromActions, closePopOver } = this.props
+        const { card, onSaveCardFromActions, closePopover } = this.props
         if (!card.attachs) card.attachs = []
         const attach = {
             id: utilsService.makeId(),
@@ -23,7 +23,7 @@ class _CardDetailsActions extends Component {
         }
         card.attachs.push(attach)
         onSaveCardFromActions(card)
-        closePopOver()
+        closePopover()
     }
 
     joinCard = () => {
@@ -62,16 +62,16 @@ class _CardDetailsActions extends Component {
         this.props.goBackToBoard()
     }
 
-    onOpenPopOver = (ev, popOverName) => {
+    onOpenPopover = (ev, PopoverName) => {
         const elPos = ev.target.getBoundingClientRect()
         const props = {
             card: this.props.card
         }
-        this.props.openPopOver(popOverName, elPos, props)
+        this.props.openPopover(PopoverName, elPos, props)
     }
 
     render() {
-        const { card, board, currPopOverName, openPopOver, loggedInUser } = this.props
+        const { card, board, currPopoverName, openPopover, loggedInUser } = this.props
         return <div className="details-actions-wrapper flex column">
             {!this.isUserMember() && <div className="suggested flex column"> <h4>SUGGESTED</h4>
                 <button className="secondary-btn actions-btn " onClick={this.joinCard}>
@@ -83,7 +83,7 @@ class _CardDetailsActions extends Component {
                 </button></div>}
             <h4>ADD TO CARD</h4>
             <div className="add-section flex column">
-                <button className="secondary-btn actions-btn " onClick={(ev) => this.onOpenPopOver(ev, 'MEMBERS')}>
+                <button className="secondary-btn actions-btn " onClick={(ev) => this.onOpenPopover(ev, 'MEMBERS')}>
                     <div className="actions-btn-content flex align-center">
                         <i className="far fa-user icon-sm "></i>
                         <span>Members</span>
@@ -92,7 +92,7 @@ class _CardDetailsActions extends Component {
                 </button>
 
 
-                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev, 'LABELS')}>
+                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'LABELS')}>
                     <div className="actions-btn-content flex align-center">
                         <LabelIcon />
                         <span>Labels</span>
@@ -101,7 +101,7 @@ class _CardDetailsActions extends Component {
                 </button>
 
 
-                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev, 'CHECKLIST')}>
+                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'CHECKLIST')}>
                     <div className="actions-btn-content flex align-center">
                         <CheckboxIcon />
                         <span>Checklist</span>
@@ -110,7 +110,7 @@ class _CardDetailsActions extends Component {
                 </button>
 
 
-                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev, 'DATE')}>
+                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'DATE')}>
                     <div className="actions-btn-content flex align-center">
                         <i className="far fa-clock icon-sm "></i>
                         <span>Date</span>
@@ -118,7 +118,7 @@ class _CardDetailsActions extends Component {
                     <ElementOverlay />
                 </button>
 
-                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev, 'ATTACH')}>
+                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'ATTACH')}>
                     <div className="actions-btn-content flex align-center">
                         <i className="fas fa-paperclip icon-sm"></i>
                         <span>Attachment</span>
@@ -127,7 +127,7 @@ class _CardDetailsActions extends Component {
                 </button>
 
 
-                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev, 'COVER')}>
+                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'COVER')}>
                     <div className="actions-btn-content flex align-center">
                         <CoverIcon />
                         <span>Cover</span>
@@ -139,7 +139,7 @@ class _CardDetailsActions extends Component {
             </div>
 
             <h4>ACTIONS</h4>
-            <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev, 'MOVE')}>
+            <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'MOVE')}>
                 <div className="actions-btn-content flex align-center">
                     <i className="fas fa-arrow-right icon-sm"></i>
                     <span>Move</span>
@@ -148,7 +148,7 @@ class _CardDetailsActions extends Component {
             </button>
 
 
-            <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopOver(ev, 'COPY')}>
+            <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'COPY')}>
                 <div className="actions-btn-content flex align-center">
                     <CopyIcon />
                     <span>Copy</span>
@@ -196,14 +196,14 @@ class _CardDetailsActions extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
-        currPopOverName: state.appModule.currPopOver.name,
+        currPopoverName: state.appModule.currPopover.name,
         loggedInUser: state.appModule.loggedInUser
     }
 }
 
 const mapDispatchToProps = {
-    openPopOver,
-    closePopOver,
+    openPopover,
+    closePopover,
 }
 
 export const CardDetailsActions = connect(mapStateToProps, mapDispatchToProps)(_CardDetailsActions)

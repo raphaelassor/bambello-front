@@ -1,9 +1,9 @@
 import { Component } from "react"
 import { FileUpload } from "../FileUpload"
-import { PopOver } from "./PopOver"
+import { Popover } from "./Popover"
 import { utilsService } from '../../services/utils.service'
 
-export class PopOverAttach extends Component {
+export class PopoverAttach extends Component {
 
     state = {
         file: null,
@@ -28,7 +28,7 @@ this.props.addFile(fileUrl)
 
     render() {
         const { inputTxt } = this.state
-        return <PopOver title="Attach from...">
+        return <Popover title="Attach from...">
             <div className="attach-pop-over-content">
                 <FileUpload onFileUpload={this.onFileUpload} />
                 <form onSubmit={this.onAttachLink}>
@@ -37,7 +37,7 @@ this.props.addFile(fileUrl)
                     <button className="primary-btn btn-wide">Attach</button>
                 </form>
             </div>
-        </PopOver>
+        </Popover>
     }
 
 }

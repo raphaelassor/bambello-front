@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { PopOver } from "./PopOver/PopOver";
+import { Popover } from "./Popover/Popover";
 
 export class ListMenu extends Component{
 
@@ -11,10 +11,10 @@ export class ListMenu extends Component{
     }
 
     render(){
-        return <PopOver title="List actions" togglePopOver={this.props.toggleMenu}>
+        return <Popover title="List actions" togglePopover={this.props.toggleMenu}>
             <ul className="list-menu-content clean-list">
                 <li onClick={this.onArchiveList}>Archive this list </li>
             </ul>
-        </PopOver>
+        </Popover>
     }
 }

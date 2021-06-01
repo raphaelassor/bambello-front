@@ -14,7 +14,8 @@ import { CardChecklists } from '../cmps/CardDetails/CardChecklists'
 import { CardDetailsActions } from '../cmps/CardDetails/CardDetailsActions'
 import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
-import { closePopOver } from '../store/actions/app.actions'
+import { CardActivities } from '../cmps/CardDetails/CardActivities'
+import { closePopover } from '../store/actions/app.actions'
 
 
 
@@ -96,13 +97,13 @@ class _CardDetails extends Component {
 
     goBackToBoard = () => {
         const { board } = this.props
-        this.props.closePopOver()
+        this.props.closePopover()
         this.props.history.push(`/board/${board._id}`)
     }
 
 
     render() {
-        const { board, onSaveBoard } = this.props
+        const { board, board: { activities }, loggedInUser, onSaveBoard } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style: { bgColor }, attachs } = card
@@ -110,14 +111,20 @@ class _CardDetails extends Component {
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
                 <section className="card-details flex-column">
-                    <button onClick={() => this.goBackToBoard()} className={`close-window-btn ${bgColor ? 'cover-mode' : ''} flex align-center justify-center`}>
+                    <button
+                        onClick={() => this.goBackToBoard()}
+                        className={`close-window-btn ${bgColor ? 'cover-mode' : ''} flex align-center justify-center`}>
                         <CloseRoundedIcon />
                     </button>
                     {bgColor && <CardDetailsCover bgColor={bgColor} />}
                     <div className="card-details-header">
                         <div className="header-content flex">
                             <WebAssetIcon />
-                            <TextareaAutosize value={title} aria-label="empty textarea" onBlur={this.onSaveCard} onChange={this.cardTitleHandleChange} />
+                            <TextareaAutosize value={title}
+                                aria-label="empty textarea"
+                                onBlur={this.onSaveCard}
+                                onChange={this.cardTitleHandleChange}
+                            />
                         </div>
                         <p className="bottom-list-name">in list <span>{list.title}</span></p>
                     </div>
@@ -126,14 +133,31 @@ class _CardDetails extends Component {
                             <div className="card-details-items flex wrap">
                                 {!!members.length && <CardDetailsMembers members={members} />}
                                 {!!this.cardLabels.length && <CardDetailsLabels labels={this.cardLabels} />}
-                                {!!dueDate && <DueDateDisplay displayType="details" card={card} toggleCardDone={this.toggleCardDone} onSaveCardFromActions={this.onSaveCardFromActions} />}
+                                {!!dueDate &&
+                                    <DueDateDisplay
+                                        displayType="details"
+                                        card={card} toggleCardDone={this.toggleCardDone}
+                                        onSaveCardFromActions={this.onSaveCardFromActions} />}
                             </div>
-                            <CardDescription description={description} onSaveCardDescription={this.onSaveCardDescription} />
-                            {!!attachs.length && <CardAttachments attachs={attachs} onDeleteCardAttachment={this.onDeleteCardAttachment} />}
-                            <CardChecklists checklists={checklists} onSaveCardChecklists={this.onSaveCardChecklists} />
+                            <CardDescription
+                                description={description}
+                                onSaveCardDescription={this.onSaveCardDescription} />
+                            {!!attachs.length &&
+                                <CardAttachments attachs={attachs}
+                                    onDeleteCardAttachment={this.onDeleteCardAttachment} />}
+                            <CardChecklists
+                                checklists={checklists}
+                                onSaveCardChecklists={this.onSaveCardChecklists} />
+                            <CardActivities card={card} activities={activities}/>
+                            {/* {!!this.cardActivities && <ActivitiesList activities={this.cardActivities} />} */}
                         </div>
                         <div className="card-details-sidebar flex column full">
-                            <CardDetailsActions board={board} card={card} goBackToBoard={this.goBackToBoard} onSaveBoard={onSaveBoard} onSaveCardFromActions={this.onSaveCardFromActions} />
+                            <CardDetailsActions
+                                board={board}
+                                card={card}
+                                goBackToBoard={this.goBackToBoard}
+                                onSaveBoard={onSaveBoard}
+                                onSaveCardFromActions={this.onSaveCardFromActions} />
                         </div>
                     </div>
                 </section>
@@ -146,13 +170,14 @@ class _CardDetails extends Component {
 
 function mapStateToProps(state) {
     return {
-        board: state.boardModule.board
+        board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 
 const mapDispatchToProps = {
     onSaveBoard,
-    closePopOver,
+    closePopover,
 }
 
 export const CardDetails = connect(mapStateToProps, mapDispatchToProps)(_CardDetails)

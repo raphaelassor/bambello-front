@@ -2,12 +2,12 @@ import { Component } from 'react';
 import { utilsService } from '../../services/utils.service';
 import { ColorPallette } from '../ColorPalette';
 import { FileUpload } from '../FileUpload';
-import { PopOver } from './PopOver';
+import { Popover } from './Popover';
 import {boardService} from '../../services/board.service'
 import {onSaveBoard} from '../../store/actions/board.actions'
 import { connect } from 'react-redux';
 
-class _PopOverCover extends Component {
+class _PopoverCover extends Component {
 
     state = {
         bgColor: this.props.card.style?.bgColor||'',
@@ -55,7 +55,7 @@ class _PopOverCover extends Component {
 
     render() {
         const { bgColor, coverMode,bgImgUrl } = this.state
-        return <PopOver  title="Cover">
+        return <Popover  title="Cover">
             <div className="cover-pop-over-content">
                 <h4>SIZE</h4>
                 <div className="cover-options flex justify-space-between align-center">
@@ -72,7 +72,7 @@ class _PopOverCover extends Component {
                 <h4>ATTACHMENTS</h4>
             <FileUpload onFileUpload={this.onFileUpload}/>
             </div>
-        </PopOver>
+        </Popover>
     }
 }
 const mapDispatchToProps = {
@@ -85,4 +85,4 @@ function mapStateToProps(state){
 }
 
 
-export const PopOverCover = connect(mapStateToProps, mapDispatchToProps)(_PopOverCover)
+export const PopoverCover = connect(mapStateToProps, mapDispatchToProps)(_PopoverCover)
