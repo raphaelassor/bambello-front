@@ -8,6 +8,7 @@ import { PopoverChecklist } from "./PopoverChecklist";
 import { PopoverMoveCopy } from './PopoverMoveCopy';
 import { PopoverProfile } from './PopoverProfile';
 import { PopoverInvite } from "./PopoverInvite";
+import { PopoverInvite } from "./PopoverEditCard";
 
 export function _DynamicPopover({ currPopover }) {
     const { name, props } = currPopover
@@ -22,6 +23,7 @@ export function _DynamicPopover({ currPopover }) {
         case 'CHECKLIST': return <PopoverChecklist {...props} />;
         case 'PROFILE': return <PopoverProfile {...props} />
         case 'INVITE': return <PopoverInvite {...props} />
+        case 'EDIT_CARD': return <PopoverEditCard {...props} />
         default: return '';
     }
 }

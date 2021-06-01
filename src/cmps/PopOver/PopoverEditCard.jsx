@@ -19,7 +19,6 @@ export class _PopoverEditCard extends Component {
         });
         // add remove event 
         this.onSetPopoverPos()
-
     }
 
     componentDidUpdate(prevProps) {
@@ -39,18 +38,16 @@ export class _PopoverEditCard extends Component {
     }
 
     render() {
-        const { children, title, closePopover, isOverlayOpen, overlay, styleMode } = this.props
+        const { children, title, closePopover } = this.props
         const { top, left } = this.state
 
         return <>
-            {overlay !== 'none' && isOverlayOpen && <div className="overlay" onClick={closePopover} />}
-            <div className={`pop-over ${styleMode === 'clean' ? 'clean' : ''} `} style={{ top: `${top}px`, left: `${left}px` }} ref={(div) => { this.selectedDiv = div }} >
-                <div className={`pop-over-header ${styleMode === 'clean' ? 'clean' : ''} `}>
-                    <span>{title}</span>
-                    <button className="clean-btn" onClick={closePopover}>
-                        <CloseIcon style={{ width: '16px', height: '16px' }} />
-                    </button>
-                </div>
+            <div className="overlay" onClick={closePopover}/>
+            <button className="clean-btn" onClick={closePopover}>
+                <CloseIcon style={{ width: '16px', height: '16px' }} />
+            </button>
+            <div className="pop-over-edit-card" style={{ top: `${top}px`, left: `${left}px` }} ref={(div) => { this.selectedDiv = div }} >
+                <span>{title}</span>
                 <div className="pop-over-content">
                     {children}
                 </div>

@@ -55,9 +55,9 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
         if (onOpenPopover) onOpenPopover(ev, 'PROFILE', member)
     }
 
-    
+
     return (
-        <div className="profile-avatar"  onClick={(ev) => onClickAvatar(ev)}>
+        <div className="profile-avatar" onClick={(ev) => onClickAvatar(ev)}>
             <StyledBadge
                 overlap="circle"
                 anchorOrigin={{
@@ -65,7 +65,7 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
                     horizontal: 'right',
                 }}
                 //TODO: variant={showStatus && isMemberLoggedin() &&'dot'}
-                variant={showStatus && 'dot'}
+                variant={showStatus ? 'dot' : 'standard'}
             >
                 <Avatar
                     className="avatar"

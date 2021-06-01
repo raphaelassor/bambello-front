@@ -26,6 +26,11 @@ class _CardPreview extends Component {
         onSaveBoard(board);
     }
 
+    openCardEdit = (ev) => {
+        ev.preventDefault(); 
+        this.onOpenPopover(ev, 'EDIT')
+    }
+
     onOpenPopover = (ev, type, member) => {
         ev.preventDefault();
         const { card, openPopover } = this.props;
@@ -41,13 +46,6 @@ class _CardPreview extends Component {
 
         openPopover(type, elPos, props)
     }
-
-    // onEditPopover = (ev) => {
-    //     ev.preventDefault();
-    //     const { isCardEditOpen } = this.state;
-    //     this.setState({ isCardEditOpen: !isCardEditOpen });
-    // }
-
 
     draggableStyle = (style, snapshot) => {
         if (!snapshot.isDropAnimating) {
@@ -72,7 +70,7 @@ class _CardPreview extends Component {
                 {(provided, snapshot) => (
                     <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)} >
                         <Link to={`/board/${board._id}/${currList.id}/${card.id}`} className="clean-link" onContextMenu={this.openCardEdit}>
-                            <div className="card-preview-container" ref={(div) => { this.cardContainer = div }}>
+                            <div className="card-preview-container" ref={(div) => { this.cardContainer = div }} >
                                 <div className="card-preview-edit-btn" onClick={this.openCardEdit}><EditIcon /></div>
                                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
