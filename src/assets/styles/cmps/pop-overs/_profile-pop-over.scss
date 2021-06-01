@@ -1,0 +1,35 @@
+.mini-profile-container {
+    // overflow-x: hidden;
+    // overflow-y: auto;
+    padding: 8px 12px 12px;
+    .mini-profile {
+        display: flex;
+        .mini-profile-avatar {
+            margin-right: 12px;
+        }
+        .mini-profile-info {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+            :first-child {
+                font-size: 16px;
+                line-height: 20px;
+                font-weight: 600;
+            }
+            :not(:first-child) {
+                color: #5e6c84;
+                font-size: 14px;
+            }
+        }
+    }
+
+    span {
+        display: block;
+        font-weight: 400;
+        padding: 6px 12px;
+        position: relative;
+        margin: 0 -12px;
+        text-decoration: none;
+    }
+}

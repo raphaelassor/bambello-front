@@ -2,15 +2,17 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Draggable } from 'react-beautiful-dnd'
+import { openPopover } from '../../store/actions/app.actions'
 import { DueDateDisplay } from '../DueDateDisplay'
 import { CardPreviewChecklist } from './CardPreviewChecklist'
 import { CardPreviewLabel } from './CardPreviewLabel'
-import { Subject as SubjectIcon } from '@material-ui/icons'
-import EditIcon from '@material-ui/icons/CreateOutlined'
-import Avatar from '@material-ui/core/Avatar';
-import { openPopover } from '../../store/actions/app.actions'
 import { CardPreviewEdit } from './CardPreviewEdit'
 import { CardPreviewComments } from './CardPreviewComments'
+import { Subject as SubjectIcon } from '@material-ui/icons'
+import EditIcon from '@material-ui/icons/CreateOutlined'
+import { ProfileAvatar } from '../ProfileAvatar'
+
+import Avatar from '@material-ui/core/Avatar';
 
 class _CardPreview extends Component {
 
@@ -31,10 +33,12 @@ class _CardPreview extends Component {
         onSaveBoard(board);
     }
 
-    // setProfilePopover = (ev, cardId, memberId) => {
-    //     ev.preventDefault();
-    //     this.setState({ currProfilePopover: `${cardId}-${memberId}` });
-    // }
+    onProfilePopover = (ev, member) => {
+        ev.preventDefault();
+        const elPos = ev.target.getBoundingClientRect();
+        const props = { member }
+        this.props.openPopover('PROFILE', elPos, props)
+    }
 
     toggleCardEdit = (ev) => {
         ev.preventDefault();
@@ -89,9 +93,7 @@ class _CardPreview extends Component {
                                             </div>
                                             {!!card.members.length && <div className="card-preview-members">
                                                 {card.members.map(member => {
-                                                    return <div key={member._id}>
-                                                        <Avatar className='avatar' onClick={(ev) => ev.preventDefault()}>{member.fullname.split(' ').map(x => x.charAt(0)).join('')}</Avatar>
-                                                    </div>
+                                                    return <ProfileAvatar member={member} key={member._id} size={28} onOpenPopover={this.onProfilePopover} />
                                                 })}
                                             </div>
                                             }

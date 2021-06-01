@@ -27,6 +27,7 @@
 @import "cmps/card-add.scss";
 @import "cmps/card-list.scss";
 @import "cmps/card-list-add.scss";
+@import "cmps/profile-avatar.scss";
 @import "cmps/color-palette";
 @import "cmps/screen-overlay.scss";
 
@@ -54,6 +55,7 @@
 
 // Popovers
 @import "cmps/pop-overs/pop-over";
+@import "cmps/pop-overs/profile-pop-over";
 @import "cmps/pop-overs/labels-pop-over";
 @import "cmps/pop-overs/members-pop-over";
 @import "cmps/pop-overs/date-pop-over";

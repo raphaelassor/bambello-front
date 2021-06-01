@@ -6,10 +6,11 @@ import { PopoverDate } from "./PopoverDate";
 import { PopoverAttach } from "./PopoverAttach";
 import { PopoverChecklist } from "./PopoverChecklist";
 import { PopoverMoveCopy } from './PopoverMoveCopy';
-import {PopoverProfile} from './PopoverProfile';
+import { PopoverProfile } from './PopoverProfile';
+
 export function _DynamicPopover({ currPopover }) {
 
-    const { name, elPos, props } = currPopover
+    const { name, props } = currPopover
 
     switch (name) {
         case 'MEMBERS': return <PopoverMembers {...props} />;

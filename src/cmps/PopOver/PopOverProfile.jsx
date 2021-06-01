@@ -1,29 +1,23 @@
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import CloseIcon from '@material-ui/icons/Close';
-import { closePopover } from '../../store/actions/app.actions'
-import Avatar from '@material-ui/core/Avatar';
+import { ProfileAvatar } from '../ProfileAvatar'
+import { Popover } from './Popover'
 
-function _PopoverProfile({ member, closePopover }) {
+export function PopoverProfile({ member }) {
     return (
-        <div className="pop-over">
-            <button className="clean-btn" onClick={closePopover}>
-                <CloseIcon style={{ width: '16px', height: '16px' }} />
-            </button>
-            <div className="mini-profile">
-                <span><Avatar key={member._id}>{member.fullname.split(' ').map(x => x.charAt(0)).join('')}</Avatar></span>
-                <h2>{member.fullname}</h2>
-                <span>@{member.username}</span>
-                 {/* TODO: show only if it's user mini-profile */}
-                {/* <Link>Edit profile info</Link> */}
+        <Popover styleMode={'clean'} overlay={'none'}>
+            <div className="mini-profile-container">
+                <div className="mini-profile">
+                    <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50}/></div>
+                    <div className="mini-profile-info">
+                        <a>{member.fullname}</a>
+                        <p>@{member.username.toLowerCase()}</p>
+                        <a className="mini-profile-info-edit">Edit profile info</a>
+                        {/* TODO: show only if it's the user mini-profile */}
+                        {/* <Link>Edit profile info</Link> */}
+                    </div>
+                </div>
+                <span className="clean-btn">Remove from card</span>
+                {/* <button className="clean-btn">Remove from card</button> */}
             </div>
-            <button>Remove from card</button>
-        </div>
+        </Popover >
     )
 }
-
-const mapDispatchToProps = {
-    closePopover
-}
-
-export const PopoverProfile = connect(null, mapDispatchToProps)(_PopoverProfile)
