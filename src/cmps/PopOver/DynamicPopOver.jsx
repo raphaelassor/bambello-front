@@ -9,9 +9,7 @@ import { PopOverMoveCopy } from './PopOverMoveCopy'
 import { PopOverProfile } from './PopOverProfile'
 
 export function _DynamicPopOver({ currPopOver }) {
-
     const { name, props } = currPopOver
-
     switch (name) {
         case 'MEMBERS': return <PopOverMembers {...props} />;
         case 'LABELS': return <PopOverLabels {...props} />;
@@ -24,7 +22,6 @@ export function _DynamicPopOver({ currPopOver }) {
         case 'PROFILE': return <PopOverProfile {...props} />;
         default: return '';
     }
-
 }
 function mapStateToProps(state) {
     return {
