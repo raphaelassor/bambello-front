@@ -1,10 +1,6 @@
 import { boardService } from '../../services/board.service.js'
 
-<<<<<<< HEAD
 export function loadBoard(boardId = '60b62a5534613c87818a5c20') {
-=======
-export function loadBoard(boardId = '60b62a5934613c87818a5c21') {
->>>>>>> 2153991ea91d91463fd8704173f4595131829ac3
     return async dispatch => {
         try {
             const board = await boardService.getById(boardId)

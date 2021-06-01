@@ -1,18 +1,23 @@
-// import { connect } from 'react-redux'
-import Avatar from '@material-ui/core/Avatar';
-import { Popover } from './Popover';
+import { ProfileAvatar } from '../ProfileAvatar'
+import { Popover } from './Popover'
 
 export function PopoverProfile({ member }) {
     return (
-        <Popover>
-            <div className="mini-profile">
-                <span><Avatar key={member._id}>{member.fullname.split(' ').map(x => x.charAt(0)).join('')}</Avatar></span>
-                <h2>{member.fullname}</h2>
-                <span>@{member.username}</span>
-                 {/* TODO: show only if it's user mini-profile */}
-                {/* <Link>Edit profile info</Link> */}
+        <Popover styleMode={'clean'} overlay={'none'}>
+            <div className="mini-profile-container">
+                <div className="mini-profile">
+                    <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50}/></div>
+                    <div className="mini-profile-info">
+                        <a>{member.fullname}</a>
+                        <p>@{member.username.toLowerCase()}</p>
+                        <a className="mini-profile-info-edit">Edit profile info</a>
+                        {/* TODO: show only if it's the user mini-profile */}
+                        {/* <Link>Edit profile info</Link> */}
+                    </div>
+                </div>
+                <span className="clean-btn">Remove from card</span>
+                {/* <button className="clean-btn">Remove from card</button> */}
             </div>
-            <button>Remove from card</button>
-        </Popover>
+        </Popover >
     )
 }

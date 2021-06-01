@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false }) {
 
-
     // const isMemberLoggedin = () => {
     //TODO: LOOP THAT RUN THROUGH MEMBERS AND CHECK WHO IS LOGGED IN
     // const {members} = this.props
@@ -52,8 +51,13 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
         },
     }))(Badge);
 
+    const onClickAvatar = (ev) => {
+        if (onOpenPopover) onOpenPopover(ev, member)
+    }
+
+    
     return (
-        <div className="profile-avatar" onClick={(ev) => onOpenPopover(ev, member)}>
+        <div className="profile-avatar"  onClick={(ev) => onClickAvatar(ev)}>
             <StyledBadge
                 overlap="circle"
                 anchorOrigin={{

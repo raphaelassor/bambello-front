@@ -7,6 +7,9 @@
     padding: 0 12px 12px;
     min-width: 20rem;
     margin-right: 4px;
+    &.clean {
+        padding: unset;
+    }
     .pop-over-header {
         display: flex;
         align-items: center;
