@@ -52,7 +52,7 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
     }))(Badge);
 
     const onClickAvatar = (ev) => {
-        if (onOpenPopover) onOpenPopover(ev, member)
+        if (onOpenPopover) onOpenPopover(ev, 'PROFILE', member)
     }
 
     
@@ -82,7 +82,7 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
 
 // function mapStateToProps(state) {
 //     return {
-//         board: state.boardModule.members
+//         members: state.boardModule.members
 //     }
 // }
 
