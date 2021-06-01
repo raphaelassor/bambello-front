@@ -26,6 +26,12 @@ class _CardPreview extends Component {
         onSaveBoard(board);
     }
 
+    openCardEdit = (ev) => {
+        ev.preventDefault();
+
+        this.onOpenPopover(ev, 'EDIT')
+    }
+
     onOpenPopover = (ev, type, member) => {
         ev.preventDefault();
         const { card, openPopover } = this.props;
@@ -41,13 +47,6 @@ class _CardPreview extends Component {
 
         openPopover(type, elPos, props)
     }
-
-    // onEditPopover = (ev) => {
-    //     ev.preventDefault();
-    //     const { isCardEditOpen } = this.state;
-    //     this.setState({ isCardEditOpen: !isCardEditOpen });
-    // }
-
 
     draggableStyle = (style, snapshot) => {
         if (!snapshot.isDropAnimating) {

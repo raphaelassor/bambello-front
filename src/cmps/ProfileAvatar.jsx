@@ -65,7 +65,7 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
                     horizontal: 'right',
                 }}
                 //TODO: variant={showStatus && isMemberLoggedin() &&'dot'}
-                variant={showStatus && 'dot'}
+                variant={showStatus ? 'dot' : 'standard'}
             >
                 <Avatar
                     className="avatar"
