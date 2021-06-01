@@ -28,7 +28,7 @@ class _CardDetails extends Component {
     componentDidMount() {
         // SETTING LIST AND CARD FROM PARAMS
         const { cardId, listId } = this.props.match.params
-        const { board, board: { lists } } = this.props
+        const { board: { lists } } = this.props
         const list = lists.find(list => list.id === listId)
         const { cards } = list;
         const card = cards.find(card => card.id === cardId)
