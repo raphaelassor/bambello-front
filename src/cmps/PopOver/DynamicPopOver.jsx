@@ -21,7 +21,7 @@ export function _DynamicPopOver({ currPopOver }) {
         case 'MOVE': return <PopOverMoveCopy popOverType="move" {...props} />;
         case 'ATTACH': return <PopOverAttach {...props} />;
         case 'CHECKLIST': return <PopOverChecklist {...props} />;
-        case 'PROFILE': return <PopOverProfile {...props} />;
+        case 'PROFILE': return <PopOverProfile {...props} />
         default: return '';
     }
 
