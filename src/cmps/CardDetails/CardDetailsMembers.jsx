@@ -18,7 +18,7 @@ export function CardDetailsMembers({ members, card, openPopover }) {
             <h3 className="card-details-item-header">Members</h3>
             <div className="members-container flex wrap">
                 {members.map(member => {
-                    return <ProfileAvatar member={member} size={32} onOpenPopover={onOpenPopover} />
+                    return <ProfileAvatar key={member._id} member={member} size={32} onOpenPopover={onOpenPopover} />
                 })}
                 <button className="secondary-btn" onClick={(ev) => onOpenPopover(ev, 'MEMBERS')} ><AddIcon /></button>
             </div>

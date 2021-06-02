@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { ChecklistPreview } from './ChecklistPreview'
-export class CardChecklists extends Component {
+import { connect } from 'react-redux'
+import { boardService } from '../../services/board.service'
+import { onSaveBoard } from '../../store/actions/board.actions'
+
+class _CardChecklists extends Component {
 
     onSaveChecklist = (checklist) => {
         if (!checklist.title) return
@@ -13,7 +17,15 @@ export class CardChecklists extends Component {
     onRemoveChecklist = (checklist) => {
         let { onSaveCardChecklists, checklists } = this.props
         checklists = checklists.filter(currChecklist => currChecklist.id !== checklist.id)
+        this.onCreateActivity('removed', checklist.title)
         onSaveCardChecklists(checklists)
+    }
+
+    onCreateActivity = (type, txt) => {
+        let { card, board, loggedInUser, onSaveBoard } = this.props
+        const savedActivity = boardService.createActivity(type, txt, loggedInUser, card)
+        board.activities.push(savedActivity)
+        onSaveBoard(board)
     }
 
     render() {
@@ -25,9 +37,26 @@ export class CardChecklists extends Component {
                         key={checklist.id}
                         checklist={checklist}
                         onRemoveChecklist={this.onRemoveChecklist}
-                        onSaveChecklist={this.onSaveChecklist} />
+                        onSaveChecklist={this.onSaveChecklist}
+                        onCreateActivity={this.onCreateActivity}
+                    />
                 })}
             </div>
         )
     }
 }
+
+
+
+function mapStateToProps(state) {
+    return {
+        board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
+    }
+}
+
+const mapDispatchToProps = {
+    onSaveBoard,
+}
+
+export const CardChecklists = connect(mapStateToProps, mapDispatchToProps)(_CardChecklists)

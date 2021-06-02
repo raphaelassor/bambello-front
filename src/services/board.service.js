@@ -62,25 +62,29 @@ export function updateCardInBoard(board, updatedCard) {
     return { ...board }
 }
 
-export function createActivity(actionType, txt, loggedInUser, card) {
+export function createActivity(actionType, txt = '', loggedInUser, card = null) {
     const { _id, fullname, imgUrl } = loggedInUser
-    const { id, title } = card
     const byMember = {
         _id,
         fullname,
         imgUrl
     }
-    card = {
-        id,
-        title
+
+    let savedCard
+    if (card) {
+        savedCard = {
+            id: card.id,
+            title: card.title
+        }
     }
+
     const savedActivity = {
         id: utilsService.makeId(),
         actionType,
         txt,
         createdAt: Date.now(),
         byMember,
-        card
+        card: savedCard || null,
     }
     return savedActivity
 }

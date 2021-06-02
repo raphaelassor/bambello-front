@@ -104,7 +104,7 @@ class _CardDetails extends Component {
 
 
     render() {
-        const { board, board: { activities }, onSaveBoard, openPopover } = this.props
+        const { board, board: { activities }, onSaveBoard, openPopover, loggedInUser } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style: { bgColor }, attachs } = card
@@ -152,13 +152,17 @@ class _CardDetails extends Component {
                                 description={description}
                                 onSaveCardDescription={this.onSaveCardDescription} />
                             {!!attachs.length &&
-                                <CardAttachments attachs={attachs}
-                                    onDeleteCardAttachment={this.onDeleteCardAttachment} />}
+                                <CardAttachments
+                                    attachs={attachs}
+                                    onDeleteCardAttachment={this.onDeleteCardAttachment}
+                                    openPopover={openPopover}
+                                    card={card}
+                                />}
                             <CardChecklists
+                                card={card}
                                 checklists={checklists}
                                 onSaveCardChecklists={this.onSaveCardChecklists} />
                             <CardActivities card={card} activities={activities} />
-                            {/* {!!this.cardActivities && <ActivitiesList activities={this.cardActivities} />} */}
                         </div>
                         <div className="card-details-sidebar flex column full">
                             <CardDetailsActions

@@ -27,6 +27,8 @@ export class ActivityPreview extends Component {
                 return `changed ${txt}`
             case 'renamed':
                 return `renamed this board to ${txt}`
+            case 'left':
+                return `left ${activityLoc}`
             default:
                 return
         }

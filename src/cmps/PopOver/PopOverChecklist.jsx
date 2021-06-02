@@ -12,14 +12,14 @@ class _PopoverChecklist extends Component {
     state = {
         title: ''
     }
-    
+
     handlechange = ({ target }) => {
         this.setState({ title: target.value })
     }
 
     addChecklist = (ev) => {
-        ev.preventDefault() 
-        const { card, onSaveBoard, board } = this.props
+        ev.preventDefault()
+        const { card, onSaveBoard, board, loggedInUser } = this.props
         if (!card.checklists) card.checklists = []
         const checklist = {
             id: utilsService.makeId(),
@@ -27,6 +27,8 @@ class _PopoverChecklist extends Component {
             todos: []
         }
         card.checklists.push(checklist)
+        const savedActivity = boardService.createActivity('added', checklist.title, loggedInUser, card)
+        board.activities.push(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
         this.props.closePopover()
@@ -37,9 +39,9 @@ class _PopoverChecklist extends Component {
         return <Popover title={"Add A Checklist"}>
             <div className="checklist-pop-over-content">
                 <form onSubmit={this.addChecklist}>
-                <label htmlFor="checklist-input" className="pop-over-label">Title</label>
-                <input className="pop-over-input" id="checklist-input" type="text" value={this.state.title} onChange={this.handlechange} placeholder="Enter a title..."/>
-                <button className="primary-btn wide-btn">Add</button>
+                    <label htmlFor="checklist-input" className="pop-over-label">Title</label>
+                    <input className="pop-over-input" id="checklist-input" type="text" value={this.state.title} onChange={this.handlechange} placeholder="Enter a title..." />
+                    <button className="primary-btn wide-btn">Add</button>
                 </form>
             </div>
         </Popover>
@@ -49,6 +51,7 @@ class _PopoverChecklist extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 

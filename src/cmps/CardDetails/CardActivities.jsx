@@ -13,6 +13,7 @@ export class CardActivities extends Component {
         const { isOnlyComments } = this.state
         const { card, activities } = this.props
         const cardActivities = activities.filter(currActivity => {
+            if (!currActivity.card) return false
             if (isOnlyComments) {
                 return (currActivity.card.id === card.id
                     && currActivity.actionType === 'comment')

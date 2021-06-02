@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
 import { userService } from '../services/user.service'
+import { boardService } from '../services/board.service'
 import { onSetLoggedInUser } from '../store/actions/app.actions'
 import { openPopover } from '../store/actions/app.actions.js'
 import AutosizeInput from 'react-input-autosize';
@@ -64,10 +65,14 @@ class _BoardHeader extends Component {
 
     onTitleSave = (ev) => {
         ev.preventDefault()
+        const { loggedInUser } = this.props
         const { title } = this.state
         if (!title) return // error msg to user: must enter title
         const { board, onSaveBoard } = this.props
         board.title = title
+        const txt = `renamed this board to ${title}`
+        const savedActivity = boardService.createActivity('renamed',txt,loggedInUser)
+        board.activities.push(savedActivity)
         onSaveBoard(board)
         this.toggleEdit()
     }
