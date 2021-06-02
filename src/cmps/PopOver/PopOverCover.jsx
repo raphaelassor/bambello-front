@@ -12,17 +12,17 @@ class _PopoverCover extends Component {
     state = { 
         bgColor: this.props.card.style?.bgColor||'',
         coverMode:this.props.card.style?.coverMode|| null,
-        bgImgUrl:this.props.card.style?.bgImgUrl|| '',
+        imgUrl:this.props.card.style?.imgUrl|| '',
     }
     componentDidMount(){
         this.setState({})
     }
 
-    saveCover = ({ bgImgUrl, bgColor, coverMode }) => {
+    saveCover = ({ imgUrl, bgColor, coverMode }) => {
             const { card, onSaveBoard ,board} = this.props
             card.style = {
                 coverMode,
-                bgImgUrl,
+                imgUrl,
                 bgColor,
             }
         const updatedBoard = boardService.updateCardInBoard(board, card)
@@ -32,11 +32,11 @@ class _PopoverCover extends Component {
     handleChange = ({ target }) => {
         let {coverMode}= this.state
         if(!coverMode) coverMode='header';
-        this.setState({ bgColor: target.value ,bgImgUrl:'',coverMode:coverMode},this.onSaveCover)
+        this.setState({ bgColor: target.value ,imgUrl:'',coverMode:coverMode},this.onSaveCover)
     }
 
     onRemoveCover = () => {
-        this.setState({ bgColor: '', coverMode: '',bgImgUrl:'' },this.onSaveCover)
+        this.setState({ bgColor: '', coverMode: '',imgUrl:'' },this.onSaveCover)
                 // this.props.removeCoverBg()
     }
 
@@ -44,17 +44,17 @@ class _PopoverCover extends Component {
         this.setState({ coverMode: mode },this.onSaveCover)
     }
     onSaveCover=()=>{
-        const {bgColor,bgImgUrl,coverMode}=this.state
-        if((coverMode&&bgImgUrl)||(coverMode&&bgColor) || (!coverMode&&!bgColor&&!bgImgUrl)) this.saveCover(this.state)
+        const {bgColor,imgUrl,coverMode}=this.state
+        if((imgUrl)||(coverMode&&bgColor) || (!coverMode&&!bgColor&&!imgUrl)) this.saveCover(this.state)
         else return
     }
     onFileUpload=(fileUrl)=>{
         if(!utilsService.isValidImg(fileUrl))return // error message
-        this.setState({bgImgUrl:fileUrl,bgColor:''})
+        this.setState({imgUrl:fileUrl,bgColor:''})
     }
 
     render() {
-        const { bgColor, coverMode,bgImgUrl } = this.state
+        const { bgColor, coverMode,imgUrl } = this.state
         return <Popover  title="Cover">
             <div className="cover-pop-over-content">
                 <h4>SIZE</h4>
@@ -64,7 +64,7 @@ class _PopoverCover extends Component {
                     </div>
                     <div className={`full-cover-preview ${coverMode === 'full' ? 'selected' : ''}`} onClick={() => this.onSetMode('full')} style={{ backgroundColor: bgColor ? bgColor : '#5e6c844d' }}> </div>
                 </div>
-                {(bgColor||bgImgUrl) && <div className="flex">
+                {(bgColor||imgUrl) && <div className="flex">
                     <button className="secondary-btn full" onClick={this.onRemoveCover}>Remove Cover</button>
                 </div>}
                 <h4>COLOR</h4>

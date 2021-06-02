@@ -7,7 +7,7 @@ export class FileUpload extends Component {
   }
   uploadFile = async (ev) => {
     this.setState({ isUploading: true })
-    console.log('file is', ev )
+
     try{
       const {secure_url} = await cloudinaryService.uploadFile(ev)
       this.props.onFileUpload(secure_url)
