@@ -9,53 +9,44 @@ import { CardList } from '../cmps/CardList'
 import { CardListAdd } from '../cmps/CardListAdd'
 import { BoardHeader } from '../cmps/BoardHeader'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-<<<<<<< HEAD
 import { eventBusService } from '../services/event-bus.service'
-=======
 import { boardService } from '../services/board.service'
 import { socketService } from '../services/socket.service'
->>>>>>> d3798e946207e1b3fb75ddeb0685f08386395a6d
 
 
 class _BoardApp extends Component {
 
-<<<<<<< HEAD
     state = {
         isCardEditOpen: false,
         currCard: null,
         elPos: null
     }
 
-    componentDidMount() {
-        this.props.loadBoard();
-        this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => this.setState({ isCardEditOpen: true, currCard: card, elPos }));
-    }
-    componentWillUnmount() {
-        this.removeEvent();
-    }
-
-    onCloseCardEdit = () => {
-        this.setState({ isCardEditOpen: false })
-=======
     async componentDidMount() {
-        socketService.setup()
         try {
+            socketService.setup()
             await this.props.loadBoard()
             const { board } = this.props
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
                 this.props.loadBoard(savedBoard._id)
             })
+            this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
+                this.setState({ isCardEditOpen: true, currCard: card, elPos });
+            });
         } catch (err) {
             console.log(err)
         }
     }
 
     componentWillUnmount() {
+        this.removeEvent();
         socketService.off('board updated')
->>>>>>> d3798e946207e1b3fb75ddeb0685f08386395a6d
     }
 
+    onCloseCardEdit = () => {
+        this.setState({isCardEditOpen: false})
+    }
 
     onDragEnd = (result) => {
         let { board, board: { lists }, onSaveBoard, loggedInUser } = this.props
@@ -107,8 +98,7 @@ class _BoardApp extends Component {
         const { board, onSaveBoard } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
-<<<<<<< HEAD
-        
+
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>
@@ -130,27 +120,6 @@ class _BoardApp extends Component {
                 </DragDropContext>
                 {isCardEditOpen && <CardEdit board={board} card={currCard} elPos={elPos} onCloseCardEdit={this.onCloseCardEdit} />}
             </>
-=======
-        console.log(board)
-        return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
-                <section className="board-app flex column">
-                    <BoardHeader board={board} onSaveBoard={onSaveBoard} />
-                    <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
-                    <Droppable droppableId="all-lists" direction="horizontal" type="list">
-                        {provided => (
-                            // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
-                            <div {...provided.droppableProps} ref={provided.innerRef} className="card-list-container flex">
-                                {board.lists.map((currList, idx) => <CardList key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
-                                {provided.placeholder}
-                                <CardListAdd board={board} onSaveBoard={onSaveBoard} />
-                            </div>
-                            // </ScrollContainer> 
-                        )}
-                    </Droppable>
-                </section>
-            </DragDropContext>
->>>>>>> d3798e946207e1b3fb75ddeb0685f08386395a6d
         )
     }
 }
