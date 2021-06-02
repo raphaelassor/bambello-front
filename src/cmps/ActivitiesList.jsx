@@ -9,4 +9,4 @@ export function ActivitiesList({ activities, isGeneral }) {
             })}
         </div>
     )
-}
+} 

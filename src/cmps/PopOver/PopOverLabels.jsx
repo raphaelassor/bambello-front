@@ -78,7 +78,7 @@ class _PopoverLabels extends Component {
                         <ul className="clean-list">
 
                             {this.presentedLabels.map(label => <PopoverLabelPreview key={label.id} label={label}
-                                toggleLabel={this.toggleLabel} isInCard={this.isLabelInCard(label)} toggleEditMode={this.toggleEditMode} />)}
+                                toggleLabel={this.toggleLabel} isSelected={this.isLabelInCard(label)} toggleEditMode={this.toggleEditMode} />)}
                         </ul>
                         <button className="secondary-btn" onClick={this.toggleEditMode}>Create a new label</button>
                     </div>

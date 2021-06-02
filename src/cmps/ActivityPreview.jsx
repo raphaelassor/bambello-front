@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ProfileAvatar } from './ProfileAvatar'
 import Moment from 'react-moment'
 
-
+ 
 export class ActivityPreview extends Component {
 
     get fullActivity() {
@@ -43,9 +43,9 @@ export class ActivityPreview extends Component {
                 <ProfileAvatar member={byMember} size={32} />
                 {actionType === 'comment' &&
                     <div className="comment-content">
-                        <div className="main flex align-center">
+                        <div className="main">
                             <span className="member-name">{byMember.fullname}</span>
-                            {isGeneral && <span>{`on ${card.title}`}</span>}
+                            {isGeneral && `on ${card.title}`}
                             <Moment className="publish-time" fromNow>{createdAt}</Moment>
                         </div>
                         <div className="comment-body">
@@ -54,9 +54,10 @@ export class ActivityPreview extends Component {
                     </div>}
                 {actionType !== 'comment' &&
                     <div className="activity-content flex column">
-                        <div className="main flex align-center">
+                        <div className="main">
                             <span className="member-name">{byMember.fullname}</span>
-                            <span>{this.fullActivity}</span>
+                            {/* <span>{this.fullActivity}</span> */}
+                            {this.fullActivity}
                         </div>
                         <Moment className="publish-time" fromNow>{createdAt}</Moment>
                     </div>}

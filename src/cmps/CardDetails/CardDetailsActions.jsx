@@ -12,7 +12,7 @@ import { utilsService } from '../../services/utils.service'
 import { boardService } from '../../services/board.service'
 import { ElementOverlay } from '../Popover/ElementOverlay'
 
-class _CardDetailsActions extends Component {
+class _CardDetailsActions extends Component { 
 
     addFile = (fileUrl) => {
         const { card, onSaveCardFromActions, closePopover } = this.props
@@ -78,7 +78,7 @@ class _CardDetailsActions extends Component {
     }
 
     render() {
-        const { card, board, currPopoverName, openPopover, loggedInUser } = this.props
+        const { card} = this.props
         return <div className="details-actions-wrapper flex column">
             {!this.isUserMember() && <div className="suggested flex column"> <h4>SUGGESTED</h4>
                 <button className="secondary-btn actions-btn " onClick={this.joinCard}>
