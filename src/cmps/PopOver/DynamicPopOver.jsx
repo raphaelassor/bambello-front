@@ -1,5 +1,5 @@
-import { PopoverMembers } from "./PopoverMembers";
 import { connect } from 'react-redux'
+import { PopoverMembers } from "./PopoverMembers";
 import { PopoverLabels } from "./PopoverLabels";
 import { PopoverCover } from "./PopoverCover";
 import { PopoverDate } from "./PopoverDate";
@@ -10,11 +10,12 @@ import { PopoverProfile } from './PopoverProfile';
 import { PopoverInvite } from "./PopoverInvite";
 import {PopoverMenu} from './PopoverMenu'
 import {PopoverBackground} from './PopoverBackground'
-import { PopoverArchive } from "./PopoverArchive";
+import { PopoverArchive } from './PopoverArchive';
+import { PopoverEditCard } from "./PopoverEditCard";
 export function _DynamicPopover({ currPopover }) {
 
     const { name, props } = currPopover
-
+ 
     switch (name) {
         case 'MEMBERS': return <PopoverMembers {...props} />;
         case 'LABELS': return <PopoverLabels {...props} />;
@@ -29,7 +30,7 @@ export function _DynamicPopover({ currPopover }) {
         case 'MENU': return <PopoverMenu {...props} />
         case 'BACKGROUND': return <PopoverBackground {...props} />
         case 'ARCHIVE': return <PopoverArchive {...props} />
-        
+        case 'EDIT_CARD': return <PopoverEditCard {...props} />
         default: return '';
     }
 

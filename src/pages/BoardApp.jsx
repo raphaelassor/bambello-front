@@ -65,7 +65,7 @@ class _BoardApp extends Component {
         console.log(board)
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <section className="board-app flex column" style={{backgroundColor:board.style.bgColor}}>
+                <section className="board-app flex column" >
                     <BoardHeader board={board} onSaveBoard={onSaveBoard}/>
                     <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
                     <Droppable droppableId="all-lists" direction="horizontal" type="list">

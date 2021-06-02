@@ -29,6 +29,7 @@ async function remove(boardId) {
 async function getById(boardId) {
     try {
         return await httpService.get(`board/${boardId}`)
+
     } catch (err) {
         throw err
     }

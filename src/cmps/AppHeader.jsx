@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { Link, withRouter } from 'react-router-dom'
-import {connect} from 'react-redux'
 import { ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import { ReactComponent as BoardIcon } from '../assets/img/icons/board.svg'
 import { ReactComponent as AppsIcon } from '../assets/img/icons/apps.svg'
@@ -9,7 +8,7 @@ import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
 import Avatar from '@material-ui/core/Avatar';
-class __AppHeader extends Component {
+class _AppHeader extends Component {
 
     state = {
         filterTxt: '',
@@ -33,20 +32,11 @@ class __AppHeader extends Component {
         else this.setState({ currOpenModal: modalName })
     }
 
-    get style(){
-        const {board}=this.props
-        const style=board? {
-            backgroundColor:board.style.bgColor
-        }: {}
-        return style
-    }
-    get isFullStyle(){
-        return !this.props.board
-    }
+   
     render() {
         const { isPrevInput, currOpenModal, isFullStyle } = this.state
-        return <div style={this.style}>
-            <div className={`main-header flex justify-space-between ${this.isFullStyle ? '' : 'opacity'} `}>
+        return <div>
+            <div className={`main-header flex justify-space-between ${isFullStyle ? '' : 'opacity'} `}>
                 <div className="btn-header-container flex">
                     <button className="btn-header">
                         <AppsIcon />
@@ -114,12 +104,8 @@ class __AppHeader extends Component {
 
 }
 
-function mapStateToProps(state) {
-    return {
-        board: state.boardModule.board,
-    }
-}
-const _AppHeader=withRouter(__AppHeader)
-export const AppHeader = connect(mapStateToProps, null)(_AppHeader)
+
+export const AppHeader=withRouter(_AppHeader)
+
 
 

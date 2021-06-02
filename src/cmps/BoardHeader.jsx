@@ -51,10 +51,9 @@ class _BoardHeader extends Component {
         board.isFavorite = !board.isFavorite
         onSaveBoard(board)
     }
-    onOpenPopover = (ev, popoverName) => {
-        console.log('on open popover', popoverName)
+    onOpenPopover = (ev, popoverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
-        const props = {}
+        const props = { member }
         this.props.openPopover(popoverName, elPos, props)
     }
 
