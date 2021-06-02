@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { AppHeader } from './cmps/AppHeader';
 import { routes } from './routes'
 // import { connect } from 'react-redux'
-import {DynamicPopover} from './cmps/Popover/DynamicPopover'
+import { DynamicPopover } from './cmps/Popover/DynamicPopover'
 
 export class App extends Component {
 
@@ -18,7 +18,7 @@ export class App extends Component {
           <Switch>
             {routes.map(route => <Route key={route.path} component={route.component} path={route.path} />)}
           </Switch>
-          <DynamicPopover/>
+          <DynamicPopover />
         </main>
       </div>
     )

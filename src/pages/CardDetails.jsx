@@ -107,17 +107,17 @@ class _CardDetails extends Component {
         const { board, board: { activities }, onSaveBoard, openPopover, loggedInUser } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
-        const { title, members, description, checklists, dueDate, style: { bgColor }, attachs } = card
+        const { title, members, description, checklists, dueDate, style, attachs } = card
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
                 <section className="card-details flex-column">
                     <button
                         onClick={() => this.goBackToBoard()}
-                        className={`close-window-btn ${bgColor ? 'cover-mode' : ''} flex align-center justify-center`}>
+                        className={`close-window-btn ${style.coverMode ? 'cover-mode' : ''} flex align-center justify-center`}>
                         <CloseRoundedIcon />
                     </button>
-                    {bgColor && <CardDetailsCover bgColor={bgColor} openPopover={openPopover} card={card} />}
+                 {style.coverMode && <CardDetailsCover style={style} openPopover={openPopover} card={card} />}
                     <div className="card-details-header">
                         <div className="header-content flex">
                             <WebAssetIcon />

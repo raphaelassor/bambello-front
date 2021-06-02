@@ -24,10 +24,11 @@ class _PopoverDate extends Component {
     }
 
     saveDueDate = (date) => {
-        console.log(new Date(date).toLocaleString('en-GB', { month: 'short', day: 'numeric' }))
-        const { card, onSaveBoard, closePopover, board } = this.props
+        const { card, onSaveBoard, closePopover, board, loggedInUser } = this.props
         card.dueDate = date ? Date.parse(date) : 0;
-        console.log(card)
+        const txt = new Date(date).toLocaleString('en-GB', { month: 'short', day: 'numeric' }) 
+        const savedActivity = boardService.createActivity('changed-date', txt, loggedInUser, card)
+        board.activities.push(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
         closePopover()
@@ -65,6 +66,7 @@ class _PopoverDate extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 

@@ -71,7 +71,7 @@ class _BoardHeader extends Component {
         const { board, onSaveBoard } = this.props
         board.title = title
         const txt = `renamed this board to ${title}`
-        const savedActivity = boardService.createActivity('renamed',txt,loggedInUser)
+        const savedActivity = boardService.createActivity('renamed', txt, loggedInUser)
         board.activities.push(savedActivity)
         onSaveBoard(board)
         this.toggleEdit()
@@ -82,7 +82,6 @@ class _BoardHeader extends Component {
         board.isFavorite = !board.isFavorite
         onSaveBoard(board)
     }
-
     onOpenPopover = (ev, PopoverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
         const props = { member }

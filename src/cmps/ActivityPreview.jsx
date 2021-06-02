@@ -25,6 +25,8 @@ export class ActivityPreview extends Component {
                 return `moved ${activityLoc} from ${txt}`
             case 'changed':
                 return `changed ${txt}`
+            case 'changed-date':
+                return `changed the due date of ${activityLoc} to ${txt}`
             case 'renamed':
                 return `renamed this board to ${txt}`
             case 'left':
