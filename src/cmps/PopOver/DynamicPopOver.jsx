@@ -1,5 +1,5 @@
-import { PopoverMembers } from "./PopoverMembers";
 import { connect } from 'react-redux'
+import { PopoverMembers } from "./PopoverMembers";
 import { PopoverLabels } from "./PopoverLabels";
 import { PopoverCover } from "./PopoverCover";
 import { PopoverDate } from "./PopoverDate";
@@ -8,7 +8,7 @@ import { PopoverChecklist } from "./PopoverChecklist";
 import { PopoverMoveCopy } from './PopoverMoveCopy';
 import { PopoverProfile } from './PopoverProfile';
 import { PopoverInvite } from "./PopoverInvite";
-import { PopoverInvite } from "./PopoverEditCard";
+import { PopoverEditCard } from "./PopoverEditCard";
 
 export function _DynamicPopover({ currPopover }) {
 

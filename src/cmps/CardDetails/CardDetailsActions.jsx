@@ -62,12 +62,12 @@ class _CardDetailsActions extends Component {
         this.props.goBackToBoard()
     }
 
-    onOpenPopover = (ev, PopoverName) => {
+    onOpenPopover = (ev, popoverName) => {
         const elPos = ev.target.getBoundingClientRect()
         const props = {
             card: this.props.card
         }
-        this.props.openPopover(PopoverName, elPos, props)
+        this.props.openPopover(popoverName, elPos, props)
     }
 
     render() {
