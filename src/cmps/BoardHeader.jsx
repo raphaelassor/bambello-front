@@ -2,11 +2,13 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
+import { ReactComponent as ElipsisIcon } from '../assets/img/icons/elipsis.svg'
 import { openPopover } from '../store/actions/app.actions.js'
 import AutosizeInput from 'react-input-autosize';
-import { ProfileAvatar } from './ProfileAvatar'
+import { ProfileAvatar } from './ProfileAvatar';
+import {ElementOverlay} from '../cmps/Popover/ElementOverlay';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
-
+import MenuIcon from '@material-ui/icons/MoreHoriz';
 
 class _BoardHeader extends Component {
 
@@ -23,7 +25,6 @@ class _BoardHeader extends Component {
     handleChange = ({ target }) => {
         const { value } = target
         let { inputWidth } = this.state
-        console.dir(this.titleInput)
         this.setState({ title: target.value, inputWidth })
     }
     toggleEdit = () => {
@@ -50,10 +51,11 @@ class _BoardHeader extends Component {
         board.isFavorite = !board.isFavorite
         onSaveBoard(board)
     }
-    onOpenPopover = (ev, popOverName, member) => {
+    onOpenPopover = (ev, popoverName) => {
+        console.log('on open popover', popoverName)
         const elPos = ev.target.getBoundingClientRect()
-        const props = { member }
-        this.props.openPopover(popOverName, elPos, props)
+        const props = {}
+        this.props.openPopover(popoverName, elPos, props)
     }
 
 
@@ -90,10 +92,15 @@ class _BoardHeader extends Component {
 
                 <div className="board-header-members flex">
                     <AvatarGroup max={4}>
-                        {board.members.map(member => <ProfileAvatar member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
+                        {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
                     </AvatarGroup>
                 <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
+                <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}> 
+                <ElipsisIcon/>
+                <span>Show Menu</span>
+                <ElementOverlay/>
+                </button>
             </div>
         )
     }

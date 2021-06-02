@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { utilsService } from '../../services/utils.service';
-import { ColorPallette } from '../ColorPalette';
+import { ColorPalette } from '../ColorPalette';
 import { FileUpload } from '../FileUpload';
 import { Popover } from './Popover';
 import {boardService} from '../../services/board.service'
@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 class _PopoverCover extends Component {
 
-    state = {
+    state = { 
         bgColor: this.props.card.style?.bgColor||'',
         coverMode:this.props.card.style?.coverMode|| null,
         bgImgUrl:this.props.card.style?.bgImgUrl|| '',
@@ -68,7 +68,7 @@ class _PopoverCover extends Component {
                     <button className="secondary-btn full" onClick={this.onRemoveCover}>Remove Cover</button>
                 </div>}
                 <h4>COLOR</h4>
-                <ColorPallette selectedColor={bgColor} handleChange={this.handleChange} />
+                <ColorPalette selectedColor={bgColor} handleChange={this.handleChange} />
                 <h4>ATTACHMENTS</h4>
             <FileUpload onFileUpload={this.onFileUpload}/>
             </div>

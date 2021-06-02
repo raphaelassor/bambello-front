@@ -10,6 +10,23 @@
     &.clean {
         padding: unset;
     }
+    &.menu{
+        background-color: #f4f5f7;
+        height: calc(100vh - 40px);
+    }
+    .back{
+        position: absolute;
+        top: 14px;
+        left: 24px;
+        font-size: 20px;
+        color: #6b778c;
+            &:hover{
+                color:$clr4;
+            }
+        svg{
+            width:18px
+        }
+    }
     .pop-over-header {
         display: flex;
         align-items: center;
@@ -23,8 +40,10 @@
         padding: 0 32px;
         position: relative;
         text-overflow: ellipsis;
-        span {
+        h3 {
             flex-grow: 1;
+            font-size: 14px;
+            font-weight: 400;
         }
         button {
             position: absolute;
@@ -42,8 +61,13 @@
             &:hover{
                 color:$clr4;
             }
+            .svg{
+                width:16px;
+                height:16px;
+            }
         }
         &.clean {
+           
             position: absolute;
             top: 0;
             right: 0;
@@ -51,6 +75,25 @@
             padding: 12px;
             button {
                 position: static;
+            }
+        }
+        &.menu {
+          
+            h3 {
+                flex-grow: 1;
+                line-height: 20px;
+                margin: 14px 32px;
+                font-size: 16px;
+                color: $clr4;
+                font-weight: 600;
+            }
+            button {
+                top:14px;
+                transform:none;
+                svg{
+                    width: 20px;
+                    height: 20px;
+                }
             }
         }
     }

@@ -16,7 +16,7 @@ function _PopoverProfile({ board, card, member, onSaveBoard, closePopover }) {
     }
 
     return (
-        <Popover styleMode={'clean'} overlay={'none'}>
+        <Popover className={'clean'} overlay={'none'}>
             <div className="mini-profile-container">
                 <div className="mini-profile">
                     <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50} /></div>
