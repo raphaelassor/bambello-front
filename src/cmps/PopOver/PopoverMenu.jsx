@@ -14,11 +14,11 @@ import { Link } from "react-router-dom";
 
     }
 
-    onOpenPopover = (ev, popoverName) => {
-        console.log('on open popover', popoverName)
+    onOpenPopover = (ev, PopoverName) => {
+        console.log('on open Popover', PopoverName)
         const elPos = ev.target.getBoundingClientRect()
         const props = {}
-        this.props.openPopover(popoverName, elPos, props)
+        this.props.openPopover(PopoverName, elPos, props)
     } 
     render() {
 

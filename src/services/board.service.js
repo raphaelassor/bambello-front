@@ -11,7 +11,7 @@ export const boardService = {
     setPopoverPos
 }
 
-async function query(filterBy) {
+async function query(filterBy = {ctg: ''}) {
     try {
         return await httpService.get('board', filterBy)
     } catch (err) {

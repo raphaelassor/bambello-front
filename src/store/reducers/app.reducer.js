@@ -7,7 +7,7 @@ const initialState = {
     loginErr: null,
     currPopover: {
         elPos: null,
-        PopoverName: '',
+        name: '',
         props: null
     },
     isOverlayOpen: false,
