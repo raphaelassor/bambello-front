@@ -34,10 +34,29 @@
         border-radius: $borderRad1;
         outline: unset;
         border: unset;
+        position: relative;
         height: 32px;
         color: $clr2;
-        *:not(:last-child) {
-            margin-inline-end: 5px;
+        margin-inline-end: 5px;
+        &:first-child{
+            svg:first-child{
+                margin-inline-end: 4px;
+                margin-inline-start: 2px;
+            }
+            svg:last-child{
+                margin-inline-end: 2px;
+            }
+            span{
+                margin-inline-end: 6px;
+            }
+        }
+        &:last-child{
+            margin-inline-end:4px;
+            padding-inline-end: 12px;
+            svg{
+                margin-inline-end:8px;
+                margin-inline-start: 3px;
+            }
         }
         &:hover {
             background-color: rgba(255, 255, 255, 0.3);
@@ -54,6 +73,7 @@
     }
 
     .board-header-members {
+        flex-grow: 1;
         .MuiAvatar-root {
             width: 28px;
             height: 28px;

@@ -19,8 +19,10 @@ export class _Popover extends Component {
         });
         // add remove event 
         this.onSetPopoverPos()
-
     }
+    // componentWillUnmount(){
+    //     window.removeEventListener('resize')
+    // }
 
     componentDidUpdate(prevProps) {
         if (this.props.elPos !== prevProps.elPos) {
@@ -30,25 +32,28 @@ export class _Popover extends Component {
 
 
     onSetPopoverPos = (diff) => {
-        const { elPos } = this.props
+        const { elPos,className } = this.props
         if (!this.selectedDiv) return
         const elRect = this.selectedDiv.getBoundingClientRect()
-        const { left, top } = boardService.setPopoverPos(elPos, elRect)
-
-        this.setState({ top, left })
+        let { left, top } = boardService.setPopoverPos(elPos, elRect)
+        if(className==='menu'){
+            top=40;
+            left=window.visualViewport.width-elRect.width;
+        }
+        this.setState({ top, left }) 
     }
 
     render() {
-        const { children, title, closePopover, isOverlayOpen, overlay, styleMode } = this.props
+        const { children, title, closePopover, isOverlayOpen, overlay, className } = this.props
         const { top, left } = this.state
 
         return <>
             {overlay !== 'none' && isOverlayOpen && <div className="overlay" onClick={closePopover} />}
-            <div className={`pop-over ${styleMode === 'clean' ? 'clean' : ''} `} style={{ top: `${top}px`, left: `${left}px` }} ref={(div) => { this.selectedDiv = div }} >
-                <div className={`pop-over-header ${styleMode === 'clean' ? 'clean' : ''} `}>
-                    <span>{title}</span>
+            <div className={`pop-over ${className} `} style={{ top: `${top}px`, left: `${left}px` }} ref={(div) => { this.selectedDiv = div }} >
+                <div className={`pop-over-header ${className} `}>
+                    <h3>{title}</h3>
                     <button className="clean-btn" onClick={closePopover}>
-                        <CloseIcon style={{ width: '16px', height: '16px' }} />
+                        <CloseIcon />
                     </button>
                 </div>
                 <div className="pop-over-content">

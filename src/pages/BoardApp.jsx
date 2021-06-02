@@ -9,11 +9,17 @@ import { CardList } from '../cmps/CardList'
 import { CardListAdd } from '../cmps/CardListAdd'
 import { BoardHeader } from '../cmps/BoardHeader'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+<<<<<<< HEAD
 import { eventBusService } from '../services/event-bus.service'
+=======
+import { boardService } from '../services/board.service'
+import { socketService } from '../services/socket.service'
+>>>>>>> d3798e946207e1b3fb75ddeb0685f08386395a6d
 
 
 class _BoardApp extends Component {
 
+<<<<<<< HEAD
     state = {
         isCardEditOpen: false,
         currCard: null,
@@ -30,10 +36,29 @@ class _BoardApp extends Component {
 
     onCloseCardEdit = () => {
         this.setState({ isCardEditOpen: false })
+=======
+    async componentDidMount() {
+        socketService.setup()
+        try {
+            await this.props.loadBoard()
+            const { board } = this.props
+            socketService.emit('join board', board._id)
+            socketService.on('board updated', savedBoard => {
+                this.props.loadBoard(savedBoard._id)
+            })
+        } catch (err) {
+            console.log(err)
+        }
     }
 
+    componentWillUnmount() {
+        socketService.off('board updated')
+>>>>>>> d3798e946207e1b3fb75ddeb0685f08386395a6d
+    }
+
+
     onDragEnd = (result) => {
-        let { board, board: { lists }, onSaveBoard } = this.props
+        let { board, board: { lists }, onSaveBoard, loggedInUser } = this.props
         const { destination, source, draggableId, type } = result
         if (!destination) return
         const droppableIdStart = source.droppableId
@@ -69,6 +94,9 @@ class _BoardApp extends Component {
             const listEndIdx = lists.indexOf(listEnd)
             lists[listStartIdx] = listStart
             lists[listEndIdx] = listEnd
+            const txt = `${listStart.title} to ${listEnd.title}`
+            const savedActivity = boardService.createActivity('moved', txt, loggedInUser, ...card)
+            board.activities.push(savedActivity)
         }
 
         board.lists = lists
@@ -79,6 +107,7 @@ class _BoardApp extends Component {
         const { board, onSaveBoard } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
+<<<<<<< HEAD
         
         return (
             <>
@@ -101,13 +130,35 @@ class _BoardApp extends Component {
                 </DragDropContext>
                 {isCardEditOpen && <CardEdit board={board} card={currCard} elPos={elPos} onCloseCardEdit={this.onCloseCardEdit} />}
             </>
+=======
+        console.log(board)
+        return (
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <section className="board-app flex column">
+                    <BoardHeader board={board} onSaveBoard={onSaveBoard} />
+                    <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
+                    <Droppable droppableId="all-lists" direction="horizontal" type="list">
+                        {provided => (
+                            // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
+                            <div {...provided.droppableProps} ref={provided.innerRef} className="card-list-container flex">
+                                {board.lists.map((currList, idx) => <CardList key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
+                                {provided.placeholder}
+                                <CardListAdd board={board} onSaveBoard={onSaveBoard} />
+                            </div>
+                            // </ScrollContainer> 
+                        )}
+                    </Droppable>
+                </section>
+            </DragDropContext>
+>>>>>>> d3798e946207e1b3fb75ddeb0685f08386395a6d
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
-        board: state.boardModule.board
+        board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 

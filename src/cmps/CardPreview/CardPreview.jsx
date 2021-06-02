@@ -2,7 +2,6 @@ import { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Draggable } from 'react-beautiful-dnd'
 import { Card } from '../Card'
-import { CardEdit } from '../CardEdit'
 
 export class CardPreview extends Component {
 
@@ -29,8 +28,6 @@ export class CardPreview extends Component {
 
     render() {
         const { board, card, currList, cardIdx } = this.props;
-        const { isCardEditOpen, elPos } = this.state;
-
         return (
             <>
                 <Draggable draggableId={card.id} index={cardIdx}>

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { ColorPallette } from "../ColorPalette";
+import { ColorPalette } from "../ColorPalette";
 
 import { Popover } from './Popover'
 export class PopoverLabelEdit extends Component {
@@ -37,7 +37,7 @@ export class PopoverLabelEdit extends Component {
                 <label htmlFor="label-inout">Name</label>
                 <input type="text" name="title" value={title} onChange={this.handleChange} className="pop-over-input" />
                 <h4>Color</h4>
-                <ColorPallette handleChange={this.handleChange} selectedColor={color} />
+                <ColorPalette handleChange={this.handleChange} selectedColor={color} />
             </div>
             <div className="flex justify-space-between">
                 <button className="primary-btn" onClick={this.onSaveLabel} >

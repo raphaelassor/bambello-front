@@ -1,6 +1,6 @@
 import CheckIcon from '@material-ui/icons/Check';
 
-export function ColorPallette({ handleChange, selectedColor }) {
+export function ColorPalette({ handleChange, selectedColor }) {
 
     const colorCodes = [
         '#60bd4f',

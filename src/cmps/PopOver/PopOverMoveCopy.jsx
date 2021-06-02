@@ -65,12 +65,12 @@ class _PopoverMoveCopy extends Component {
     render() {
         // const {board}=this.props// will need to bring the workspace, not only the current board
         const { board, listId, cardIdx, title } = this.state
-        const { popoverType, card } = this.props
+        const { PopoverType, card } = this.props
         if (!board) return ''
         const listIdx = this.chosenListIdx
         const chosenCards = board.lists[listIdx].cards
-        return <Popover title={popoverType === 'move' ? 'Move card' : 'Copy card'}>
-            {popoverType === 'copy' && <>
+        return <Popover title={PopoverType === 'move' ? 'Move card' : 'Copy card'}>
+            {PopoverType === 'copy' && <>
                 <label htmlFor="title-copy">Title</label>
                 <input type="text" className="pop-over-input" onChange={this.handleChange} value={title} name="title" id="title-copy" autoFocus />
                 <label>Copy To...</label>
@@ -118,7 +118,7 @@ class _PopoverMoveCopy extends Component {
                         </Select>
                     </FormControl>
                 </div>
-                {popoverType === 'move' ?
+                {PopoverType === 'move' ?
                     <button className="primary-btn wide-btn" onClick={() => this.onMoveCard(card)}>Move</button>
                     :
                     <button className="primary-btn wide-btn" onClick={this.onCopyCard}>Create card</button>

@@ -52,9 +52,10 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
     }))(Badge);
 
     const onClickAvatar = (ev) => {
-        if (onOpenPopover) onOpenPopover(ev, 'PROFILE', member)
-    }
 
+        if (onOpenPopover) onOpenPopover(ev, 'PROFILE', member)
+
+    }
 
     return (
         <div className="profile-avatar" onClick={(ev) => onClickAvatar(ev)}>

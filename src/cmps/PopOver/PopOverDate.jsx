@@ -4,39 +4,43 @@ import { boardService } from '../../services/board.service';
 import { closePopover } from '../../store/actions/app.actions';
 import { connect } from 'react-redux';
 import { onSaveBoard } from '../../store/actions/board.actions';
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { Popover } from './Popover';
 class _PopoverDate extends Component {
 
     state = {
-        date:null
+        date: null
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const date = this.props.card.dueDate ? new Date(this.props.card.dueDate).toLocaleString() : new Date()
-        this.setState({date})
+        this.setState({ date })
     }
 
 
     handleChange = (ev) => {
-        console.log('date is :' ,ev._d)
+        console.log('date is :', ev._d)
         this.setState({ date: ev._d })
     }
+
     saveDueDate = (date) => {
-        const { card, onSaveBoard ,closePopover,board } = this.props
+        const { card, onSaveBoard, closePopover, board, loggedInUser } = this.props
         card.dueDate = date ? Date.parse(date) : 0;
-        console.log(card)
+        const txt = new Date(date).toLocaleString('en-GB', { month: 'short', day: 'numeric' }) 
+        const savedActivity = boardService.createActivity('changed-date', txt, loggedInUser, card)
+        board.activities.push(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
         closePopover()
     }
-    onRemoveDate=()=>{
+
+    onRemoveDate = () => {
         this.saveDueDate(null)
     }
 
     render() {
-        const {date}=this.state
-        if(!date) return ''//loading
+        const { date } = this.state
+        if (!date) return ''//loading
         return <Popover title="Date">
             <div className="date-pop-over-content">
 
@@ -51,7 +55,7 @@ class _PopoverDate extends Component {
                     />
                 </MuiPickersUtilsProvider>
                 <div className="btn-container flex column">
-                    <button className="primary-btn" onClick={()=>this.saveDueDate(date)} >Save</button>
+                    <button className="primary-btn" onClick={() => this.saveDueDate(date)} >Save</button>
                     <button className="secondary-btn" onClick={this.onRemoveDate}>Remove</button>
                 </div>
             </div>
@@ -62,6 +66,7 @@ class _PopoverDate extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 

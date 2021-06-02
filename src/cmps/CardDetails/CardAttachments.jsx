@@ -3,8 +3,17 @@ import Moment from 'react-moment';
 import { ReactComponent as PaperClipIcon } from '../../assets/img/icons/paperclip-solid.svg'
 import VideoLabelIcon from '@material-ui/icons/VideoLabel'
 
-export function CardAttachments({ attachs, onDeleteCardAttachment }) {
-    console.log(attachs)
+export function CardAttachments({ attachs, onDeleteCardAttachment, card, openPopover }) {
+
+    const onOpenPopover = (ev, type) => {
+        ev.preventDefault();
+        let elPos;
+        let props;
+        elPos = ev.target.getBoundingClientRect()
+        props = { card }
+        openPopover(type, elPos, props)
+    }
+
     return (
         <div className="card-attachments">
             <div className="window-modal-title flex align-center">
@@ -23,11 +32,7 @@ export function CardAttachments({ attachs, onDeleteCardAttachment }) {
                                 <div className="time-n-actions flex wrap align-center ">
                                     <Moment fromNow>{attach.createdAt}</Moment>
                                     <span>-</span>
-                                    <button>Comment</button>
-                                    <span>-</span>
                                     <button onClick={(ev) => onDeleteCardAttachment(ev, attach.id)}>Delete</button>
-                                    <span>-</span>
-                                    <button>Edit</button>
                                 </div>
                                 <span className="flex align-center"><VideoLabelIcon />Make cover</span>
                             </div>
@@ -35,7 +40,7 @@ export function CardAttachments({ attachs, onDeleteCardAttachment }) {
                     </a>
                 })}
             </div>
-            <button className="secondary-btn">Add an attachment</button>
+            <button className="secondary-btn" onClick={(ev) => onOpenPopover(ev, 'ATTACH')}>Add an attachment</button>
         </div>
     )
 }
