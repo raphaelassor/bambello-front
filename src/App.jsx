@@ -29,12 +29,13 @@ export class _App extends Component {
           <Switch>
             {routes.map(route => <Route key={route.path} component={route.component} path={route.path} />)}
           </Switch>
-          <DynamicPopover />
+         <DynamicPopover />
         </main>
       </div>
     )
   }
 }
+
 function mapStateToProps(state) {
   return {
     board: state.boardModule.board,

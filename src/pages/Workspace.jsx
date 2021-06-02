@@ -15,7 +15,8 @@ class _Workspace extends Component {
         return boards.filter(board => board.isFavorite)
     }
 
-    onToggleFavorite = (boardId) => {
+    onToggleFavorite = (ev, boardId) => {
+        ev.stopPropagation()
         const { boards, onSaveBoard } = this.props
         const board = boards.find(board => board._id === boardId)
         board.isFavorite = !board.isFavorite
