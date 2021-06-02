@@ -2,33 +2,60 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
+import { userService } from '../services/user.service'
+import { boardService } from '../services/board.service'
+import { onSetLoggedInUser } from '../store/actions/app.actions'
 import { ReactComponent as ElipsisIcon } from '../assets/img/icons/elipsis.svg'
 import { openPopover } from '../store/actions/app.actions.js'
 import AutosizeInput from 'react-input-autosize';
 import { ProfileAvatar } from './ProfileAvatar';
-import {ElementOverlay} from '../cmps/Popover/ElementOverlay';
+import { ElementOverlay } from '../cmps/Popover/ElementOverlay';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import MenuIcon from '@material-ui/icons/MoreHoriz';
 
 class _BoardHeader extends Component {
 
     state = {
+        // debugging only
+        users: [],
+        //
         title: '',
         isEdit: false,
-        inputWidth: 0,
-
     }
- 
+
     componentDidMount() {
+        this.loadUsers()
         this.setState({ title: this.props.board.title })
     }
+
+    // debugging only
+    async loadUsers() {
+        try {
+            const users = await userService.getUsers()
+            this.setState({ users })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    // debugging only 
+    onChangeUser = async ({ target: { value } }) => {
+        const { onSetLoggedInUser } = this.props
+        try {
+            const user = await userService.getById(value)
+            onSetLoggedInUser(user)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     handleChange = ({ target }) => {
         const { value } = target
         let { inputWidth } = this.state
         this.setState({ title: target.value, inputWidth })
     }
+
     toggleEdit = () => {
-        console.log('is edit toggle')
         const { isEdit } = this.state
         if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
 
@@ -37,30 +64,37 @@ class _BoardHeader extends Component {
             if (this.state.isEdit) this.titleInput.select()
         })
     }
+
     onTitleSave = (ev) => {
         ev.preventDefault()
-        const {title}=this.state
-        if(!title) return // error msg to user: must enter title 
+        const { loggedInUser } = this.props
+        const { title } = this.state
+        if (!title) return // error msg to user: must enter title
         const { board, onSaveBoard } = this.props
         board.title = title
+        const txt = `renamed this board to ${title}`
+        const savedActivity = boardService.createActivity('renamed', txt, loggedInUser)
+        board.activities.push(savedActivity)
         onSaveBoard(board)
         this.toggleEdit()
     }
+
     onToggleFav = () => {
         const { board, onSaveBoard } = this.props
         board.isFavorite = !board.isFavorite
         onSaveBoard(board)
     }
-    onOpenPopover = (ev, popoverName, member) => {
+    onOpenPopover = (ev, PopoverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
         const props = { member }
-        this.props.openPopover(popoverName, elPos, props)
+        this.props.openPopover(PopoverName, elPos, props)
     }
 
 
     render() {
-        const { board } = this.props
-        const { isEdit, title, inputWidth } = this.state
+        const { board, loggedInUser } = this.props
+        const { users, isEdit, title } = this.state
+        if (!users.length) return ''
         return (
             <div className="board-header">
                 <button className="board-btn">
@@ -93,20 +127,38 @@ class _BoardHeader extends Component {
                     <AvatarGroup max={4}>
                         {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
                     </AvatarGroup>
-                <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
+                    <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
-                <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}> 
-                <ElipsisIcon/>
-                <span>Show Menu</span>
-                <ElementOverlay/>
+                <select name="" id="" onChange={this.onChangeUser}>
+                    {users.map(user => {
+                        return <option key={user._id} value={user._id}>{user.fullname}</option>
+                    })}
+                </select>
+                <h1>{loggedInUser.fullname}</h1>
+                <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
+                    <ElipsisIcon />
+                    <span>Show Menu</span>
+                    <ElementOverlay />
                 </button>
             </div>
         )
+
+    }
+}
+
+
+
+
+function mapStateToProps(state) {
+    return {
+        board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 
 const mapDispatchToProps = {
-    openPopover,
+    onSetLoggedInUser,
+    openPopover
 }
 
-export const BoardHeader = connect(null, mapDispatchToProps)(_BoardHeader)
+export const BoardHeader = connect(mapStateToProps, mapDispatchToProps)(_BoardHeader)

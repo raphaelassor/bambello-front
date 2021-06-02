@@ -1,6 +1,7 @@
 .card-details-labels {
     .labels-container {
         .label {
+            cursor: pointer;
             color: $clr2;
             border-radius: 3px;
             box-sizing: border-box;
@@ -13,6 +14,9 @@
             min-width: 40px;
             padding: 0 12px;
             width: auto;
+            &:hover {
+                opacity: 0.8;
+            }
         }
         .secondary-btn {
             display: flex;

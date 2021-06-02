@@ -8,16 +8,33 @@ import { CardList } from '../cmps/CardList'
 import { CardListAdd } from '../cmps/CardListAdd'
 import { BoardHeader } from '../cmps/BoardHeader'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { boardService } from '../services/board.service'
+import { socketService } from '../services/socket.service'
 
 
 class _BoardApp extends Component {
 
-    componentDidMount() {
-        this.props.loadBoard();
+    async componentDidMount() {
+        socketService.setup()
+        try {
+            await this.props.loadBoard()
+            const { board } = this.props
+            socketService.emit('join board', board._id)
+            socketService.on('board updated', savedBoard => {
+                this.props.loadBoard(savedBoard._id)
+            })
+        } catch (err) {
+            console.log(err)
+        }
     }
 
+    componentWillUnmount() {
+        socketService.off('board updated')
+    }
+
+
     onDragEnd = (result) => {
-        let { board, board: { lists }, onSaveBoard } = this.props
+        let { board, board: { lists }, onSaveBoard, loggedInUser } = this.props
         const { destination, source, draggableId, type } = result
         if (!destination) return
         const droppableIdStart = source.droppableId
@@ -53,8 +70,11 @@ class _BoardApp extends Component {
             const listEndIdx = lists.indexOf(listEnd)
             lists[listStartIdx] = listStart
             lists[listEndIdx] = listEnd
+            const txt = `${listStart.title} to ${listEnd.title}`
+            const savedActivity = boardService.createActivity('moved', txt, loggedInUser, ...card)
+            board.activities.push(savedActivity)
         }
-        
+
         board.lists = lists
         onSaveBoard(board)
     }
@@ -65,8 +85,8 @@ class _BoardApp extends Component {
         console.log(board)
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <section className="board-app flex column" >
-                    <BoardHeader board={board} onSaveBoard={onSaveBoard}/>
+                <section className="board-app flex column">
+                    <BoardHeader board={board} onSaveBoard={onSaveBoard} />
                     <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
                     <Droppable droppableId="all-lists" direction="horizontal" type="list">
                         {provided => (
@@ -87,7 +107,8 @@ class _BoardApp extends Component {
 
 function mapStateToProps(state) {
     return {
-        board: state.boardModule.board
+        board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 

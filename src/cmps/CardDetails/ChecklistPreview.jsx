@@ -19,8 +19,8 @@ export class ChecklistPreview extends Component {
     }
 
     onToggleTitleEdit = () => {
-        const { isTitleEdit ,checklist} = this.state
-        if(!checklist.title) return
+        const { isTitleEdit, checklist } = this.state
+        if (!checklist.title) return
         this.setState({ isTitleEdit: !isTitleEdit }, () => {
             if (this.state.isTitleEdit) this.selectedInput.select()
         })
@@ -52,7 +52,7 @@ export class ChecklistPreview extends Component {
             onSaveChecklist(checklist)
             return
         }
-        const todoIdx = todos.indexOf(todo)
+        const todoIdx = todos.findIndex(currTodo => todo.id === currTodo.id)
         todos[todoIdx] = todo
         checklist.todos = todos
         onSaveChecklist(checklist)
@@ -61,6 +61,7 @@ export class ChecklistPreview extends Component {
     onAddTodo = (todo) => {
         const { onSaveChecklist } = this.props
         const { checklist } = this.state
+        if (!checklist.todos) checklist.todos = []
         checklist.todos.push(todo)
         onSaveChecklist(checklist)
     }
@@ -74,7 +75,7 @@ export class ChecklistPreview extends Component {
     }
 
     render() {
-        const { onRemoveChecklist, onSaveChecklist } = this.props
+        const { onRemoveChecklist, onSaveChecklist, onCreateActivity } = this.props
         const { checklist, isTitleEdit } = this.state
         if (!checklist) return '' //loader
         const { todos } = checklist
@@ -103,7 +104,11 @@ export class ChecklistPreview extends Component {
                 </div>
             </div>}
             <ProgressBar completed={this.doneTodosProgress} />
-            <TodoList todos={todos} onSaveTodo={this.onSaveTodo} onRemoveTodo={this.onRemoveTodo} />
+            <TodoList
+                todos={todos}
+                onSaveTodo={this.onSaveTodo}
+                onCreateActivity={onCreateActivity}
+                onRemoveTodo={this.onRemoveTodo} />
             <TodoAdd onAddTodo={this.onAddTodo} />
         </div>)
     }

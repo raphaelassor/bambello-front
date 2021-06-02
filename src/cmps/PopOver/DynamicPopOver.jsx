@@ -13,7 +13,6 @@ import {PopoverBackground} from './PopoverBackground'
 import { PopoverArchive } from './PopoverArchive';
 import { PopoverEditCard } from "./PopoverEditCard";
 export function _DynamicPopover({ currPopover }) {
-
     const { name, props } = currPopover
  
     switch (name) {
@@ -21,8 +20,8 @@ export function _DynamicPopover({ currPopover }) {
         case 'LABELS': return <PopoverLabels {...props} />;
         case 'COVER': return <PopoverCover {...props} />;
         case 'DATE': return <PopoverDate {...props} />;
-        case 'COPY': return <PopoverMoveCopy popoverType="copy" {...props} />;
-        case 'MOVE': return <PopoverMoveCopy popoverType="move" {...props} />;
+        case 'COPY': return <PopoverMoveCopy PopoverType="copy" {...props} />;
+        case 'MOVE': return <PopoverMoveCopy PopoverType="move" {...props} />;
         case 'ATTACH': return <PopoverAttach {...props} />;
         case 'CHECKLIST': return <PopoverChecklist {...props} />;
         case 'PROFILE': return <PopoverProfile {...props} /> 
@@ -33,7 +32,6 @@ export function _DynamicPopover({ currPopover }) {
         case 'EDIT_CARD': return <PopoverEditCard {...props} />
         default: return '';
     }
-
 }
 function mapStateToProps(state) {
     return {

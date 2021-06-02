@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Popover } from './Popover';
 import { boardService } from '../../services/board.service'
-import { PopoverMemberPreview} from './PopoverMemberPreview'
+import { PopoverMemberPreview } from './PopoverMemberPreview'
 import { onSaveBoard } from '../../store/actions/board.actions';
 import { connect } from 'react-redux'
 
@@ -24,15 +24,31 @@ class _PopoverMembers extends Component {
             this.setState({ presentedMembers: this.props.board.members.filter(member => filterRegex.test(member.fullname)) })
         })
     }
+
     toggleMember = (member) => {
-        const { card, board } = this.props
+        const { card, board, loggedInUser } = this.props
         const idx = card.members.findIndex(cardMember => cardMember._id === member._id)
-        if (idx === -1) card.members.push(member)
-        else card.members.splice(idx, 1)
-        console.log('card is:', card)
+        let savedActivity
+        console.log(idx)
+        if (idx === -1) {
+            card.members.push(member)
+            if (member._id === loggedInUser._id) {
+                savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
+            } else {
+                savedActivity = boardService.createActivity('added', member.fullname, loggedInUser, card)
+            }
+        } else {
+            card.members.splice(idx, 1)
+            if (member._id === loggedInUser._id) {
+                savedActivity = boardService.createActivity('left', '', loggedInUser, card)
+            } else {
+                savedActivity = boardService.createActivity('removed', member.fullname, loggedInUser, card)
+            }
+            console.log(savedActivity)
+        }
+        board.activities.push(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         this.props.onSaveBoard(updatedBoard)
-        // onSaveCardFromActions(card)
     }
 
     isMemberInCard = (member) => {
@@ -60,6 +76,7 @@ class _PopoverMembers extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 

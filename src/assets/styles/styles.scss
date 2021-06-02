@@ -30,6 +30,8 @@
 @import "cmps/profile-avatar.scss";
 @import "cmps/color-palette";
 @import "cmps/screen-overlay.scss";
+@import "cmps/activities-list.scss";
+@import "cmps/activity-preview.scss";
 
 // CardPreview
 @import "cmps/card-preview/card-preview.scss";
@@ -52,6 +54,8 @@
 @import "cmps/card-details/progress-bar.scss";
 @import "cmps/card-details/card-details-cover.scss";
 @import "cmps/card-details//card-attachments.scss";
+@import "cmps/card-details/comment-add.scss";
+@import "cmps/card-details/card-activities.scss";
 
 // Popovers
 @import "cmps/pop-overs/pop-over";

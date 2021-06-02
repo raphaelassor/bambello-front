@@ -6,8 +6,10 @@ import MinusIcon from '@material-ui/icons/RemoveOutlined';
 import CopyIcon from '@material-ui/icons/FileCopyOutlined';
 import WatchIcon from '@material-ui/icons/VisibilityOutlined';
 import { openPopover, closePopover } from '../../store/actions/app.actions'
+import { onSaveBoard } from '../../store/actions/board.actions';
 import { connect } from 'react-redux'
 import { utilsService } from '../../services/utils.service'
+import { boardService } from '../../services/board.service'
 import { ElementOverlay } from '../Popover/ElementOverlay'
 
 class _CardDetailsActions extends Component {
@@ -29,9 +31,13 @@ class _CardDetailsActions extends Component {
     joinCard = () => {
         //board.members.find(loggedInUser....)
         if (this.isUserMember()) return //cannot join as member - already in 
-        const { card, loggedInUser, onSaveCardFromActions } = this.props
+        const { card, loggedInUser, onSaveCardFromActions, onSaveBoard, board } = this.props
         card.members.push(loggedInUser)
         onSaveCardFromActions(card)
+        const savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
+        console.log(savedActivity)
+        board.activities.push(savedActivity)
+        onSaveBoard(board)
     }
 
     toggleArchive = () => {
@@ -62,12 +68,13 @@ class _CardDetailsActions extends Component {
         this.props.goBackToBoard()
     }
 
-    onOpenPopover = (ev, popoverName) => {
+    onOpenPopover = (ev, PopoverName) => {
         const elPos = ev.target.getBoundingClientRect()
         const props = {
-            card: this.props.card
+            card: this.props.card,
+            addFile: this.addFile
         }
-        this.props.openPopover(popoverName, elPos, props)
+        this.props.openPopover(PopoverName, elPos, props)
     }
 
     render() {
@@ -204,6 +211,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
     openPopover,
     closePopover,
+    onSaveBoard
 }
 
 export const CardDetailsActions = connect(mapStateToProps, mapDispatchToProps)(_CardDetailsActions)

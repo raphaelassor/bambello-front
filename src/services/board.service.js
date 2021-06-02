@@ -1,4 +1,4 @@
-
+import { utilsService } from './utils.service'
 import { httpService } from './http.service'
 
 export const boardService = {
@@ -7,6 +7,7 @@ export const boardService = {
     getById,
     save,
     updateCardInBoard,
+    createActivity,
     setPopoverPos
 }
 
@@ -59,8 +60,36 @@ export function updateCardInBoard(board, updatedCard) {
             if (card.id === updatedCard.id) list.cards[idx] = updatedCard
         })
     })
-    return board
+    return { ...board }
 }
+
+export function createActivity(actionType, txt = '', loggedInUser, card = null) {
+    const { _id, fullname, imgUrl } = loggedInUser
+    const byMember = {
+        _id,
+        fullname,
+        imgUrl
+    }
+
+    let savedCard
+    if (card) {
+        savedCard = {
+            id: card.id,
+            title: card.title
+        }
+    }
+
+    const savedActivity = {
+        id: utilsService.makeId(),
+        actionType,
+        txt,
+        createdAt: Date.now(),
+        byMember,
+        card: savedCard || null,
+    }
+    return savedActivity
+}
+
 
 //move to app service
 
@@ -72,5 +101,5 @@ function setPopoverPos(pos, elRect, diff = 38) {
     const viewportHeight = window.visualViewport.height
     if (left + width > viewportWidth) left = viewportWidth - width - 10
     if (top + height > viewportHeight) top = viewportHeight - height - 10
-    return { left, top }
+    return { left, top, width }
 }
