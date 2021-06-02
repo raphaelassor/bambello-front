@@ -50,7 +50,7 @@ class _PopoverCover extends Component {
     }
     onFileUpload=(fileUrl)=>{
         if(!utilsService.isValidImg(fileUrl))return // error message
-        this.setState({imgUrl:fileUrl,bgColor:''})
+        this.setState({imgUrl:fileUrl,bgColor:'',coverMode:'full'})
     }
 
     render() {
