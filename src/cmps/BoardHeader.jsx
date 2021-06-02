@@ -2,13 +2,10 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
-<<<<<<< HEAD
 import { userService } from '../services/user.service'
 import { boardService } from '../services/board.service'
 import { onSetLoggedInUser } from '../store/actions/app.actions'
-=======
 import { ReactComponent as ElipsisIcon } from '../assets/img/icons/elipsis.svg'
->>>>>>> edf8681079455ab7bf5d6c6d50babeb41a947ed5
 import { openPopover } from '../store/actions/app.actions.js'
 import AutosizeInput from 'react-input-autosize';
 import { ProfileAvatar } from './ProfileAvatar';
