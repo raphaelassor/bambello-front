@@ -30,6 +30,7 @@ async function remove(boardId) {
 async function getById(boardId) {
     try {
         return await httpService.get(`board/${boardId}`)
+
     } catch (err) {
         throw err
     }
@@ -100,5 +101,10 @@ function setPopoverPos(pos, elRect, diff = 38) {
     const viewportHeight = window.visualViewport.height
     if (left + width > viewportWidth) left = viewportWidth - width - 10
     if (top + height > viewportHeight) top = viewportHeight - height - 10
+<<<<<<< HEAD
     return { left, top, width }
 }
+=======
+    return { left, top }
+}
+>>>>>>> edf8681079455ab7bf5d6c6d50babeb41a947ed5

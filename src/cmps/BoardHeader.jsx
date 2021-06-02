@@ -2,14 +2,19 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
+<<<<<<< HEAD
 import { userService } from '../services/user.service'
 import { boardService } from '../services/board.service'
 import { onSetLoggedInUser } from '../store/actions/app.actions'
+=======
+import { ReactComponent as ElipsisIcon } from '../assets/img/icons/elipsis.svg'
+>>>>>>> edf8681079455ab7bf5d6c6d50babeb41a947ed5
 import { openPopover } from '../store/actions/app.actions.js'
 import AutosizeInput from 'react-input-autosize';
-import { ProfileAvatar } from './ProfileAvatar'
+import { ProfileAvatar } from './ProfileAvatar';
+import { ElementOverlay } from '../cmps/Popover/ElementOverlay';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
-
+import MenuIcon from '@material-ui/icons/MoreHoriz';
 
 class _BoardHeader extends Component {
 
@@ -133,6 +138,11 @@ class _BoardHeader extends Component {
                     })}
                 </select>
                 <h1>{loggedInUser.fullname}</h1>
+                <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
+                    <ElipsisIcon />
+                    <span>Show Menu</span>
+                    <ElementOverlay />
+                </button>
             </div>
         )
 

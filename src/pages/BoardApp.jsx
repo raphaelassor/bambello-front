@@ -82,6 +82,7 @@ class _BoardApp extends Component {
     render() {
         const { board, onSaveBoard } = this.props
         if (!board) return <div></div>
+        console.log(board)
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <section className="board-app flex column">

@@ -14,9 +14,6 @@ export class CardPreview extends Component {
             transitionDuration: `0.001s`,
         }
     }
-
-
-
     get cardIdx() {
 
     }

@@ -8,10 +8,13 @@ import { PopoverChecklist } from "./PopoverChecklist";
 import { PopoverMoveCopy } from './PopoverMoveCopy';
 import { PopoverProfile } from './PopoverProfile';
 import { PopoverInvite } from "./PopoverInvite";
+import {PopoverMenu} from './PopoverMenu'
+import {PopoverBackground} from './PopoverBackground'
+import { PopoverArchive } from './PopoverArchive';
 import { PopoverEditCard } from "./PopoverEditCard";
-
 export function _DynamicPopover({ currPopover }) {
     const { name, props } = currPopover
+ 
     switch (name) {
         case 'MEMBERS': return <PopoverMembers {...props} />;
         case 'LABELS': return <PopoverLabels {...props} />;
@@ -21,8 +24,11 @@ export function _DynamicPopover({ currPopover }) {
         case 'MOVE': return <PopoverMoveCopy PopoverType="move" {...props} />;
         case 'ATTACH': return <PopoverAttach {...props} />;
         case 'CHECKLIST': return <PopoverChecklist {...props} />;
-        case 'PROFILE': return <PopoverProfile {...props} />
+        case 'PROFILE': return <PopoverProfile {...props} /> 
         case 'INVITE': return <PopoverInvite {...props} />
+        case 'MENU': return <PopoverMenu {...props} />
+        case 'BACKGROUND': return <PopoverBackground {...props} />
+        case 'ARCHIVE': return <PopoverArchive {...props} />
         case 'EDIT_CARD': return <PopoverEditCard {...props} />
         default: return '';
     }
