@@ -3,16 +3,24 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 // import ScrollContainer from 'react-indiana-drag-scroll'
 import { loadBoard, onSaveBoard } from '../store/actions/board.actions'
+import { CardEdit } from '../cmps/CardEdit'
 import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
 import { CardListAdd } from '../cmps/CardListAdd'
 import { BoardHeader } from '../cmps/BoardHeader'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { eventBusService } from '../services/event-bus.service'
 import { boardService } from '../services/board.service'
 import { socketService } from '../services/socket.service'
 
 
 class _BoardApp extends Component {
+
+    state = {
+        isCardEditOpen: false,
+        currCard: null,
+        elPos: null
+    }
 
     async componentDidMount() {
         socketService.setup()
@@ -23,6 +31,9 @@ class _BoardApp extends Component {
             socketService.on('board updated', savedBoard => {
                 this.props.loadBoard(savedBoard._id)
             })
+            this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
+                this.setState({ isCardEditOpen: true, currCard: card, elPos })
+            });
         } catch (err) {
             console.log(err)
         }
@@ -30,6 +41,11 @@ class _BoardApp extends Component {
 
     componentWillUnmount() {
         socketService.off('board updated')
+        this.removeEvent();
+    }
+
+    onCloseCardEdit = () => {
+        this.setState({ isCardEditOpen: false })
     }
 
 
@@ -81,26 +97,30 @@ class _BoardApp extends Component {
 
     render() {
         const { board, onSaveBoard } = this.props
+        const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
-        console.log(board)
+
         return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
-                <section className="board-app flex column">
-                    <BoardHeader board={board} onSaveBoard={onSaveBoard} />
-                    <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
-                    <Droppable droppableId="all-lists" direction="horizontal" type="list">
-                        {provided => (
-                            // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
-                            <div {...provided.droppableProps} ref={provided.innerRef} className="card-list-container flex">
-                                {board.lists.map((currList, idx) => <CardList key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
-                                {provided.placeholder}
-                                <CardListAdd board={board} onSaveBoard={onSaveBoard} />
-                            </div>
-                            // </ScrollContainer> 
-                        )}
-                    </Droppable>
-                </section>
-            </DragDropContext>
+            <>
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <section className="board-app flex column">
+                        <BoardHeader board={board} onSaveBoard={onSaveBoard} />
+                        <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
+                        <Droppable droppableId="all-lists" direction="horizontal" type="list">
+                            {provided => (
+                                // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
+                                <div {...provided.droppableProps} ref={provided.innerRef} className="card-list-container flex">
+                                    {board.lists.map((currList, idx) => <CardList key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
+                                    {provided.placeholder}
+                                    <CardListAdd board={board} onSaveBoard={onSaveBoard} />
+                                </div>
+                                // </ScrollContainer> 
+                            )}
+                        </Droppable>
+                    </section>
+                </DragDropContext>
+                {isCardEditOpen && <CardEdit board={board} card={currCard} elPos={elPos} onCloseCardEdit={this.onCloseCardEdit} />}
+            </>
         )
     }
 }

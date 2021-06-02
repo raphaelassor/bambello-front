@@ -11,13 +11,9 @@ import { PopoverInvite } from "./PopoverInvite";
 import { PopoverMenu } from './PopoverMenu'
 import { PopoverBackground } from './PopoverBackground'
 import { PopoverArchive } from './PopoverArchive';
-import { PopoverEditCard } from "./PopoverEditCard";
 
 export function _DynamicPopover({ currPopover }) {
-
-    if (!currPopover) return ''
     const { name, props } = currPopover
-
     switch (name) {
         case 'MEMBERS': return <PopoverMembers {...props} />;
         case 'LABELS': return <PopoverLabels {...props} />;
@@ -32,7 +28,6 @@ export function _DynamicPopover({ currPopover }) {
         case 'MENU': return <PopoverMenu {...props} />
         case 'BACKGROUND': return <PopoverBackground {...props} />
         case 'ARCHIVE': return <PopoverArchive {...props} />
-        case 'EDIT_CARD': return <PopoverEditCard {...props} />
         default: return '';
     }
 }

@@ -21,9 +21,9 @@ export function appReducer(state = initialState, action) {
             return { ...state, loggedInUser: action.user, loginErr: null }
         case 'LOGIN_ERR':
             return { ...state, loginErr: action.err }
-        case 'SET_Popover':
-            return { ...state, currPopover: { name: action.PopoverName, elPos: action.elPos, props: action.props }, isOverlayOpen: true }
-        case 'CLOSE_Popover':
+        case 'SET_POPOVER':
+            return { ...state, currPopover: { name: action.popoverName, elPos: action.elPos, props: action.props }, isOverlayOpen: true }
+        case 'CLOSE_POPOVER':
             return { ...state, currPopover: { name: '', elPos: null, props: null }, isOverlayOpen: false }
         default:
             return state
