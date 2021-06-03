@@ -16,37 +16,12 @@ import MenuIcon from '@material-ui/icons/MoreHoriz';
 class _BoardHeader extends Component {
 
     state = {
-        // debugging only
-        users: [],
-        //
         title: '',
         isEdit: false,
     }
 
     componentDidMount() {
-        this.loadUsers()
         this.setState({ title: this.props.board.title })
-    }
-
-    // debugging only
-    async loadUsers() {
-        try {
-            const users = await userService.getUsers()
-            this.setState({ users })
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    // debugging only 
-    onChangeUser = async ({ target: { value } }) => {
-        const { onSetLoggedInUser } = this.props
-        try {
-            const user = await userService.getById(value)
-            onSetLoggedInUser(user)
-        } catch (err) {
-            console.log(err)
-        }
     }
 
     handleChange = ({ target }) => {
@@ -93,8 +68,7 @@ class _BoardHeader extends Component {
 
     render() {
         const { board, loggedInUser } = this.props
-        const { users, isEdit, title } = this.state
-        if (!users.length) return ''
+        const { isEdit, title } = this.state
         return (
             <div className="board-header">
                 <button className="board-btn">
@@ -123,18 +97,11 @@ class _BoardHeader extends Component {
                 </button>
                 <span className="divider"></span>
 
-                <div className="board-header-members flex">
-                    <AvatarGroup max={4}>
-                        {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
-                    </AvatarGroup>
+                <div className="board-header-members flex align-center">
+                    {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
+
                     <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
-                <select name="" id="" onChange={this.onChangeUser}>
-                    {users.map(user => {
-                        return <option key={user._id} value={user._id}>{user.fullname}</option>
-                    })}
-                </select>
-                <h1>{loggedInUser.fullname}</h1>
                 <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
                     <ElipsisIcon />
                     <span>Show Menu</span>

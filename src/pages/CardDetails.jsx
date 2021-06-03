@@ -72,6 +72,16 @@ class _CardDetails extends Component {
         this.setState({ card }, this.onSaveCard())
     }
 
+    onSaveCardTitle = (ev) => {
+        if (ev.type === 'keydown' && ev.key !== 'Enter') return
+        if (ev.type === 'keydown') {
+            ev.preventDefault()
+            this.selectedInput.blur()
+            return
+        }
+        this.onSaveCard()
+    }
+
     onSaveCardChecklists = (checklists) => {
         const { card } = this.state
         card.checklists = checklists
@@ -104,11 +114,10 @@ class _CardDetails extends Component {
 
 
     render() {
-        const { board, board: { activities }, onSaveBoard, openPopover, loggedInUser } = this.props
+        const { board, board: { activities }, onSaveBoard, openPopover } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style, attachs } = card
-        console.log('style.coverMode on details:', style.coverMode)
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
@@ -124,8 +133,10 @@ class _CardDetails extends Component {
                             <WebAssetIcon />
                             <TextareaAutosize value={title}
                                 aria-label="empty textarea"
-                                onBlur={this.onSaveCard}
                                 onChange={this.cardTitleHandleChange}
+                                onKeyDown={this.onSaveCardTitle}
+                                onBlur={this.onSaveCardTitle}
+                                ref={(input) => this.selectedInput = input}
                             />
                         </div>
                         <p className="bottom-list-name">in list <span>{list.title}</span></p>

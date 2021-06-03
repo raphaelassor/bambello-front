@@ -41,7 +41,8 @@ class _PopoverBackground extends Component {
                 </div>
                 <div>
                     <h4>Gradients</h4>
-                    {/* Gardientscmp - maybe with colors */}
+                    <ColorPalette handleChange={this.handleChange} selectedColor={board.bgColor} isGradient={true} />
+
                 </div>
                 <div>
                     <h4>Images</h4>

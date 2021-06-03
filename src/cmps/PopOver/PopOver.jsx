@@ -17,12 +17,9 @@ export class _Popover extends Component {
             if (window.visualViewport.width > 1000) return
             this.onSetPopoverPos()
         });
-        // add remove event 
         this.onSetPopoverPos()
     }
-    // componentWillUnmount(){
-    //     window.removeEventListener('resize')
-    // }
+   
 
     componentDidUpdate(prevProps) {
         if (this.props.elPos !== prevProps.elPos) {
@@ -31,7 +28,7 @@ export class _Popover extends Component {
     }
 
 
-    onSetPopoverPos = (diff) => {
+    onSetPopoverPos = () => {
         const { elPos,className } = this.props
         if (!this.selectedDiv) return
         const elRect = this.selectedDiv.getBoundingClientRect()

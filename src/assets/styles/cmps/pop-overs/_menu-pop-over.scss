@@ -3,7 +3,7 @@
         width: 22.5rem;
     }
     ul{
-        padding-top: 4px;
+       
         padding-bottom: 16px;
         margin-bottom: 16px;
         border-bottom: 1px solid rgba(9,30,66,.13);;
@@ -20,7 +20,6 @@
         &:hover{
             background-color: rgba(9,30,66,.08);
         }
-        
         .menu-icon,svg {
             font-size: 20px;
             height: 20px;
@@ -35,6 +34,13 @@
             }
         }
     }
+    .activity{
+        margin-bottom: 0.8rem;
+        font-weight: 700;
+    }
+}
+.board-filter-pop-over{
+    width: 22.5rem;
 }
 
 // board-menu-content-frame {

@@ -11,6 +11,7 @@ class _CardPreviewLabel extends Component {
         const label = labels.find(label => {
             return label.id === labelId
         })
+        if(!label) return ''
         return label
     }
 
@@ -29,7 +30,7 @@ class _CardPreviewLabel extends Component {
 
     render() {
 
-        const { isPreviewLabelsOpen } = this.props
+        const { isPreviewLabelsOpen, labels } = this.props
         const label = this.label
         return (
             <div className={`card-preview-label ${isPreviewLabelsOpen ? 'open' : 'close'}`} style={{ backgroundColor: label.color }} onClick={this.onTogglePreviewLabels}>

@@ -22,6 +22,8 @@ class _BoardApp extends Component {
         elPos: null
     }
 
+    removeEvent;
+
     async componentDidMount() {
         try {
             socketService.setup()
@@ -31,7 +33,7 @@ class _BoardApp extends Component {
             socketService.on('board updated', savedBoard => {
                 this.props.loadBoard(savedBoard._id)
             })
-            this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
+            this.removeEvent =  eventBusService.on('card-edit', ({ elPos, card }) => {
                 this.setState({ isCardEditOpen: true, currCard: card, elPos })
             });
         } catch (err) {

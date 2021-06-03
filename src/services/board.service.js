@@ -8,7 +8,8 @@ export const boardService = {
     save,
     updateCardInBoard,
     createActivity,
-    setPopoverPos
+    setPopoverPos,
+ 
 }
 
 async function query(filterBy = {ctg: ''}) {
@@ -103,3 +104,4 @@ function setPopoverPos(pos, elRect, diff = 38) {
     if (top + height > viewportHeight) top = viewportHeight - height - 10
     return { left, top, width }
 }
+

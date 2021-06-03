@@ -7,12 +7,10 @@ import {ReactComponent as SearchIcon} from '../../assets/img/icons/search.svg'
 import {ReactComponent as BoardIcon} from '../../assets/img/icons/board.svg'
 import ActivityIcon from '@material-ui/icons/FormatListBulletedOutlined';
 import { Link } from "react-router-dom";
+import { ActivitiesList } from "../ActivitiesList"
 
  class _PopoverMenu extends Component {
 
-    state = {
-
-    }
 
     onOpenPopover = (ev, PopoverName) => {
         console.log('on open Popover', PopoverName)
@@ -20,8 +18,11 @@ import { Link } from "react-router-dom";
         const props = {}
         this.props.openPopover(PopoverName, elPos, props)
     } 
+    get activities(){
+        return this.props.board.activities.slice(0,10)
+    }
     render() {
-
+        const {board}=this.props
         return <div className="board-menu-wrapper">
             <Popover className="menu" title="Menu">
                 <div className="menu-details ">
@@ -30,7 +31,7 @@ import { Link } from "react-router-dom";
                             <li onClick={(ev) => this.onOpenPopover(ev, 'BACKGROUND')}> 
                             <BoardIcon/>
                             Change background </li>
-                            <li onClick={(ev) => this.onOpenPopover(ev, 'SEARCH')}>
+                            <li onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
                                 <SearchIcon/>
                                 Search cards</li>
                             <li onClick={(ev) => this.onOpenPopover(ev, 'ARCHIVE')}>
@@ -40,15 +41,20 @@ import { Link } from "react-router-dom";
                         <Link  to ="#" className="activity clean-link" onClick={(ev) => this.onOpenPopover(ev, 'ACTIVITY')} >
                         <ActivityIcon/>
                             Activity</Link>
-                        {/* Activity list */}
+                            
+                      <ActivitiesList activities={this.activities} isGeneral={true}/>
                     </section>
                 </div>
             </Popover>
-        </div>
+        </div> 
     }
 
 }
-
+function mapStateToProps(state){
+    return{
+        board: state.boardModule.board
+    }
+}
 
 const mapDispatchToProps = {
     onSaveBoard,
@@ -56,4 +62,4 @@ const mapDispatchToProps = {
 }
 
 
-export const PopoverMenu = connect(null, mapDispatchToProps)(_PopoverMenu)
+export const PopoverMenu = connect(mapStateToProps, mapDispatchToProps)(_PopoverMenu)

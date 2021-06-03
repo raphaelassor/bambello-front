@@ -11,9 +11,11 @@ import { PopoverInvite } from "./PopoverInvite";
 import { PopoverMenu } from './PopoverMenu';
 import { PopoverBackground } from './PopoverBackground';
 import { PopoverArchive } from './PopoverArchive';
+import { PopoverActivity } from './PopoverActivity';
+import { PopoverBoardFilter } from './PopoverBoardFilter';
 
 function _DynamicPopover({ currPopover }) {
-     if(!currPopover) return ''
+    if (!currPopover) return ''
     const { name, props } = currPopover
     switch (name) {
         case 'MEMBERS': return <PopoverMembers {...props} />;
@@ -29,6 +31,8 @@ function _DynamicPopover({ currPopover }) {
         case 'MENU': return <PopoverMenu {...props} />
         case 'BACKGROUND': return <PopoverBackground {...props} />
         case 'ARCHIVE': return <PopoverArchive {...props} />
+        case 'ACTIVITY': return <PopoverActivity {...props} />
+        case 'BOARD_FILTER': return <PopoverBoardFilter {...props} />
         default: return '';
     }
 }

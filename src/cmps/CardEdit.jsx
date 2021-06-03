@@ -20,8 +20,8 @@ class _CardEdit extends Component {
         width: null,
         cardTitle: ''
     }
-
-    handleChange = (ev) => {
+ 
+    handleChange = (ev) => {    
         if (ev.key === 'Enter') {
             this.onSaveCard(ev)
             return

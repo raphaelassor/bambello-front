@@ -13,10 +13,10 @@ import { boardService } from '../../services/board.service'
 import { ElementOverlay } from '../Popover/ElementOverlay'
 import { ReactComponent as MemberIcon } from '../../assets/img/icons/person.svg'
 
-class _CardDetailsActions extends Component {
+class _CardDetailsActions extends Component { 
 
     addFile = (fileUrl) => {
-        const { card, onSaveCardFromActions, closePopover } = this.props
+        const { card, onSaveCardFromActions, onSaveBoard, closePopover, board, loggedInUser } = this.props
         if (!card.attachs) card.attachs = []
         const attach = {
             id: utilsService.makeId(),
@@ -24,8 +24,12 @@ class _CardDetailsActions extends Component {
             url: fileUrl,
             createdAt: Date.now()
         }
+
         card.attachs.push(attach)
         onSaveCardFromActions(card)
+        const savedActivity = boardService.createActivity('attached', attach.fileName, loggedInUser, card)
+        board.activities.push(savedActivity)
+        onSaveBoard(board)
         closePopover()
     }
 
@@ -36,7 +40,6 @@ class _CardDetailsActions extends Component {
         card.members.push(loggedInUser)
         onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
-        console.log(savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
     }
@@ -79,7 +82,7 @@ class _CardDetailsActions extends Component {
     }
 
     render() {
-        const { card, board, currPopoverName, openPopover, loggedInUser } = this.props
+        const { card} = this.props
         return <div className="details-actions-wrapper flex column">
             {!this.isUserMember() && <div className="suggested flex column"> <h4>SUGGESTED</h4>
                 <button className="secondary-btn actions-btn " onClick={this.joinCard}>

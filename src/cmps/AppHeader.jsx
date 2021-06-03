@@ -7,6 +7,7 @@ import { ReactComponent as SearchIcon } from '../assets/img/icons/search.svg'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
+import { ProfileAvatar } from './ProfileAvatar'
 import Avatar from '@material-ui/core/Avatar';
 class _AppHeader extends Component {
 
@@ -18,10 +19,10 @@ class _AppHeader extends Component {
         isFullStyle: false
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.match.url === '/' && this.props.match.url !== '/') this.setState({ isFullStyle: false })
-        if (prevProps.match.url !== '/' && this.props.match.url === '/') this.setState({ isFullStyle: true })
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.match.url === '/' && this.props.match.url !== '/') this.setState({ isFullStyle: false })
+    //     if (prevProps.match.url !== '/' && this.props.match.url === '/') this.setState({ isFullStyle: true })
+    // }
 
     toggleInput = () => {
         this.setState({ isPrevInput: !this.state.isPrevInput, currOpenModal: !this.state.isPrevInput ? '' : 'search' })
@@ -32,11 +33,12 @@ class _AppHeader extends Component {
         else this.setState({ currOpenModal: modalName })
     }
 
-   
+
     render() {
         const { isPrevInput, currOpenModal, isFullStyle } = this.state
+        const { board, loggedInUser } = this.props
         return <div>
-            <div className={`main-header flex justify-space-between ${isFullStyle ? '' : 'opacity'} `}>
+            <div className={`main-header flex justify-space-between ${board ? 'in-board' : ''} `}>
                 <div className="btn-header-container flex">
                     <button className="btn-header">
                         <AppsIcon />
@@ -91,7 +93,7 @@ class _AppHeader extends Component {
                     NOTIFICATIONS  PLACEHOLDER
                 </div>}
                     </div>
-                    <Avatar onClick={() => this.toggleCurModal('user')} style={{ backgroundColor: '#DFE1E6', color: '#172b4d', width: '32px', height: '32px', fontWeight: 'bold', fontSize: '14px' }}>RA</Avatar>
+                    {/* <ProfileAvatar member={loggedInUser} onOpenPopover={() => this.toggleCurModal('user')} size={32} /> */}
                     {currOpenModal === 'user' &&
                         <div className="header-modal notific-modal">
                             {/* <NotificsList activities={this.props.activities} /> */}
@@ -105,7 +107,7 @@ class _AppHeader extends Component {
 }
 
 
-export const AppHeader=withRouter(_AppHeader)
+export const AppHeader = withRouter(_AppHeader)
 
 
 

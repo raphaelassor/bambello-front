@@ -7,7 +7,7 @@ export function BoardList({ boards, onToggleFavorite }) {
             {boards.map(board => {
                 return <Link key={board._id} className="clean-link" to={`/board/${board._id}`}>
                     <div className="board-preview"
-                        style={{ backgroundColor: board.style?.bgColor || '#de213d' }}>
+                        style={{ background: board.style?.bgColor || 'red' }}>
                         <div className="board-preview-details">
                             <h3>{board.title.length > 20 ? board.title.substring(0, 20) + '...' : board.title}</h3>
                             <span className={`far fa-star ${board.isFavorite ? 'favorite' : ''}`}
@@ -18,6 +18,5 @@ export function BoardList({ boards, onToggleFavorite }) {
                 </Link >
             })}
         </div>
-
     )
 }

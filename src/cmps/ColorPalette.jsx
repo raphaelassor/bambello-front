@@ -1,6 +1,6 @@
 import CheckIcon from '@material-ui/icons/Check';
 
-export function ColorPalette({ handleChange, selectedColor }) {
+export function ColorPalette({ handleChange, selectedColor,isGradient,isColor }) {
 
     const colorCodes = [
         '#60bd4f',
@@ -15,10 +15,22 @@ export function ColorPalette({ handleChange, selectedColor }) {
         '#b3bac5',
 
     ]
+    const gradientStyles=[
+        'linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)',
+        'linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)',
+        'linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%)',
+        ' linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)',
+        'linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)',
+        'linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%)',
+    ]
+    
+    function getStyles(){
+        return isGradient? gradientStyles:colorCodes
+    }
 
     return <div className="color-palette flex wrap">
-        {colorCodes.map(colorCode => {
-            return <label key={colorCode} className="flex align-center justify-center" style={{ backgroundColor: colorCode }} name="label-color" htmlFor={`color-${colorCode}`}>
+        {getStyles().map(colorCode => {
+            return <label key={colorCode} className="flex align-center justify-center" style={{ background: colorCode }} name="label-color" htmlFor={`color-${colorCode}`}>
                 <input type="radio" name="color" id={`color-${colorCode}`} value={colorCode} onClick={handleChange} />
                 {selectedColor === colorCode && <CheckIcon key={colorCode} style={{ width: '16px', height: '16px', color: 'white' }} />}
             </label>
