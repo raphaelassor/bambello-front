@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { closePopover, openPopover } from '../store/actions/app.actions'
 import { onSaveBoard } from '../store/actions/board.actions'
 import { boardService } from '../services/board.service';
@@ -20,7 +21,7 @@ class _CardEdit extends Component {
         cardTitle: ''
     }
 
-    handleChange = (ev) => {    
+    handleChange = (ev) => {
         if (ev.key === 'Enter') {
             this.onSaveCard(ev)
             return
@@ -68,6 +69,12 @@ class _CardEdit extends Component {
         this.setState({ top, left, width })
     }
 
+    get list() {
+        const { card, board } = this.props
+        const list = board.lists.find(list => list.cards.some(currCard => card.id === currCard.id))
+        return list.id
+    }
+
     render() {
         const { closePopover, card, board, onCloseCardEdit } = this.props
         const { top, left, width, cardTitle } = this.state
@@ -80,12 +87,13 @@ class _CardEdit extends Component {
                         <button className="edit-pop-over-save primary-btn" name="save" onClick={this.onSaveCard}>Save</button>
                     </div>
                     <div className="edit-pop-over-btns">
-                        <button
+                        <Link
+                            to={`/board/${board._id}/${this.list.id}/${card.id}`}
                             className="open-card-btn clean-btn"
                             onMouseDown={closePopover}>
                             <WebAssetIcon />
                             Open card
-                        </button>
+                        </Link>
                         <button
                             className="edit-labels-btn clean-btn"
                             onClick={(ev) => this.onOpenPopover(ev, 'LABELS')}>

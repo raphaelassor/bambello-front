@@ -16,11 +16,17 @@
         left: 100%;
         position: absolute;
         top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         width: fit-content;
         z-index: 0;
         transition: transform 85ms ease-in;
-        // display: flex;
         margin-inline-start: 8px;
+        a {
+            text-decoration: none;
+        }
+        //div buttons
         > * {
             margin-bottom: 4px;
             background: rgba(0, 0, 0, 0.6);
@@ -31,11 +37,13 @@
             padding: 6px 12px 6px 8px;
             transition: transform 85ms ease-in;
 
-            >* {
+            //icons
+            > * {
                 width: 16px;
                 height: 16px;
                 margin-right: 5px;
             }
+
             &:hover {
                 background: rgba(0, 0, 0, 0.8);
                 color: #fff;
