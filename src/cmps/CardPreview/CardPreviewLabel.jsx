@@ -12,6 +12,7 @@ class _CardPreviewLabel extends Component {
             return label.id === labelId
         })
         if(!label) return ''
+        //if not found slice the label ID. there is an error becasue there is a splice on board and not on the card Labels as well
         return label
     }
 
@@ -27,7 +28,7 @@ class _CardPreviewLabel extends Component {
     //     if (isPreviewLabelsOpen === 'open') return 'open'
     //     if (isPreviewLabelsOpen === 'close')
     // }
-
+ 
     render() {
 
         const { isPreviewLabelsOpen, labels } = this.props
