@@ -10,14 +10,16 @@ export function CardDetailsCover({ style, openPopover, card }) {
     }
 
     const getBackground = () => {
-        const { bgColor, imgUrl } = style
-        const background = bgColor ? bgColor : `url(${imgUrl})`
+        const { bgColor, bgImgUrl } = style
+        console.log(bgImgUrl);
+        const background = bgColor ? { background: bgColor } : { backgroundImage: `url(${bgImgUrl})` }
         return background
     }
-
+    const { bgColor, bgImgUrl } = style
     return (
-        <div className="card-details-cover" style={{ background: getBackground() }}>
-            <button className="cover-menu-btn" onClick={(ev) => onOpenPopover(ev, 'COVER')}><VideoLabelIcon/>Cover</button>
-        </div>
+        <div className={`card-details-cover ${style.bgImgUrl ? 'img' : ''}`} style={getBackground()}>
+            < button className="cover-menu-btn" onClick={(ev) => onOpenPopover(ev, 'COVER')
+            }> <VideoLabelIcon />Cover</button >
+        </div >
     )
 }

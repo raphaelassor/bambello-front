@@ -123,10 +123,9 @@ class _BoardHeader extends Component {
                 </button>
                 <span className="divider"></span>
 
-                <div className="board-header-members flex">
-                    <AvatarGroup max={4}>
+                <div className="board-header-members flex align-center">
                         {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
-                    </AvatarGroup>
+              
                     <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
                 <select name="" id="" onChange={this.onChangeUser}>

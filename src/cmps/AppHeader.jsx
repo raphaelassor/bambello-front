@@ -18,10 +18,10 @@ class _AppHeader extends Component {
         isFullStyle: false
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.match.url === '/' && this.props.match.url !== '/') this.setState({ isFullStyle: false })
-        if (prevProps.match.url !== '/' && this.props.match.url === '/') this.setState({ isFullStyle: true })
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.match.url === '/' && this.props.match.url !== '/') this.setState({ isFullStyle: false })
+    //     if (prevProps.match.url !== '/' && this.props.match.url === '/') this.setState({ isFullStyle: true })
+    // }
 
     toggleInput = () => {
         this.setState({ isPrevInput: !this.state.isPrevInput, currOpenModal: !this.state.isPrevInput ? '' : 'search' })
@@ -35,8 +35,9 @@ class _AppHeader extends Component {
    
     render() {
         const { isPrevInput, currOpenModal, isFullStyle } = this.state
+        const{board} =this.props
         return <div>
-            <div className={`main-header flex justify-space-between ${isFullStyle ? '' : 'opacity'} `}>
+            <div className={`main-header flex justify-space-between ${board ? 'in-board' : ''} `}>
                 <div className="btn-header-container flex">
                     <button className="btn-header">
                         <AppsIcon />

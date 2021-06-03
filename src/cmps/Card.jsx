@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { boardService } from '../services/board.service'
-
 import { ProfileAvatar } from './ProfileAvatar'
 import { DueDateDisplay } from './DueDateDisplay'
 import { CardPreviewChecklist } from './CardPreview/CardPreviewChecklist'
@@ -11,8 +10,26 @@ import { Subject as SubjectIcon } from '@material-ui/icons'
 import { onSaveBoard } from '../store/actions/board.actions'
 import { openPopover } from '../store/actions/app.actions'
 import EditIcon from '@material-ui/icons/CreateOutlined'
+import { TextareaAutosize } from '@material-ui/core';
+import { eventBusService } from '../services/event-bus.service'
 
 class _Card extends Component {
+
+    state = {
+        cardTitle: ''
+    }
+
+    componentDidMount() {
+        const { card, isEditMode } = this.props
+        if (isEditMode)
+            this.setState({ cardTitle: card.title })
+    }
+
+    handleChange = (ev) => {
+        const { name, value } = ev.target
+        this.setState({ [name]: value })
+    }
+
 
     isChecklistsEmpty = ({ checklists }) => {
         return checklists.every(checklist => !checklist.todos.length)
@@ -26,9 +43,11 @@ class _Card extends Component {
         onSaveBoard(savedBoard);
     }
 
-    openCardEdit = (ev) => {
+    onOpenCardEdit = (ev) => {
         ev.preventDefault();
-        this.onOpenPopover(ev, 'EDIT_CARD')
+        const { card } = this.props
+        const elPos = this.cardContainer.getBoundingClientRect();
+        eventBusService.emit('card-edit', { elPos, card });
     }
 
     onOpenPopover = (ev, type, member) => {
@@ -47,20 +66,25 @@ class _Card extends Component {
     }
 
     get cardStyles() {
+        const { isEditMode } = this.props
         const { coverMode, bgColor } = this.props.card.style
-        if (coverMode !== 'header') return { borderRadius: '3px' };
-        else if (coverMode === 'full') return { backgroundColor: bgColor, borderTopLeftRadius: '3px', borderTopRightRadius: '3px', minHeight: '56px' }
-        else return {};
-
+        if (coverMode === 'header') return { minHeight: '56px' };
+        else if (isEditMode && coverMode === 'full') return {};
+        else if (coverMode === 'full') return { backgroundColor: bgColor, borderTopLeftRadius: '3px', borderTopRightRadius: '3px', minHeight: '56px' };
+        else return { borderRadius: '3px' };
     }
 
     render() {
 
         const { isEditMode, card, board } = this.props;
-        const { coverMode, bgColor } = card.style;
+        let { coverMode, bgColor } = card.style;
+        const { cardTitle } = this.state
+
+        if (isEditMode && coverMode === 'full') coverMode = 'header';
+
         return (
-            <div className="card-preview-container" ref={(div) => { this.cardContainer = div }} onContextMenu={this.openCardEdit}>
-                {!isEditMode && <div className="card-preview-edit-btn" onClick={this.openCardEdit}><EditIcon /></div>}
+            <div className="card-preview-container" ref={(div) => { this.cardContainer = div }} onContextMenu={this.onOpenCardEdit}>
+                {!isEditMode && <div className="card-preview-edit-btn" onClick={this.onOpenCardEdit}><EditIcon /></div>}
                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
                     {coverMode !== 'full' && <div className="card-preview-labels">
@@ -68,7 +92,12 @@ class _Card extends Component {
                     </div>
                     }
                     {isEditMode ?
-                        <input type="text" className="card-preview-name" autoFocus onFocus={(ev) => ev.target.select()} />
+                        <TextareaAutosize
+                            className="card-preview-input"
+                            name="cardTitle"
+                            autoFocus
+                            value={cardTitle}
+                            onChange={this.handleChange} aria-label="empty textarea" />
                         :
                         <div className="card-preview-name">{card.title}</div>
                     }

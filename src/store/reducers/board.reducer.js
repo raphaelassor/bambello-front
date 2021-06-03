@@ -1,4 +1,5 @@
 const initialState = {
+    boards : [],
     board: null,
     isPreviewLabelsOpen: false,
     filterBy:{
@@ -6,11 +7,13 @@ const initialState = {
             labels:[],
             txt:'',
     }
-
+    
 }
 
 export function boardReducer(state = initialState, action) {
     switch (action.type) {
+        case 'SET_WORKSPACE':
+            return { ...state, boards: action.boards }
         case 'SET_BOARD':
             return { ...state, board: action.board }
         case 'SAVE_BOARD':

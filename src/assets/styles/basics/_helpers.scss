@@ -48,8 +48,11 @@
     &.column-reverse {
         flex-direction: column-reverse;
     }
-    &.align-flex-end {
+    &.justify-flex-end {
         justify-content: flex-end;
+    }
+    &.align-flex-start {
+        align-items: flex-start;
     }
 }
 

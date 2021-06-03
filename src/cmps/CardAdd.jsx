@@ -29,7 +29,7 @@ export class CardAdd extends Component {
 
         const { board, currList, onSaveBoard } = this.props;
         const listIdx = board.lists.findIndex(list => list.id === currList.id);
-
+        
         const card = {
             id: utilsService.makeId(),
             title: titleTxt,

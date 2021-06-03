@@ -12,11 +12,11 @@ import { ActivitiesList } from "../ActivitiesList"
  class _PopoverMenu extends Component {
 
 
-    onOpenPopover = (ev, popoverName) => {
-        console.log('on open popover', popoverName)
+    onOpenPopover = (ev, PopoverName) => {
+        console.log('on open Popover', PopoverName)
         const elPos = ev.target.getBoundingClientRect()
         const props = {}
-        this.props.openPopover(popoverName, elPos, props)
+        this.props.openPopover(PopoverName, elPos, props)
     } 
     get activities(){
         return this.props.board.activities.slice(0,10)

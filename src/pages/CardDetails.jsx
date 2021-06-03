@@ -108,6 +108,7 @@ class _CardDetails extends Component {
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style, attachs } = card
+        console.log('style.coverMode on details:',style.coverMode)
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />

@@ -1,0 +1,50 @@
+.workspace-container {
+    margin-top: 40px;
+    background-color: $clr2;
+    height: 100vh;
+
+    .side-bar {
+        cursor: pointer;
+        margin-inline-start: 16px;
+        margin-inline-end: 32px;
+        width: 270px;
+        background: white;
+        font-weight: bold;
+        color: $clr1;
+
+        > * {
+            width: 100%;
+            padding: 6px 8px 6px 0;
+            &.active {
+                background-color: #e4f0f6;
+            }
+        }
+    }
+
+    .boards-wrapper {
+        width: 100%;
+        max-width: 825px;
+        min-width: 288px;
+        > *:not(:last-child) {
+            margin-bottom: 40px;
+        }
+    }
+
+    .preview-title {
+        color: $clr4;
+        font-size: 16px;
+        font-weight: 700;
+        margin-inline-start: 5px;
+        margin-top: 6px;
+        margin-bottom: 11px;
+        > *:first-child {
+            font-size: 21.5px;
+            margin-inline-end: 10px;
+        }
+
+        svg {
+            width: 25px;
+            height: 25px;
+        }
+    }
+}

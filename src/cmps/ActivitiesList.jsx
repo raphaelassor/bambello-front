@@ -1,5 +1,6 @@
 import { ActivityPreview } from './ActivityPreview'
 export function ActivitiesList({ activities, isGeneral }) {
+   
     const sortedActivities = activities.sort((a, b) => b.createdAt - a.createdAt)
     
     return (
