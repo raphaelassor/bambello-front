@@ -32,7 +32,7 @@ class _BoardApp extends Component {
                 this.props.loadBoard(savedBoard._id)
             })
             this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
-                this.setState({ isCardEditOpen: true, currCard: card, elPos });
+                this.setState({ isCardEditOpen: true, currCard: card, elPos })
             });
         } catch (err) {
             console.log(err)
@@ -40,12 +40,12 @@ class _BoardApp extends Component {
     }
 
     componentWillUnmount() {
-        this.removeEvent();
         socketService.off('board updated')
+        this.removeEvent();
     }
 
     onCloseCardEdit = () => {
-        this.setState({isCardEditOpen: false})
+        this.setState({ isCardEditOpen: false })
     }
 
     onDragEnd = (result) => {

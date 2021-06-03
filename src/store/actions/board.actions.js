@@ -2,6 +2,16 @@
 import { boardService } from '../../services/board.service'
 import { socketService } from '../../services/socket.service'
 
+export function loadBoards(filterBy = { ctg: '' }) {
+    return async dispatch => {
+        try {
+            const boards = await boardService.query(filterBy)
+            dispatch({ type: 'SET_WORKSPACE', boards })
+        } catch (err) {
+            console.log('BoardActions: err in loadBoards', err)
+        }
+    }
+}
 
 export function loadBoard(boardId = '60b76c0dfbe8be28da32b0da') {
     return async dispatch => {
@@ -18,7 +28,7 @@ export function onSaveBoard(board) {
     return async dispatch => {
         try {
             const savedBoard = await boardService.save(board)
-            socketService.emit('board newUpdate',savedBoard)
+            socketService.emit('board newUpdate', savedBoard)
             dispatch({ type: 'SAVE_BOARD', board: savedBoard })
         } catch (err) {
             console.log('BoardActions: err in onSaveBoard', err)

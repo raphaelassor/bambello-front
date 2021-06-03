@@ -18,12 +18,14 @@
 
 // PAGES
 // @import "./pages/homepage.scss";
+@import "./pages//workspace.scss";
 @import "./pages/board-app.scss";
 @import "./pages/card-details.scss";
 
 // CMPS
 @import "cmps/main-header.scss";
 @import "cmps/board-header.scss";
+@import "cmps/board-list.scss";
 @import "cmps/card-add.scss";
 @import "cmps/card-list.scss";
 @import "cmps/card-list-add.scss";

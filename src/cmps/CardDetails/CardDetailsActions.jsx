@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { utilsService } from '../../services/utils.service'
 import { boardService } from '../../services/board.service'
 import { ElementOverlay } from '../Popover/ElementOverlay'
+import { ReactComponent as MemberIcon } from '../../assets/img/icons/person.svg'
 
 class _CardDetailsActions extends Component {
 
@@ -83,16 +84,15 @@ class _CardDetailsActions extends Component {
             {!this.isUserMember() && <div className="suggested flex column"> <h4>SUGGESTED</h4>
                 <button className="secondary-btn actions-btn " onClick={this.joinCard}>
                     <div className="actions-btn-content flex align-center">
-                        <i className="far fa-user icon-sm "></i>
+                        <MemberIcon/>
                         <span>Join</span>
-
                     </div>
                 </button></div>}
             <h4>ADD TO CARD</h4>
             <div className="add-section flex column">
                 <button className="secondary-btn actions-btn " onClick={(ev) => this.onOpenPopover(ev, 'MEMBERS')}>
                     <div className="actions-btn-content flex align-center">
-                        <i className="far fa-user icon-sm "></i>
+                        <MemberIcon />
                         <span>Members</span>
                     </div>
                     <ElementOverlay />
