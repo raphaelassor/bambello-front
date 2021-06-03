@@ -1,5 +1,6 @@
 import { utilsService } from './utils.service'
 import { httpService } from './http.service'
+import { userService } from './user.service'
 
 export const boardService = {
     query,
@@ -9,10 +10,10 @@ export const boardService = {
     updateCardInBoard,
     createActivity,
     setPopoverPos,
- 
+
 }
 
-async function query(filterBy = {ctg: ''}) {
+async function query(filterBy = { ctg: '' }) {
     try {
         return await httpService.get('board', filterBy)
     } catch (err) {
@@ -64,7 +65,8 @@ export function updateCardInBoard(board, updatedCard) {
     return { ...board }
 }
 
-export function createActivity(actionType, txt = '', loggedInUser, card = null) {
+export function createActivity(actionType, txt = '', undefined, card = null) {
+    const loggedInUser = userService.getLoggedinUser()
     const { _id, fullname, imgUrl } = loggedInUser
     const byMember = {
         _id,

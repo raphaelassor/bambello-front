@@ -5,6 +5,8 @@ import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 
 export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false }) {
+    
+    if(!member) return ''
 
     // const isMemberLoggedin = () => {
     //TODO: LOOP THAT RUN THROUGH MEMBERS AND CHECK WHO IS LOGGED IN

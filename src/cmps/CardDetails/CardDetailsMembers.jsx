@@ -12,7 +12,7 @@ export function CardDetailsMembers({ members, card, openPopover }) {
         props = type === 'PROFILE' ? { member, card } : { card }
         openPopover(type, elPos, props)
     }
-
+    
     return (
         <div className="card-details-members item-container flex column">
             <h3 className="card-details-item-header">Members</h3>

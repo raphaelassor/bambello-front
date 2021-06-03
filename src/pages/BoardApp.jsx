@@ -15,7 +15,6 @@ import { socketService } from '../services/socket.service'
 
 
 class _BoardApp extends Component {
-
     state = {
         isCardEditOpen: false,
         currCard: null,
@@ -26,14 +25,15 @@ class _BoardApp extends Component {
 
     async componentDidMount() {
         try {
+            const { boardId } = this.props.match.params
             socketService.setup()
-            await this.props.loadBoard()
+            await this.props.loadBoard(boardId)
             const { board } = this.props
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
                 this.props.loadBoard(savedBoard._id)
             })
-            this.removeEvent =  eventBusService.on('card-edit', ({ elPos, card }) => {
+            this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
                 this.setState({ isCardEditOpen: true, currCard: card, elPos })
             });
         } catch (err) {
@@ -100,7 +100,6 @@ class _BoardApp extends Component {
         const { board, onSaveBoard } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
-
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>
