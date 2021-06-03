@@ -35,9 +35,12 @@ class _PopoverBoardFilter extends Component{
         const {board}=this.props
         return <Popover title="Search" className="menu">
             <div className="board-filter-pop-over">
+            <h4>Labels</h4>
             <input type="text " className="pop-over-input" value={txt} onChange={this.handleChange}/>
             {board.labels.map(label=> <PopoverLabelPreview label={label} toggleLabel={this.toggleLabel} previewMode={true} isSelected={this.isSelected(label)}/> )}
             </div>
+            <h4>Members</h4>
+            {board.members.map(member=> <PopoverMemberPreview member={member} toggleMember={this.toggleFilter} previewMode={true} isSelected={this.isSelected(label)}/> )}
         </Popover>
     }
 }

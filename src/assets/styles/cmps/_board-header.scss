@@ -74,6 +74,9 @@
 
     .board-header-members {
         flex-grow: 1;
+        .profile-avatar{
+            width:26px;
+        }
         .MuiAvatar-root {
             width: 28px;
             height: 28px;

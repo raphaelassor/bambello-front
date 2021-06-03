@@ -19,7 +19,7 @@ import { ActivitiesList } from "../ActivitiesList"
         this.props.openPopover(PopoverName, elPos, props)
     } 
     get activities(){
-        return this.props.board.activities.slice(0,10)
+        return this.props.board.activities
     }
     render() {
         const {board}=this.props

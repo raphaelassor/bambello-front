@@ -40,7 +40,7 @@ class _PopoverChecklist extends Component {
             <div className="checklist-pop-over-content">
                 <form onSubmit={this.addChecklist}>
                     <label htmlFor="checklist-input" className="pop-over-label">Title</label>
-                    <input className="pop-over-input" id="checklist-input" type="text" value={this.state.title} onChange={this.handlechange} placeholder="Enter a title..." />
+                    <input className="pop-over-input" id="checklist-input" type="text" value={this.state.title} onChange={this.handlechange} placeholder="Enter a title..." autoFocus />
                     <button className="primary-btn wide-btn">Add</button>
                 </form>
             </div>

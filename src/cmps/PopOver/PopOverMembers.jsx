@@ -63,7 +63,7 @@ class _PopoverMembers extends Component {
                 <h4>BOARD MEMBERS</h4>
                 <ul className="clean-list">
                     {presentedMembers.map(member => <PopoverMemberPreview key={member._id} member={member}
-                        toggleMember={this.toggleMember} isJoined={this.isMemberInCard(member)} />)}
+                        toggleMember={this.toggleMember} isSelected={this.isMemberInCard(member)} />)}
                 </ul>
             </div>
         </Popover>
