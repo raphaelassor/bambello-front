@@ -1,5 +1,17 @@
 import { userService } from '../../services/user.service.js'
 
+// export function onGoogleLogin(tokenId) {
+//     return async dispatch => {
+//         try {
+//             const user = await userService.googleLogin(tokenId)
+//             console.log(user)
+//             dispatch({ type: 'SET_USER', user })
+//         } catch (err) {
+//             console.log('UserActions: err in login', err)
+//         }
+//     }
+// }
+
 export function onLogin(credentials) {
     return async dispatch => {
         try {

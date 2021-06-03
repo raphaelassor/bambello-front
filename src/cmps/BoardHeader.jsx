@@ -47,8 +47,7 @@ class _BoardHeader extends Component {
         if (!title) return // error msg to user: must enter title
         const { board, onSaveBoard } = this.props
         board.title = title
-        const txt = `renamed this board to ${title}`
-        const savedActivity = boardService.createActivity('renamed', txt, loggedInUser)
+        const savedActivity = boardService.createActivity('renamed', board.title, loggedInUser)
         board.activities.push(savedActivity)
         onSaveBoard(board)
         this.toggleEdit()
