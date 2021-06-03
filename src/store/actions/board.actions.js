@@ -13,7 +13,7 @@ export function loadBoards(filterBy = { ctg: '' }) {
     }
 }
 
-export function loadBoard(boardId = '60b76c0dfbe8be28da32b0da') {
+export function loadBoard(boardId = '60b62a5534613c87818a5c20') {
     return async dispatch => {
         try {
             const board = await boardService.getById(boardId)
@@ -39,6 +39,12 @@ export function onSaveBoard(board) {
 export function togglePreviewLabels() {
     return dispatch => {
         dispatch({ type: 'TOGGLE_LABELS' })
+    }
+}
+
+export function setFilter(filterBy){
+    return dispatch=>{
+        dispatch({ type: 'SET_FILTER',filterBy })
     }
 }
 

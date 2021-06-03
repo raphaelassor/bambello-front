@@ -4,8 +4,8 @@
     max-height: 40px;
     padding:4px;
     background-color: $clr1;
-    &.opacity{
-        background-color: rgba($color: #000000, $alpha: .15);
+    &.in-board{
+        background-color: rgba($color: #000000, $alpha: .1);
     }
     .back-screen{
         position: absolute;

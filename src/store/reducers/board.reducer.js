@@ -1,7 +1,13 @@
 const initialState = {
     boards : [],
     board: null,
-    isPreviewLabelsOpen: false
+    isPreviewLabelsOpen: false,
+    filterBy:{
+            members:[],
+            labels:[],
+            txt:'',
+    }
+    
 }
 
 export function boardReducer(state = initialState, action) {
@@ -14,6 +20,8 @@ export function boardReducer(state = initialState, action) {
             return { ...state, board: { ...action.board } }
         case 'TOGGLE_LABELS':
             return { ...state, isPreviewLabelsOpen: !state.isPreviewLabelsOpen }
+        case 'SET_FILTER':
+            return {...state, filterBy:action.filterBy}
         case 'REMOVE_CARD':
             return {}
         default:

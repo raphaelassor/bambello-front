@@ -20,9 +20,7 @@ export class _Popover extends Component {
         // add remove event 
         this.onSetPopoverPos()
     }
-    // componentWillUnmount(){
-    //     window.removeEventListener('resize')
-    // }
+   
 
     componentDidUpdate(prevProps) {
         if (this.props.elPos !== prevProps.elPos) {

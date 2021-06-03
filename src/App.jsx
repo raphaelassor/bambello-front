@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch ,withRouter } from 'react-router-dom'
 import { AppHeader } from './cmps/AppHeader';
 import { routes } from './routes'
 import { connect } from 'react-redux';
@@ -9,20 +9,21 @@ import { DynamicPopover } from './cmps/Popover/DynamicPopover'
 export class _App extends Component {
 
   get style() {
-    const { board } = this.props
+    const { board,location } = this.props
+    if (!location.pathname.includes('/board')) return {}
     const style = board ? {
-      background: 'linear-gradient(311deg, rgba(86,189,202,1) 0%, rgba(50,124,148,1) 35%, rgba(44,113,139,1) 47%, rgba(36,98,126,1) 54%, rgba(29,85,115,1) 65%, rgba(2,34,73,1) 100%)'
+      background: board.style.bgColor
     } : {}
     return style
   }
 
 
   render() {
-    const { currPopover } = this.props
+    console.log(this.props)
     return (
       <div style={this.style}>
         <header>
-          <AppHeader />
+          <AppHeader board={this.props.board}/>
         </header>
 
         <main>
@@ -42,7 +43,8 @@ function mapStateToProps(state) {
     currPopover: state.appModule.currPopover
   }
 }
-export const App = connect(mapStateToProps, null)(_App)
+const _AppWithRouter=withRouter(_App)
+export const App = connect(mapStateToProps, null)(_AppWithRouter)
 
 // function mapStateToProps(state) {
 //   return {

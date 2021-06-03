@@ -13,6 +13,10 @@
     &.menu{
         background-color: #f4f5f7;
         height: calc(100vh - 40px);
+        overflow: auto;
+        .pop-over-header{
+            position: sticky;
+        }
     }
     .back{
         position: absolute;

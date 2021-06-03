@@ -76,7 +76,7 @@
         }
 
         .card-preview-name {
-            word-wrap: break-word;
+            word-break: break-word;
             margin-bottom: 5px;
             display: flex;
             align-items: flex-end;
@@ -90,7 +90,7 @@
             border: none;
             resize: none;
             width: 100%;
-            word-wrap: break-word;
+            word-break: break-word;
         }
         .card-preview-bagdes {
             display: flex;
