@@ -32,6 +32,15 @@ export class ChecklistPreview extends Component {
         this.setState({ checklist })
     }
 
+    onSaveChecklistTitle = (ev) => {
+        const { onSaveChecklist } = this.props
+        const { checklist } = this.state
+        if (ev.type === 'keydown' && ev.key !== 'Enter') return
+        if (ev.type === 'keydown') ev.preventDefault()
+        onSaveChecklist(checklist)
+        this.onToggleTitleEdit()
+    }
+
     get doneTodosProgress() {
         const { checklist: { todos } } = this.state
         if (!todos.length) return 0
@@ -91,15 +100,18 @@ export class ChecklistPreview extends Component {
                 <CheckBoxOutlinedIcon />
                 <div className="flex column">
                     <TextareaAutosize
-                        onBlur={() => this.onToggleTitleEdit()}
+                        onKeyDown={this.onSaveChecklistTitle}
                         onChange={this.titleHandleChange}
                         value={checklist.title}
                         ref={(input) => { this.selectedInput = input }}
                         autoFocus
                         aria-label="empty textarea" />
                     <div className="checklist-controllers flex align-center">
-                        <button className="primary-btn" onMouseDown={() => onSaveChecklist(checklist)}>Save</button>
-                        <CloseRoundedIcon className="close-svg" />
+                        <button className="primary-btn"
+                            onClick={this.onSaveChecklistTitle}>
+                            Save
+                            </button>
+                        <CloseRoundedIcon className="close-svg" onClick={this.onToggleTitleEdit} />
                     </div >
                 </div>
             </div>}

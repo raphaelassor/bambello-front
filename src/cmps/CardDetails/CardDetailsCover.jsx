@@ -11,7 +11,6 @@ export function CardDetailsCover({ style, openPopover, card }) {
 
     const getBackground = () => {
         const { bgColor, bgImgUrl } = style
-        console.log(bgImgUrl);
         const background = bgColor ? { background: bgColor } : { backgroundImage: `url(${bgImgUrl})` }
         return background
     }

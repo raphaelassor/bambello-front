@@ -15,7 +15,7 @@ import { ElementOverlay } from '../Popover/ElementOverlay'
 class _CardDetailsActions extends Component {
 
     addFile = (fileUrl) => {
-        const { card, onSaveCardFromActions, closePopover } = this.props
+        const { card, onSaveCardFromActions, onSaveBoard, closePopover, board, loggedInUser } = this.props
         if (!card.attachs) card.attachs = []
         const attach = {
             id: utilsService.makeId(),
@@ -23,8 +23,12 @@ class _CardDetailsActions extends Component {
             url: fileUrl,
             createdAt: Date.now()
         }
+
         card.attachs.push(attach)
         onSaveCardFromActions(card)
+        const savedActivity = boardService.createActivity('attached', attach.fileName, loggedInUser, card)
+        board.activities.push(savedActivity)
+        onSaveBoard(board)
         closePopover()
     }
 
@@ -35,7 +39,6 @@ class _CardDetailsActions extends Component {
         card.members.push(loggedInUser)
         onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
-        console.log(savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
     }
