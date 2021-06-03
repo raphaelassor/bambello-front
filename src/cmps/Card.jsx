@@ -15,21 +15,11 @@ import { eventBusService } from '../services/event-bus.service'
 
 class _Card extends Component {
 
-    state = {
-        cardTitle: ''
-    }
-
     componentDidMount() {
         const { card, isEditMode } = this.props
         if (isEditMode)
             this.setState({ cardTitle: card.title })
     }
-
-    handleChange = (ev) => {
-        const { name, value } = ev.target
-        this.setState({ [name]: value })
-    }
-
 
     isChecklistsEmpty = ({ checklists }) => {
         return checklists.every(checklist => !checklist.todos.length)
@@ -76,9 +66,8 @@ class _Card extends Component {
 
     render() {
 
-        const { isEditMode, card, board } = this.props;
+        const { isEditMode, card, board, handleChange, cardTitle } = this.props;
         let { coverMode, bgColor } = card.style;
-        const { cardTitle } = this.state
 
         if (isEditMode && coverMode === 'full') coverMode = 'header';
 
@@ -97,7 +86,9 @@ class _Card extends Component {
                             name="cardTitle"
                             autoFocus
                             value={cardTitle}
-                            onChange={this.handleChange} aria-label="empty textarea" />
+                            onChange={handleChange} 
+                            onKeyDown={handleChange}
+                            aria-label="empty textarea" />
                         :
                         <div className="card-preview-name">{card.title}</div>
                     }

@@ -5,17 +5,6 @@ import { Card } from '../Card'
 
 export class CardPreview extends Component {
 
-    state = {
-        isCardEditOpen: false,
-        elPos: null
-    }
-
-    toggleCardEdit = (ev) => {
-        const elPos = ev.target.getBoundingClientRect()
-        console.log(elPos)
-        this.setState({ isCardEditOpen: !this.state.isCardEditOpen, elPos: elPos })
-    }
-
     draggableStyle = (style, snapshot) => {
         if (!snapshot.isDropAnimating) {
             return style;
@@ -34,7 +23,7 @@ export class CardPreview extends Component {
                     {(provided, snapshot) => (
                         <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={this.draggableStyle(provided.draggableProps.style, snapshot)} >
                             <Link to={`/board/${board._id}/${currList?.id}/${card.id}`} className="clean-link">
-                                <Card card={card} board={board} toggleCardEdit={this.toggleCardEdit} />
+                                <Card card={card} board={board} />
                             </Link>
                         </div>
                     )}

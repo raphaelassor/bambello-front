@@ -23,8 +23,8 @@ class _BoardApp extends Component {
     }
 
     async componentDidMount() {
-        socketService.setup()
         try {
+            socketService.setup()
             await this.props.loadBoard()
             const { board } = this.props
             socketService.emit('join board', board._id)
@@ -47,7 +47,6 @@ class _BoardApp extends Component {
     onCloseCardEdit = () => {
         this.setState({ isCardEditOpen: false })
     }
-
 
     onDragEnd = (result) => {
         let { board, board: { lists }, onSaveBoard, loggedInUser } = this.props

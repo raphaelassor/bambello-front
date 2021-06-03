@@ -8,8 +8,8 @@ import { PopoverChecklist } from "./PopoverChecklist";
 import { PopoverMoveCopy } from './PopoverMoveCopy';
 import { PopoverProfile } from './PopoverProfile';
 import { PopoverInvite } from "./PopoverInvite";
-import { PopoverMenu } from './PopoverMenu'
-import { PopoverBackground } from './PopoverBackground'
+import { PopoverMenu } from './PopoverMenu';
+import { PopoverBackground } from './PopoverBackground';
 import { PopoverArchive } from './PopoverArchive';
 import { PopoverActivity } from './PopoverActivity';
 import { PopoverBoardFilter } from './PopoverBoardFilter';

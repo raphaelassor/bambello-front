@@ -108,7 +108,7 @@ class _CardDetails extends Component {
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style, attachs } = card
-        console.log('style.coverMode on details:',style.coverMode)
+        console.log('style.coverMode on details:', style.coverMode)
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
@@ -118,7 +118,7 @@ class _CardDetails extends Component {
                         className={`close-window-btn ${style.coverMode ? 'cover-mode' : ''} flex align-center justify-center`}>
                         <CloseRoundedIcon />
                     </button>
-                 {style.coverMode && <CardDetailsCover style={style} openPopover={openPopover} card={card} />}
+                    {style.coverMode && <CardDetailsCover style={style} openPopover={openPopover} card={card} />}
                     <div className="card-details-header">
                         <div className="header-content flex">
                             <WebAssetIcon />
