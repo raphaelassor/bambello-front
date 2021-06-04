@@ -65,10 +65,11 @@ export class _LoginSignup extends Component {
         const { loginErr } = this.props
         if (!pageMode) return ''
         return (<section className="login-signup-container">
-            <div className="logo flex align-center justify-center">
+            <Link to="/" className="clean-link"><div className="logo flex align-center justify-center">
                 <LoginSignupLogo />
                 <h1>Bambello</h1>
             </div>
+            </Link>
             {pageMode === 'login' && <div className="login-signup flex column">
                 <h3>Log in to Bambello</h3>
                 <Formik initialValues={credentials} onSubmit={this.onSubmit} >
