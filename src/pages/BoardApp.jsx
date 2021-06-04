@@ -15,7 +15,6 @@ import { socketService } from '../services/socket.service'
 
 
 class _BoardApp extends Component {
-
     state = {
         isCardEditOpen: false,
         currCard: null,
@@ -26,14 +25,15 @@ class _BoardApp extends Component {
 
     async componentDidMount() {
         try {
+            const { boardId } = this.props.match.params
             socketService.setup()
-            await this.props.loadBoard()
+            await this.props.loadBoard(boardId)
             const { board } = this.props
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
                 this.props.loadBoard(savedBoard._id)
             })
-            this.removeEvent =  eventBusService.on('card-edit', ({ elPos, card }) => {
+            this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
                 this.setState({ isCardEditOpen: true, currCard: card, elPos })
             });
         } catch (err) {
@@ -95,12 +95,14 @@ class _BoardApp extends Component {
         board.lists = lists
         onSaveBoard(board)
     }
+   
 
     render() {
-        const { board, onSaveBoard } = this.props
+        const {onSaveBoard ,board,filterBy } = this.props
+    
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
-
+        console.log(board)
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>
@@ -111,7 +113,7 @@ class _BoardApp extends Component {
                             {provided => (
                                 // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
                                 <div {...provided.droppableProps} ref={provided.innerRef} className="card-list-container flex">
-                                    {board.lists.map((currList, idx) => <CardList key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
+                                    {board.lists.map((currList, idx) => <CardList filterBy={filterBy} key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
                                     {provided.placeholder}
                                     <CardListAdd board={board} onSaveBoard={onSaveBoard} />
                                 </div>
@@ -129,7 +131,8 @@ class _BoardApp extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
-        loggedInUser: state.appModule.loggedInUser
+        loggedInUser: state.appModule.loggedInUser,
+        filterBy: state.boardModule.filterBy
     }
 }
 

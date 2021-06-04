@@ -7,7 +7,7 @@ export class ActivityPreview extends Component {
 
     get fullActivity() {
         const { activity: { actionType, txt, card }, isGeneral } = this.props
-        const activityLoc = isGeneral ? card.title : 'this card'
+        const activityLoc = isGeneral ? card?.title : 'this card'
         switch (actionType) {
             case 'attached':
                 return `attached ${txt} to ${activityLoc}`

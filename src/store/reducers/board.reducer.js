@@ -22,8 +22,6 @@ export function boardReducer(state = initialState, action) {
             return { ...state, isPreviewLabelsOpen: !state.isPreviewLabelsOpen }
         case 'SET_FILTER':
             return {...state, filterBy:action.filterBy}
-        case 'REMOVE_CARD':
-            return {}
         default:
             return state
     }

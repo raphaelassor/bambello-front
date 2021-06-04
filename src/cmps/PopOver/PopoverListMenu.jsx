@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { Popover } from "./Popover/Popover";
+import { Popover } from "./Popover";
 
-export class ListMenu extends Component{
+export class PopoverListMenu extends Component{
 
     onArchiveList=()=>{
         const {currList,onSaveBoard,board}=this.props

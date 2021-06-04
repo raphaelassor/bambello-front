@@ -25,7 +25,6 @@ class _Workspace extends Component {
 
     render() {
         const { boards } = this.props
-        console.log(this.userBoards)
         return (
             <section className="workspace-container flex align-flex-start justify-center ">
                 {/* <div className="side-bar">
@@ -51,12 +50,6 @@ class _Workspace extends Component {
         )
     }
 }
-
-
-
-
-
-
 
 function mapStateToProps(state) {
     return {

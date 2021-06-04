@@ -17,7 +17,7 @@ export class _Popover extends Component {
             if (window.visualViewport.width > 1000) return
             this.onSetPopoverPos()
         });
-        this.onSetPopoverPos()
+        this.onSetPopoverPos() 
     }
    
 

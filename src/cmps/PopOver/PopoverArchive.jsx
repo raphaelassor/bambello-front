@@ -1,6 +1,6 @@
 import {Popover} from './Popover'
 import {connect} from 'react-redux'
-import ArrowBackIcon from '@material-ui/icons/ArrowBackIos';
+import {BackToPrevPopover} from './BackToPrevPopover'
 import {onSaveBoard} from '../../store/actions/board.actions'
 import {openPopover} from '../../store/actions/app.actions'
 import { Component } from "react";
@@ -30,19 +30,11 @@ class _PopoverArchive extends Component {
         const regEx= new RegExp(filterTxt, 'i')
         return archivedCards.filter(card=> regEx.test(card.title) )
     }
-    onOpenPopover = (ev, PopoverName) => {
-        const elPos = ev.target.getBoundingClientRect()
-        const props = {}
-        this.props.openPopover(PopoverName, elPos, props)
-    }
-
     render(){
         const {filterTxt}=this.state
         return <Popover className="menu" title="Archive">
             <div className="pop-over-archive-details">
-            <span className= "back" onClick={ev=>this.onOpenPopover(ev,'MENU')}>
-            <ArrowBackIcon/>
-            </span>
+            <BackToPrevPopover popoverName="MENU" />
             <input type="text" className="pop-over-input" value={filterTxt} onChange={this.handleChange} autoFocus/>
             {/* map of Card Previews  */}
             </div>
@@ -57,7 +49,6 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     onSaveBoard,
-    openPopover
 }
 
 

@@ -43,7 +43,17 @@ function _saveLocalUser(user) {
 }
 
 function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null');
+    let user = JSON.parse(sessionStorage.getItem('loggedinUser' || null));
+    // if (!user) {
+    //     user = {
+    //         _id: '60b606f35231459a81c67e5b3',
+    //         username: 'GUEST',
+    //         fullname: 'GUEST',
+    //         imgUrl: ''
+    //     }
+    //     _saveLocalUser(user)
+    // }
+    return user
 }
 
 

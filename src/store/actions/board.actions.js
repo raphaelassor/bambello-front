@@ -13,7 +13,7 @@ export function loadBoards(filterBy = { ctg: '' }) {
     }
 }
 
-export function loadBoard(boardId = '60b76c0dfbe8be28da32b0da') {
+export function loadBoard(boardId) {
     return async dispatch => {
         try {
             const board = await boardService.getById(boardId)
@@ -43,6 +43,7 @@ export function togglePreviewLabels() {
 }
 
 export function setFilter(filterBy){
+    console.log('in set Filter', filterBy)
     return dispatch=>{
         dispatch({ type: 'SET_FILTER',filterBy })
     }

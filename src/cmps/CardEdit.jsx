@@ -72,7 +72,7 @@ class _CardEdit extends Component {
     get list() {
         const { card, board } = this.props
         const list = board.lists.find(list => list.cards.some(currCard => card.id === currCard.id))
-        return list.id
+        return list
     }
 
     render() {

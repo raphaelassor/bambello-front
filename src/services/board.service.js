@@ -1,5 +1,6 @@
 import { utilsService } from './utils.service'
 import { httpService } from './http.service'
+import { userService } from './user.service'
 
 export const boardService = {
     query,
@@ -9,10 +10,10 @@ export const boardService = {
     updateCardInBoard,
     createActivity,
     setPopoverPos,
- 
+    getFilteredList
 }
 
-async function query(filterBy = {ctg: ''}) {
+async function query(filterBy = { ctg: '' }) {
     try {
         return await httpService.get('board', filterBy)
     } catch (err) {
@@ -64,7 +65,8 @@ export function updateCardInBoard(board, updatedCard) {
     return { ...board }
 }
 
-export function createActivity(actionType, txt = '', loggedInUser, card = null) {
+export function createActivity(actionType, txt = '', undefined, card = null) {
+    const loggedInUser = userService.getLoggedinUser()
     const { _id, fullname, imgUrl } = loggedInUser
     const byMember = {
         _id,
@@ -89,6 +91,26 @@ export function createActivity(actionType, txt = '', loggedInUser, card = null) 
         card: savedCard || null,
     }
     return savedActivity
+}
+
+function getFilteredList(listToFilter, filter) {
+    const list = JSON.parse(JSON.stringify(listToFilter))
+
+    list.cards = list.cards.filter(card => {
+        let isInLabels = true;
+        let isInMembers = true;
+        if (filter.labels.length) {
+            isInLabels = filter.labels.some(label => card.labelIds.some(labelId => labelId === label.id))
+
+        }
+        if (filter.members.length) {
+            isInMembers = filter.members.some(memberFilter => card.members.some(member => memberFilter._id === member._id))
+        }
+        const regex = new RegExp(filter.txt, 'i')
+        
+        return !card.isArchived && isInMembers && isInLabels && regex.test(card.title)
+    })
+    return list
 }
 
 

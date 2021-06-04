@@ -6,16 +6,16 @@ import { connect } from 'react-redux';
 // import { connect } from 'react-redux'
 import { DynamicPopover } from './cmps/Popover/DynamicPopover'
 
-export class _App extends Component {
+ class _App extends Component {
 
   get style() {
     const { board, location } = this.props
     if (!location.pathname.includes('/board')) return {}
     const style = board ? {
-      background: board.style.bgColor
-    } : {}
+      background: board.style.background
+    } : {background: "#0079bf"}
     return style
-  }
+  } 
 
 
   render() {
