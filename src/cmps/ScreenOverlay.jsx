@@ -1,12 +1,14 @@
 //TODO: // import CloseIcon from '@material-ui/icons/Close';
 
 
-export function ScreenOverlay({ goBack, styleMode, children, closeBtn }) {
+export function ScreenOverlay({ goBack = null, styleMode, children }) {
 
-    //TODO: if closeBtn true then show close btn in the top right side of the screen
     return (
         <div className="screen-overlay-wrapper">
-            <div className={`screen-overlay ${styleMode}`} onClick={() => goBack()}></div>
+            <div className={`screen-overlay ${styleMode}`} onClick={() => {
+                if (goBack) goBack()
+                return
+            }}></div>
             {children}
         </div>
     )

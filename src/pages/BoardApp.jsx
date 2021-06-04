@@ -12,6 +12,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { eventBusService } from '../services/event-bus.service'
 import { boardService } from '../services/board.service'
 import { socketService } from '../services/socket.service'
+import { Dashboard } from './Dashboard'
 
 
 class _BoardApp extends Component {
@@ -105,7 +106,8 @@ class _BoardApp extends Component {
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <section className="board-app flex column">
                         <BoardHeader board={board} onSaveBoard={onSaveBoard} />
-                        <Route path='/board/:boardId/:listId/:cardId' component={CardDetails} />
+                        <Route path="/board/:boardId/:listId/:cardId" component={CardDetails} />
+                        <Route path="/board/:boardId/dashboard" component={Dashboard} />
                         <Droppable droppableId="all-lists" direction="horizontal" type="list">
                             {provided => (
                                 // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
