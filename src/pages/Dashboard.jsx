@@ -115,7 +115,7 @@ class _Dashboard extends Component {
         return (
             <>
                 <ScreenOverlay styleMode="darken" />
-                <section className="dashboard-container">
+                <section className="dashboard-container flex column">
                     <CloseRoundedIcon className="close-svg" />
                     <div className="general-statistics flex justify-center">
                         <div className="stats flex align-center">
