@@ -20,7 +20,7 @@
         &:hover{
             background-color: rgba(9,30,66,.08);
         }
-        .menu-icon,svg {
+        .menu-icon,svg,span {
             font-size: 20px;
             height: 20px;
             line-height: 20px;
@@ -32,6 +32,10 @@
             path{
                 fill:#42526e
             }
+        }
+        span{
+            display: inline-block;
+            border-radius:3px;
         }
     }
     .activity{
@@ -56,3 +60,4 @@
 //     font-size: 14px;
 //     line-height: 20px
 // }
+

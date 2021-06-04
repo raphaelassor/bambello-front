@@ -28,7 +28,7 @@ class _PopoverActivity extends Component {
     render() {
         const { isCommentsOnly } = this.state
         const { board } = this.props
-        return <Popover className="menu" title="Activity">
+        return <Popover displayMode="menu-popovers" title="Activity">
             <div className="activity-pop-over-details" >
                 <BackToPrevPopover popoverName="MENU" />
                 <div className="filter-container flex">

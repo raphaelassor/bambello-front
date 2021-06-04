@@ -52,7 +52,6 @@ class _CardDetailsActions extends Component {
 
     isUserMember = () => {
         const { card, loggedInUser } = this.props
-        console.log('loggedInUser',loggedInUser);
         const idx = card.members.findIndex(member => member._id === loggedInUser._id)
         if (idx !== -1) return true
         return false

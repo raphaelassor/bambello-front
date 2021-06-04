@@ -52,7 +52,6 @@ export class CardList extends Component {
         const {currList,filterBy}=this.props
         if(!currList) return
         return boardService.getFilteredList(currList,filterBy)
-        
     } 
 
 

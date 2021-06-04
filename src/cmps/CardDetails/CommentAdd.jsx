@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { TextareaAutosize } from '@material-ui/core'
 import { ProfileAvatar } from '../ProfileAvatar'
 import { onSaveBoard } from '../../store/actions/board.actions'
+import { socketService } from "../../services/socket.service";
 
 
 class _CommentAdd extends Component {
@@ -28,6 +29,8 @@ class _CommentAdd extends Component {
         const { loggedInUser, card, board, onSaveBoard } = this.props
         const { txt } = this.state
         const savedActivity = boardService.createActivity('comment', txt, loggedInUser, card)
+        console.log('activity : ' , savedActivity )
+         socketService.emit('new-activity',savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
         this.selectedInput.blur()

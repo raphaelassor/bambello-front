@@ -9,6 +9,7 @@ import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
 import { ProfileAvatar } from './ProfileAvatar'
 import Avatar from '@material-ui/core/Avatar';
+import { socketService } from "../services/socket.service";
 class _AppHeader extends Component {
 
     state = {
@@ -19,10 +20,10 @@ class _AppHeader extends Component {
         isFullStyle: false
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.match.url === '/' && this.props.match.url !== '/') this.setState({ isFullStyle: false })
-    //     if (prevProps.match.url !== '/' && this.props.match.url === '/') this.setState({ isFullStyle: true })
-    // }
+  componentDidMount(){
+      console.log('mounted')
+     
+  }
 
     toggleInput = () => {
         this.setState({ isPrevInput: !this.state.isPrevInput, currOpenModal: !this.state.isPrevInput ? '' : 'search' })
@@ -43,29 +44,22 @@ class _AppHeader extends Component {
                     <button className="btn-header">
                         <AppsIcon />
                     </button>
-                    <button className="btn-header">
+                    <Link to ="/workspace" className="btn-header">
                         <HomeIcon />
-                    </button>
+                    </Link>
                     <button className="btn-header flex" onClick={() => this.toggleCurModal('board-search')}>
                         <BoardIcon />
                         <span>
                             Boards
-                {currOpenModal === 'board-search' && <div className="header-modal board-search">
-                                <input type="text" name="" id="" />
-                                {/* <BoardList boards={FilteredBoards}/> */}
-                            </div>}
                         </span>
                     </button>
                     <div className={`input-header-wrapper flex ${!isPrevInput && 'extended-input'}`} >
                         <input type="text" className="input-header" placeholder="Jump to..." onFocus={this.toggleInput} onBlur={this.toggleInput} />
                         <SearchIcon />
-                        {currOpenModal === 'search' && <div className=" header-modal search-all">
-                            SEARCH PLACEHOLDER
-                </div>}
                     </div>
                 </div>
                 <div className="logo flex align-center">
-                    <Link to="/">
+                    <Link to="/workspace">
                         <BoardIcon />
                         <span>Bambello</span>
                     </Link>
@@ -75,10 +69,6 @@ class _AppHeader extends Component {
                         <button className="btn-header" onClick={() => this.toggleCurModal('create')}>
                             <AddIcon />
                         </button>
-                        {currOpenModal === 'create' && <div className=" header-modal create-modal">
-                            {/* <CreateModal/> */}
-                    CREATE PLACEHOLDER
-                </div>}
                     </div>
                     <button className="btn-header" onClick={() => this.toggleCurModal('info')}>
                         <InfoIcon />
@@ -87,11 +77,6 @@ class _AppHeader extends Component {
                         <button className="btn-header" onClick={() => this.toggleCurModal('notifics')}>
                             <BellIcon />
                         </button>
-                        {currOpenModal === 'notifics' &&
-                            <div className="header-modal notific-modal">
-                                {/* <NotificsList activities={this.props.activities} /> */}
-                    NOTIFICATIONS  PLACEHOLDER
-                </div>}
                     </div>
                     {/* <ProfileAvatar member={loggedInUser} onOpenPopover={() => this.toggleCurModal('user')} size={32} /> */}
                     {currOpenModal === 'user' &&

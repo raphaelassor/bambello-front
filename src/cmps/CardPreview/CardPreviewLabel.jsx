@@ -17,8 +17,8 @@ class _CardPreviewLabel extends Component {
     }
 
     onTogglePreviewLabels = (ev) => {
+        if(this.props.isArchived) return
         ev.preventDefault();
-        console.log(this.props.isPreview)
         if (!this.props.isPreview) this.props.togglePreviewLabels()
     }
 

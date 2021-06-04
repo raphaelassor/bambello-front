@@ -10,7 +10,8 @@ export const boardService = {
     updateCardInBoard,
     createActivity,
     setPopoverPos,
-    getFilteredList
+    removeCard,
+    getFilteredList,
 }
 
 async function query(filterBy = { ctg: '' }) {
@@ -78,7 +79,8 @@ export function createActivity(actionType, txt = '', undefined, card = null) {
     if (card) {
         savedCard = {
             id: card.id,
-            title: card.title
+            title: card.title,
+            members:card.members
         }
     }
 
@@ -125,5 +127,13 @@ function setPopoverPos(pos, elRect, diff = 38) {
     if (left + width > viewportWidth) left = viewportWidth - width - 10
     if (top + height > viewportHeight) top = viewportHeight - height - 10
     return { left, top, width }
+}
+
+function removeCard(board,card){
+    board.lists.forEach(list => {
+        if(list.cards.some(boardCard=>boardCard.id===card.id))
+            list.cards=list.cards.filter(boardCard=>boardCard.id!==card.id)
+    })
+    return { ...board }
 }
 

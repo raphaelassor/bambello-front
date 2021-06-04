@@ -52,7 +52,7 @@ class _PopoverBoardFilter extends Component {
     render() {
         const { txt } = this.state.filterBy
         const { board } = this.props
-        return <Popover title="Search" className="menu">
+        return <Popover title="Search" displayMode="menu-popovers" >
             <BackToPrevPopover popoverName="MENU" />
             <div className="board-filter-pop-over">
                 <input type="text " className="pop-over-input" value={txt} onChange={this.handleChange} autoFocus/>

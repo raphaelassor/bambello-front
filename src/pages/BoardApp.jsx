@@ -25,12 +25,14 @@ class _BoardApp extends Component {
 
     async componentDidMount() {
         try {
-            const { boardId } = this.props.match.params
-            socketService.setup()
+            const { boardId } = this.props.match.params 
             await this.props.loadBoard(boardId)
-            const { board } = this.props
+            const { board,loggedInUser } = this.props
+             socketService.setup()
+            // socketService.emit('user watch',loggedInUser._id)
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
+                console.log('board update')
                 this.props.loadBoard(savedBoard._id)
             })
             this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
@@ -91,18 +93,16 @@ class _BoardApp extends Component {
             const savedActivity = boardService.createActivity('moved', txt, loggedInUser, ...card)
             board.activities.push(savedActivity)
         }
-
         board.lists = lists
         onSaveBoard(board)
     }
-   
+  
 
     render() {
         const {onSaveBoard ,board,filterBy } = this.props
     
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
-        console.log(board)
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>

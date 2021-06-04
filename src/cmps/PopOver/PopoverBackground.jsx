@@ -15,7 +15,7 @@ function  _PopoverBackground ({onSaveBoard,board}) {
         board.style.background = value;
         onSaveBoard(board)
     }
-        return <Popover title="Change background" className="menu">
+        return <Popover title="Change background" displayMode="menu-popovers">
             <BackToPrevPopover popoverName="MENU" />
             <div className="pop-over-backround-details">
                 <div>

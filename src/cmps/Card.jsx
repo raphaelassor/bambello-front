@@ -26,23 +26,26 @@ class _Card extends Component {
     }
 
     toggleCardDone = (ev) => {
-        ev.preventDefault();
         const { board, card, onSaveBoard } = this.props;
+        if(card.isArchived) return
+        ev.preventDefault();
         card.isDone = !card.isDone
         const savedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(savedBoard);
     }
 
     onOpenCardEdit = (ev) => {
-        ev.preventDefault();
         const { card } = this.props
+        if(card.isArchived) return
+        ev.preventDefault();
         const elPos = this.cardContainer.getBoundingClientRect();
         eventBusService.emit('card-edit', { elPos, card });
     }
 
     onOpenPopover = (ev, type, member) => {
-        ev.preventDefault();
         const { card, openPopover } = this.props;
+        if(card.isArchived) return
+        ev.preventDefault();
         let elPos;
         let props;
         if (type === 'PROFILE') {
@@ -77,7 +80,7 @@ class _Card extends Component {
                 {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
                     {coverMode !== 'full' && <div className="card-preview-labels">
-                        {!!card.labelIds.length && card.labelIds.map(labelId => <CardPreviewLabel key={labelId} labelId={labelId} labels={board.labels} isPreview={isEditMode} />)}
+                        {!!card.labelIds.length && card.labelIds.map(labelId => <CardPreviewLabel key={labelId} labelId={labelId} labels={board.labels} isArchived={card.isArchived} isPreview={isEditMode} />)}
                     </div>
                     }
                     {isEditMode ?
