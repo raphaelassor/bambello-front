@@ -2,6 +2,7 @@
 import { httpService } from './http.service'
 
 export const userService = {
+    // googleLogin,
     login,
     logout,
     signup,
@@ -18,6 +19,15 @@ async function login(credentials) {
         throw err
     }
 }
+
+// async function googleLogin(tokenId) {
+//     try {
+//         const user = await httpService.post('auth/googlelogin', { tokenId })
+//         console.log(user)
+//     } catch (err) {
+//         throw err
+//     }
+// }
 
 async function signup(userInfo) {
     try {

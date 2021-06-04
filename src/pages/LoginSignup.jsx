@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { ReactComponent as LogoRight } from '../assets/img/logos/auth-right-logo.svg'
+import { ReactComponent as LogoLeft } from '../assets/img/logos/auth-left-logo.svg'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { onLogin, onSignup } from '../store/actions/app.actions.js'
-import { ReactComponent as HomepageLogo } from '../assets/img/logos/home-logo.svg'
+import { ReactComponent as LoginSignupLogo } from '../assets/img/logos/login-signup-logo.svg'
 
 export class _LoginSignup extends Component {
 
@@ -56,14 +59,19 @@ export class _LoginSignup extends Component {
         pageMode === 'login' ? onLogin(values) : onSignup(values)
     }
 
+
     render() {
         const { pageMode, credentials, userInfo } = this.state
         const { loginErr } = this.props
         if (!pageMode) return ''
         return (<section className="login-signup-container">
-            <HomepageLogo />
-            {pageMode === 'login' && <div className="login-signup flex column align-center">
-                <h1>Log in to Bambello</h1>
+            <Link to="/" className="clean-link"><div className="logo flex align-center justify-center">
+                <LoginSignupLogo />
+                <h1>Bambello</h1>
+            </div>
+            </Link>
+            {pageMode === 'login' && <div className="login-signup flex column">
+                <h3>Log in to Bambello</h3>
                 <Formik initialValues={credentials} onSubmit={this.onSubmit} >
                     <Form className="flex column">
                         <Field type="username" placeholder="Enter username" name="username" />
@@ -71,13 +79,15 @@ export class _LoginSignup extends Component {
                         <Field type="password" placeholder="Enter password" name="password" />
                         <ErrorMessage name="password" component="div" />
                         {loginErr && <p>{loginErr}</p>}
-                        <button type="submit" className="primary-btn">Login</button>
+                        <button type="submit" className="primary-btn">Log in</button>
                     </Form>
                 </Formik>
+                <hr />
+                <Link to="/signup">Sign up for an account</Link>
             </div>}
             {pageMode === 'signup' &&
-                <div className="login-signup flex column align-center full">
-                    <h1>Signup</h1>
+                <div className="login-signup flex column ">
+                    <h3>Sign up for your account</h3>
                     <Formik initialValues={userInfo} validateOnChange={false} validateOnBlur={false} validate={this.validate} onSubmit={this.onSubmit}>
                         <Form className="flex column">
                             <Field type="fullname" placeholder="Enter fullname" name="fullname" />
@@ -86,10 +96,18 @@ export class _LoginSignup extends Component {
                             <ErrorMessage name="username" component="p" />
                             <Field type="password" placeholder="Enter password" name="password" />
                             <ErrorMessage name="password" component="p" />
-                            <button type="submit" className="primary-btn">Signup</button>
+                            <button type="submit" className="primary-btn">Sign up</button>
                         </Form>
                     </Formik>
+                    <hr />
+                    <Link to="/login">Already have an account ? Log In</Link>
                 </div>}
+            <div className="left-logo">
+                <LogoLeft />
+            </div>
+            <div className="right-logo">
+                <LogoRight />
+            </div>
         </section>
         )
     }
