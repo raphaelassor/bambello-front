@@ -74,7 +74,7 @@ export class _LoginSignup extends Component {
                 <h3>Log in to Bambello</h3>
                 <Formik initialValues={credentials} onSubmit={this.onSubmit} >
                     <Form className="flex column">
-                        <Field type="username" placeholder="Enter username" name="username" />
+                        <Field type="username" placeholder="Enter username" name="username"  autoFocus/>
                         <ErrorMessage name="username" component="div" />
                         <Field type="password" placeholder="Enter password" name="password" />
                         <ErrorMessage name="password" component="div" />
@@ -90,7 +90,7 @@ export class _LoginSignup extends Component {
                     <h3>Sign up for your account</h3>
                     <Formik initialValues={userInfo} validateOnChange={false} validateOnBlur={false} validate={this.validate} onSubmit={this.onSubmit}>
                         <Form className="flex column">
-                            <Field type="fullname" placeholder="Enter fullname" name="fullname" />
+                            <Field type="fullname" placeholder="Enter fullname" name="fullname" autoFocus />
                             <ErrorMessage name="fullname" component="p" />
                             <Field type="username" placeholder="Enter username" name="username" />
                             <ErrorMessage name="username" component="p" />

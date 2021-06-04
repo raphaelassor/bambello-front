@@ -37,6 +37,17 @@ class _CardDetails extends Component {
         this.setState({ card, list })
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.board !== this.props.board) {
+            const { board: { lists } } = this.props
+            const { cardId, listId } = this.props.match.params
+            const list = lists.find(list => list.id === listId)
+            const { cards } = list;
+            const card = cards.find(card => card.id === cardId)
+            this.setState({ card, list })
+        }
+    }
+
     get cardLabels() {
         const { card: { labelIds } } = this.state
         const { board: { labels } } = this.props
@@ -117,6 +128,10 @@ class _CardDetails extends Component {
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style, attachs } = card
+<<<<<<< HEAD
+=======
+        console.log('card members', members)
+>>>>>>> 7456a0e3bbfb1675e8a35949d250a849712cc1de
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
