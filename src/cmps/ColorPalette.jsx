@@ -1,6 +1,7 @@
 import CheckIcon from '@material-ui/icons/Check';
+import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
 
-export function ColorPalette({ handleChange, selectedColor,isGradient,isColor }) {
+export function ColorPalette({ handleChange, selectedColor,isGradient,isColor,count }) {
 
     const colorCodes = [
         '#60bd4f',
@@ -25,10 +26,11 @@ export function ColorPalette({ handleChange, selectedColor,isGradient,isColor })
     ]
     
     function getStyles(){
-        return isGradient? gradientStyles:colorCodes
+        const styles=isGradient? gradientStyles:colorCodes
+        return count ? styles.slice(0,count):styles
     }
 
-    return <div className="color-palette flex wrap">
+    return <div className="color-palette">
         {getStyles().map(colorCode => {
             return <label key={colorCode} className="flex align-center justify-center" style={{ background: colorCode }} name="label-color" htmlFor={`color-${colorCode}`}>
                 <input type="radio" name="color" id={`color-${colorCode}`} value={colorCode} onClick={handleChange} />

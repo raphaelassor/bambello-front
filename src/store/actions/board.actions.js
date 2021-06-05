@@ -35,6 +35,11 @@ export function onSaveBoard(board) {
         }
     }
 }
+export function unsetBoard(){
+    return  dispatch=>{
+        dispatch({type:'SET_BOARD', board:null })
+    }
+}
 
 export function togglePreviewLabels() {
     return dispatch => {

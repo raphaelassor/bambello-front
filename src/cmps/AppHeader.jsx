@@ -1,5 +1,8 @@
 import { Component } from "react";
 import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { socketService } from "../services/socket.service";
+import {openPopover} from '../store/actions/app.actions'
 import { ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import { ReactComponent as BoardIcon } from '../assets/img/icons/board.svg'
 import { ReactComponent as AppsIcon } from '../assets/img/icons/apps.svg'
@@ -9,7 +12,6 @@ import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
 import { ProfileAvatar } from './ProfileAvatar'
 import Avatar from '@material-ui/core/Avatar';
-import { socketService } from "../services/socket.service";
 class _AppHeader extends Component {
 
     state = {
@@ -37,9 +39,9 @@ class _AppHeader extends Component {
 
     render() {
         const { isPrevInput, currOpenModal, isFullStyle } = this.state
-        const { board, loggedInUser } = this.props
+        const { board, loggedInUser,openPopover } = this.props
         return <div>
-            <div className={`main-header flex justify-space-between ${board ? 'in-board' : ''} `}>
+            <div className={`main-header flex justify-space-between ${board ? 'in-board' : 'out-board'} `}>
                 <div className="btn-header-container flex">
                     <button className="btn-header">
                         <AppsIcon />
@@ -66,7 +68,7 @@ class _AppHeader extends Component {
                 </div>
                 <div className="btn-header-container flex">
                     <div>
-                        <button className="btn-header" onClick={() => this.toggleCurModal('create')}>
+                        <button className="btn-header" onClick={() => openPopover('CREATE_BOARD')}>
                             <AddIcon />
                         </button>
                     </div>
@@ -91,8 +93,11 @@ class _AppHeader extends Component {
 
 }
 
+const mapDispatchToProps={
+    openPopover
+}
 
-export const AppHeader = withRouter(_AppHeader)
+export const AppHeader = connect(null,mapDispatchToProps)(_AppHeader)
 
 
 

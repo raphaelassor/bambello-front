@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 // import ScrollContainer from 'react-indiana-drag-scroll'
-import { loadBoard, onSaveBoard } from '../store/actions/board.actions'
+import { loadBoard, onSaveBoard ,unsetBoard} from '../store/actions/board.actions'
 import { CardEdit } from '../cmps/CardEdit'
 import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
@@ -29,11 +29,10 @@ class _BoardApp extends Component {
             const { boardId } = this.props.match.params 
             await this.props.loadBoard(boardId)
             const { board,loggedInUser } = this.props
-             socketService.setup()
             // socketService.emit('user watch',loggedInUser._id)
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
-                console.log('board update')
+
                 this.props.loadBoard(savedBoard._id)
             })
             this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
@@ -47,6 +46,7 @@ class _BoardApp extends Component {
     componentWillUnmount() {
         socketService.off('board updated')
         this.removeEvent();
+        this.props.unsetBoard()
     }
 
     onCloseCardEdit = () => {
@@ -101,7 +101,6 @@ class _BoardApp extends Component {
 
     render() {
         const {onSaveBoard ,board,filterBy } = this.props
-    
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
         return (
@@ -140,7 +139,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     loadBoard,
-    onSaveBoard
+    onSaveBoard,
+    unsetBoard
 }
 
 export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)

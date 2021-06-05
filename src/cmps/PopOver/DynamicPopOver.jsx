@@ -13,6 +13,7 @@ import { PopoverBackground } from './PopoverBackground';
 import { PopoverArchive } from './PopoverArchive';
 import { PopoverActivity } from './PopoverActivity';
 import { PopoverBoardFilter } from './PopoverBoardFilter';
+import { PopoverCreateBoard } from './PopoverCreateBoard';
 
 function _DynamicPopover({ currPopover }) {
     if (!currPopover) return ''
@@ -33,6 +34,7 @@ function _DynamicPopover({ currPopover }) {
         case 'ARCHIVE': return <PopoverArchive {...props} />
         case 'ACTIVITY': return <PopoverActivity {...props} />
         case 'BOARD_FILTER': return <PopoverBoardFilter {...props} />
+        case 'CREATE_BOARD': return <PopoverCreateBoard {...props} />
         default: return '';
     }
 }

@@ -128,10 +128,6 @@ class _CardDetails extends Component {
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
         const { title, members, description, checklists, dueDate, style, attachs } = card
-<<<<<<< HEAD
-=======
-        console.log('card members', members)
->>>>>>> 7456a0e3bbfb1675e8a35949d250a849712cc1de
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />

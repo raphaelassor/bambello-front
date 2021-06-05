@@ -1,6 +1,8 @@
 .color-palette {
     width: 100%;
     margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
     label[name="label-color"]{
         width: 48px;
         height: 32px;
