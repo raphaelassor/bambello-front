@@ -20,7 +20,6 @@ class _App extends Component {
 
   render() {
     const { loggedInUser, board } = this.props
-    console.log(loggedInUser)
     return (
       <div style={this.style}>
         {loggedInUser && <header>

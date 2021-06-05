@@ -37,6 +37,7 @@
             height: 40px;
             top: 4px;
             right: 4px;
+            z-index: 10;
             transition: background-color 85ms, color 85ms;
 
             &.cover-mode {
@@ -54,6 +55,23 @@
 
             &:active {
                 background-color: rgba(9, 30, 66, 0.25);
+            }
+        }
+
+        .card-details-archived{
+            >*:first-child{
+                font-size: 20px;
+                margin-inline-end: 22px;
+            }
+            background-color: #FDFAE5;
+            background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 75%, transparent 75%, transparent);
+            background-size: 14px 14px;
+            min-height: 30px;
+            padding: 12px;
+            position: relative;
+            h3{
+                font-size: 16px;
+                line-height: 30px;
             }
         }
 

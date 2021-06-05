@@ -128,8 +128,7 @@ class _CardDetails extends Component {
         const { board, board: { activities }, onSaveBoard, openPopover } = this.props
         const { card, list } = this.state
         if (!card) return '' //LOADER PLACER
-        const { title, members, description, checklists, dueDate, style, attachs } = card
-        console.log('card members', members)
+        const { title, members, description, checklists, dueDate, style, attachs, isArchived } = card
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
@@ -140,6 +139,10 @@ class _CardDetails extends Component {
                         <CloseRoundedIcon />
                     </button>
                     {style.coverMode && <CardDetailsCover style={style} openPopover={openPopover} card={card} />}
+                    {isArchived && <div className="card-details-archived flex align-center">
+                        <i className="fas fa-archive icon-sm"></i>
+                        <h3>This card is archived.</h3>
+                    </div>}
                     <div className="card-details-header">
                         <div className="header-content flex">
                             <WebAssetIcon />
