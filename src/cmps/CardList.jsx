@@ -1,8 +1,9 @@
 import { Component } from 'react'
+import { boardService } from '../services/board.service'
 import { CardPreview } from './CardPreview/CardPreview'
 import { CardAdd } from './CardAdd'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
-import { ListMenu } from './ListMenu'
+import { PopoverListMenu } from './Popover/PopoverListMenu'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 export class CardList extends Component {
@@ -47,6 +48,12 @@ export class CardList extends Component {
         this.setState({ isMenuOpen: !this.state.isMenuOpen })
     }
 
+    get filteredList(){
+        const {currList,filterBy}=this.props
+        if(!currList) return
+        return boardService.getFilteredList(currList,filterBy)
+    } 
+
 
     render() {
         const { board, currList, onSaveBoard, currListIdx } = this.props
@@ -66,11 +73,11 @@ export class CardList extends Component {
                                         }
                                         <div onClick={() => this.toggleMenu()} className="card-list-btn-menu">
                                             <i className="fas fa-ellipsis-h"></i>
-                                            {isMenuOpen && <ListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu} />}
+                                            {isMenuOpen && <PopoverListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu} />}
                                         </div>
                                     </div>
-                                    <div className="card-list-cards">
-                                        {currList.cards.map((card, idx) => <CardPreview key={card.id} card={card} cardIdx={idx} currList={currList} board={board} onSaveBoard={onSaveBoard} />)}
+                                     <div className="card-list-cards">
+                                        {this.filteredList.cards.map((card, idx) => <CardPreview key={card.id} card={card} cardIdx={idx} currList={currList} board={board} onSaveBoard={onSaveBoard} />)}
                                         {isAddCardOpen &&
                                             <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
                                         }

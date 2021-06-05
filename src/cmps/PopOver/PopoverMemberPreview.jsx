@@ -1,9 +1,10 @@
 import Avatar from '@material-ui/core/Avatar';
 import CheckIcon from '@material-ui/icons/Check';
+import { ProfileAvatar } from '../ProfileAvatar';
 export function PopoverMemberPreview({member,toggleMember,isSelected}){
 
-return <li onClick={()=>toggleMember(member)} className="member-pop-over-preview flex">
-    <Avatar style={{backgroundColor:'#DFE1E6',color:'#172b4d',width:'32px',height:'32px',fontWeight:'bold',fontSize:'14px'}}>aa</Avatar>
+return <li onClick={()=>toggleMember(member,'members')} className="member-pop-over-preview flex">
+    <ProfileAvatar member={member} size={32} />
     <span>{member.fullname}</span>
     {isSelected && <span className="icon-check" ><CheckIcon style={{width:'16px'}}/></span>}
 </li>

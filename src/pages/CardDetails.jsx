@@ -111,7 +111,6 @@ class _CardDetails extends Component {
         const { card } = this.state
         card.isDone = !card.isDone
         this.setState({ card }, () => {
-            console.log('card is ', this.state.card)
             this.onSaveCard()
         })
     }

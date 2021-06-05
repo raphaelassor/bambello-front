@@ -9,8 +9,7 @@
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: $borderRad1;
         color: $clr2;
-        h1{
-
+        h1 {
             line-height: 32px;
             padding: 0 12px;
         }
@@ -38,23 +37,23 @@
         height: 32px;
         color: $clr2;
         margin-inline-end: 5px;
-        &:first-child{
-            svg:first-child{
+        &:first-child {
+            svg:first-child {
                 margin-inline-end: 4px;
                 margin-inline-start: 2px;
             }
-            svg:last-child{
+            svg:last-child {
                 margin-inline-end: 2px;
             }
-            span{
+            span {
                 margin-inline-end: 6px;
             }
         }
-        &:last-child{
-            margin-inline-end:4px;
+        &:last-child {
+            margin-inline-end: 4px;
             padding-inline-end: 12px;
-            svg{
-                margin-inline-end:8px;
+            svg {
+                margin-inline-end: 8px;
                 margin-inline-start: 3px;
             }
         }
@@ -74,8 +73,8 @@
 
     .board-header-members {
         flex-grow: 1;
-        .profile-avatar{
-            width:26px;
+        .profile-avatar {
+            width: 26px;
         }
         .MuiAvatar-root {
             width: 28px;
@@ -96,14 +95,38 @@
         .MuiAvatar-colorDefault {
             color: rgb(23, 43, 77);
         }
-        button{
+        button {
             margin-left: 8px;
-            padding:5px 14px;
+            padding: 5px 14px;
         }
     }
-    .divider{
-        border-left: 1px solid hsla(0,0%,100%,.24);
+    .divider {
+        border-left: 1px solid hsla(0, 0%, 100%, 0.24);
         height: 16px;
         margin: 8px 6px 8px 4px;
+    }
+    .board-filter-results {
+        background-color: #5aac44;
+        color: white;
+        text-decoration: none;
+        border-radius: $borderRad1;
+        span {
+            &:first-child {
+                padding: 0 12px;
+            }
+            &:last-child {
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+                background-color: #61bd4f;
+                svg {
+                    width: 16px;
+                    height: 16px;
+                    margin: 8px;
+                }
+            }
+        }
+        &:hover{
+            filter: brightness(105%);
+        }
     }
 }

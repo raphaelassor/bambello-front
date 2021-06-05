@@ -35,6 +35,11 @@ export function onSaveBoard(board) {
         }
     }
 }
+export function unsetBoard(){
+    return  dispatch=>{
+        dispatch({type:'SET_BOARD', board:null })
+    }
+}
 
 export function togglePreviewLabels() {
     return dispatch => {
@@ -43,6 +48,7 @@ export function togglePreviewLabels() {
 }
 
 export function setFilter(filterBy){
+    console.log('in set Filter', filterBy)
     return dispatch=>{
         dispatch({ type: 'SET_FILTER',filterBy })
     }

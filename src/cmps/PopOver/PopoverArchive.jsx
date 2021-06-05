@@ -1,28 +1,52 @@
 import {Popover} from './Popover'
 import {connect} from 'react-redux'
-import ArrowBackIcon from '@material-ui/icons/ArrowBackIos';
+import {BackToPrevPopover} from './BackToPrevPopover'
 import {onSaveBoard} from '../../store/actions/board.actions'
 import {openPopover} from '../../store/actions/app.actions'
 import { Component } from "react";
+import { Card } from '../Card'
+import { Link } from 'react-router-dom'
+import { boardService } from '../../services/board.service'
 
 class _PopoverArchive extends Component { 
     state={
-        archivedCards:[],
         filterTxt:'',
+        archivedCards:[]
     }
     componentDidMount(){
+    
         const {board}= this.props
-        const archivedCards= board.lists.reduce((acc,list)=>{
-            list.cards.forEach(card=>{
-                if(card.isArchived) acc.push(card)
-            })
-            return acc
-        })
+       const archivedCards= board.lists.reduce((acc,list)=>{
+              list.cards.forEach(card=>{
+                  if(card.isArchived) acc.push(card)
+              })
+              return acc
+          },[])
         this.setState({archivedCards})
     }
 
     handleChange=({target})=>{
         this.setState({filterTxt:target.value})
+    }
+    onRemoveCard=(card)=>{
+        const {board,onSaveBoard}=this.props
+      const updatedBoard= boardService.removeCard(board,card)
+       onSaveBoard(updatedBoard)
+       this.updateArchivedState(card)
+}
+    onSendToBoard=(card)=>{
+        const {board,onSaveBoard}=this.props
+        card.isArchived=false
+        const updatedBoard= boardService.updateCardInBoard(board,card)
+        onSaveBoard(updatedBoard)
+        this.updateArchivedState(card)
+    }
+
+    updateArchivedState=(card)=>{
+        this.setState({archivedCards:this.state.archivedCards.filter(archivedCard=> archivedCard.id!==card.id)})
+    }
+    get archivedCards(){
+     
     }
 
     get filteredCards(){
@@ -30,21 +54,31 @@ class _PopoverArchive extends Component {
         const regEx= new RegExp(filterTxt, 'i')
         return archivedCards.filter(card=> regEx.test(card.title) )
     }
-    onOpenPopover = (ev, PopoverName) => {
-        const elPos = ev.target.getBoundingClientRect()
-        const props = {}
-        this.props.openPopover(PopoverName, elPos, props)
+
+    getCardListId= (card)=>{
+        const {board}=this.props
+        const list = board.lists.find(list=> list.cards.some(listCard=> listCard.id===card.id))
+        if (!list) return ''
+        return list.id
     }
 
     render(){
-        const {filterTxt}=this.state
-        return <Popover className="menu" title="Archive">
+        const {filterTxt,archivedCards}=this.state
+        const{card,board}=this.props
+        return <Popover displayMode="menu-popovers" title="Archive">
             <div className="pop-over-archive-details">
-            <span className= "back" onClick={ev=>this.onOpenPopover(ev,'MENU')}>
-            <ArrowBackIcon/>
-            </span>
+            <BackToPrevPopover popoverName="MENU" />
             <input type="text" className="pop-over-input" value={filterTxt} onChange={this.handleChange} autoFocus/>
-            {/* map of Card Previews  */}
+            {archivedCards.map(card=> {
+              return <div>
+               <Link to={`/board/${board._id}/${this.getCardListId(card)}/${card.id}`}>
+            <Card card={card} board={board} />
+                </Link>
+                <p className="archive-card-actions">
+                    <Link onClick={()=>this.onSendToBoard(card)}>Send to board</Link> - <Link onClick={()=>this.onRemoveCard(card)}>Delete</Link>
+                </p>
+              </div>
+             })}
             </div>
         </Popover>
     }
@@ -57,7 +91,6 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     onSaveBoard,
-    openPopover
 }
 
 

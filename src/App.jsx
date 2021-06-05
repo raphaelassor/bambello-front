@@ -5,8 +5,13 @@ import { routes } from './routes'
 import { connect } from 'react-redux';
 // import { connect } from 'react-redux'
 import { DynamicPopover } from './cmps/Popover/DynamicPopover'
+import { socketService } from './services/socket.service';
 
 class _App extends Component {
+  
+  componentDidMount(){
+    socketService.setup()
+  }
 
   get style() {
     const { board, location } = this.props
@@ -15,14 +20,21 @@ class _App extends Component {
       background: board.style.background
     } : { background: "#0079bf" }
     return style
+  } 
+  get isHeaderAppears(){
+    const {pathname}=this.props.location
+    return (pathname.includes('/board')||pathname.includes('workspace'))
   }
+
+
+
 
 
   render() {
     const { loggedInUser, board } = this.props
     return (
       <div style={this.style}>
-        {loggedInUser && <header>
+        {this.isHeaderAppears && <header>
           <AppHeader board={board} loggedInUser={loggedInUser} />
         </header>}
 

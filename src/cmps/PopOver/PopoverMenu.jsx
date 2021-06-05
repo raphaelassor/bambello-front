@@ -24,12 +24,12 @@ import { ActivitiesList } from "../ActivitiesList"
     render() {
         const {board}=this.props
         return <div className="board-menu-wrapper">
-            <Popover className="menu" title="Menu">
+            <Popover displayMode="menu" title="Menu">
                 <div className="menu-details ">
                     <section>
                         <ul className="clean-list">
                             <li onClick={(ev) => this.onOpenPopover(ev, 'BACKGROUND')}> 
-                            <BoardIcon/>
+                            <span style={{background:board.style.background}}></span>
                             Change background </li>
                             <li onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
                                 <SearchIcon/>

@@ -1,5 +1,8 @@
 import { Component } from "react";
 import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { socketService } from "../services/socket.service";
+import {openPopover} from '../store/actions/app.actions'
 import { ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import { ReactComponent as BoardIcon } from '../assets/img/icons/board.svg'
 import { ReactComponent as AppsIcon } from '../assets/img/icons/apps.svg'
@@ -19,10 +22,10 @@ class _AppHeader extends Component {
         isFullStyle: false
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.match.url === '/' && this.props.match.url !== '/') this.setState({ isFullStyle: false })
-    //     if (prevProps.match.url !== '/' && this.props.match.url === '/') this.setState({ isFullStyle: true })
-    // }
+  componentDidMount(){
+      console.log('mounted')
+     
+  }
 
     toggleInput = () => {
         this.setState({ isPrevInput: !this.state.isPrevInput, currOpenModal: !this.state.isPrevInput ? '' : 'search' })
@@ -36,49 +39,38 @@ class _AppHeader extends Component {
 
     render() {
         const { isPrevInput, currOpenModal, isFullStyle } = this.state
-        const { board, loggedInUser } = this.props
+        const { board, loggedInUser,openPopover } = this.props
         return <div>
-            <div className={`main-header flex justify-space-between ${board ? 'in-board' : ''} `}>
+            <div className={`main-header flex justify-space-between ${board ? 'in-board' : 'out-board'} `}>
                 <div className="btn-header-container flex">
                     <button className="btn-header">
                         <AppsIcon />
                     </button>
-                    <button className="btn-header">
+                    <Link to ="/workspace" className="btn-header">
                         <HomeIcon />
-                    </button>
+                    </Link>
                     <button className="btn-header flex" onClick={() => this.toggleCurModal('board-search')}>
                         <BoardIcon />
                         <span>
                             Boards
-                {currOpenModal === 'board-search' && <div className="header-modal board-search">
-                                <input type="text" name="" id="" />
-                                {/* <BoardList boards={FilteredBoards}/> */}
-                            </div>}
                         </span>
                     </button>
                     <div className={`input-header-wrapper flex ${!isPrevInput && 'extended-input'}`} >
                         <input type="text" className="input-header" placeholder="Jump to..." onFocus={this.toggleInput} onBlur={this.toggleInput} />
                         <SearchIcon />
-                        {currOpenModal === 'search' && <div className=" header-modal search-all">
-                            SEARCH PLACEHOLDER
-                </div>}
                     </div>
                 </div>
                 <div className="logo flex align-center">
-                    <Link to="/">
+                    <Link to="/workspace">
                         <BoardIcon />
                         <span>Bambello</span>
                     </Link>
                 </div>
                 <div className="btn-header-container flex">
                     <div>
-                        <button className="btn-header" onClick={() => this.toggleCurModal('create')}>
+                        <button className="btn-header" onClick={() => openPopover('CREATE_BOARD')}>
                             <AddIcon />
                         </button>
-                        {currOpenModal === 'create' && <div className=" header-modal create-modal">
-                            {/* <CreateModal/> */}
-                    CREATE PLACEHOLDER
-                </div>}
                     </div>
                     <button className="btn-header" onClick={() => this.toggleCurModal('info')}>
                         <InfoIcon />
@@ -87,11 +79,6 @@ class _AppHeader extends Component {
                         <button className="btn-header" onClick={() => this.toggleCurModal('notifics')}>
                             <BellIcon />
                         </button>
-                        {currOpenModal === 'notifics' &&
-                            <div className="header-modal notific-modal">
-                                {/* <NotificsList activities={this.props.activities} /> */}
-                    NOTIFICATIONS  PLACEHOLDER
-                </div>}
                     </div>
                     {/* <ProfileAvatar member={loggedInUser} onOpenPopover={() => this.toggleCurModal('user')} size={32} /> */}
                     {currOpenModal === 'user' &&
@@ -106,8 +93,11 @@ class _AppHeader extends Component {
 
 }
 
+const mapDispatchToProps={
+    openPopover
+}
 
-export const AppHeader = withRouter(_AppHeader)
+export const AppHeader = connect(null,mapDispatchToProps)(_AppHeader)
 
 
 

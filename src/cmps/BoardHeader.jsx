@@ -1,17 +1,18 @@
 import { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
-import { userService } from '../services/user.service'
+import { ReactComponent as ElipsisIcon } from '../assets/img/icons/elipsis.svg'
+import CloseIcon from '@material-ui/icons/Close';
+import AutosizeInput from 'react-input-autosize';
+import { ElementOverlay } from '../cmps/Popover/ElementOverlay';
+import { ProfileAvatar } from './ProfileAvatar';
 import { boardService } from '../services/board.service'
 import { onSetLoggedInUser } from '../store/actions/app.actions'
-import { ReactComponent as ElipsisIcon } from '../assets/img/icons/elipsis.svg'
 import { openPopover } from '../store/actions/app.actions.js'
-import AutosizeInput from 'react-input-autosize';
-import { ProfileAvatar } from './ProfileAvatar';
-import { ElementOverlay } from '../cmps/Popover/ElementOverlay';
-import AvatarGroup from '@material-ui/lab/AvatarGroup';
-import MenuIcon from '@material-ui/icons/MoreHoriz';
+import { setFilter } from '../store/actions/board.actions.js'
+
 
 class _BoardHeader extends Component {
 
@@ -63,7 +64,27 @@ class _BoardHeader extends Component {
         const props = { member }
         this.props.openPopover(PopoverName, elPos, props)
     }
+    get isFilterOn(){
+        
+        const {labels,txt,members}=this.props.filterBy
+        return labels.length|| members.length|| txt
+    }
 
+    get searchResultsCount(){
+        const {board,filterBy}=this.props
+        return  board.lists.reduce((acc,list)=>{
+            const filteredList = boardService.getFilteredList(list,filterBy)
+            acc+=filteredList.cards.length
+            return acc
+        },0)
+       
+
+    }
+
+    resetFilter=(ev)=>{
+        ev.stopPropagation()
+        this.props.setFilter({txt:'',labels:[],members:[]})
+    }
 
     render() {
         const { board, loggedInUser } = this.props
@@ -101,6 +122,12 @@ class _BoardHeader extends Component {
 
                     <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
+               {this.isFilterOn && <Link className="board-filter-results flex align-center" to= "#" onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
+                    <span>{this.searchResultsCount} search results</span>
+                    <span className="flex align-center" onClick={this.resetFilter}>
+                        <CloseIcon/>
+                    </span>
+                </Link>}
                 <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
                     <ElipsisIcon />
                     <span>Show Menu</span>
@@ -118,13 +145,15 @@ class _BoardHeader extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
-        loggedInUser: state.appModule.loggedInUser
+        loggedInUser: state.appModule.loggedInUser,
+        filterBy:state.boardModule.filterBy
     }
 }
 
 const mapDispatchToProps = {
     onSetLoggedInUser,
-    openPopover
+    openPopover,
+    setFilter
 }
 
 export const BoardHeader = connect(mapStateToProps, mapDispatchToProps)(_BoardHeader)

@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 // import ScrollContainer from 'react-indiana-drag-scroll'
-import { loadBoard, onSaveBoard } from '../store/actions/board.actions'
+import { loadBoard, onSaveBoard ,unsetBoard} from '../store/actions/board.actions'
 import { CardEdit } from '../cmps/CardEdit'
 import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
@@ -26,12 +26,13 @@ class _BoardApp extends Component {
 
     async componentDidMount() {
         try {
-            const { boardId } = this.props.match.params
-            socketService.setup()
+            const { boardId } = this.props.match.params 
             await this.props.loadBoard(boardId)
-            const { board } = this.props
+            const { board,loggedInUser } = this.props
+            // socketService.emit('user watch',loggedInUser._id)
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
+
                 this.props.loadBoard(savedBoard._id)
             })
             this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
@@ -45,6 +46,7 @@ class _BoardApp extends Component {
     componentWillUnmount() {
         socketService.off('board updated')
         this.removeEvent();
+        this.props.unsetBoard()
     }
 
     onCloseCardEdit = () => {
@@ -92,13 +94,13 @@ class _BoardApp extends Component {
             const savedActivity = boardService.createActivity('moved', txt, loggedInUser, ...card)
             board.activities.push(savedActivity)
         }
-
         board.lists = lists
         onSaveBoard(board)
     }
+  
 
     render() {
-        const { board, onSaveBoard } = this.props
+        const {onSaveBoard ,board,filterBy } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <div></div>
         return (
@@ -112,7 +114,7 @@ class _BoardApp extends Component {
                             {provided => (
                                 // <ScrollContainer hideScrollbars={false} className="card-list-container scroll-container" ignoreElements={`.card-list`} {...provided.droppableProps} ref={provided.innerRef}>
                                 <div {...provided.droppableProps} ref={provided.innerRef} className="card-list-container flex">
-                                    {board.lists.map((currList, idx) => <CardList key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
+                                    {board.lists.map((currList, idx) => <CardList filterBy={filterBy} key={currList.id} currListIdx={idx} currList={currList} onSaveBoard={onSaveBoard} board={board} />)}
                                     {provided.placeholder}
                                     <CardListAdd board={board} onSaveBoard={onSaveBoard} />
                                 </div>
@@ -130,13 +132,15 @@ class _BoardApp extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
-        loggedInUser: state.appModule.loggedInUser
+        loggedInUser: state.appModule.loggedInUser,
+        filterBy: state.boardModule.filterBy
     }
 }
 
 const mapDispatchToProps = {
     loadBoard,
-    onSaveBoard
+    onSaveBoard,
+    unsetBoard
 }
 
 export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)
