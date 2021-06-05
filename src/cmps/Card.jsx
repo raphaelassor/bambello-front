@@ -27,7 +27,7 @@ class _Card extends Component {
 
     toggleCardDone = (ev) => {
         const { board, card, onSaveBoard } = this.props;
-        if(card.isArchived) return
+        if (card.isArchived) return
         ev.preventDefault();
         card.isDone = !card.isDone
         const savedBoard = boardService.updateCardInBoard(board, card)
@@ -36,7 +36,7 @@ class _Card extends Component {
 
     onOpenCardEdit = (ev) => {
         const { card } = this.props
-        if(card.isArchived) return
+        if (card.isArchived) return
         ev.preventDefault();
         const elPos = this.cardContainer.getBoundingClientRect();
         eventBusService.emit('card-edit', { elPos, card });
@@ -44,7 +44,7 @@ class _Card extends Component {
 
     onOpenPopover = (ev, type, member) => {
         const { card, openPopover } = this.props;
-        if(card.isArchived) return
+        if (card.isArchived) return
         ev.preventDefault();
         let elPos;
         let props;
@@ -58,13 +58,52 @@ class _Card extends Component {
         openPopover(type, elPos, props)
     }
 
+    // get cardStyles() {
+    //     const { isEditMode } = this.props
+    //     const { coverMode, bgColor, bgImgUrl } = this.props.card.style
+    //     if (bgImgUrl) return { background: }
+    //     if (coverMode === 'header') return { minHeight: '56px' };
+    //     else if (isEditMode && coverMode === 'full') return {};
+    //     else if (coverMode === 'full') return { backgroundColor: bgColor, borderTopLeftRadius: '3px', borderTopRightRadius: '3px', minHeight: '56px' };
+    //     else return { borderRadius: '3px' };
+    // }
+
     get cardStyles() {
         const { isEditMode } = this.props
-        const { coverMode, bgColor } = this.props.card.style
-        if (coverMode === 'header') return { minHeight: '56px' };
-        else if (isEditMode && coverMode === 'full') return {};
-        else if (coverMode === 'full') return { backgroundColor: bgColor, borderTopLeftRadius: '3px', borderTopRightRadius: '3px', minHeight: '56px' };
+        const { coverMode, bgColor, bgImgUrl } = this.props.card.style
+
+        if (coverMode === 'full' && bgImgUrl && !isEditMode) return {
+            color: '#fff',
+            backgroundImage: `url(${bgImgUrl})`,
+            borderTopLeftRadius: '3px',
+            borderTopRightRadius: '3px',
+            minHeight: '130px'
+        }
+        else if (coverMode === 'full' && !isEditMode) return {
+            backgroundColor: bgColor,
+            minHeight: '56px',
+            borderTopLeftRadius: '3px',
+            borderTopRightRadius: '3px'
+        }
+        if (coverMode === 'header' && bgImgUrl) return {};
+        if (coverMode === 'header' && !isEditMode) return {};
+        if (isEditMode && !coverMode) return { borderRadius: '3px' }
+        else if (isEditMode) return {};
         else return { borderRadius: '3px' };
+    }
+
+    get getCardHeaderStyles() {
+        const { isEditMode } = this.props
+        const { coverMode, bgColor, bgImgUrl } = this.props.card.style
+        if (coverMode === 'full' && bgImgUrl && isEditMode) return {
+            backgroundImage: `url(${bgImgUrl})`,
+            minHeight: '130px'
+        }
+        if (coverMode === 'header' && bgImgUrl) return {
+            backgroundImage: `url(${bgImgUrl})`,
+            minHeight: '130px'
+        }
+        if (coverMode === 'full' || coverMode === 'header') return { backgroundColor: bgColor }
     }
 
     render() {
@@ -72,12 +111,10 @@ class _Card extends Component {
         const { isEditMode, card, board, handleChange, cardTitle } = this.props;
         let { coverMode, bgColor } = card.style;
 
-        if (isEditMode && coverMode === 'full') coverMode = 'header';
-
         return (
             <div className="card-preview-container" ref={(div) => { this.cardContainer = div }} onContextMenu={this.onOpenCardEdit}>
                 {!isEditMode && <div className="card-preview-edit-btn" onClick={this.onOpenCardEdit}><EditIcon /></div>}
-                {coverMode === 'header' && <div className="card-preview-header" style={coverMode ? { backgroundColor: bgColor } : {}}></div>}
+                {(coverMode === 'header' || coverMode === 'full' && isEditMode) && <div className="card-preview-header" style={this.getCardHeaderStyles}></div>}
                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
                     {coverMode !== 'full' && <div className="card-preview-labels">
                         {!!card.labelIds.length && card.labelIds.map(labelId => <CardPreviewLabel key={labelId} labelId={labelId} labels={board.labels} isArchived={card.isArchived} isPreview={isEditMode} />)}
@@ -89,7 +126,7 @@ class _Card extends Component {
                             name="cardTitle"
                             autoFocus
                             value={cardTitle}
-                            onChange={handleChange} 
+                            onChange={handleChange}
                             onKeyDown={handleChange}
                             aria-label="empty textarea" />
                         :
