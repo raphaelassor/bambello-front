@@ -107,11 +107,9 @@
     }
 
     .board-charts{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        canvas{
-                  max-width: 100%;
-                  color :$clr2;
-        }
+         canvas{
+             max-width: 500px;
+             height: 500px;
+         }
     }
 }
