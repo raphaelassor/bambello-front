@@ -50,6 +50,7 @@ class _BoardApp extends Component {
     }
 
     onCloseCardEdit = () => {
+        console.log('im here baby')
         this.setState({ isCardEditOpen: false })
     }
 
