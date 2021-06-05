@@ -5,7 +5,7 @@ import { utilsService } from '../../services/utils.service'
 
 export class TodoAdd extends Component {
     state = {
-        isEditMode: false,
+        isEditMode: true,
         todo: {
             title: ''
         }
@@ -28,7 +28,9 @@ export class TodoAdd extends Component {
         if (!todo.title) return
         todo.id = utilsService.makeId()
         todo.isDone = false
-        this.setState({ todo: { title: '' } }, onAddTodo(todo))
+        this.setState({ todo: { title: '' } }, () => {
+            onAddTodo(todo)
+        })
     }
 
     render() {
@@ -43,7 +45,7 @@ export class TodoAdd extends Component {
                         onBlur={() => this.onEditMode()}
                         onChange={this.handleChange}
                         onKeyDown={(ev) => this.onCreateTodo(ev)}
-                        defaultValue={title}
+                        value={title}
                         autoFocus
                         placeholder="Add an item"
                         autoCorrect="false"
