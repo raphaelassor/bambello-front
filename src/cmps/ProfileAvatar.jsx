@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 
-export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false }) {
+export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false}) {
     
     if(!member) return ''
 
@@ -54,8 +54,9 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false 
     }))(Badge);
 
     const onClickAvatar = (ev) => {
-
-        if (onOpenPopover) onOpenPopover(ev, 'PROFILE', member)
+        if (onOpenPopover){
+            onOpenPopover(ev, 'PROFILE', member)
+        } 
 
     }
 

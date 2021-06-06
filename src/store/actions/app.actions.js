@@ -17,6 +17,7 @@ export function onLogin(credentials) {
         try {
             const user = await userService.login(credentials)
             dispatch({ type: 'SET_USER', user })
+            socketService.emit('user-watch',user._id)
         } catch (err) {
             console.log('UserActions: err in login', err)
         }

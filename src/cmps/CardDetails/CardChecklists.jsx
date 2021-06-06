@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ChecklistPreview } from './ChecklistPreview'
 import { connect } from 'react-redux'
 import { boardService } from '../../services/board.service'
+import { socketService } from '../../services/socket.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
 
 class _CardChecklists extends Component {
@@ -24,6 +25,7 @@ class _CardChecklists extends Component {
     onCreateActivity = (type, txt) => {
         let { card, board, loggedInUser, onSaveBoard } = this.props
         const savedActivity = boardService.createActivity(type, txt, loggedInUser, card)
+        socketService.emit('app newActivity',savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
     }

@@ -28,9 +28,20 @@ export function onSaveBoard(board) {
     return async dispatch => {
         try {
             const savedBoard = await boardService.save(board)
+            console.log('saved Board is : ',savedBoard)
             socketService.emit('board newUpdate', savedBoard)
             dispatch({ type: 'SAVE_BOARD', board: savedBoard })
         } catch (err) {
+            console.log('BoardActions: err in onSaveBoard', err)
+        }
+    }
+}
+export function createBoard(board){
+    return async dispatch=>{
+        try{
+            const savedBoard = await boardService.save(board)
+            dispatch({ type: 'SET_BOARD', board: savedBoard })
+        }catch (err) {
             console.log('BoardActions: err in onSaveBoard', err)
         }
     }

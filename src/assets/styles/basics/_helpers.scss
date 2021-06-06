@@ -54,6 +54,9 @@
     &.align-flex-start {
         align-items: flex-start;
     }
+    &.full{
+        flex-grow: 1;
+    }
 }
 
 // List helpers

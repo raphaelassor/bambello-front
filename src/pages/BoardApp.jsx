@@ -32,7 +32,7 @@ class _BoardApp extends Component {
             // socketService.emit('user watch',loggedInUser._id)
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
-
+                console.log('board is updated from socekt' )
                 this.props.loadBoard(savedBoard._id)
             })
             this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {

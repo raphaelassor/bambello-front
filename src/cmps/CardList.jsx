@@ -1,18 +1,19 @@
 import { Component } from 'react'
+import {connect} from 'react-redux'
 import { boardService } from '../services/board.service'
 import { CardPreview } from './CardPreview/CardPreview'
 import { CardAdd } from './CardAdd'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { PopoverListMenu } from './Popover/PopoverListMenu'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
+import { openPopover } from '../store/actions/app.actions'
 
-export class CardList extends Component {
+export class _CardList extends Component {
 
     state = {
         isEditTitle: false,
         titleTxt: '',
         isAddCardOpen: false,
-        isMenuOpen: false
     }
 
     toggleEditTitle = () => {
@@ -44,15 +45,23 @@ export class CardList extends Component {
         this.setState({ titleTxt: value });
     }
 
-    toggleMenu = () => {
-        this.setState({ isMenuOpen: !this.state.isMenuOpen })
-    }
+    
 
     get filteredList(){
         const {currList,filterBy}=this.props
         if(!currList) return
         return boardService.getFilteredList(currList,filterBy)
     } 
+    onOpenPopover = (ev, PopoverName) => {
+        const elPos = ev.target.getBoundingClientRect()
+        const { board, currList, onSaveBoard}=this.props
+        const props = {
+            currList,
+            board,
+            onSaveBoard
+        }
+        this.props.openPopover(PopoverName, elPos, props)
+    }
 
 
     render() {
@@ -71,9 +80,8 @@ export class CardList extends Component {
                                             :
                                             <h2 onClick={this.toggleEditTitle}>{currList.title}</h2>
                                         }
-                                        <div onClick={() => this.toggleMenu()} className="card-list-btn-menu">
+                                        <div onClick={(ev) => this.onOpenPopover(ev,'LIST_MENU')} className="card-list-btn-menu">
                                             <i className="fas fa-ellipsis-h"></i>
-                                            {isMenuOpen && <PopoverListMenu onSaveBoard={onSaveBoard} board={board} currList={currList} toggleMenu={this.toggleMenu} />}
                                         </div>
                                     </div>
                                      <div className="card-list-cards">
@@ -98,6 +106,11 @@ export class CardList extends Component {
     }
 }
 
+const mapDispatchToProps={
+    openPopover
+}
+
+export const CardList = connect(null,mapDispatchToProps)(_CardList)
 
 
 

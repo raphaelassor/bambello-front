@@ -31,11 +31,11 @@ class _App extends Component {
 
 
   render() {
-    const { loggedInUser, board } = this.props
+    const { loggedInUser, board ,location} = this.props
     return (
       <div style={this.style}>
         {this.isHeaderAppears && <header>
-          <AppHeader board={board} loggedInUser={loggedInUser} />
+          <AppHeader board={board} loggedInUser={loggedInUser} isBoardStyle={location.pathname.includes('/board')} />
         </header>}
 
         <main>

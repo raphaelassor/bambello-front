@@ -30,7 +30,7 @@ class _CommentAdd extends Component {
         const { txt } = this.state
         const savedActivity = boardService.createActivity('comment', txt, loggedInUser, card)
         console.log('activity : ' , savedActivity )
-         socketService.emit('new-activity',savedActivity)
+         socketService.emit('app newActivity',savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
         this.selectedInput.blur()
