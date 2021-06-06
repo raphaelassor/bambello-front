@@ -12,12 +12,6 @@
         transition-duration: 0.14s;
         transition-timing-function: ease-in;
 
-        &:hover {
-            .delete-svg {
-                display: flex;
-            }
-        }
-
         .checked,
         .non-checked {
             margin: 6px 18px 6px 2px;
@@ -78,10 +72,9 @@
         }
 
         .delete-svg {
+            cursor: pointer;
             align-self: center;
             margin-top: 8px;
-            cursor: pointer;
-            display: none;
             &:hover {
                 background-color: rgba(9, 30, 66, 0.08);
                 border-radius: $borderRad1;
@@ -100,6 +93,20 @@
             &:hover {
                 color: $clr4;
             }
+        }
+    }
+
+    @include for-details-narrow-layout  {
+        .todo-preview {
+            &:hover {
+                .delete-svg {
+                    display: flex;
+                }
+            }
+        }
+
+        .delete-svg {
+            display: none;
         }
     }
 }

@@ -6,7 +6,7 @@
     width: 100%;
     z-index: 4;
     position: fixed;
-    
+
     &::after {
         content: "";
         display: block;
@@ -17,14 +17,13 @@
         color: $clr7;
         background-color: $bgClr1;
         border-radius: $borderRad1;
-        width: 768px;
+        max-width: 768px;
         position: absolute;
         z-index: 4;
         top: 48px;
         right: 0;
         left: 0;
-        margin: 0 auto;
-
+        margin: 0 8px;
 
         .close-window-btn {
             cursor: pointer;
@@ -58,26 +57,37 @@
             }
         }
 
-        .card-details-archived{
-            >*:first-child{
+        .card-details-archived {
+            > *:first-child {
                 font-size: 20px;
                 margin-inline-end: 22px;
             }
-            background-color: #FDFAE5;
-            background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 75%, transparent 75%, transparent);
+            background-color: #fdfae5;
+            background-image: linear-gradient(
+                to bottom right,
+                rgba(0, 0, 0, 0.05) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(0, 0, 0, 0.05) 50%,
+                rgba(0, 0, 0, 0.05) 75%,
+                transparent 75%,
+                transparent
+            );
             background-size: 14px 14px;
             min-height: 30px;
             padding: 12px;
             position: relative;
-            h3{
+            h3 {
                 font-size: 16px;
                 line-height: 30px;
             }
         }
 
         .card-details-header {
-            margin: 20px 0 8px 16px;
+            max-width: 672px;
+            margin: 20px 16px 8px 16px;
             .header-content {
+                width: 100%;
                 svg {
                     width: 25px;
                     height: 25px;
@@ -85,7 +95,6 @@
                 }
 
                 textarea {
-                    width: 672px;
                     color: $clr7;
                     background-color: transparent;
                     border: 0;
@@ -114,26 +123,29 @@
                 }
             }
         }
-
-        .card-details-items {
-            margin-inline-start: 40px;
-            margin-bottom: 20px;
-            align-items: flex-start;
-            .card-details-item-header {
-                color: $clr3;
-                font-size: 12px;
-                font-weight: 500;
-                margin: 0 8px 4px 0;
-                text-transform: uppercase;
+        .card-details-main-container {
+            display: flex;
+            flex-direction: column;
+            .card-details-items {
+                margin-inline-start: 40px;
+                margin-bottom: 20px;
+                align-items: flex-start;
+                .card-details-item-header {
+                    color: $clr3;
+                    font-size: 12px;
+                    font-weight: 500;
+                    margin: 0 8px 4px 0;
+                    text-transform: uppercase;
+                }
+                .item-container {
+                    margin: 0 8px 8px 0;
+                }
             }
-            .item-container {
-                margin: 0 8px 8px 0;
-            }
-        }
 
-        .card-details-main {
-            width: 552px;
-            margin: 16px 0 0 16px;
+            .card-details-main {
+                max-width: 552px;
+                margin: 16px 16px 0 16px;
+            }
         }
 
         .window-modal-title {
@@ -148,6 +160,29 @@
                 width: 25px;
                 height: 25px;
                 margin-inline-end: 16px;
+            }
+        }
+    }
+
+    @include for-details-narrow-layout  {
+        .card-details-header {
+            margin: 20px 0px 8px 16px;
+            .header-content {
+                textarea {
+                    width: 100%;
+                }
+            }
+        }
+
+        .card-details {
+            margin: 0 auto;
+            .card-details-main-container {
+                flex-direction: unset;
+
+                .card-details-main {
+                    width: 552px;
+                    margin: 16px 0px 0 16px;
+                }
             }
         }
     }

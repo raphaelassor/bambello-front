@@ -14,7 +14,7 @@ import { ElementOverlay } from '../Popover/ElementOverlay'
 import { ReactComponent as MemberIcon } from '../../assets/img/icons/person.svg'
 import { socketService } from '../../services/socket.service'
 
-class _CardDetailsActions extends Component { 
+class _CardDetailsActions extends Component {
 
     addFile = (fileUrl) => {
         const { card, onSaveCardFromActions, onSaveBoard, closePopover, board, loggedInUser } = this.props
@@ -29,7 +29,7 @@ class _CardDetailsActions extends Component {
         card.attachs.push(attach)
         onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('attached', attach.fileName, loggedInUser, card)
-        socketService.emit('app newActivity',savedActivity)
+        socketService.emit('app newActivity', savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
         closePopover()
@@ -42,7 +42,7 @@ class _CardDetailsActions extends Component {
         card.members.push(loggedInUser)
         onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
-        socketService.emit('app newActivity',savedActivity)
+        socketService.emit('app newActivity', savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
     }
@@ -85,17 +85,17 @@ class _CardDetailsActions extends Component {
     }
 
     render() {
-        const { card} = this.props
-        return <div className="details-actions-wrapper flex column">
+        const { card } = this.props
+        return <div className="details-actions-wrapper flex">
             {!this.isUserMember() && <div className="suggested flex column"> <h4>SUGGESTED</h4>
                 <button className="secondary-btn actions-btn " onClick={this.joinCard}>
                     <div className="actions-btn-content flex align-center">
-                        <MemberIcon/>
+                        <MemberIcon />
                         <span>Join</span>
                     </div>
                 </button></div>}
-            <h4>ADD TO CARD</h4>
             <div className="add-section flex column">
+                <h4>ADD TO CARD</h4>
                 <button className="secondary-btn actions-btn " onClick={(ev) => this.onOpenPopover(ev, 'MEMBERS')}>
                     <div className="actions-btn-content flex align-center">
                         <MemberIcon />
@@ -150,57 +150,57 @@ class _CardDetailsActions extends Component {
 
 
             </div>
-
-            <h4>ACTIONS</h4>
-            <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'MOVE')}>
-                <div className="actions-btn-content flex align-center">
-                    <i className="fas fa-arrow-right icon-sm"></i>
-                    <span>Move</span>
-                </div>
-                <ElementOverlay />
-            </button>
-
-
-            <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'COPY')}>
-                <div className="actions-btn-content flex align-center">
-                    <CopyIcon />
-                    <span>Copy</span>
-                </div>
-                <ElementOverlay />
-            </button>
-
-
-            <button className="secondary-btn actions-btn" onClick={this.toggelWatch}>
-                <div className="actions-btn-content flex align-center">
-                    <WatchIcon />
-                    <span>Watch</span>
-                </div>
-                <ElementOverlay />
-            </button>
-
-            {!card.isArchived ?
-                <button className="secondary-btn actions-btn" onClick={this.toggleArchive}>
+            <div className="actions-section flex column">
+                <h4>ACTIONS</h4>
+                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'MOVE')}>
                     <div className="actions-btn-content flex align-center">
-                        <i className="fas fa-archive icon-sm"></i>
-                        <span>Archive</span>
+                        <i className="fas fa-arrow-right icon-sm"></i>
+                        <span>Move</span>
                     </div>
+                    <ElementOverlay />
                 </button>
-                :
-                <>
-                    <button className="secondary-btn actions-btn" onClick={this.toggleArchive} >
-                        <div className="actions-btn-content flex align-center">
-                            <i className="fas fa-undo icon-sm"></i>
-                            <span>Return To Board</span>
-                        </div>
-                    </button>
-                    <button className="secondary-btn actions-btn danger-btn" onClick={this.removeCard} >
-                        <div className="actions-btn-content  flex align-center">
-                            <MinusIcon className="remove" />
-                            <span>Delete</span>
-                        </div>
-                    </button>
-                </>}
 
+
+                <button className="secondary-btn actions-btn" onClick={(ev) => this.onOpenPopover(ev, 'COPY')}>
+                    <div className="actions-btn-content flex align-center">
+                        <CopyIcon />
+                        <span>Copy</span>
+                    </div>
+                    <ElementOverlay />
+                </button>
+
+
+                <button className="secondary-btn actions-btn" onClick={this.toggelWatch}>
+                    <div className="actions-btn-content flex align-center">
+                        <WatchIcon />
+                        <span>Watch</span>
+                    </div>
+                    <ElementOverlay />
+                </button>
+
+                {!card.isArchived ?
+                    <button className="secondary-btn actions-btn" onClick={this.toggleArchive}>
+                        <div className="actions-btn-content flex align-center">
+                            <i className="fas fa-archive icon-sm"></i>
+                            <span>Archive</span>
+                        </div>
+                    </button>
+                    :
+                    <>
+                        <button className="secondary-btn actions-btn" onClick={this.toggleArchive} >
+                            <div className="actions-btn-content flex align-center">
+                                <i className="fas fa-undo icon-sm"></i>
+                                <span>Return To Board</span>
+                            </div>
+                        </button>
+                        <button className="secondary-btn actions-btn danger-btn" onClick={this.removeCard} >
+                            <div className="actions-btn-content  flex align-center">
+                                <MinusIcon className="remove" />
+                                <span>Delete</span>
+                            </div>
+                        </button>
+                    </>}
+            </div>
         </div>
     }
 

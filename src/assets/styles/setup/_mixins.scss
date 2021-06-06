@@ -23,6 +23,13 @@
         @content;
     }
 }
+
+@mixin for-details-narrow-layout {
+    @media (min-width: $details-breakpoint) {
+        @content;
+    }
+}
+
 @mixin for-header-narrow-layout {
     @media (max-width: $header-breakbpoint) {
         @content;

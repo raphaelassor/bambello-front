@@ -131,7 +131,7 @@ class _CardDetails extends Component {
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />
-                <section className="card-details flex-column">
+                <section className="card-details flex column">
                     <button
                         onClick={() => this.goBackToBoard()}
                         className={`close-window-btn ${style.coverMode ? 'cover-mode' : ''} flex align-center justify-center`}>
@@ -155,7 +155,7 @@ class _CardDetails extends Component {
                         </div>
                         <p className="bottom-list-name">in list <span>{list.title}</span></p>
                     </div>
-                    <div className="flex">
+                    <div className="card-details-main-container">
                         <div className="card-details-main flex column">
                             <div className="card-details-items flex wrap">
                                 {!!members.length && <CardDetailsMembers
