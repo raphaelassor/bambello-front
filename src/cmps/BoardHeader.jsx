@@ -123,7 +123,7 @@ class _BoardHeader extends Component {
 
                     <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
-                <Link to={`/board/${board._id}`} className="clean-link">
+                <Link to={`/board/${board._id}/dashboard`} className="clean-link">
                 <BarChartIcon/>
                     Dashboard
                     </Link>
