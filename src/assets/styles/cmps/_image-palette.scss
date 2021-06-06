@@ -1,0 +1,27 @@
+.image-palette {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    label[name="label-img"]{
+        width: 150px;
+        height: 100px;
+        margin: 0 rem(8px) rem(8px) 0;
+        border-radius: 3px;
+        background-size: cover;
+        background-position: center;
+       cursor:pointer;
+       &:hover{
+           filter: brightness(90%)
+       }
+    }
+    input[type="radio"]{
+        opacity: 0;
+        position: absolute;
+        width:0;
+        height:0;
+    }
+    // svg {
+    //     z-index: 2;
+    // }
+}

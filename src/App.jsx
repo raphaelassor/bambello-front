@@ -12,17 +12,16 @@ class _App extends Component {
   componentDidMount() {
     socketService.setup()
   }
-
+  
   get style() {
     const { board, location } = this.props
     if (!location.pathname.includes('/board')) return {}
     const style = board ? {
-      background: board.style.background,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center center'
+      background: `${board.style.background} center center / cover`,
     } : { background: "#0079bf" }
     return style
   }
+
   get isHeaderAppears() {
     const { pathname } = this.props.location
     return (pathname.includes('/board') || pathname.includes('workspace'))
@@ -35,7 +34,7 @@ class _App extends Component {
   render() {
     const { loggedInUser, board ,location} = this.props
     return (
-      <section style={this.style}>
+      <section className="app" style={this.style}>
         {this.isHeaderAppears && <header>
           <AppHeader board={board} loggedInUser={loggedInUser} isBoardStyle={location.pathname.includes('/board')} />
         </header>}

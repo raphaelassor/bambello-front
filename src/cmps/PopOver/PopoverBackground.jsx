@@ -1,29 +1,20 @@
 import { Popover } from './Popover'
 import { connect } from 'react-redux'
 // import { Component } from 'react'
-import { unSplashService } from '../../services/unsplash.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
 import { ColorPalette } from '../ColorPalette'
+import { ImagePalette } from '../ImagePalette'
 import { BackToPrevPopover } from "./BackToPrevPopover"
 
 function _PopoverBackground({ onSaveBoard, board }) {
 
-    // function getPhotos() {
-    //     try {
-            const data = unSplashService.getTenPhotos()
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-
-
-
     function handleChange({ target }) {
         const { name, value } = target
-        // if (name==='imgUrl'){
-        //     props.board.imgUrl=target.value
-        // } 
-        board.style.background = value;
+        console.log(name)
+        if (name === 'imgUrl') {
+            console.log(`i'm here`)
+            board.style.background = `url(${value})`
+        } else board.style.background = value;
         onSaveBoard(board)
     }
     return <Popover title="Change background" displayMode="menu-popovers">
@@ -36,11 +27,10 @@ function _PopoverBackground({ onSaveBoard, board }) {
             <div>
                 <h4>Gradients</h4>
                 <ColorPalette handleChange={handleChange} selectedColor={board.background} isGradient={true} />
-
             </div>
             <div>
                 <h4>Images</h4>
-                {/* Imnages Palette */}
+                <ImagePalette handleChange={handleChange} />
             </div>
         </div>
     </Popover>
