@@ -8,8 +8,8 @@ import { DynamicPopover } from './cmps/Popover/DynamicPopover'
 import { socketService } from './services/socket.service';
 
 class _App extends Component {
-  
-  componentDidMount(){
+
+  componentDidMount() {
     socketService.setup()
   }
 
@@ -17,13 +17,15 @@ class _App extends Component {
     const { board, location } = this.props
     if (!location.pathname.includes('/board')) return {}
     const style = board ? {
-      background: board.style.background
+      background: 'url(https://images.unsplash.com/photo-1587502537147-2ba64a62e3d3?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyMzU5OTZ8MXwxfHNlYXJjaHwxfHxsYW5kc2NhcGV8ZW58MHwwfHx8MTYyMjk3NzI2Ng&ixlib=rb-1.2.1&q=85)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center'
     } : { background: "#0079bf" }
     return style
-  } 
-  get isHeaderAppears(){
-    const {pathname}=this.props.location
-    return (pathname.includes('/board')||pathname.includes('workspace'))
+  }
+  get isHeaderAppears() {
+    const { pathname } = this.props.location
+    return (pathname.includes('/board') || pathname.includes('workspace'))
   }
 
 
@@ -33,7 +35,7 @@ class _App extends Component {
   render() {
     const { loggedInUser, board ,location} = this.props
     return (
-      <div style={this.style}>
+      <section style={this.style}>
         {this.isHeaderAppears && <header>
           <AppHeader board={board} loggedInUser={loggedInUser} isBoardStyle={location.pathname.includes('/board')} />
         </header>}
@@ -44,7 +46,7 @@ class _App extends Component {
           </Switch>
           <DynamicPopover />
         </main>
-      </div>
+      </section>
     )
   }
 }

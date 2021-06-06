@@ -20,8 +20,8 @@ class _CardEdit extends Component {
         width: null,
         cardTitle: ''
     }
- 
-    handleChange = (ev) => {    
+
+    handleChange = (ev) => {
         if (ev.key === 'Enter') {
             this.onSaveCard(ev)
             return
@@ -49,7 +49,6 @@ class _CardEdit extends Component {
     onSaveCard = ({ target }) => {
         const { board, card, onCloseCardEdit, onSaveBoard } = this.props;
         if (target.name === 'cardTitle' || 'save') card.title = this.state.cardTitle;
-        console.log(target.name, target.name === ('cardTitle' || 'save'), card)
         if (target.name === 'archive') card.isArchive = true;
         const savedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(savedBoard);
@@ -76,7 +75,7 @@ class _CardEdit extends Component {
     }
 
     render() {
-        const { closePopover, card, board, onCloseCardEdit } = this.props
+        const { card, board, onCloseCardEdit } = this.props
         const { top, left, width, cardTitle } = this.state
 
         return <>
@@ -90,7 +89,7 @@ class _CardEdit extends Component {
                         <Link
                             to={`/board/${board._id}/${this.list.id}/${card.id}`}
                             className="open-card-btn clean-btn"
-                            onMouseDown={closePopover}>
+                            onClick={() => onCloseCardEdit()}>
                             <WebAssetIcon />
                             Open card
                         </Link>

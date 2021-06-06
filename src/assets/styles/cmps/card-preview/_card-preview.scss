@@ -11,6 +11,9 @@
         height: 32px;
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
     .card-preview-edit-btn {
         display: flex;
@@ -46,6 +49,9 @@
         background-color: #fff;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
         cursor: pointer;
         display: block;
         margin-bottom: 8px;

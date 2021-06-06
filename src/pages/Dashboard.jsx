@@ -109,6 +109,11 @@ class _Dashboard extends Component {
         return cardsPerListMap
     }
 
+    goBackToBoard = () => {
+        const { board } = this.props
+        this.props.history.push(`/board/${board._id}`)
+    }
+
     render() {
         const { chartsData } = this.state
         if (!chartsData) return '' //LOADER
@@ -116,8 +121,8 @@ class _Dashboard extends Component {
             <>
                 <ScreenOverlay styleMode="darken" />
                 <section className="dashboard-container flex column">
-                    <CloseRoundedIcon className="close-svg" />
-                    <div className="general-statistics flex justify-center">
+                    <CloseRoundedIcon className="close-svg" onClick={() => this.goBackToBoard()} />
+                    <div className="general-statistics flex justify-center wrap">
                         <div className="stats flex align-center">
                             <div className="logo-container flex align-center justify-center">
                                 <AssignmentIcon />

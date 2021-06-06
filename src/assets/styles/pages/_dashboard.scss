@@ -3,8 +3,11 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    top:0;
+    padding: 120px 0;
+    top: 0;
     right: 0;
+    overflow-y: scroll;
+
     .close-svg {
         cursor: pointer;
         position: absolute;
@@ -22,8 +25,8 @@
 
     .general-statistics {
         width: 100%;
-        margin: 40px 0;
-        > *:not(:last-child) {
+        margin-bottom: 80px;
+        > * {
             margin-inline-end: 25px;
         }
 
@@ -34,15 +37,16 @@
             height: 140px;
             min-width: 340px;
             width: 340px;
+            margin-bottom: 20px;
 
             &:nth-child(1) {
                 .logo-container {
                     background-color: $clr1;
                 }
 
-                .content{
-                    h3{
-                        color: $clr1
+                .content {
+                    h3 {
+                        color: $clr1;
                     }
                 }
             }
@@ -52,9 +56,9 @@
                     background-color: #f2d600;
                 }
 
-                .content{
-                    h3{
-                        color: #f2d600
+                .content {
+                    h3 {
+                        color: #f2d600;
                     }
                 }
             }
@@ -64,14 +68,12 @@
                     background-color: #eb5a46;
                 }
 
-                .content{
-                    h3{
-                        color: #eb5a46
+                .content {
+                    h3 {
+                        color: #eb5a46;
                     }
                 }
             }
-
-        
 
             .logo-container {
                 border-top-left-radius: $borderRad1;
@@ -88,10 +90,9 @@
 
             .content {
                 > * {
-                    font-weight: bold;
+                    font-weight: 600;
                     font-size: 25px;
                     line-height: 30px;
-                    
                 }
 
                 h3 {
@@ -106,10 +107,28 @@
         }
     }
 
-    .board-charts{
-         canvas{
-             max-width: 500px;
-             height: 500px;
-         }
+    .board-charts {
+        width: 100vw;
+
+        h3 {
+            text-align: center;
+            font-weight: 600;
+            color: $clr2;
+            font-size: 25px;
+            margin-bottom: 16px;
+        }
+
+        .chart {
+            background: #00000047;
+            padding: 20px;
+            border-radius: $borderRad1;
+            margin-inline-end: 20px;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 350px;
+            height: 350px;
+        }
     }
 }

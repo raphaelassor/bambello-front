@@ -13,6 +13,7 @@ import { boardService } from '../services/board.service'
 import { onSetLoggedInUser } from '../store/actions/app.actions'
 import { openPopover } from '../store/actions/app.actions.js'
 import { setFilter } from '../store/actions/board.actions.js'
+import BarChartIcon from '@material-ui/icons/BarChart';
 
 
 class _BoardHeader extends Component {
@@ -65,26 +66,26 @@ class _BoardHeader extends Component {
         const props = { member , isInCard:false }
         this.props.openPopover(PopoverName, elPos, props)
     }
-    get isFilterOn(){
-        
-        const {labels,txt,members}=this.props.filterBy
-        return labels.length|| members.length|| txt
+    get isFilterOn() {
+
+        const { labels, txt, members } = this.props.filterBy
+        return labels.length || members.length || txt
     }
 
-    get searchResultsCount(){
-        const {board,filterBy}=this.props
-        return  board.lists.reduce((acc,list)=>{
-            const filteredList = boardService.getFilteredList(list,filterBy)
-            acc+=filteredList.cards.length
+    get searchResultsCount() {
+        const { board, filterBy } = this.props
+        return board.lists.reduce((acc, list) => {
+            const filteredList = boardService.getFilteredList(list, filterBy)
+            acc += filteredList.cards.length
             return acc
-        },0)
-       
+        }, 0)
+
 
     }
 
-    resetFilter=(ev)=>{
+    resetFilter = (ev) => {
         ev.stopPropagation()
-        this.props.setFilter({txt:'',labels:[],members:[]})
+        this.props.setFilter({ txt: '', labels: [], members: [] })
     }
 
     render() {
@@ -126,10 +127,14 @@ class _BoardHeader extends Component {
 
                     <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
-               {this.isFilterOn && <Link className="board-filter-results flex align-center" to= "#" onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
+                <Link to={`/board/${board._id}/dashboard`} className="clean-link">
+                <BarChartIcon/>
+                    Dashboard
+                    </Link>
+                {this.isFilterOn && <Link className="board-filter-results flex align-center" to="#" onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
                     <span>{this.searchResultsCount} search results</span>
                     <span className="flex align-center" onClick={this.resetFilter}>
-                        <CloseIcon/>
+                        <CloseIcon />
                     </span>
                 </Link>}
                 <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
@@ -151,7 +156,7 @@ function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
         loggedInUser: state.appModule.loggedInUser,
-        filterBy:state.boardModule.filterBy
+        filterBy: state.boardModule.filterBy
     }
 }
 
