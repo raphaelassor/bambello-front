@@ -4,8 +4,10 @@ import { Popover } from './Popover'
 import { boardService } from '../../services/board.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
 import { closePopover } from '../../store/actions/app.actions'
+import { socketService } from '../../services/socket.service'
 
-function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overlayType ,isInCard=true}) {
+function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overlayType, isInCard = true }) {
+
     const onRemoveMember = () => {
         const memberIdx = card.members.findIndex(currMember => currMember._id === member._id)
         card.members.splice(memberIdx, 1)
@@ -27,8 +29,8 @@ function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overl
                         {/* <Link>Edit profile info</Link> */}
                     </div>
                 </div>
-              {isInCard&&  <span className="remove clean-btn" onClick={() => onRemoveMember()}>Remove from card</span>}
             </div>
+            {isInCard && <span className="remove clean-btn" onClick={() => onRemoveMember()}>Remove from card</span>}
         </Popover >
     )
 }

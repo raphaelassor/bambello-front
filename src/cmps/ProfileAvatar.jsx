@@ -1,17 +1,16 @@
 import React from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 
-export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false}) {
-    
-    if(!member) return ''
+function _ProfileAvatar({ member, size, onOpenPopover, showStatus = false, onlineUsers}) {
 
-    // const isMemberLoggedin = () => {
-    //TODO: LOOP THAT RUN THROUGH MEMBERS AND CHECK WHO IS LOGGED IN
-    // const {members} = this.props
-    // }
+    if (!member) return ''
+
+    const isMemberLoggedin = () => {
+        return onlineUsers.some(onlineUserId => onlineUserId === member._id)
+    }
 
     const avatarStyles = () => {
         let styles = {};
@@ -19,6 +18,12 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false}
         styles.width = `${size}px`;
         styles.height = `${size}px`;
         return styles
+    }
+
+    const getStatus = () => {
+        if (!showStatus) return 'standard'
+        else if (isMemberLoggedin()) return 'dot'
+        else return 'standard'
     }
 
     const StyledBadge = withStyles((theme) => ({
@@ -54,12 +59,11 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false}
     }))(Badge);
 
     const onClickAvatar = (ev) => {
-        if (onOpenPopover){
+        if (onOpenPopover) {
             onOpenPopover(ev, 'PROFILE', member)
-        } 
-
+        }
     }
-
+    console.log(member)
     return (
         <div className="profile-avatar" onClick={(ev) => onClickAvatar(ev)}>
             <StyledBadge
@@ -68,8 +72,7 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false}
                     vertical: 'bottom',
                     horizontal: 'right',
                 }}
-                //TODO: variant={showStatus && isMemberLoggedin() &&'dot'}
-                variant={showStatus ? 'dot' : 'standard'}
+                variant={getStatus()}
             >
                 <Avatar
                     className="avatar"
@@ -84,10 +87,10 @@ export function ProfileAvatar({ member, size, onOpenPopover, showStatus = false}
     )
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         members: state.boardModule.members
-//     }
-// }
+function mapStateToProps(state) {
+    return {
+        onlineUsers: state.appModule.onlineUsers
+    }
+}
 
-// export const ProfileAvatar = connect(mapStateToProps)(_ProfileAvatar)
+export const ProfileAvatar = connect(mapStateToProps)(_ProfileAvatar)

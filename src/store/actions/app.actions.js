@@ -1,5 +1,6 @@
 import { userService } from '../../services/user.service.js'
-import {socketService} from '../../services/socket.service.js'
+import { socketService } from '../../services/socket.service.js'
+
 // export function onGoogleLogin(tokenId) {
 //     return async dispatch => {
 //         try {
@@ -17,7 +18,7 @@ export function onLogin(credentials) {
         try {
             const user = await userService.login(credentials)
             dispatch({ type: 'SET_USER', user })
-            socketService.emit('user-watch',user._id)
+            socketService.emit('user-watch', user._id)
         } catch (err) {
             console.log('UserActions: err in login', err)
         }
@@ -35,10 +36,12 @@ export function onSignup(userInfo) {
     }
 }
 
-export function onLogout() {
+export function onLogout(user) {
     return async dispatch => {
         try {
-            await userService.logout()
+            socketService.emit('user logout', user._id)
+            await userService.logout(user)
+            // dispatch({ type: 'UPDATE_ONLINE_USERS', userId })
             dispatch({ type: 'SET_USER', user: null })
         } catch (err) {
             console.log('UserActions: err in logout', err)
@@ -66,6 +69,17 @@ export function closePopover() {
         dispatch(action)
     }
 }
+
+export function updateOnlineUsers(onlineUsers) {
+    return async dispatch => {
+        try {
+            dispatch({ type: 'SET_ONLINE_USERS', onlineUsers })
+        } catch (err) {
+            console.log('UserActions: err in login', err)
+        }
+    }
+}
+
 
 // for debugging 
 export function onSetLoggedInUser(user) {
