@@ -29,7 +29,7 @@
 @import "./pages/card-details.scss";
 
 // CMPS
-@import "cmps/main-header.scss";
+@import "cmps/app-header.scss";
 @import "cmps/home-header.scss";
 @import "cmps/board-header.scss";
 @import "cmps/board-list.scss";
@@ -38,6 +38,7 @@
 @import "cmps/card-list-add.scss";
 @import "cmps/profile-avatar.scss";
 @import "cmps/color-palette";
+@import "cmps/image-palette";
 @import "cmps/screen-overlay.scss";
 @import "cmps/activities-list.scss";
 @import "cmps/activity-preview.scss";
@@ -85,4 +86,5 @@
 @import "cmps/pop-overs/activity-pop-over";
 @import "cmps/pop-overs/board-filter-pop-over";
 @import "cmps/pop-overs/create-board-pop-over";
+@import "cmps/pop-overs/misc-popovers";
 

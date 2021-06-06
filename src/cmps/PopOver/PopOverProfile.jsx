@@ -29,7 +29,6 @@ function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overl
                 </div>
               {isInCard&&  <span className="remove clean-btn" onClick={() => onRemoveMember()}>Remove from card</span>}
             </div>
-            <span className="remove clean-btn" onClick={() => onRemoveMember()}>Remove from card</span>
         </Popover >
     )
 }

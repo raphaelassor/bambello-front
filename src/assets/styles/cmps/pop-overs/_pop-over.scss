@@ -7,6 +7,7 @@
     padding: 0 12px 12px;
     min-width: 20rem;
     margin-right: 4px;
+    max-width: 100%;
     &.clean {
         padding: unset;
     }
@@ -150,6 +151,9 @@
     height: 100%;
     top: 0;
     left: 0;
+}
+@include for-mobile-layout{
+  
 }
 
 @keyframes open-menu {

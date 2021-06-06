@@ -39,5 +39,11 @@
 .label-add-content {
     width: 20rem;
 }
+@include for-mobile-layout{
+    // .label-add-content,.labels-pop-over {
+    //     width: calc(100% - 30px);
+        
+    // }
+}
 
 

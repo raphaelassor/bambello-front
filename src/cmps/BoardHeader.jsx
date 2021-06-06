@@ -95,7 +95,7 @@ class _BoardHeader extends Component {
             <div className="board-header">
                 <button className="board-btn">
                     <BoardsIcon />
-                    <span>Board</span>
+                    <span className="wide-layout">Board</span>
                     <ArrowDown />
                 </button>
                 <div className="board-title" >
@@ -103,11 +103,12 @@ class _BoardHeader extends Component {
                         <form onSubmit={this.onTitleSave}>
                             {/* <input type="text" value={title}  ref={(input) => { this.titleInput = input }} /> */}
                             <AutosizeInput
+                            
                                 name="form-field-name"
                                 value={title}
                                 onChange={this.handleChange}
                                 ref={(input) => { this.titleInput = input }}
-                                onBlur={this.onTitleSave}
+                                // onBlur={this.onTitleSave}
                             />
                         </form>
                         :
@@ -118,18 +119,18 @@ class _BoardHeader extends Component {
                     <i className={`far fa-star icon-sm star-icon ${board.isFavorite ? 'favorite' : ''}`}></i>
                 </button>
                 <span className="divider"></span>
-<div className="flex full ">
+<div className="flex header-section">
     
                 <div className="board-header-members flex align-center">
                     <AvatarGroup>
                     {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
                     </AvatarGroup>
 
-                    <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
+                    <button className="wide-layout" onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
                 <Link to={`/board/${board._id}/dashboard`} className="clean-link">
                 <BarChartIcon/>
-                    Dashboard
+                    <span className="wide-layout">Dashboard</span> 
                     </Link>
                 {this.isFilterOn && <Link className="board-filter-results flex align-center" to="#" onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
                     <span>{this.searchResultsCount} search results</span>
@@ -139,7 +140,7 @@ class _BoardHeader extends Component {
                 </Link>}
                 <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
                     <ElipsisIcon />
-                    <span>Show Menu</span>
+                    <span className="wide-layout">Show Menu</span>
                     <ElementOverlay />
                 </button>
 </div>
