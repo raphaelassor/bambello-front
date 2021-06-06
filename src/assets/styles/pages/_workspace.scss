@@ -1,7 +1,7 @@
 .workspace-container {
-    margin-top: 40px;
     background-color: $clr2;
     height: 100vh;
+    margin: 40px 8px 0 8px;
 
     .side-bar {
         cursor: pointer;
@@ -46,5 +46,9 @@
             width: 25px;
             height: 25px;
         }
+    }
+
+    @include for-wide-layout {
+        margin: 40px 0 0 0;
     }
 }

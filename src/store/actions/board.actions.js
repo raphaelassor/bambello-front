@@ -5,6 +5,7 @@ import { socketService } from '../../services/socket.service'
 export function loadBoards(filterBy = { ctg: '' }) {
     return async dispatch => {
         try {
+            dispatch({ type: 'SET_LOADING'})
             const boards = await boardService.query(filterBy)
             dispatch({ type: 'SET_WORKSPACE', boards })
         } catch (err) {

@@ -26,10 +26,8 @@
     .general-statistics {
         width: 100%;
         margin-bottom: 80px;
-        > * {
-            margin-inline-end: 25px;
-        }
-
+        flex-direction: column;
+        align-items: center;
         .stats {
             width: fit-content;
             border-radius: $borderRad1;
@@ -119,11 +117,30 @@
         }
 
         .chart {
-            background: #00000047;
+            background: #25252547;
             padding: 20px;
             border-radius: $borderRad1;
-            margin-inline-end: 20px;
             margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 300px;
+            height: 300px;
+        }
+    }
+
+    @include for-dashboard-narrow-layout {
+        .general-statistics {
+            flex-direction: unset;
+            > *:not(:last-child) {
+                margin-inline-end: 25px;
+            }
+        }
+
+        .board-charts {
+            > *:not(:last-child) {
+                margin-inline-end: 20px;
+            }
         }
 
         canvas {

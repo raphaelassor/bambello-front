@@ -2,7 +2,8 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 // import ScrollContainer from 'react-indiana-drag-scroll'
-import { loadBoard, onSaveBoard ,unsetBoard} from '../store/actions/board.actions'
+import { loadBoard, onSaveBoard, unsetBoard } from '../store/actions/board.actions'
+import { Loader } from '../cmps/Loader'
 import { CardEdit } from '../cmps/CardEdit'
 import { CardDetails } from './CardDetails'
 import { CardList } from '../cmps/CardList'
@@ -26,9 +27,9 @@ class _BoardApp extends Component {
 
     async componentDidMount() {
         try {
-            const { boardId } = this.props.match.params 
+            const { boardId } = this.props.match.params
             await this.props.loadBoard(boardId)
-            const { board,loggedInUser } = this.props
+            const { board, loggedInUser } = this.props
             // socketService.emit('user watch',loggedInUser._id)
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
@@ -97,12 +98,12 @@ class _BoardApp extends Component {
         board.lists = lists
         onSaveBoard(board)
     }
-  
+
 
     render() {
-        const {onSaveBoard ,board,filterBy } = this.props
+        const { onSaveBoard, board, filterBy, isLoading } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
-        if (!board) return <div></div>
+        if (isLoading) return <Loader />
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>
@@ -132,6 +133,7 @@ class _BoardApp extends Component {
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
+        isLoading: state.boardModule.isLoading,
         loggedInUser: state.appModule.loggedInUser,
         filterBy: state.boardModule.filterBy
     }
