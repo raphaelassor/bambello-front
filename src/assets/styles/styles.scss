@@ -16,6 +16,9 @@
 @import "./basics/layout.scss";
 @import "./basics/buttons.scss";
 
+//Main
+@import "./pages/app.scss";
+
 // PAGES
 // @import "./pages/homepage.scss";
 @import "./pages/login-signup.scss";
@@ -82,3 +85,4 @@
 @import "cmps/pop-overs/activity-pop-over";
 @import "cmps/pop-overs/board-filter-pop-over";
 @import "cmps/pop-overs/create-board-pop-over";
+

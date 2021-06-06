@@ -24,7 +24,8 @@
             border: none;
         }
     }
-    button {
+    button,
+    a {
         display: flex;
         padding: 5px;
         align-items: center;
@@ -125,7 +126,7 @@
                 }
             }
         }
-        &:hover{
+        &:hover {
             filter: brightness(105%);
         }
     }
