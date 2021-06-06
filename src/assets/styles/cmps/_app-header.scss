@@ -8,7 +8,6 @@
     }
     &.out-board {
         background-color: $clr1;
-      
     }
     .back-screen {
         position: absolute;
@@ -51,7 +50,7 @@
         &:hover {
             background-color: rgba(255, 255, 255, 0.2);
         }
-        &.new-notific{
+        &.new-notific {
             background-color: #e54c31d6;
         }
     }
@@ -156,39 +155,49 @@
         }
     }
 }
-.user-notifics{
+.user-notifics {
     max-height: 500px;
     overflow-y: auto;
 }
 
-@include for-header-narrow-layout{
-    .main-header{
+@include for-header-narrow-layout {
+    .main-header {
         .input-header-wrapper {
-            width:32px;
-            input{
+            width: 32px;
+            input {
                 display: none;
             }
             display: flex;
             align-items: center;
             justify-content: center;
-            svg{
+            svg {
                 margin-inline-end: 0;
             }
         }
-        .boards-btn{
-            span{
+        .boards-btn {
+            span {
                 display: none;
             }
         }
-            .btn-header-container{
-                &:first-of-type{
-                    .btn-header{
-                        &:first-child{
-                            display: none;
-                        }
+        .btn-header-container {
+            &:first-of-type {
+                .btn-header {
+                    &:first-child {
+                        display: none;
                     }
                 }
             }
-    
+        }
+    }
+}
+@include for-mobile-layout {
+    .main-header {
+        .btn-header-container {
+            .btn-header {
+                &.wide-layout{
+                    display:none;
+                }
+            }
+        }
     }
 }

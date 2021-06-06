@@ -6,7 +6,7 @@ import { CardAdd } from './CardAdd'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { PopoverListMenu } from './Popover/PopoverListMenu'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { openPopover } from '../store/actions/app.actions'
+import { openPopover,closePopover } from '../store/actions/app.actions'
 
 export class _CardList extends Component {
 
@@ -54,11 +54,12 @@ export class _CardList extends Component {
     } 
     onOpenPopover = (ev, PopoverName) => {
         const elPos = ev.target.getBoundingClientRect()
-        const { board, currList, onSaveBoard}=this.props
+        const { board, currList, onSaveBoard,closePopover}=this.props
         const props = {
             currList,
             board,
-            onSaveBoard
+            onSaveBoard,
+
         }
         this.props.openPopover(PopoverName, elPos, props)
     }
@@ -107,7 +108,8 @@ export class _CardList extends Component {
 }
 
 const mapDispatchToProps={
-    openPopover
+    openPopover,
+    closePopover
 }
 
 export const CardList = connect(null,mapDispatchToProps)(_CardList)

@@ -54,13 +54,13 @@ class _AppHeader extends Component {
         return <div>
             <div className={`main-header flex justify-space-between ${isBoardStyle ? 'in-board' : 'out-board'} `}>
                 <div className="btn-header-container flex">
-                    <button className="btn-header ">
+                    <button className="btn-header wide-layout ">
                         <AppsIcon />
                     </button>
                     <Link to ="/workspace" className="btn-header">
                         <HomeIcon />
                     </Link>
-                    <button className="btn-header boards-btn flex" onClick={() => this.toggleCurModal('board-search')}>
+                    <button className="btn-header wide-layout flex" onClick={() => this.toggleCurModal('board-search')}>
                         <BoardIcon />
                         <span>
                             Boards
@@ -81,9 +81,9 @@ class _AppHeader extends Component {
                     <div>
                         <button className="btn-header" onClick={() => openPopover('CREATE_BOARD')}>
                             <AddIcon />
-                        </button>
+                        </button> 
                     </div>
-                    <button className="btn-header" onClick={() => this.toggleCurModal('info')}>
+                    <button className="btn-header wide-layout" onClick={() => this.toggleCurModal('info')}>
                         <InfoIcon />
                     </button>
                     <div>

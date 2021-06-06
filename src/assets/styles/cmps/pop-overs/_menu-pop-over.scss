@@ -60,4 +60,13 @@
 //     font-size: 14px;
 //     line-height: 20px
 // }
+@include for-mobile-layout{
+    .board-menu-wrapper{
+
+        .menu-details {
+            width: 20rem;
+        }
+    }
+    
+}
 
