@@ -23,6 +23,11 @@
         @content;
     }
 }
+@mixin for-header-narrow-layout {
+    @media (max-width: $header-breakbpoint) {
+        @content;
+    }
+}
 
 /* Media  Mixins */
 @mixin aspect-ratio($width, $height) {

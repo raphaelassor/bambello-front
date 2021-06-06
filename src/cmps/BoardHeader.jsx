@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { ReactComponent as ArrowDown } from '../assets/img/icons/arrow-down.svg'
 import { ReactComponent as BoardsIcon } from '../assets/img/icons/boards-icon.svg'
 import { ReactComponent as ElipsisIcon } from '../assets/img/icons/elipsis.svg'
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import CloseIcon from '@material-ui/icons/Close';
 import AutosizeInput from 'react-input-autosize';
 import { ElementOverlay } from '../cmps/Popover/ElementOverlay';
@@ -62,7 +63,7 @@ class _BoardHeader extends Component {
     }
     onOpenPopover = (ev, PopoverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
-        const props = { member }
+        const props = { member , isInCard:false }
         this.props.openPopover(PopoverName, elPos, props)
     }
     get isFilterOn() {
@@ -117,9 +118,12 @@ class _BoardHeader extends Component {
                     <i className={`far fa-star icon-sm star-icon ${board.isFavorite ? 'favorite' : ''}`}></i>
                 </button>
                 <span className="divider"></span>
-
+<div className="flex full ">
+    
                 <div className="board-header-members flex align-center">
+                    <AvatarGroup>
                     {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} />)}
+                    </AvatarGroup>
 
                     <button onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
                 </div>
@@ -138,6 +142,7 @@ class _BoardHeader extends Component {
                     <span>Show Menu</span>
                     <ElementOverlay />
                 </button>
+</div>
             </div>
         )
 

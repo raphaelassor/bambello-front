@@ -4,6 +4,8 @@ import { boardService } from '../../services/board.service'
 import { PopoverMemberPreview } from './PopoverMemberPreview'
 import { onSaveBoard } from '../../store/actions/board.actions';
 import { connect } from 'react-redux'
+import { socketService } from '../../services/socket.service'
+
 
 
 class _PopoverMembers extends Component {
@@ -44,8 +46,9 @@ class _PopoverMembers extends Component {
             } else {
                 savedActivity = boardService.createActivity('removed', member.fullname, loggedInUser, card)
             }
-            console.log(savedActivity)
+            
         }
+        socketService.emit('app newActivity',savedActivity)
         board.activities.push(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         this.props.onSaveBoard(updatedBoard)

@@ -14,10 +14,13 @@ import { PopoverArchive } from './PopoverArchive';
 import { PopoverActivity } from './PopoverActivity';
 import { PopoverBoardFilter } from './PopoverBoardFilter';
 import { PopoverCreateBoard } from './PopoverCreateBoard';
+import { PopoverListMenu } from './PopoverListMenu';
+import { PopoverNotifics } from './PopoverNotifics';
 
 function _DynamicPopover({ currPopover }) {
     if (!currPopover) return ''
     const { name, props } = currPopover
+    console.log('props in dynamic popover', props)
     switch (name) {
         case 'MEMBERS': return <PopoverMembers {...props} />;
         case 'LABELS': return <PopoverLabels {...props} />;
@@ -35,6 +38,8 @@ function _DynamicPopover({ currPopover }) {
         case 'ACTIVITY': return <PopoverActivity {...props} />
         case 'BOARD_FILTER': return <PopoverBoardFilter {...props} />
         case 'CREATE_BOARD': return <PopoverCreateBoard {...props} />
+        case 'LIST_MENU': return <PopoverListMenu {...props} />
+        case 'NOTIFICATIONS': return <PopoverNotifics {...props} />
         default: return '';
     }
 }

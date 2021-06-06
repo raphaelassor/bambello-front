@@ -3,6 +3,7 @@ import { Popover } from "./Popover"
 import {Component} from 'react'
 import {connect} from 'react-redux'
 import {PopoverMemberPreview} from './PopoverMemberPreview'
+import {userService} from '../../services/user.service'
 class _PopoverInvite extends Component {
 
     state = {
@@ -11,17 +12,18 @@ class _PopoverInvite extends Component {
 
     }
 
-    componentDidMount(){
-        const{board}= this.props
-        this.setState({members:board.members})
+   async componentDidMount(){
+       const members = await userService.getUsers()
+        this.setState({members})
     }
     handleChange = ({ target }) => {
-       // const members=this.userService.getUsers(target.value)
-        // this.setState({ memberTxt: target.value,members: })
+      
+        this.setState({ memberTxt: target.value})
     }
     addMember = (member) => {
-        const { board } = this.props
+        const { board, onSaveBoard } = this.props
         const idx = board.members.findIndex(boardMember => boardMember._id === member._id)
+        console.log('added member idx', idx)
         if (idx !== -1) return
          board.members.push(member)
         onSaveBoard(board)
@@ -30,15 +32,20 @@ class _PopoverInvite extends Component {
     isMemberInBoard=(member)=>{
         return this.props.board.members.some(boardMember=>boardMember._id===member._id)
     }
+    get filteredMembers(){
+        const {members,memberTxt}=this.state
+        const regex=new RegExp (memberTxt,'i')
+        return members.filter(member=> regex.test(member.fullname)).slice(0,10)
+    }
 
     render() {
         const { members } = this.state
         return <Popover title="Invite to board">
             <div className="invite-details flex column">
-                <input type="text" autoFocus className="pop-over-input" />
+                <input type="text" autoFocus className="pop-over-input" onChange={this.handleChange} />
                 <div className="members">
-                {members.map(member => <PopoverMemberPreview key={member._id} member={member}
-                    toggleMember={this.addMember} isJoined={this.isMemberInBoard(member)} />)}
+                {this.filteredMembers.map(member => <PopoverMemberPreview key={member._id} member={member}
+                    toggleMember={this.addMember} isSelected={this.isMemberInBoard(member)} />)}
                     </div>
 
                 <button className="primary-btn">Send invitation</button>

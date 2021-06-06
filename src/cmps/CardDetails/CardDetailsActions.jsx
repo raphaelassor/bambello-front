@@ -12,6 +12,7 @@ import { utilsService } from '../../services/utils.service'
 import { boardService } from '../../services/board.service'
 import { ElementOverlay } from '../Popover/ElementOverlay'
 import { ReactComponent as MemberIcon } from '../../assets/img/icons/person.svg'
+import { socketService } from '../../services/socket.service'
 
 class _CardDetailsActions extends Component { 
 
@@ -28,6 +29,7 @@ class _CardDetailsActions extends Component {
         card.attachs.push(attach)
         onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('attached', attach.fileName, loggedInUser, card)
+        socketService.emit('app newActivity',savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
         closePopover()
@@ -40,6 +42,7 @@ class _CardDetailsActions extends Component {
         card.members.push(loggedInUser)
         onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
+        socketService.emit('app newActivity',savedActivity)
         board.activities.push(savedActivity)
         onSaveBoard(board)
     }

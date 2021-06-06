@@ -19,12 +19,16 @@ class _AppHeader extends Component {
         currOpenModal: '',
         isPrevInput: true,
         isNewNotific: false,
-        isFullStyle: false
+        // isFullLayout: true
     }
 
   componentDidMount(){
       console.log('mounted')
-     
+      socketService.on('app addActivity',activity=>{
+          //send push when available
+          console.log('activity in header', activity)
+          this.setState({isNewNotific:true})
+      })
   }
 
     toggleInput = () => {
@@ -35,21 +39,28 @@ class _AppHeader extends Component {
         if (this.state.currOpenModal === modalName) this.setState({ currOpenModal: '' })
         else this.setState({ currOpenModal: modalName })
     }
+    onOpenNotifics=(ev)=>{
+        const{openPopover}=this.props
+        this.setState({isNewNotific:false},()=>{
+            const elPos=ev.target.getBoundingClientRect()
+            openPopover('NOTIFICATIONS',elPos)
+        })
+    }
 
 
     render() {
-        const { isPrevInput, currOpenModal, isFullStyle } = this.state
-        const { board, loggedInUser,openPopover } = this.props
+        const { isPrevInput, currOpenModal,isNewNotific,isFullLayout } = this.state
+        const { board, isBoardStyle,openPopover } = this.props
         return <div>
-            <div className={`main-header flex justify-space-between ${board ? 'in-board' : 'out-board'} `}>
+            <div className={`main-header flex justify-space-between ${isBoardStyle ? 'in-board' : 'out-board'} `}>
                 <div className="btn-header-container flex">
-                    <button className="btn-header">
+                    <button className="btn-header ">
                         <AppsIcon />
                     </button>
                     <Link to ="/workspace" className="btn-header">
                         <HomeIcon />
                     </Link>
-                    <button className="btn-header flex" onClick={() => this.toggleCurModal('board-search')}>
+                    <button className="btn-header boards-btn flex" onClick={() => this.toggleCurModal('board-search')}>
                         <BoardIcon />
                         <span>
                             Boards
@@ -76,7 +87,7 @@ class _AppHeader extends Component {
                         <InfoIcon />
                     </button>
                     <div>
-                        <button className="btn-header" onClick={() => this.toggleCurModal('notifics')}>
+                        <button className={`btn-header ${isNewNotific? 'new-notific':'' }`} onClick={(ev) => this.onOpenNotifics(ev)}>
                             <BellIcon />
                         </button>
                     </div>
@@ -92,12 +103,17 @@ class _AppHeader extends Component {
     }
 
 }
+function mapStateToProps(state){
+    return {
+        loggedInUser:state.appModule.loggedInUser
+    }
+}
 
 const mapDispatchToProps={
     openPopover
 }
 
-export const AppHeader = connect(null,mapDispatchToProps)(_AppHeader)
+export const AppHeader = connect(mapStateToProps,mapDispatchToProps)(_AppHeader)
 
 
 

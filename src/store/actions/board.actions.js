@@ -35,6 +35,16 @@ export function onSaveBoard(board) {
         }
     }
 }
+export function createBoard(board){
+    return async dispatch=>{
+        try{
+            const savedBoard = await boardService.save(board)
+            dispatch({ type: 'SET_BOARD', board: savedBoard })
+        }catch (err) {
+            console.log('BoardActions: err in onSaveBoard', err)
+        }
+    }
+}
 export function unsetBoard(){
     return  dispatch=>{
         dispatch({type:'SET_BOARD', board:null })
