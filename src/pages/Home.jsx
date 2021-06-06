@@ -18,7 +18,7 @@ export class Home extends Component {
                                 <p>Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Bambello.</p>
                                 {/* FOR PRODUCTION: */}
                                 {/* <Link to="/existingboard" className="clean-link">Try now!</Link> */}
-                                <Link to="/workspace" className="clean-link">Get started!</Link>
+                                <Link to="/board/60bb8a47bfc2a07e2ada4b0f" className="clean-link">Get started!</Link>
                             </div>
                             <div className="hero-img">
                                 <img src={heroImgUrl} alt="" />

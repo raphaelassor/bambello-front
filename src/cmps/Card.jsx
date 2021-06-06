@@ -125,6 +125,7 @@ class _Card extends Component {
                             className="card-preview-input"
                             name="cardTitle"
                             autoFocus
+                            ref={elTextarea => this.elTextarea}
                             value={cardTitle}
                             onChange={handleChange}
                             onKeyDown={handleChange}
