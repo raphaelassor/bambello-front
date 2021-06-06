@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { socketService } from "../services/socket.service";
-import {openPopover} from '../store/actions/app.actions'
+import { openPopover, onLogout } from '../store/actions/app.actions'
 import { ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import { ReactComponent as BoardIcon } from '../assets/img/icons/board.svg'
 import { ReactComponent as AppsIcon } from '../assets/img/icons/apps.svg'
@@ -11,7 +11,7 @@ import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
 import { ProfileAvatar } from './ProfileAvatar'
-import Avatar from '@material-ui/core/Avatar';
+
 class _AppHeader extends Component {
 
     state = {
@@ -22,14 +22,14 @@ class _AppHeader extends Component {
         // isFullLayout: true
     }
 
-  componentDidMount(){
-      console.log('mounted')
-      socketService.on('app addActivity',activity=>{
-          //send push when available
-          console.log('activity in header', activity)
-          this.setState({isNewNotific:true})
-      })
-  }
+    componentDidMount() {
+        console.log('mounted')
+        socketService.on('app addActivity', activity => {
+            //send push when available
+            console.log('activity in header', activity)
+            this.setState({ isNewNotific: true })
+        })
+    }
 
     toggleInput = () => {
         this.setState({ isPrevInput: !this.state.isPrevInput, currOpenModal: !this.state.isPrevInput ? '' : 'search' })
@@ -39,25 +39,31 @@ class _AppHeader extends Component {
         if (this.state.currOpenModal === modalName) this.setState({ currOpenModal: '' })
         else this.setState({ currOpenModal: modalName })
     }
-    onOpenNotifics=(ev)=>{
-        const{openPopover}=this.props
-        this.setState({isNewNotific:false},()=>{
-            const elPos=ev.target.getBoundingClientRect()
-            openPopover('NOTIFICATIONS',elPos)
+    onOpenNotifics = (ev) => {
+        const { openPopover } = this.props
+        this.setState({ isNewNotific: false }, () => {
+            const elPos = ev.target.getBoundingClientRect()
+            openPopover('NOTIFICATIONS', elPos)
         })
+    }
+
+    onLogout = () => {
+        const { onLogout, loggedInUser } = this.props
+        onLogout(loggedInUser)
+        // this.props.history.push('/')
     }
 
 
     render() {
-        const { isPrevInput, currOpenModal,isNewNotific,isFullLayout } = this.state
-        const { board, isBoardStyle,openPopover } = this.props
+        const { isPrevInput, currOpenModal, isNewNotific, isFullLayout } = this.state
+        const { board, isBoardStyle, openPopover } = this.props
         return <div>
             <div className={`main-header flex justify-space-between ${isBoardStyle ? 'in-board' : 'out-board'} `}>
                 <div className="btn-header-container flex">
                     <button className="btn-header wide-layout ">
                         <AppsIcon />
                     </button>
-                    <Link to ="/workspace" className="btn-header">
+                    <Link to="/workspace" className="btn-header">
                         <HomeIcon />
                     </Link>
                     <button className="btn-header wide-layout flex" onClick={() => this.toggleCurModal('board-search')}>
@@ -81,13 +87,13 @@ class _AppHeader extends Component {
                     <div>
                         <button className="btn-header" onClick={() => openPopover('CREATE_BOARD')}>
                             <AddIcon />
-                        </button> 
+                        </button>
                     </div>
                     <button className="btn-header wide-layout" onClick={() => this.toggleCurModal('info')}>
                         <InfoIcon />
                     </button>
                     <div>
-                        <button className={`btn-header ${isNewNotific? 'new-notific':'' }`} onClick={(ev) => this.onOpenNotifics(ev)}>
+                        <button className={`btn-header ${isNewNotific ? 'new-notific' : ''}`} onClick={(ev) => this.onOpenNotifics(ev)}>
                             <BellIcon />
                         </button>
                     </div>
@@ -95,25 +101,30 @@ class _AppHeader extends Component {
                     {currOpenModal === 'user' &&
                         <div className="header-modal notific-modal">
                             {/* <NotificsList activities={this.props.activities} /> */}
-                    USER NAV  PLACEHOLDER
-                </div>}
+                            USER NAV  PLACEHOLDER
+                        </div>
+                    }
+                    <div className="btn-header">
+                        <button onClick={this.onLogout}>Logout</button>
+                    </div>
                 </div>
             </div>
         </div>
     }
 
 }
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
-        loggedInUser:state.appModule.loggedInUser
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 
-const mapDispatchToProps={
-    openPopover
+const mapDispatchToProps = {
+    openPopover,
+    onLogout
 }
 
-export const AppHeader = connect(mapStateToProps,mapDispatchToProps)(_AppHeader)
+export const AppHeader = connect(mapStateToProps, mapDispatchToProps)(_AppHeader)
 
 
 

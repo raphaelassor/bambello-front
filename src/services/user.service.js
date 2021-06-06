@@ -6,7 +6,9 @@ export const userService = {
     login,
     logout,
     signup,
+    updateUser,
     getLoggedinUser,
+    getOnlineUsers,
     getUsers,
     getById,
 }
@@ -38,10 +40,18 @@ async function signup(userInfo) {
     }
 }
 
-async function logout() {
+async function logout(user) {
     try {
         sessionStorage.clear()
-        return await httpService.post('auth/logout')
+        return await httpService.post('auth/logout', user)
+    } catch (err) {
+        throw err
+    }
+}
+
+async function updateUser(user) {
+    try {
+        await httpService.put(`user/${user.id}`, user)
     } catch (err) {
         throw err
     }
@@ -66,7 +76,21 @@ function getLoggedinUser() {
     return user
 }
 
-
+async function getOnlineUsers() {
+    try {
+        const users = await getUsers()
+        console.log(users)
+        const onlineUsers = users.reduce((acc,user) => {
+            if (user.isOnline) {
+                acc.push(user._id)
+            }
+            return acc
+        }, [])
+        return onlineUsers
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 async function getUsers() {
     try {
