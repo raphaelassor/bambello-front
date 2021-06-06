@@ -80,7 +80,7 @@ export function createActivity(actionType, txt = '', undefined, card = null) {
         savedCard = {
             id: card.id,
             title: card.title,
-            members:card.members
+            members: card.members
         }
     }
 
@@ -109,7 +109,7 @@ function getFilteredList(listToFilter, filter) {
             isInMembers = filter.members.some(memberFilter => card.members.some(member => memberFilter._id === member._id))
         }
         const regex = new RegExp(filter.txt, 'i')
-        
+
         return !card.isArchived && isInMembers && isInLabels && regex.test(card.title)
     })
     return list
@@ -129,11 +129,10 @@ function setPopoverPos(pos, elRect, diff = 38) {
     return { left, top, width }
 }
 
-function removeCard(board,card){
+function removeCard(board, card) {
     board.lists.forEach(list => {
-        if(list.cards.some(boardCard=>boardCard.id===card.id))
-            list.cards=list.cards.filter(boardCard=>boardCard.id!==card.id)
+        if (list.cards.some(boardCard => boardCard.id === card.id))
+            list.cards = list.cards.filter(boardCard => boardCard.id !== card.id)
     })
     return { ...board }
 }
-
