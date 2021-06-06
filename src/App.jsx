@@ -17,7 +17,7 @@ class _App extends Component {
     const { board, location } = this.props
     if (!location.pathname.includes('/board')) return {}
     const style = board ? {
-      background: 'url(https://images.unsplash.com/photo-1587502537147-2ba64a62e3d3?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyMzU5OTZ8MXwxfHNlYXJjaHwxfHxsYW5kc2NhcGV8ZW58MHwwfHx8MTYyMjk3NzI2Ng&ixlib=rb-1.2.1&q=85)',
+      background: board.style.background,
       backgroundSize: 'cover',
       backgroundPosition: 'center center'
     } : { background: "#0079bf" }

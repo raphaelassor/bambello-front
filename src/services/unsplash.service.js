@@ -12,5 +12,5 @@ async function query(keyword = '16:9') {
 
 async function getTenPhotos() {
     const { results } = await query()
-    console.log(results)
+    // results.reduce()
 }
