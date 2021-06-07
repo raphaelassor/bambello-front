@@ -38,16 +38,16 @@ class _CardDetails extends Component {
         this.setState({ card, list })
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.board !== this.props.board) {
-    //         const { board: { lists } } = this.props
-    //         const { cardId, listId } = this.props.match.params
-    //         const list = lists.find(list => list.id === listId)
-    //         const { cards } = list;
-    //         const card = cards.find(card => card.id === cardId)
-    //         this.setState({ card, list })
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps.board !== this.props.board) {
+            const { board: { lists } } = this.props
+            const { cardId, listId } = this.props.match.params
+            const list = lists.find(list => list.id === listId)
+            const { cards } = list;
+            const card = cards.find(card => card.id === cardId)
+            this.setState({ card, list })
+        }
+    }
 
     get cardLabels() {
         const { card: { labelIds } } = this.state
