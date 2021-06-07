@@ -8,7 +8,6 @@ import { DynamicPopover } from './cmps/Popover/DynamicPopover'
 import { socketService } from './services/socket.service';
 import { userService } from './services/user.service';
 import { updateOnlineUsers } from './store/actions/app.actions'
-import socket from 'socket.io-client/lib/socket';
 
 class _App extends Component {
 
