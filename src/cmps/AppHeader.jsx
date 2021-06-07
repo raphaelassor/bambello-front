@@ -23,10 +23,8 @@ class _AppHeader extends Component {
     }
 
     componentDidMount() {
-        console.log('mounted')
         socketService.on('app addActivity', activity => {
             //send push when available
-            console.log('activity in header', activity)
             this.setState({ isNewNotific: true })
         })
     }

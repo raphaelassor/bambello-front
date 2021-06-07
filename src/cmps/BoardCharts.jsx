@@ -41,7 +41,6 @@ export class BoardCharts extends Component {
 
     get cardsPerListData() {
         const { cardsPerListMap } = this.props.chartsData
-        console.log(cardsPerListMap)
         return {
             labels: Object.keys(cardsPerListMap),
             datasets: [

@@ -16,7 +16,6 @@ class _PopoverActivity extends Component {
     toggleFilter = (filter) => {
         const { isCommentsOnly } = this.state
         if ((!isCommentsOnly && filter === 'all') || (isCommentsOnly && filter === 'comments')) return
-        console.log('in toggle filter')
         this.setState({ isCommentsOnly: !this.state.isCommentsOnly })
     }
     get activities() {

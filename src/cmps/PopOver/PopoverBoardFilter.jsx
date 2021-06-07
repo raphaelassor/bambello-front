@@ -17,7 +17,6 @@ class _PopoverBoardFilter extends Component {
     componentDidMount(){
         const {filterBy:{labels,txt,members}}=this.props
         this.setState({ filterBy: { labels, txt ,members } },()=>{
-            console.log(this.state)
         })
     }
 

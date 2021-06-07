@@ -31,7 +31,6 @@ class _PopoverMembers extends Component {
         const { card, board, loggedInUser } = this.props
         const idx = card.members.findIndex(cardMember => cardMember._id === member._id)
         let savedActivity
-        console.log(idx)
         if (idx === -1) {
             card.members.push(member)
             if (member._id === loggedInUser._id) {

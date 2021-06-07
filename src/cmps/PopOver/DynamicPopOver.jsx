@@ -20,7 +20,6 @@ import { PopoverNotifics } from './PopoverNotifics';
 function _DynamicPopover({ currPopover }) {
     if (!currPopover) return ''
     const { name, props } = currPopover
-    console.log('props in dynamic popover', props)
     switch (name) {
         case 'MEMBERS': return <PopoverMembers {...props} />;
         case 'LABELS': return <PopoverLabels {...props} />;

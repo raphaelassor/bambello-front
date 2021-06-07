@@ -22,17 +22,14 @@ class _App extends Component {
 
 
       if (loggedInUser) {
-        console.log('logged in user exisits , emited user-watch')
         socketService.emit('user-watch', loggedInUser._id)
       }
       socketService.on('user connected', userId => {
         const {onlineUsers}=this.props
         const isLoggedIn = this.props.onlineUsers.some(currUserId => currUserId === userId)
-        console.log('user connected: ' , userId)
         if (!isLoggedIn) {
           onlineUsers.push(userId)
           updateOnlineUsers(onlineUsers)
-          console.log('online users pushed :' , onlineUsers)
         }
       })
 
@@ -44,8 +41,6 @@ class _App extends Component {
 
         const {onlineUsers}=this.props
         const onlineUsersToSet = onlineUsers.filter(currUserId => currUserId !== userId)
-        console.log('user disconnected , online Users are ',onlineUsers)
-        console.log('userDisconnected: online users to set are : ',onlineUsersToSet)
         updateOnlineUsers(onlineUsersToSet)
       })
     } catch (err) {

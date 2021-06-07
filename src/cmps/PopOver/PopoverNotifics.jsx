@@ -10,7 +10,6 @@ function _PopoverNotifcs ({loggedInUser,board}){
         const userNotifics=sortedActivities.reduce((acc,activity)=>{
             if(activity.card?.members){
                 activity.card.members.forEach(member=>{
-                    console.log('Member:' ,member)
                     if(loggedInUser._id===member._id&&loggedInUser._id!==activity.byMember._id){
                         acc.push(activity)
                     }
