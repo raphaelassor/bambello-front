@@ -10,9 +10,10 @@ function createSocketService() {
   const socketService = {
     async setup() {
       if (socket) return
-      await httpService.get('setup-session')
-      socket = io(baseUrl, { reconnection: false })
+      await httpService.get('setup-session' )
+      socket = io(baseUrl, { reconnection: true })
       socketIsReady = true;
+
     },
     async on(eventName, cb) {
       if (!socket) await socketService.setup()

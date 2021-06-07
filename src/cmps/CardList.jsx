@@ -59,7 +59,7 @@ export class _CardList extends Component {
             currList,
             board,
             onSaveBoard,
-
+            closePopover
         }
         this.props.openPopover(PopoverName, elPos, props)
     }
