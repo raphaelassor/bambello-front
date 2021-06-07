@@ -51,7 +51,7 @@ class _BoardHeader extends Component {
         const { board, onSaveBoard } = this.props
         board.title = title
         const savedActivity = boardService.createActivity('renamed', board.title, loggedInUser)
-        board.activities.push(savedActivity)
+        board.activities.unshift(savedActivity)
         onSaveBoard(board)
         this.toggleEdit()
     }
@@ -108,7 +108,7 @@ class _BoardHeader extends Component {
                                 value={title}
                                 onChange={this.handleChange}
                                 ref={(input) => { this.titleInput = input }}
-                                // onBlur={this.onTitleSave}
+                                 onBlur={this.onTitleSave}
                             />
                         </form>
                         :

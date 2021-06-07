@@ -28,7 +28,7 @@ class _PopoverDate extends Component {
         card.dueDate = date ? Date.parse(date) : 0;
         const txt = new Date(date).toLocaleString('en-GB', { month: 'short', day: 'numeric' }) 
         const savedActivity = boardService.createActivity('changed-date', txt, loggedInUser, card)
-        board.activities.push(savedActivity)
+        board.activities.unshift(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
         closePopover()

@@ -49,7 +49,7 @@ class _PopoverMembers extends Component {
             
         }
         socketService.emit('app newActivity',savedActivity)
-        board.activities.push(savedActivity)
+        board.activities.unshift(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         this.props.onSaveBoard(updatedBoard)
     }

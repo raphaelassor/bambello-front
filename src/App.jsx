@@ -19,8 +19,6 @@ class _App extends Component {
       const { onlineUsers, updateOnlineUsers, loggedInUser } = this.props
       const onlineUsersToSet = await userService.getOnlineUsers()
       updateOnlineUsers(onlineUsersToSet)
-      
-
 
       if (loggedInUser) {
         console.log('logged in user exisits , emited user-watch')

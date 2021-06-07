@@ -26,7 +26,7 @@ class _CardChecklists extends Component {
         let { card, board, loggedInUser, onSaveBoard } = this.props
         const savedActivity = boardService.createActivity(type, txt, loggedInUser, card)
         socketService.emit('app newActivity',savedActivity)
-        board.activities.push(savedActivity)
+        board.activities.unshift(savedActivity)
         onSaveBoard(board)
     }
 

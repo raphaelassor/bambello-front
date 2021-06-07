@@ -26,12 +26,13 @@ class _CardDetailsActions extends Component {
             createdAt: Date.now()
         }
 
+        // onSaveCardFromActions(card)
         card.attachs.push(attach)
-        onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('attached', attach.fileName, loggedInUser, card)
         socketService.emit('app newActivity', savedActivity)
-        board.activities.push(savedActivity)
-        onSaveBoard(board)
+        board.activities.unshift(savedActivity)
+        const  updatedBoard = boardService.updateCardInBoard(board,card)
+        onSaveBoard(updatedBoard)
         closePopover()
     }
 
@@ -43,7 +44,7 @@ class _CardDetailsActions extends Component {
         onSaveCardFromActions(card)
         const savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
         socketService.emit('app newActivity', savedActivity)
-        board.activities.push(savedActivity)
+        board.activities.unshift(savedActivity)
         onSaveBoard(board)
     }
 

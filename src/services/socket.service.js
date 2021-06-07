@@ -11,7 +11,7 @@ function createSocketService() {
     async setup() {
       if (socket) return
       await httpService.get('setup-session' )
-      socket = io(baseUrl, { reconnection: true })
+      socket = io(baseUrl, { reconnection: false })
       socketIsReady = true;
 
     },
