@@ -42,7 +42,7 @@ class _Dashboard extends Component {
         const { lists } = this.props.board
         const overdueCardsCount = lists.reduce((acc, list) => {
             const overdueCardsCountPerList = list.cards.reduce((acc, card) => {
-                if (card.dueDate < Date.now() && card.dueDate) acc++
+                if (card.dueDate < Date.now() && card.dueDate && !card.isDone) acc++
                 return acc
             }, 0)
             acc += overdueCardsCountPerList

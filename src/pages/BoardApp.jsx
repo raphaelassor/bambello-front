@@ -33,6 +33,7 @@ class _BoardApp extends Component {
             // socketService.emit('user watch',loggedInUser._id)
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
+                console.log('board updated socket ')
                 this.props.loadBoard(savedBoard._id)
             })
             this.removeEvent = eventBusService.on('card-edit', ({ elPos, card }) => {
@@ -50,7 +51,6 @@ class _BoardApp extends Component {
     }
 
     onCloseCardEdit = () => {
-        console.log('im here baby')
         this.setState({ isCardEditOpen: false })
     }
 
@@ -93,7 +93,7 @@ class _BoardApp extends Component {
             lists[listEndIdx] = listEnd
             const txt = `${listStart.title} to ${listEnd.title}`
             const savedActivity = boardService.createActivity('moved', txt, loggedInUser, ...card)
-            board.activities.push(savedActivity)
+            board.activities.unshift(savedActivity)
         }
         board.lists = lists
         onSaveBoard(board)
@@ -101,9 +101,10 @@ class _BoardApp extends Component {
 
 
     render() {
-        const { onSaveBoard, board, filterBy, isLoading } = this.props
+        const { onSaveBoard, board, filterBy } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
-        if (isLoading) return <Loader />
+        if (!board) return <Loader />
+      
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>

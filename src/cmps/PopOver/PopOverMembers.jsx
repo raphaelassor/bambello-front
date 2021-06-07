@@ -31,7 +31,6 @@ class _PopoverMembers extends Component {
         const { card, board, loggedInUser } = this.props
         const idx = card.members.findIndex(cardMember => cardMember._id === member._id)
         let savedActivity
-        console.log(idx)
         if (idx === -1) {
             card.members.push(member)
             if (member._id === loggedInUser._id) {
@@ -49,7 +48,7 @@ class _PopoverMembers extends Component {
             
         }
         socketService.emit('app newActivity',savedActivity)
-        board.activities.push(savedActivity)
+        board.activities.unshift(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         this.props.onSaveBoard(updatedBoard)
     }

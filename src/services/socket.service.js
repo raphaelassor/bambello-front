@@ -10,9 +10,10 @@ function createSocketService() {
   const socketService = {
     async setup() {
       if (socket) return
-      await httpService.get('setup-session')
+      await httpService.get('setup-session' )
       socket = io(baseUrl, { reconnection: false })
       socketIsReady = true;
+
     },
     async on(eventName, cb) {
       if (!socket) await socketService.setup()
@@ -65,10 +66,3 @@ function createDummySocketService() {
   }
   return socketService
 }
-// Basic Tests
-// function cb(x) { console.log(x) }
-// socketService.on('baba', cb)
-// socketService.on('mama', cb)
-// socketService.on('lala', cb)
-// socketService.emit('baba', 'DATA')
-// socketService.off('baba', cb)

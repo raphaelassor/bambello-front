@@ -29,8 +29,8 @@ export function onSaveBoard(board) {
     return async dispatch => {
         try {
             dispatch({ type: 'SAVE_BOARD', board })
-            await boardService.save(board)
-            socketService.emit('board newUpdate', board)
+            const savedBoard = await boardService.save(board)
+            socketService.emit('board newUpdate', savedBoard)
         } catch (err) {
             console.log('BoardActions: err in onSaveBoard', err)
         }
@@ -58,10 +58,9 @@ export function togglePreviewLabels() {
     }
 }
 
-export function setFilter(filterBy) {
-    console.log('in set Filter', filterBy)
-    return dispatch => {
-        dispatch({ type: 'SET_FILTER', filterBy })
+export function setFilter(filterBy){
+    return dispatch=>{
+        dispatch({ type: 'SET_FILTER',filterBy })
     }
 }
 

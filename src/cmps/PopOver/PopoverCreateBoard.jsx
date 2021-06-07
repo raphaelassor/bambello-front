@@ -17,10 +17,7 @@ class _PopoverCreateBoard extends Component {
 
     handleChange = ({ target }) => {
         const { name, value } = target
-        this.setState({ [name]: value }, () => {
-
-            console.log(this.state)
-        })
+        this.setState({ [name]: value })
     }
 
     onCreateBoard = async () => {

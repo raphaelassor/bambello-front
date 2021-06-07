@@ -8,7 +8,6 @@ import { DynamicPopover } from './cmps/Popover/DynamicPopover'
 import { socketService } from './services/socket.service';
 import { userService } from './services/user.service';
 import { updateOnlineUsers } from './store/actions/app.actions'
-import socket from 'socket.io-client/lib/socket';
 
 class _App extends Component {
 
@@ -17,33 +16,41 @@ class _App extends Component {
       socketService.setup()
 
       const { onlineUsers, updateOnlineUsers, loggedInUser } = this.props
-
-      // if (loggedInUser) {
-      //   socketService.emit('user-watch', loggedInUser._id)
-      // }
-
       const onlineUsersToSet = await userService.getOnlineUsers()
       updateOnlineUsers(onlineUsersToSet)
 
+      if (loggedInUser) {
+        socketService.emit('user-watch', loggedInUser._id)
+      }
       socketService.on('user connected', userId => {
-        const isLoggedIn = onlineUsers.some(currUserId => currUserId === userId)
+        const {onlineUsers}=this.props
+        const isLoggedIn = this.props.onlineUsers.some(currUserId => currUserId === userId)
         if (!isLoggedIn) {
           onlineUsers.push(userId)
           updateOnlineUsers(onlineUsers)
         }
       })
+
       socketService.on('user disconnected', userId => {
-        const newOnlineUsers = onlineUsers.filter(currUserId => currUserId !== userId)
-        updateOnlineUsers(newOnlineUsers);
+        // if (userId === loggedInUser?._id) {
+        //   loggedInUser.isOnline = false;
+        //   await userService.updateUser(loggedInUser)
+        // }
 
-        if (userId === loggedInUser?._id) {
-          loggedInUser.isOnline = false;
-          userService.updateUser(loggedInUser)
-        }
-
+        const {onlineUsers}=this.props
+        const onlineUsersToSet = onlineUsers.filter(currUserId => currUserId !== userId)
+        updateOnlineUsers(onlineUsersToSet)
       })
     } catch (err) {
       console.log(err)
+    }
+  }
+  async componentWillUnmount(){
+    const {loggedInUser}=this.props
+    if(loggedInUser) {
+      loggedInUser.isOnline = false;
+     await userService.updateUser(loggedInUser)
+      socketService.emit('user endSession',loggedInUser._id)
     }
   }
 

@@ -13,7 +13,6 @@ class _PopoverMenu extends Component {
 
 
     onOpenPopover = (ev, PopoverName) => {
-        console.log('on open Popover', PopoverName)
         const elPos = ev.target.getBoundingClientRect()
         const props = {}
         this.props.openPopover(PopoverName, elPos, props)

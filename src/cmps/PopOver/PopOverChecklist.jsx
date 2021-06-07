@@ -28,7 +28,7 @@ class _PopoverChecklist extends Component {
         }
         card.checklists.push(checklist)
         const savedActivity = boardService.createActivity('added', checklist.title, loggedInUser, card)
-        board.activities.push(savedActivity)
+        board.activities.unshift(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
         this.props.closePopover()

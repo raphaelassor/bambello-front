@@ -1,7 +1,7 @@
 import { ActivityPreview } from './ActivityPreview'
-export function ActivitiesList({ activities, isGeneral }) {
+export function ActivitiesList({ activities, isGeneral}) {
    
-    const sortedActivities = activities.sort((a, b) => b.createdAt - a.createdAt)
+    const sortedActivities = activities.slice(0,20)
     
     return (
         <div className="activities-list">
