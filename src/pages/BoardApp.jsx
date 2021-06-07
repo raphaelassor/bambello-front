@@ -103,7 +103,7 @@ class _BoardApp extends Component {
     render() {
         const { onSaveBoard, board, filterBy, isLoading } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
-        if (isLoading) return <Loader />
+        if (!board) return <Loader />
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>

@@ -39,7 +39,7 @@ export function onSignup(userInfo) {
 export function onLogout(user) {
     return async dispatch => {
         try {
-            socketService.emit('user logout', user._id)
+            socketService.emit('user endSession', user._id)
             await userService.logout(user)
             // dispatch({ type: 'UPDATE_ONLINE_USERS', userId })
             dispatch({ type: 'SET_USER', user: null })
