@@ -19,13 +19,6 @@ export class BoardCharts extends Component {
                 {
                     data: Object.values(cardsPerMemberMap),
                     backgroundColor: '#0079bf',
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                            }
-                        }
-                    },
                 }
             ]
         }
