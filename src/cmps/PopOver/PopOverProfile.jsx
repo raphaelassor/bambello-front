@@ -4,7 +4,7 @@ import { Popover } from './Popover'
 import { boardService } from '../../services/board.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
 import { closePopover } from '../../store/actions/app.actions'
-import { socketService } from '../../services/socket.service'
+// import { socketService } from '../../services/socket.service'
 
 function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overlayType, isInCard = true }) {
 

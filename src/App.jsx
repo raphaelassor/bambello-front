@@ -32,10 +32,12 @@ class _App extends Component {
           updateOnlineUsers(onlineUsers)
         }
       })
+
       socketService.on('user disconnected', userId => {
         const newOnlineUsers = onlineUsers.filter(currUserId => currUserId !== userId)
         updateOnlineUsers(newOnlineUsers);
 
+        //update backend after front
         if (userId === loggedInUser?._id) {
           loggedInUser.isOnline = false;
           userService.updateUser(loggedInUser)
