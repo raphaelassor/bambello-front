@@ -16,6 +16,7 @@ import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
 import { CardActivities } from '../cmps/CardDetails/CardActivities'
 import { closePopover, openPopover } from '../store/actions/app.actions'
+import { Loader } from '../cmps/Loader'
 
 
 
@@ -37,16 +38,16 @@ class _CardDetails extends Component {
         this.setState({ card, list })
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.board !== this.props.board) {
-            const { board: { lists } } = this.props
-            const { cardId, listId } = this.props.match.params
-            const list = lists.find(list => list.id === listId)
-            const { cards } = list;
-            const card = cards.find(card => card.id === cardId)
-            this.setState({ card, list })
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.board !== this.props.board) {
+    //         const { board: { lists } } = this.props
+    //         const { cardId, listId } = this.props.match.params
+    //         const list = lists.find(list => list.id === listId)
+    //         const { cards } = list;
+    //         const card = cards.find(card => card.id === cardId)
+    //         this.setState({ card, list })
+    //     }
+    // }
 
     get cardLabels() {
         const { card: { labelIds } } = this.state
@@ -126,7 +127,7 @@ class _CardDetails extends Component {
     render() {
         const { board, board: { activities }, onSaveBoard, openPopover } = this.props
         const { card, list } = this.state
-        if (!card) return '' //LOADER PLACER
+        if (!card) return <Loader />
         const { title, members, description, checklists, dueDate, style, attachs, isArchived } = card
         return (<>
             <section className="card-details-container">

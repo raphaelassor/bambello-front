@@ -104,9 +104,9 @@ class _AppHeader extends Component {
                             USER NAV  PLACEHOLDER
                         </div>
                     }
-                    <div className="btn-header">
+                    {/* <div className="btn-header">
                         <button onClick={this.onLogout}>Logout</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
