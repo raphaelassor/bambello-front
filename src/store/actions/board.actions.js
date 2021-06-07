@@ -59,7 +59,6 @@ export function togglePreviewLabels() {
 }
 
 export function setFilter(filterBy){
-    console.log('in set Filter', filterBy)
     return dispatch=>{
         dispatch({ type: 'SET_FILTER',filterBy })
     }

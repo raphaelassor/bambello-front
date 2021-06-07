@@ -19,7 +19,6 @@ class _PopoverDate extends Component {
 
 
     handleChange = (ev) => {
-        console.log('date is :', ev._d)
         this.setState({ date: ev._d })
     }
 

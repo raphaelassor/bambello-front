@@ -23,10 +23,8 @@ class _AppHeader extends Component {
     }
 
     componentDidMount() {
-        console.log('mounted')
         socketService.on('app addActivity', activity => {
             //send push when available
-            console.log('activity in header', activity)
             this.setState({ isNewNotific: true })
         })
     }
@@ -104,9 +102,9 @@ class _AppHeader extends Component {
                             USER NAV  PLACEHOLDER
                         </div>
                     }
-                    <div className="btn-header">
+                    {/* <div className="btn-header">
                         <button onClick={this.onLogout}>Logout</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

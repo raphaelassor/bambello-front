@@ -10,9 +10,7 @@ function _PopoverBackground({ onSaveBoard, board }) {
 
     function handleChange({ target }) {
         const { name, value } = target
-        console.log(name)
         if (name === 'imgUrl') {
-            console.log(`i'm here`)
             board.style.background = `url(${value})`
         } else board.style.background = value;
         onSaveBoard(board)

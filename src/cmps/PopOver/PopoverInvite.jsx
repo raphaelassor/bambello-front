@@ -23,7 +23,6 @@ class _PopoverInvite extends Component {
     addMember = (member) => {
         const { board, onSaveBoard } = this.props
         const idx = board.members.findIndex(boardMember => boardMember._id === member._id)
-        console.log('added member idx', idx)
         if (idx !== -1) return
          board.members.push(member)
         onSaveBoard(board)

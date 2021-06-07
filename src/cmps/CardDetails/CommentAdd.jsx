@@ -29,7 +29,6 @@ class _CommentAdd extends Component {
         const { loggedInUser, card, board, onSaveBoard } = this.props
         const { txt } = this.state
         const savedActivity = boardService.createActivity('comment', txt, loggedInUser, card)
-        console.log('activity : ' , savedActivity )
          socketService.emit('app newActivity',savedActivity)
         board.activities.unshift(savedActivity)
         onSaveBoard(board)

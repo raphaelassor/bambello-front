@@ -51,7 +51,6 @@ class _BoardApp extends Component {
     }
 
     onCloseCardEdit = () => {
-        console.log('im here baby')
         this.setState({ isCardEditOpen: false })
     }
 
@@ -102,7 +101,7 @@ class _BoardApp extends Component {
 
 
     render() {
-        const { onSaveBoard, board, filterBy, isLoading } = this.props
+        const { onSaveBoard, board, filterBy } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <Loader />
       
