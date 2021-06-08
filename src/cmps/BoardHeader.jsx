@@ -103,12 +103,16 @@ class _BoardHeader extends Component {
                         <form onSubmit={this.onTitleSave}>
                             {/* <input type="text" value={title}  ref={(input) => { this.titleInput = input }} /> */}
                             <AutosizeInput
-                            
+
                                 name="form-field-name"
                                 value={title}
                                 onChange={this.handleChange}
                                 ref={(input) => { this.titleInput = input }}
+<<<<<<< HEAD
+                            // onBlur={this.onTitleSave}
+=======
                                  onBlur={this.onTitleSave}
+>>>>>>> 8fcce47a91f932d07eeb15b8bae358beed0291f2
                             />
                         </form>
                         :
@@ -119,31 +123,31 @@ class _BoardHeader extends Component {
                     <i className={`far fa-star icon-sm star-icon ${board.isFavorite ? 'favorite' : ''}`}></i>
                 </button>
                 <span className="divider"></span>
-<div className="flex header-section">
-    
-                <div className="board-header-members flex align-center">
-                    <AvatarGroup>
-                    {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} showStatus={true} />)}
-                    </AvatarGroup>
+                <div className="flex header-section">
 
-                    <button className="wide-layout" onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
-                </div>
-                <Link to={`/board/${board._id}/dashboard`} className="clean-link">
-                <BarChartIcon/>
-                    <span className="wide-layout">Dashboard</span> 
+                    <div className="board-header-members flex align-center">
+                        <AvatarGroup>
+                            {board.members.map(member => <ProfileAvatar key={member._id} member={member} onOpenPopover={this.onOpenPopover} size={28} showStatus={true} />)}
+                        </AvatarGroup>
+
+                        <button className="wide-layout" onClick={(ev) => this.onOpenPopover(ev, 'INVITE')}>Invite</button>
+                    </div>
+                    <Link to={`/board/${board._id}/dashboard`} className="clean-link">
+                        <BarChartIcon />
+                        <span className="wide-layout">Dashboard</span>
                     </Link>
-                {this.isFilterOn && <Link className="board-filter-results flex align-center" to="#" onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
-                    <span>{this.searchResultsCount} search results</span>
-                    <span className="flex align-center" onClick={this.resetFilter}>
-                        <CloseIcon />
-                    </span>
-                </Link>}
-                <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
-                    <ElipsisIcon />
-                    <span className="wide-layout">Show Menu</span>
-                    <ElementOverlay />
-                </button>
-</div>
+                    {this.isFilterOn && <Link className="board-filter-results flex align-center" to="#" onClick={(ev) => this.onOpenPopover(ev, 'BOARD_FILTER')}>
+                        <span>{this.searchResultsCount} search results</span>
+                        <span className="flex align-center" onClick={this.resetFilter}>
+                            <CloseIcon />
+                        </span>
+                    </Link>}
+                    <button className="board-btn" onClick={(ev) => this.onOpenPopover(ev, 'MENU')}>
+                        <ElipsisIcon />
+                        <span className="wide-layout">Show Menu</span>
+                        <ElementOverlay />
+                    </button>
+                </div>
             </div>
         )
 

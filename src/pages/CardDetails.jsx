@@ -16,6 +16,7 @@ import { CardDetailsCover } from '../cmps/CardDetails/CardDetailsCover'
 import { CardAttachments } from '../cmps/CardDetails/CardAttachments'
 import { CardActivities } from '../cmps/CardDetails/CardActivities'
 import { closePopover, openPopover } from '../store/actions/app.actions'
+import { Loader } from '../cmps/Loader'
 
 
 
@@ -126,7 +127,7 @@ class _CardDetails extends Component {
     render() {
         const { board, board: { activities }, onSaveBoard, openPopover } = this.props
         const { card, list } = this.state
-        if (!card) return '' //LOADER PLACER
+        if (!card) return <Loader />
         const { title, members, description, checklists, dueDate, style, attachs, isArchived } = card
         console.log(card)
         return (<>

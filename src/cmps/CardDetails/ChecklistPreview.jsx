@@ -4,6 +4,7 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { TextareaAutosize } from '@material-ui/core';
 import { TodoList } from './TodoList'
 import { TodoAdd } from './TodoAdd'
+import { Loader } from '../Loader'
 import { ProgressBar } from '../ProgressBar'
 
 export class ChecklistPreview extends Component {
@@ -86,7 +87,7 @@ export class ChecklistPreview extends Component {
     render() {
         const { onRemoveChecklist, onSaveChecklist, onCreateActivity } = this.props
         const { checklist, isTitleEdit } = this.state
-        if (!checklist) return '' //loader
+        if (!checklist) return <Loader />
         const { todos } = checklist
         return (<div className="checklist-preview">
             {!isTitleEdit && <div className="window-modal-title flex align-center justify-space-between">

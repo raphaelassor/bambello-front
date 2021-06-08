@@ -34,7 +34,6 @@ export function CardAttachments({ attachs, onDeleteCardAttachment, card, openPop
                                     <span>-</span>
                                     <button onClick={(ev) => onDeleteCardAttachment(ev, attach.id)}>Delete</button>
                                 </div>
-                                <span className="flex align-center"><VideoLabelIcon />Make cover</span>
                             </div>
                         </div>
                     </a>

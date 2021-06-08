@@ -5,7 +5,7 @@ import { socketService } from '../../services/socket.service'
 export function loadBoards(filterBy = { ctg: '' }) {
     return async dispatch => {
         try {
-            dispatch({ type: 'SET_LOADING'})
+            dispatch({ type: 'SET_LOADING' })
             const boards = await boardService.query(filterBy)
             dispatch({ type: 'SET_BOARDS', boards })
         } catch (err) {
@@ -36,19 +36,19 @@ export function onSaveBoard(board) {
         }
     }
 }
-export function createBoard(board){
-    return async dispatch=>{
-        try{
+export function createBoard(board) {
+    return async dispatch => {
+        try {
             const savedBoard = await boardService.save(board)
             dispatch({ type: 'SET_BOARD', board: savedBoard })
-        }catch (err) {
+        } catch (err) {
             console.log('BoardActions: err in onSaveBoard', err)
         }
     }
 }
-export function unsetBoard(){
-    return  dispatch=>{
-        dispatch({type:'SET_BOARD', board:null })
+export function unsetBoard() {
+    return dispatch => {
+        dispatch({ type: 'SET_BOARD', board: null })
     }
 }
 

@@ -5,7 +5,7 @@ import { utilsService } from '../../services/utils.service'
 
 export class TodoAdd extends Component {
     state = {
-        isEditMode: true,
+        isEditMode: false,
         todo: {
             title: ''
         }
