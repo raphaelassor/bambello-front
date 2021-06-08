@@ -5,6 +5,7 @@ import { ColorPalette } from "../ColorPalette";
 import { closePopover } from "../../store/actions/app.actions";
 import { onSaveBoard } from "../../store/actions/board.actions";
 import { withRouter } from 'react-router-dom';
+
 class _PopoverCreateBoard extends Component {
 
     state = {
@@ -22,18 +23,17 @@ class _PopoverCreateBoard extends Component {
 
     onCreateBoard = async () => {
         const { title, color } = this.state
-        const { board,loggedInUser ,onSaveBoard,closePopover} = this.props
+        const { loggedInUser, onSaveBoard, closePopover } = this.props
         const boardToSave = {
             title,
-            background:color,
+            background: color,
             createdBy: loggedInUser
         }
         try {
-            await  onSaveBoard(boardToSave)
-            console.log(this.props.board)
-            if(this.props.board) this.props.history.push(`/board/${this.props.board._id}`)
+            await onSaveBoard(boardToSave)
+            if (this.props.board) this.props.history.push(`/board/${this.props.board._id}`)
             closePopover()
-        }catch(err){
+        } catch (err) {
             console.log('could Not Load Board')
         }
     }
@@ -61,7 +61,7 @@ class _PopoverCreateBoard extends Component {
 
 function mapStateToProps(state) {
     return {
-    loggedInUser: state.appModule.loggedInUser,
+        loggedInUser: state.appModule.loggedInUser,
         board: state.boardModule.board
     }
 }

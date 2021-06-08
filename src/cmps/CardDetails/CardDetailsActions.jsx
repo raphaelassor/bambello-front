@@ -17,7 +17,7 @@ import { socketService } from '../../services/socket.service'
 class _CardDetailsActions extends Component {
 
     addFile = (fileUrl) => {
-        const { card, onSaveCardFromActions, onSaveBoard, closePopover, board, loggedInUser } = this.props
+        const { card, onSaveBoard, closePopover, board } = this.props
         if (!card.attachs) card.attachs = []
         const attach = {
             id: utilsService.makeId(),
@@ -28,10 +28,10 @@ class _CardDetailsActions extends Component {
 
         // onSaveCardFromActions(card)
         card.attachs.push(attach)
-        const savedActivity = boardService.createActivity('attached', attach.fileName, loggedInUser, card)
+        const savedActivity = boardService.createActivity('attached', attach.fileName, card)
         socketService.emit('app newActivity', savedActivity)
         board.activities.unshift(savedActivity)
-        const  updatedBoard = boardService.updateCardInBoard(board,card)
+        const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
         closePopover()
     }
@@ -42,7 +42,7 @@ class _CardDetailsActions extends Component {
         const { card, loggedInUser, onSaveCardFromActions, onSaveBoard, board } = this.props
         card.members.push(loggedInUser)
         onSaveCardFromActions(card)
-        const savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
+        const savedActivity = boardService.createActivity('joined', '', card)
         socketService.emit('app newActivity', savedActivity)
         board.activities.unshift(savedActivity)
         onSaveBoard(board)

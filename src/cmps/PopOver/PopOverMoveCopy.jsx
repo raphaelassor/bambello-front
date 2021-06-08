@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { Popover } from "./Popover";
-import { boardService } from '../../services/board.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';

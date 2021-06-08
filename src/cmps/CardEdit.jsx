@@ -47,11 +47,12 @@ class _CardEdit extends Component {
     // }
 
     onSaveCard = ({ target }) => {
-        const { board, card, onCloseCardEdit, onSaveBoard } = this.props;
+        const { board, card, onCloseCardEdit, onSaveBoard, closePopover } = this.props;
         if (target.name === 'cardTitle' || 'save') card.title = this.state.cardTitle;
         if (target.name === 'archive') card.isArchived = true;
         const savedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(savedBoard);
+        closePopover();
         onCloseCardEdit();
     }
 

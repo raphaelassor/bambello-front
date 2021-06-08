@@ -19,6 +19,7 @@
             transition-property: background-color, border-color, box-shadow;
             transition-duration: 85ms;
             transition-timing-function: ease;
+            margin-bottom: 8px;
             &:hover {
                 background-color: rgba(9, 30, 66, 0.04);
                 .img-container{
@@ -27,9 +28,6 @@
             }
         }
 
-        > *:not(:last-child) {
-            margin-bottom: 8px;
-        }
 
         .img-container {
             height: 100%;
@@ -80,19 +78,6 @@
                 }
             }
 
-            :last-child {
-                cursor: pointer;
-                color: $clr3;
-                text-decoration: underline;
-                &:hover {
-                    color: $clr7;
-                }
-                svg {
-                    margin-inline-end: 4px;
-                    height: 16px;
-                    width: 16px;
-                }
-            }
         }
     }
     .secondary-btn{

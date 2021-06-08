@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { PopoverDate } from './Popover/PopoverDate'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { ReactComponent as DropdownIcon } from '../assets/img/icons/dropdown.svg'
@@ -30,16 +29,19 @@ class _DueDateDisplay extends Component {
             if (timeDiff < 86400000) dueStatus = 'due-soon'
         }
         return dueStatus
-
     }
 
     onToggleCardDone = () => {
         // this.props.toggleCardDone()
         const { card, board, onSaveBoard } = this.props
         card.isDone = !card.isDone;
+        if (card.isDone) {
+            const txt = 'the due date complete'
+            const savedActivity = boardService.createActivity('marked',txt,card)
+            board.activities.unshift(savedActivity)
+        }
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)
-
     }
 
     get dueMsg() {
@@ -47,6 +49,7 @@ class _DueDateDisplay extends Component {
             case 'done': return 'COMPLETE';
             case 'due-soon': return 'DUE SOON';
             case 'overdue': return 'OVERDUE';
+            default: return ''
         }
     }
 
@@ -61,7 +64,7 @@ class _DueDateDisplay extends Component {
 
     render() {
         // TODO: IMPLEMENT TIME TRACKING
-        const { card, toggleCardDone, displayType, openPopover, currPopover } = this.props
+        const { card, toggleCardDone, displayType } = this.props
         const dueStatus = this.getDueStatus();
         return <> { displayType === 'preview' ?
             <div className={`card-preview-date ${dueStatus}`} onClick={toggleCardDone}>
@@ -78,7 +81,7 @@ class _DueDateDisplay extends Component {
                     {card.isDone ?
                         <CheckBoxIcon className="checked" onClick={this.onToggleCardDone} /> :
                         <CheckBoxOutlineBlankIcon className="non-checked" onClick={this.onToggleCardDone} />}
-                    <button className="secondary-btn" onClick={(ev) => this.onOpenPopover(ev,'DATE')}>
+                    <button className="secondary-btn" onClick={(ev) => this.onOpenPopover(ev, 'DATE')}>
                         <div className="flex align-center">
                             <span> {this.dueDateFormat(card.dueDate)}</span>
                             <span className={`due-msg ${dueStatus}`}>{this.dueMsg}</span>

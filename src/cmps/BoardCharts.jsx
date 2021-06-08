@@ -148,6 +148,7 @@ export class BoardCharts extends Component {
                         <Bar
                             data={this.cardsPerListData}
                             options={{
+                                indexAxis: 'y',
                                 maintainAspectRatio: false
                             }}
                         />

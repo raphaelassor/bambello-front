@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { ReactComponent as LogoRight } from '../assets/img/logos/auth-right-logo.svg'
-import { ReactComponent as LogoLeft } from '../assets/img/logos/auth-left-logo.svg'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { onLogin, onSignup } from '../store/actions/app.actions.js'
+import { GoogleLogin } from 'react-google-login'
+import { ReactComponent as LogoRight } from '../assets/img/logos/auth-right-logo.svg'
+import { ReactComponent as LogoLeft } from '../assets/img/logos/auth-left-logo.svg'
+import { onLogin, onSignup, onGoogleLogin } from '../store/actions/app.actions.js'
 import { ReactComponent as LoginSignupLogo } from '../assets/img/logos/login-signup-logo.svg'
+
 
 export class _LoginSignup extends Component {
 
@@ -59,6 +61,16 @@ export class _LoginSignup extends Component {
         pageMode === 'login' ? onLogin(values) : onSignup(values)
     }
 
+    onSuccessGoogle = (res) => {
+        const { tokenId } = res
+        const { onGoogleLogin } = this.props
+        onGoogleLogin(tokenId)
+    }
+
+    onFailureGoogle = (res) => {
+        console.log('Login with google failed', res)
+    }
+
 
     render() {
         const { pageMode, credentials, userInfo } = this.state
@@ -74,14 +86,23 @@ export class _LoginSignup extends Component {
                 <h3>Log in to Bambello</h3>
                 <Formik initialValues={credentials} onSubmit={this.onSubmit} >
                     <Form className="flex column">
-                        <Field type="username" placeholder="Enter username" name="username"  autoFocus/>
+                        <Field type="username" placeholder="Enter username" name="username" autoFocus />
                         <ErrorMessage name="username" component="div" />
                         <Field type="password" placeholder="Enter password" name="password" />
                         <ErrorMessage name="password" component="div" />
                         {loginErr && <p>{loginErr}</p>}
-                        <button type="submit" className="primary-btn">Log in</button>
+                        <button type="submit" className="primary-btn login-signup-btn">Log in</button>
                     </Form>
                 </Formik>
+                <p>OR</p>
+                <GoogleLogin
+                    className="google-login-btn flex align-center justify-center"
+                    clientId='882164866738-fe8q1uh6fprm8fgtqq6bffcti6put4o1.apps.googleusercontent.com'
+                    buttonText='Continue with Google'
+                    onSuccess={this.onSuccessGoogle}
+                    onFailure={this.onFailureGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
                 <hr />
                 <Link to="/signup">Sign up for an account</Link>
             </div>}
@@ -96,7 +117,7 @@ export class _LoginSignup extends Component {
                             <ErrorMessage name="username" component="p" />
                             <Field type="password" placeholder="Enter password" name="password" />
                             <ErrorMessage name="password" component="p" />
-                            <button type="submit" className="primary-btn">Sign up</button>
+                            <button type="submit" className="primary-btn login-signup-btn">Sign up</button>
                         </Form>
                     </Formik>
                     <hr />
@@ -124,6 +145,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
     onLogin,
     onSignup,
+    onGoogleLogin
 }
 
 export const LoginSignup = connect(mapStateToProps, mapDispatchToProps)(_LoginSignup)

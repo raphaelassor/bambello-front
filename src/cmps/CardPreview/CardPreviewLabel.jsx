@@ -11,13 +11,13 @@ class _CardPreviewLabel extends Component {
         const label = labels.find(label => {
             return label.id === labelId
         })
-        if(!label) return ''
+        if (!label) return ''
         //if not found slice the label ID. there is an error becasue there is a splice on board and not on the card Labels as well
         return label
     }
 
     onTogglePreviewLabels = (ev) => {
-        if(this.props.isArchived) return
+        if (this.props.isArchived) return
         ev.preventDefault();
         if (!this.props.isPreview) this.props.togglePreviewLabels()
     }
@@ -28,11 +28,11 @@ class _CardPreviewLabel extends Component {
     //     if (isPreviewLabelsOpen === 'open') return 'open'
     //     if (isPreviewLabelsOpen === 'close')
     // }
- 
-    render() {
 
-        const { isPreviewLabelsOpen, labels } = this.props
+    render() {
+        const { isPreviewLabelsOpen } = this.props
         const label = this.label
+
         return (
             <div className={`card-preview-label ${isPreviewLabelsOpen ? 'open' : 'close'}`} style={{ backgroundColor: label.color }} onClick={this.onTogglePreviewLabels}>
                 <span className={`label-text ${isPreviewLabelsOpen ? 'open' : ''}`}>{label.title}</span>

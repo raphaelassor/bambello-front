@@ -121,7 +121,6 @@ class _Dashboard extends Component {
             path: {
                 // stroke: ` linear-gradient(176deg, rgba(52,171,245,1) 0%, rgba(31,135,237,1) 100%)`,
                 stroke: ` #2fb4f5`,
-                background:` linear-gradient(176deg, rgba(52,171,245,1) 0%, rgba(31,135,237,1) 100%)`,
                 transition: 'stroke-dashoffset 0.5s ease 0s',
                 // transform: 'rotate(0.25turn)',
 
@@ -141,10 +140,11 @@ class _Dashboard extends Component {
         }
     }
     get dueSoonPercentage(){
-        return this.dueSoonCardsCount/this.cardsCount*100
+        return +((this.dueSoonCardsCount/this.cardsCount*100).toFixed(1))
     }
     get overduePercentage(){
-        return this.overdueCardsCount/this.cardsCount*100
+        
+        return +((this.overdueCardsCount/this.cardsCount*100).toFixed(1))
     }
 
     goBackToBoard = () => {

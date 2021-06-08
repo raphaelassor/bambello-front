@@ -15,7 +15,7 @@ class _App extends Component {
     try {
       socketService.setup()
 
-      const { onlineUsers, updateOnlineUsers, loggedInUser } = this.props
+      const { updateOnlineUsers, loggedInUser } = this.props
       const onlineUsersToSet = await userService.getOnlineUsers()
       updateOnlineUsers(onlineUsersToSet)
 

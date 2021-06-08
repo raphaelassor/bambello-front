@@ -1,19 +1,19 @@
 import { userService } from '../../services/user.service.js'
 import { socketService } from '../../services/socket.service.js'
 
-// export function onGoogleLogin(tokenId) {
-//     return async dispatch => {
-//         try {
-//             const user = await userService.googleLogin(tokenId)
-//             console.log(user)
-//             dispatch({ type: 'SET_USER', user })
-//         } catch (err) {
-//             console.log('UserActions: err in login', err)
-//         }
-//     }
-// }
+export function onGoogleLogin(tokenId) {
+    return async dispatch => {
+        try {
+            const user = await userService.googleLogin(tokenId)
+            console.log(user)
+            dispatch({ type: 'SET_USER', user })
+        } catch (err) {
+            console.log('UserActions: err in login', err)
+        }
+    }
+}
 
-export function onLogin(credentials) {
+export function onLogin(credentials = { username: 'asaf1234', password: '1234' }) {
     return async dispatch => {
         try {
             const user = await userService.login(credentials)
@@ -77,13 +77,5 @@ export function updateOnlineUsers(onlineUsers) {
         } catch (err) {
             console.log('UserActions: err in login', err)
         }
-    }
-}
-
-
-// for debugging 
-export function onSetLoggedInUser(user) {
-    return dispatch => {
-        dispatch({ type: 'SET_USER', user })
     }
 }

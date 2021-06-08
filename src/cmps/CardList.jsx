@@ -1,12 +1,11 @@
 import { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { boardService } from '../services/board.service'
 import { CardPreview } from './CardPreview/CardPreview'
 import { CardAdd } from './CardAdd'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
-import { PopoverListMenu } from './Popover/PopoverListMenu'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { openPopover,closePopover } from '../store/actions/app.actions'
+import { openPopover, closePopover } from '../store/actions/app.actions'
 
 export class _CardList extends Component {
 
@@ -45,16 +44,15 @@ export class _CardList extends Component {
         this.setState({ titleTxt: value });
     }
 
-    
+    get filteredList() {
+        const { currList, filterBy } = this.props
+        if (!currList) return null
+        return boardService.getFilteredList(currList, filterBy)
+    }
 
-    get filteredList(){
-        const {currList,filterBy}=this.props
-        if(!currList) return
-        return boardService.getFilteredList(currList,filterBy)
-    } 
     onOpenPopover = (ev, PopoverName) => {
         const elPos = ev.target.getBoundingClientRect()
-        const { board, currList, onSaveBoard,closePopover}=this.props
+        const { board, currList, onSaveBoard, closePopover } = this.props
         const props = {
             currList,
             board,
@@ -67,7 +65,7 @@ export class _CardList extends Component {
 
     render() {
         const { board, currList, onSaveBoard, currListIdx } = this.props
-        const { isEditTitle, isAddCardOpen, titleTxt, isMenuOpen } = this.state
+        const { isEditTitle, isAddCardOpen, titleTxt } = this.state
         return (
             <Draggable draggableId={currList.id} index={currListIdx}>
                 {provided => (
@@ -81,11 +79,11 @@ export class _CardList extends Component {
                                             :
                                             <h2 onClick={this.toggleEditTitle}>{currList.title}</h2>
                                         }
-                                        <div onClick={(ev) => this.onOpenPopover(ev,'LIST_MENU')} className="card-list-btn-menu">
+                                        <div onClick={(ev) => this.onOpenPopover(ev, 'LIST_MENU')} className="card-list-btn-menu">
                                             <i className="fas fa-ellipsis-h"></i>
                                         </div>
                                     </div>
-                                     <div className="card-list-cards">
+                                    <div className="card-list-cards">
                                         {this.filteredList.cards.map((card, idx) => <CardPreview key={card.id} card={card} cardIdx={idx} currList={currList} board={board} onSaveBoard={onSaveBoard} />)}
                                         {isAddCardOpen &&
                                             <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
@@ -107,12 +105,12 @@ export class _CardList extends Component {
     }
 }
 
-const mapDispatchToProps={
+const mapDispatchToProps = {
     openPopover,
     closePopover
 }
 
-export const CardList = connect(null,mapDispatchToProps)(_CardList)
+export const CardList = connect(null, mapDispatchToProps)(_CardList)
 
 
 

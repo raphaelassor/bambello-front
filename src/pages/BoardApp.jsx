@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 // import ScrollContainer from 'react-indiana-drag-scroll'
 import { loadBoard, onSaveBoard, unsetBoard } from '../store/actions/board.actions'
+import { onLogin } from '../store/actions/app.actions'
 import { closePopover } from '../store/actions/app.actions'
 import { Loader } from '../cmps/Loader'
 import { CardEdit } from '../cmps/CardEdit'
@@ -29,9 +30,10 @@ class _BoardApp extends Component {
 
     async componentDidMount() {
         try {
+            if (!this.props.loggedInUser) this.props.onLogin()
             const { boardId } = this.props.match.params
             await this.props.loadBoard(boardId)
-            const { board, loggedInUser } = this.props
+            const { board } = this.props
             // socketService.emit('user watch',loggedInUser._id)
             socketService.emit('join board', board._id)
             socketService.on('board updated', savedBoard => {
@@ -45,10 +47,10 @@ class _BoardApp extends Component {
             console.log(err)
         }
     }
-   async componentDidUpdate(prevProps){
+    async componentDidUpdate(prevProps) {
         const { boardId } = this.props.match.params
-        const {loadBoard,closePopover}=this.props
-        if(prevProps.match.params.boardId!==boardId){
+        const { loadBoard, closePopover } = this.props
+        if (prevProps.match.params.boardId !== boardId) {
             closePopover()
             await loadBoard(boardId)
             socketService.emit('join board', boardId)
@@ -57,7 +59,9 @@ class _BoardApp extends Component {
 
     componentWillUnmount() {
         socketService.off('board updated')
-        this.removeEvent();
+        if (this.removeEvent) {
+            this.removeEvent()
+        }
         closePopover()
         this.props.unsetBoard()
     }
@@ -67,8 +71,8 @@ class _BoardApp extends Component {
     }
 
     onDragEnd = (result) => {
-        let { board, board: { lists }, onSaveBoard, loggedInUser } = this.props
-        const { destination, source, draggableId, type } = result
+        let { board, board: { lists }, onSaveBoard } = this.props
+        const { destination, source, type } = result
         if (!destination) return
         const droppableIdStart = source.droppableId
         const droppableIdEnd = destination.droppableId
@@ -104,7 +108,7 @@ class _BoardApp extends Component {
             lists[listStartIdx] = listStart
             lists[listEndIdx] = listEnd
             const txt = `${listStart.title} to ${listEnd.title}`
-            const savedActivity = boardService.createActivity('moved', txt, loggedInUser, ...card)
+            const savedActivity = boardService.createActivity('moved', txt, ...card)
             board.activities.unshift(savedActivity)
         }
         board.lists = lists
@@ -116,7 +120,7 @@ class _BoardApp extends Component {
         const { onSaveBoard, board, filterBy } = this.props
         const { currCard, elPos, isCardEditOpen } = this.state
         if (!board) return <Loader />
-      
+
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>
@@ -156,7 +160,8 @@ const mapDispatchToProps = {
     loadBoard,
     onSaveBoard,
     unsetBoard,
-    closePopover,
+    onLogin,
+    closePopover
 }
 
 export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)
