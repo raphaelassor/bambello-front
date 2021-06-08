@@ -75,16 +75,26 @@
 
         .google-login-btn {
             background-color: $clr2;
-            
-            span{
-                color: $clr3;
-                font-weight: bold  !important;
+            box-shadow: rgba(black, 0.2) 1px 1px 5px 0 !important;
+            transition: background-color .2s ease-in-out 0s;
+            &:hover {
+                background-color: #f9fafc !important;
+                color: unset !important;
+                opacity: unset !important;
+            }
+            span {
+                color: #505f79 !important;
+                font-weight: bold !important;
                 font-size: 14px;
             }
 
-            div{
+            div {
                 display: flex;
                 align-items: center;
+                margin: unset !important;
+                background-color: unset !important;
+                svg {
+                }
             }
         }
 

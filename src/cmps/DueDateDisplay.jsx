@@ -4,7 +4,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { ReactComponent as DropdownIcon } from '../assets/img/icons/dropdown.svg'
 import { openPopover } from '../store/actions/app.actions';
 import { connect } from 'react-redux';
-import { boardService, createActivity } from '../services/board.service'
+import { boardService } from '../services/board.service'
 import { onSaveBoard } from '../store/actions/board.actions'
 
 class _DueDateDisplay extends Component {
