@@ -34,7 +34,7 @@ export class ActivityPreview extends Component {
             case 'marked':
                 return `marked ${txt} on ${activityLoc}`
             default:
-                return
+                return ''
         }
     }
 

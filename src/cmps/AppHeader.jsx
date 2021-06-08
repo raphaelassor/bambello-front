@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { socketService } from "../services/socket.service";
-import { openPopover, onLogout } from '../store/actions/app.actions'
+import { openPopover, onLogout, closePopover } from '../store/actions/app.actions'
 import { ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import { ReactComponent as BoardIcon } from '../assets/img/icons/board.svg'
 import { ReactComponent as AppsIcon } from '../assets/img/icons/apps.svg'
@@ -38,11 +38,26 @@ class _AppHeader extends Component {
         else this.setState({ currOpenModal: modalName })
     }
     onOpenNotifics = (ev) => {
-        const { openPopover } = this.props
         this.setState({ isNewNotific: false }, () => {
-            const elPos = ev.target.getBoundingClientRect()
-            openPopover('NOTIFICATIONS', elPos)
+            this.onOpenPopover(ev, 'NOTIFICATIONS')
         })
+    }
+    onOpenPopover = (ev, popoverName) => {
+        const { openPopover, onLogout, history, loggedInUser, closePopover } = this.props
+        const elPos = ev.target.getBoundingClientRect()
+        const props = popoverName === 'PROFILE' ?
+            {
+                logOutUser: () => {
+                    onLogout(loggedInUser)
+                    closePopover()
+                    history.push('/')
+                },
+                member: loggedInUser,
+                isInCard: false,
+                isLoggedInUser: true
+            }
+            : null
+        openPopover(popoverName, elPos, props)
     }
 
     onLogout = () => {
@@ -53,8 +68,8 @@ class _AppHeader extends Component {
 
 
     render() {
-        const { isPrevInput, currOpenModal, isNewNotific, isFullLayout } = this.state
-        const { board, isBoardStyle, openPopover } = this.props
+        const { isPrevInput, isNewNotific } = this.state
+        const { isBoardStyle, openPopover, loggedInUser } = this.props
         return <div>
             <div className={`main-header flex justify-space-between ${isBoardStyle ? 'in-board' : 'out-board'} `}>
                 <div className="btn-header-container flex">
@@ -64,7 +79,7 @@ class _AppHeader extends Component {
                     <Link to="/workspace" className="btn-header">
                         <HomeIcon />
                     </Link>
-                    <button className="btn-header wide-layout flex" onClick={() => this.toggleCurModal('board-search')}>
+                    <button className="btn-header wide-layout flex" onClick={(ev) => this.onOpenPopover(ev, 'BOARDS_SEARCH')}>
                         <BoardIcon />
                         <span>
                             Boards
@@ -87,7 +102,7 @@ class _AppHeader extends Component {
                             <AddIcon />
                         </button>
                     </div>
-                    <button className="btn-header wide-layout" onClick={() => this.toggleCurModal('info')}>
+                    <button className="btn-header wide-layout">
                         <InfoIcon />
                     </button>
                     <div>
@@ -95,16 +110,7 @@ class _AppHeader extends Component {
                             <BellIcon />
                         </button>
                     </div>
-                    {/* <ProfileAvatar member={loggedInUser} onOpenPopover={() => this.toggleCurModal('user')} size={32} /> */}
-                    {currOpenModal === 'user' &&
-                        <div className="header-modal notific-modal">
-                            {/* <NotificsList activities={this.props.activities} /> */}
-                            USER NAV  PLACEHOLDER
-                        </div>
-                    }
-                    {/* <div className="btn-header">
-                        <button onClick={this.onLogout}>Logout</button>
-                    </div> */}
+                    <ProfileAvatar member={loggedInUser} onOpenPopover={this.onOpenPopover} size={32} />
                 </div>
             </div>
         </div>
@@ -119,10 +125,12 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     openPopover,
-    onLogout
+    onLogout,
+    closePopover
 }
 
-export const AppHeader = connect(mapStateToProps, mapDispatchToProps)(_AppHeader)
+
+export const AppHeader = connect(mapStateToProps, mapDispatchToProps)(withRouter(_AppHeader))
 
 
 

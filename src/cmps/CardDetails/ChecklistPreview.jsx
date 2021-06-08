@@ -85,7 +85,7 @@ export class ChecklistPreview extends Component {
     }
 
     render() {
-        const { onRemoveChecklist, onSaveChecklist, onCreateActivity } = this.props
+        const { onRemoveChecklist, onCreateActivity } = this.props
         const { checklist, isTitleEdit } = this.state
         if (!checklist) return <Loader />
         const { todos } = checklist

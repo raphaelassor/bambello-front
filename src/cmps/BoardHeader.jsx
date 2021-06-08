@@ -27,14 +27,15 @@ class _BoardHeader extends Component {
     }
 
     handleChange = ({ target }) => {
-        const { value } = target
         let { inputWidth } = this.state
         this.setState({ title: target.value, inputWidth })
     }
 
     toggleEdit = () => {
         const { isEdit } = this.state
-        if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
+        // if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
+        const inputWidth = this.h1Title.getBoundingClientRect().width
+        if (!isEdit) this.setState({ inputWidth })
 
         this.setState({ isEdit: !isEdit, inputWidth: this.state.inputWidth }, () => {
 
@@ -44,7 +45,6 @@ class _BoardHeader extends Component {
 
     onTitleSave = (ev) => {
         ev.preventDefault()
-        const { loggedInUser } = this.props
         const { title } = this.state
         if (!title) return // error msg to user: must enter title
         const { board, onSaveBoard } = this.props
@@ -62,7 +62,7 @@ class _BoardHeader extends Component {
     }
     onOpenPopover = (ev, PopoverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
-        const props = { member, isInCard: false }
+        const props = { member, isInCard: false, showStatus: true }
         this.props.openPopover(PopoverName, elPos, props)
     }
     get isFilterOn() {

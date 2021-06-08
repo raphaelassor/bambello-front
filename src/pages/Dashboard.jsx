@@ -119,18 +119,18 @@ class _Dashboard extends Component {
         if (!chartsData) return '' //LOADER
         return (
             <>
-                <ScreenOverlay styleMode="darken" />
+                <ScreenOverlay styleMode="heavy-dark" />
                 <section className="dashboard-container flex column">
                     <CloseRoundedIcon className="close-svg" onClick={() => this.goBackToBoard()} />
                     <div className="general-statistics flex justify-center wrap">
-                        <div className="stats flex align-center">
-                            <div className="logo-container flex align-center justify-center">
+                        <div className="stats">
+                            {/* <div className="logo-container flex align-center justify-center"> */}
+                            {/* </div> */}
+                            <div className="content flex align-center">
                                 <AssignmentIcon />
-                            </div>
-                            <div className="content flex column full">
                                 <h3>Tasks</h3>
-                                <h4>{this.cardsCount}</h4>
                             </div>
+                                <h4>{this.cardsCount}</h4>
                         </div>
                         <div className="stats flex align-center">
                             <div className="logo-container flex align-center justify-center">

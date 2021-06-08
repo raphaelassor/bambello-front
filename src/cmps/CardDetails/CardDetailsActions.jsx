@@ -17,7 +17,7 @@ import { socketService } from '../../services/socket.service'
 class _CardDetailsActions extends Component {
 
     addFile = (fileUrl) => {
-        const { card, onSaveCardFromActions, onSaveBoard, closePopover, board, loggedInUser } = this.props
+        const { card, onSaveBoard, closePopover, board } = this.props
         if (!card.attachs) card.attachs = []
         const attach = {
             id: utilsService.makeId(),

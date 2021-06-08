@@ -74,7 +74,7 @@ class _CardDetails extends Component {
     }
 
     onSaveCardFromActions = (card) => {
-        this.setState({ card }, this.onSaveCard()) 
+        this.setState({ card }, this.onSaveCard())
     }
 
     onSaveCardDescription = (description) => {
@@ -129,7 +129,7 @@ class _CardDetails extends Component {
         const { card, list } = this.state
         if (!card) return <Loader />
         const { title, members, description, checklists, dueDate, style, attachs, isArchived } = card
-        console.log(card)
+
         return (<>
             <section className="card-details-container">
                 <ScreenOverlay goBack={this.goBackToBoard} styleMode="darken" />

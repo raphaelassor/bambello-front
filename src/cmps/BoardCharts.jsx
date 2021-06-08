@@ -18,7 +18,8 @@ export class BoardCharts extends Component {
             datasets: [
                 {
                     data: Object.values(cardsPerMemberMap),
-                    backgroundColor: '#0079bf',
+                    backgroundColor: '#0058ffdb',
+                    barThickness:20
                 }
             ]
         }
@@ -34,6 +35,7 @@ export class BoardCharts extends Component {
                     data: Object.values(cardsPerLabelMap).map(value => value.count),
                     backgroundColor: Object.values(cardsPerLabelMap).map(value => value.color),
                     borderWidth: 0,
+                  
                 },
             ],
         }
@@ -68,7 +70,8 @@ export class BoardCharts extends Component {
                                 },
                                 legend: {
                                     display: false,
-                                }
+                                },
+                                cutout:'60%',
                             }}
                         />
                     </div>
@@ -79,8 +82,18 @@ export class BoardCharts extends Component {
                         <Bar
                             data={this.cardsPerMemberData}
                             options={{
-                                maintainAspectRatio: false
-                            }}
+                                indexAxis: 'y',
+                                maintainAspectRatio: false,
+                                legend: {
+                                    labels: {
+                                        // This more specific font property overrides the global property
+                                        fontColor: 'black'
+                                    }
+                                }
+                            }
+                            }
+
+
                         />
                     </div>
                 </div>

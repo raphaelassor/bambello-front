@@ -1,8 +1,6 @@
 import { ActivitiesList } from "../ActivitiesList";
 import { connect } from 'react-redux';
 import { Popover } from "./Popover";
-import ArrowBackIcon from '@material-ui/icons/ArrowBackIos';
-import { openPopover } from '../../store/actions/app.actions'
 import { Component } from "react";
 import { NetworkCellOutlined } from "@material-ui/icons";
 import { BackToPrevPopover } from "./BackToPrevPopover";
@@ -26,7 +24,7 @@ class _PopoverActivity extends Component {
     }
     render() {
         const { isCommentsOnly } = this.state
-        const { board } = this.props
+        
         return <Popover displayMode="menu-popovers" title="Activity">
             <div className="activity-pop-over-details" >
                 <BackToPrevPopover popoverName="MENU" />

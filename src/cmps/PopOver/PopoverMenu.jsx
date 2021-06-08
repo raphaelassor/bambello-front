@@ -1,13 +1,13 @@
 import { Component } from "react"
-import { Popover } from "./Popover"
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Popover } from "./Popover"
+import { ActivitiesList } from "../ActivitiesList"
 import { onSaveBoard } from '../../store/actions/board.actions'
 import { openPopover } from '../../store/actions/app.actions'
 import { ReactComponent as SearchIcon } from '../../assets/img/icons/search.svg'
-import { ReactComponent as BoardIcon } from '../../assets/img/icons/board.svg'
 import ActivityIcon from '@material-ui/icons/FormatListBulletedOutlined';
-import { Link } from "react-router-dom";
-import { ActivitiesList } from "../ActivitiesList"
+// import { ReactComponent as BoardIcon } from '../../assets/img/icons/board.svg'
 
 class _PopoverMenu extends Component {
 
@@ -46,8 +46,8 @@ class _PopoverMenu extends Component {
             </Popover>
         </div>
     }
-
 }
+
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board
