@@ -66,7 +66,7 @@ export function updateCardInBoard(board, updatedCard) {
     return { ...board }
 }
 
-export function createActivity(actionType, txt = '', undefined, card = null) {
+export function createActivity(actionType, txt = '', card = null) {
     const loggedInUser = userService.getLoggedinUser()
     const { _id, fullname, imgUrl } = loggedInUser
     const byMember = {

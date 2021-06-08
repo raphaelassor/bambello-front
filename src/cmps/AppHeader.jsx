@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { socketService } from "../services/socket.service";
-import { openPopover, onLogout,closePopover } from '../store/actions/app.actions'
+import { openPopover, onLogout, closePopover } from '../store/actions/app.actions'
 import { ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import { ReactComponent as BoardIcon } from '../assets/img/icons/board.svg'
 import { ReactComponent as AppsIcon } from '../assets/img/icons/apps.svg'
@@ -10,7 +10,7 @@ import { ReactComponent as SearchIcon } from '../assets/img/icons/search.svg'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
-// import { ProfileAvatar } from './ProfileAvatar'
+import { ProfileAvatar } from './ProfileAvatar'
 
 class _AppHeader extends Component {
 
@@ -39,23 +39,25 @@ class _AppHeader extends Component {
     }
     onOpenNotifics = (ev) => {
         this.setState({ isNewNotific: false }, () => {
-            this.onOpenPopover(ev,'NOTIFICATIONS')
+            this.onOpenPopover(ev, 'NOTIFICATIONS')
         })
     }
-    onOpenPopover=(ev,popoverName)=>{
-        const { openPopover,onLogout ,history,loggedInUser,closePopover} = this.props
+    onOpenPopover = (ev, popoverName) => {
+        const { openPopover, onLogout, history, loggedInUser, closePopover } = this.props
         const elPos = ev.target.getBoundingClientRect()
-        const props= popoverName==='PROFILE'? {
-            logOutUser:()=>{
-                onLogout(loggedInUser)
-                closePopover()
-                history.push('/')
-            },
-            member:loggedInUser,
-            isInCard:false,
-            isLoggedInUser:true
-        } : null
-        openPopover(popoverName, elPos,props)
+        const props = popoverName === 'PROFILE' ?
+            {
+                logOutUser: () => {
+                    onLogout(loggedInUser)
+                    closePopover()
+                    history.push('/')
+                },
+                member: loggedInUser,
+                isInCard: false,
+                isLoggedInUser: true
+            }
+            : null
+        openPopover(popoverName, elPos, props)
     }
 
     onLogout = () => {
@@ -66,8 +68,8 @@ class _AppHeader extends Component {
 
 
     render() {
-        const { isPrevInput, currOpenModal, isNewNotific } = this.state
-        const { isBoardStyle, openPopover,loggedInUser } = this.props
+        const { isPrevInput, isNewNotific } = this.state
+        const { isBoardStyle, openPopover, loggedInUser } = this.props
         return <div>
             <div className={`main-header flex justify-space-between ${isBoardStyle ? 'in-board' : 'out-board'} `}>
                 <div className="btn-header-container flex">
@@ -77,7 +79,7 @@ class _AppHeader extends Component {
                     <Link to="/workspace" className="btn-header">
                         <HomeIcon />
                     </Link>
-                    <button className="btn-header wide-layout flex" onClick={(ev) => this.onOpenPopover(ev,'BOARDS_SEARCH')}>
+                    <button className="btn-header wide-layout flex" onClick={(ev) => this.onOpenPopover(ev, 'BOARDS_SEARCH')}>
                         <BoardIcon />
                         <span>
                             Boards

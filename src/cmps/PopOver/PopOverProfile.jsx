@@ -1,12 +1,21 @@
 import { connect } from 'react-redux'
-import { ProfileAvatar } from '../ProfileAvatar'
+import { Link } from 'react-router-dom'
 import { Popover } from './Popover'
+import { ProfileAvatar } from '../ProfileAvatar'
 import { boardService } from '../../services/board.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
-import { closePopover,onLogout } from '../../store/actions/app.actions'
-// import { socketService } from '../../services/socket.service'
+import { closePopover, onLogout } from '../../store/actions/app.actions'
 
-function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overlayType, isInCard = true ,showStatus=false,isLoggedInUser=false,logOutUser}) {
+function _PopoverProfile({
+    board,
+    card,
+    member,
+    onSaveBoard,
+    closePopover,
+    overlayType,
+    isInCard = true,
+    showStatus = false,
+    isLoggedInUser = false, logOutUser, loggedInUser }) {
 
     const onRemoveMember = () => {
         const memberIdx = card.members.findIndex(currMember => currMember._id === member._id)
@@ -20,18 +29,18 @@ function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overl
         <Popover className="clean" overlay={overlayType}>
             <div className="mini-profile-container">
                 <div className="mini-profile">
-                    <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50} showStatus={showStatus}/></div>
+                    <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50} showStatus={showStatus} /></div>
                     <div className="mini-profile-info">
-                        <a>{member.fullname}</a>
+                        <Link to="/workspace" className="clean-link" onClick={closePopover}>{member.fullname}</Link>
                         <p>@{member.username.toLowerCase()}</p>
-                        <a className="mini-profile-info-edit">Edit profile info</a>
-                        {/* TODO: show only if it's the user mini-profile */}
-                        {/* <Link>Edit profile info</Link> */}
+                        {loggedInUser?._id === member._id &&
+                            <Link className="mini-profile-info-edit" to="/workspace" onClick={closePopover}>Edit profile info</Link>
+                        }
                     </div>
                 </div>
             </div>
             {isInCard && <span className="remove clean-btn" onClick={() => onRemoveMember()}>Remove from card</span>}
-            {isLoggedInUser&& <span className="remove clean-btn" onClick={logOutUser}>Logout</span>} 
+            {isLoggedInUser && <span className="remove clean-btn" onClick={logOutUser}>Logout</span>}
         </Popover >
     )
 }
@@ -39,7 +48,7 @@ function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overl
 function mapStateToProps(state) {
     return {
         board: state.boardModule.board,
-        loggedInUser:state.appModule.loggedInUser
+        loggedInUser: state.appModule.loggedInUser
     }
 }
 

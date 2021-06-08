@@ -19,7 +19,7 @@ class _PopoverChecklist extends Component {
 
     addChecklist = (ev) => {
         ev.preventDefault()
-        const { card, onSaveBoard, board, loggedInUser } = this.props
+        const { card, onSaveBoard, board } = this.props
         if (!card.checklists) card.checklists = []
         const checklist = {
             id: utilsService.makeId(),
@@ -27,7 +27,7 @@ class _PopoverChecklist extends Component {
             todos: []
         }
         card.checklists.push(checklist)
-        const savedActivity = boardService.createActivity('added', checklist.title, loggedInUser, card)
+        const savedActivity = boardService.createActivity('added', checklist.title, card)
         board.activities.unshift(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(updatedBoard)

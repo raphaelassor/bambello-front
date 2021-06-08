@@ -104,17 +104,18 @@ class _Card extends Component {
             minHeight: '130px'
         }
         if (coverMode === 'full' || coverMode === 'header') return { backgroundColor: bgColor }
+        else return {}
     }
 
     render() {
 
         const { isEditMode, card, board, handleChange, cardTitle } = this.props;
-        let { coverMode, bgColor } = card.style;
+        const { coverMode } = card.style;
 
         return (
             <div className="card-preview-container" ref={(div) => { this.cardContainer = div }} onContextMenu={this.onOpenCardEdit}>
                 {!isEditMode && <div className="card-preview-edit-btn" onClick={this.onOpenCardEdit}><EditIcon /></div>}
-                {(coverMode === 'header' || coverMode === 'full' && isEditMode) && <div className="card-preview-header" style={this.getCardHeaderStyles}></div>}
+                {(coverMode === 'header' || (coverMode === 'full' && isEditMode)) && <div className="card-preview-header" style={this.getCardHeaderStyles}></div>}
                 <div className={`card-preview ${coverMode === 'full' && 'cover-full'}`} style={this.cardStyles}>
                     {coverMode !== 'full' && <div className="card-preview-labels">
                         {!!card.labelIds.length && card.labelIds.map(labelId => <CardPreviewLabel key={labelId} labelId={labelId} labels={board.labels} isArchived={card.isArchived} isPreview={isEditMode} />)}

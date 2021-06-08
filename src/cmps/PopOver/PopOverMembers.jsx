@@ -34,16 +34,16 @@ class _PopoverMembers extends Component {
         if (idx === -1) {
             card.members.push(member)
             if (member._id === loggedInUser._id) {
-                savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
+                savedActivity = boardService.createActivity('joined', '', card)
             } else {
-                savedActivity = boardService.createActivity('added', member.fullname, loggedInUser, card)
+                savedActivity = boardService.createActivity('added', member.fullname, card)
             }
         } else {
             card.members.splice(idx, 1)
             if (member._id === loggedInUser._id) {
-                savedActivity = boardService.createActivity('left', '', loggedInUser, card)
+                savedActivity = boardService.createActivity('left', '', card)
             } else {
-                savedActivity = boardService.createActivity('removed', member.fullname, loggedInUser, card)
+                savedActivity = boardService.createActivity('removed', member.fullname, card)
             }
             
         }

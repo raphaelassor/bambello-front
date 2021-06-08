@@ -28,14 +28,15 @@ class _BoardHeader extends Component {
     }
 
     handleChange = ({ target }) => {
-        const { value } = target
         let { inputWidth } = this.state
         this.setState({ title: target.value, inputWidth })
     }
 
     toggleEdit = () => {
         const { isEdit } = this.state
-        if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
+        // if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
+        const inputWidth = this.h1Title.getBoundingClientRect().width
+        if (!isEdit) this.setState({ inputWidth })
 
         this.setState({ isEdit: !isEdit, inputWidth: this.state.inputWidth }, () => {
 
@@ -45,12 +46,11 @@ class _BoardHeader extends Component {
 
     onTitleSave = (ev) => {
         ev.preventDefault()
-        const { loggedInUser } = this.props
         const { title } = this.state
         if (!title) return // error msg to user: must enter title
         const { board, onSaveBoard } = this.props
         board.title = title
-        const savedActivity = boardService.createActivity('renamed', board.title, loggedInUser)
+        const savedActivity = boardService.createActivity('renamed', board.title)
         board.activities.unshift(savedActivity)
         onSaveBoard(board)
         this.toggleEdit()
@@ -63,7 +63,7 @@ class _BoardHeader extends Component {
     }
     onOpenPopover = (ev, PopoverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
-        const props = { member , isInCard:false ,showStatus:true}
+        const props = { member, isInCard: false, showStatus: true }
         this.props.openPopover(PopoverName, elPos, props)
     }
     get isFilterOn() {
@@ -89,7 +89,7 @@ class _BoardHeader extends Component {
     }
 
     render() {
-        const { board, loggedInUser } = this.props
+        const { board } = this.props
         const { isEdit, title } = this.state
         return (
             <div className="board-header">
@@ -108,7 +108,7 @@ class _BoardHeader extends Component {
                                 value={title}
                                 onChange={this.handleChange}
                                 ref={(input) => { this.titleInput = input }}
-                                 onBlur={this.onTitleSave}
+                                onBlur={this.onTitleSave}
                             />
                         </form>
                         :

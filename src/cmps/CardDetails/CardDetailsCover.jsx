@@ -14,7 +14,7 @@ export function CardDetailsCover({ style, openPopover, card }) {
         const background = bgColor ? { background: bgColor } : { backgroundImage: `url(${bgImgUrl})` }
         return background
     }
-    const { bgColor, bgImgUrl } = style
+
     return (
         <div className={`card-details-cover ${style.bgImgUrl ? 'img' : ''}`} style={getBackground()}>
             < button className="cover-menu-btn" onClick={(ev) => onOpenPopover(ev, 'COVER')

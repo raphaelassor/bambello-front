@@ -1,7 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import { ReactComponent as PaperClipIcon } from '../../assets/img/icons/paperclip-solid.svg'
-import VideoLabelIcon from '@material-ui/icons/VideoLabel'
+// import VideoLabelIcon from '@material-ui/icons/VideoLabel'
 
 export function CardAttachments({ attachs, onDeleteCardAttachment, card, openPopover }) {
 
@@ -22,7 +22,7 @@ export function CardAttachments({ attachs, onDeleteCardAttachment, card, openPop
             </div>
             <div className="attachments-container">
                 {attachs.map(attach => {
-                    return <a key={attach.id} target="_blank" href={attach.url} className="clean-link">
+                    return <a key={attach.id} target="_blank" rel="noreferrer" href={attach.url} className="clean-link">
                         <div className="attach-preview flex">
                             <div className="img-container">
                                 <img src={attach.url} alt="" />
