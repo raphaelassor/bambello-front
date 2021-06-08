@@ -83,10 +83,10 @@ export class _CardList extends Component {
                                             <i className="fas fa-ellipsis-h"></i>
                                         </div>
                                     </div>
-                                    <div className="card-list-cards">
+                                    <div className="card-list-cards" ref={(cards) => { this.elCardsContainer = cards }}>
                                         {this.filteredList.cards.map((card, idx) => <CardPreview key={card.id} card={card} cardIdx={idx} currList={currList} board={board} onSaveBoard={onSaveBoard} />)}
                                         {isAddCardOpen &&
-                                            <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} />
+                                            <CardAdd board={board} currList={currList} onSaveBoard={onSaveBoard} toggleCardAdd={this.toggleCardAdd} elCardsContainer={this.elCardsContainer} />
                                         }
                                         {provided.placeholder}
                                     </div>

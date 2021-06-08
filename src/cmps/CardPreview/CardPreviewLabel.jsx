@@ -1,10 +1,9 @@
 
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { togglePreviewLabels } from '../../store/actions/board.actions'
+import { togglePreviewLabels, setPreviewLabelClassName } from '../../store/actions/board.actions'
 
 class _CardPreviewLabel extends Component {
-
 
     get label() {
         const { labelId, labels } = this.props
@@ -17,24 +16,22 @@ class _CardPreviewLabel extends Component {
     }
 
     onTogglePreviewLabels = (ev) => {
-        if (this.props.isArchived) return
         ev.preventDefault();
+        if (this.props.isArchived) return
+        const { isPreviewLabelsOpen, setPreviewLabelClassName } = this.props
+        setPreviewLabelClassName(isPreviewLabelsOpen ? 'close-anim' : 'open-anim')
+        setTimeout(() => { setPreviewLabelClassName('') }, 1000)
+
         if (!this.props.isPreview) this.props.togglePreviewLabels()
     }
 
-    //TODO: 
-    // get labelState() {
-    //     const { isPreviewLabelsOpen } = this.props;
-    //     if (isPreviewLabelsOpen === 'open') return 'open'
-    //     if (isPreviewLabelsOpen === 'close')
-    // }
-
     render() {
-        const { isPreviewLabelsOpen } = this.props
+        const { isPreviewLabelsOpen, previewLabelClassName } = this.props
+        // const { className } = this.state
         const label = this.label
 
         return (
-            <div className={`card-preview-label ${isPreviewLabelsOpen ? 'open' : 'close'}`} style={{ backgroundColor: label.color }} onClick={this.onTogglePreviewLabels}>
+            <div className={`card-preview-label ${isPreviewLabelsOpen ? 'open' : 'close'} ${previewLabelClassName}`} style={{ backgroundColor: label.color }} onClick={this.onTogglePreviewLabels}>
                 <span className={`label-text ${isPreviewLabelsOpen ? 'open' : ''}`}>{label.title}</span>
             </div>
         )
@@ -44,11 +41,13 @@ class _CardPreviewLabel extends Component {
 function mapStateToProps(state) {
     return {
         isPreviewLabelsOpen: state.boardModule.isPreviewLabelsOpen,
+        previewLabelClassName: state.boardModule.previewLabelClassName,
     }
 }
 
 const mapDispatchToProps = {
-    togglePreviewLabels
+    togglePreviewLabels,
+    setPreviewLabelClassName
 }
 
 export const CardPreviewLabel = connect(mapStateToProps, mapDispatchToProps)(_CardPreviewLabel)

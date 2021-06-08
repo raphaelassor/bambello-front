@@ -9,6 +9,13 @@ export class CardAdd extends Component {
         titleTxt: ''
     }
 
+    componentDidMount() {
+        // WHY DOESN'T WORK?
+        // const { elCardsContainer } = this.props
+        // elCardsContainer.scrollIntoView({ block: "end", behavior: 'smooth' });
+    }
+    
+
     handleChange = (ev) => {
         const { value } = ev.target;
         if (ev.key === 'Enter') {
@@ -21,7 +28,7 @@ export class CardAdd extends Component {
 
     onAddCard = () => {
         const { titleTxt } = this.state;
-
+        // const { elCardsContainer } = this.props
         if (!titleTxt) {
             this.textArea.focus();
             return;
@@ -29,7 +36,7 @@ export class CardAdd extends Component {
 
         const { board, currList, onSaveBoard } = this.props;
         const listIdx = board.lists.findIndex(list => list.id === currList.id);
-        
+
         const card = {
             id: utilsService.makeId(),
             title: titleTxt,
@@ -51,7 +58,11 @@ export class CardAdd extends Component {
 
         board.lists[listIdx].cards.push(card)
         onSaveBoard(board)
-        this.setState({ titleTxt: '' }, () => this.textArea.focus())
+        this.setState({ titleTxt: '' }, () => {
+            //WHY DOESN'T WORK
+            // elCardsContainer.scrollIntoView({ block: "end" });
+            this.textArea.focus()
+        })
     }
 
     render() {

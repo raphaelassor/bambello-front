@@ -1,31 +1,39 @@
 .card-preview-label {
     display: flex;
-    min-width: 40px;
+    width: 40px;
     border-radius: 4px;
-    color: $clr2;
     height: 8px;
     margin-bottom: 4px;
+    color: transparent;
 
     &:hover {
         filter: brightness(95%);
     }
+
     &.open {
-        animation: label-text-appear 0.45s ease-out;
+        color: $clr2;
         height: 16px;
         line-height: 16px;
         padding: 0 8px;
+        min-width: 40px;
+        width: unset;
+    }
+    
+    &.open-anim {
+        animation: label-text-appear 0.45s ease-out;
     }
 
-    &.close {
+    &.close-anim {
         animation: label-text-disappear 0.45s ease-in forwards;
     }
+
     .label-text {
         // display: none;
         font-size: 12px;
         font-weight: 700;
         white-space: nowrap;
         -webkit-font-smoothing: antialiased;
-        &.open{
+        &.open {
             display: initial;
             visibility: visible;
         }
@@ -68,6 +76,8 @@
         line-height: 16px;
         padding: 0 8px;
         max-width: 198px;
+        min-width: 40px;
+        width: unset;
     }
     25% {
         color: transparent;

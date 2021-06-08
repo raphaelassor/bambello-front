@@ -1,13 +1,14 @@
 const initialState = {
     boards: [],
     board: null,
-    isPreviewLabelsOpen: false,
     filterBy: {
         members: [],
         labels: [],
         txt: '',
     },
-    isLoading: true
+    isLoading: true,
+    isPreviewLabelsOpen: false,
+    previewLabelClassName: ''
 }
 
 export function boardReducer(state = initialState, action) {
@@ -22,6 +23,8 @@ export function boardReducer(state = initialState, action) {
             return { ...state, isLoading: true }
         case 'TOGGLE_LABELS':
             return { ...state, isPreviewLabelsOpen: !state.isPreviewLabelsOpen }
+        case 'SET_LABELS_CLASSNAME':
+            return { ...state, previewLabelClassName: action.className }
         case 'SET_FILTER':
             return { ...state, filterBy: action.filterBy }
         default:
