@@ -58,15 +58,12 @@ export function togglePreviewLabels() {
     }
 }
 
-<<<<<<< HEAD
 export function setPreviewLabelClassName(className) {
     return dispatch => {
         dispatch({ type: 'SET_LABELS_CLASSNAME', className })
     }
 }
 
-=======
->>>>>>> 6cf52b77cf71d3520d89b0ad9b30ba02c495c4e0
 export function setFilter(filterBy) {
     return dispatch => {
         dispatch({ type: 'SET_FILTER', filterBy })
