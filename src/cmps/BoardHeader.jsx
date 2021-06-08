@@ -63,7 +63,7 @@ class _BoardHeader extends Component {
     }
     onOpenPopover = (ev, PopoverName, member) => {
         const elPos = ev.target.getBoundingClientRect()
-        const props = { member , isInCard:false }
+        const props = { member , isInCard:false ,showStatus:true}
         this.props.openPopover(PopoverName, elPos, props)
     }
     get isFilterOn() {

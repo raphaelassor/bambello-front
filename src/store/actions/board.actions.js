@@ -7,7 +7,7 @@ export function loadBoards(filterBy = { ctg: '' }) {
         try {
             dispatch({ type: 'SET_LOADING'})
             const boards = await boardService.query(filterBy)
-            dispatch({ type: 'SET_WORKSPACE', boards })
+            dispatch({ type: 'SET_BOARDS', boards })
         } catch (err) {
             console.log('BoardActions: err in loadBoards', err)
         }
