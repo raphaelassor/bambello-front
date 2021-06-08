@@ -3,10 +3,10 @@ import { ProfileAvatar } from '../ProfileAvatar'
 import { Popover } from './Popover'
 import { boardService } from '../../services/board.service'
 import { onSaveBoard } from '../../store/actions/board.actions'
-import { closePopover } from '../../store/actions/app.actions'
+import { closePopover,onLogout } from '../../store/actions/app.actions'
 // import { socketService } from '../../services/socket.service'
 
-function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overlayType, isInCard = true }) {
+function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overlayType, isInCard = true ,showStatus=false,isLoggedInUser=false,logOutUser}) {
 
     const onRemoveMember = () => {
         const memberIdx = card.members.findIndex(currMember => currMember._id === member._id)
@@ -20,7 +20,7 @@ function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overl
         <Popover className="clean" overlay={overlayType}>
             <div className="mini-profile-container">
                 <div className="mini-profile">
-                    <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50} /></div>
+                    <div className="mini-profile-avatar"><ProfileAvatar member={member} size={50} showStatus={showStatus}/></div>
                     <div className="mini-profile-info">
                         <a>{member.fullname}</a>
                         <p>@{member.username.toLowerCase()}</p>
@@ -31,19 +31,22 @@ function _PopoverProfile({ board, card, member, onSaveBoard, closePopover, overl
                 </div>
             </div>
             {isInCard && <span className="remove clean-btn" onClick={() => onRemoveMember()}>Remove from card</span>}
+            {isLoggedInUser&& <span className="remove clean-btn" onClick={logOutUser}>Logout</span>} 
         </Popover >
     )
 }
 
 function mapStateToProps(state) {
     return {
-        board: state.boardModule.board
+        board: state.boardModule.board,
+        loggedInUser:state.appModule.loggedInUser
     }
 }
 
 const mapDispatchToProps = {
     onSaveBoard,
-    closePopover
+    closePopover,
+    onLogout
 }
 
 export const PopoverProfile = connect(mapStateToProps, mapDispatchToProps)(_PopoverProfile)

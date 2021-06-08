@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 // import ScrollContainer from 'react-indiana-drag-scroll'
 import { loadBoard, onSaveBoard, unsetBoard } from '../store/actions/board.actions'
+import { closePopover } from '../store/actions/app.actions'
 import { Loader } from '../cmps/Loader'
 import { CardEdit } from '../cmps/CardEdit'
 import { CardDetails } from './CardDetails'
@@ -14,6 +15,7 @@ import { eventBusService } from '../services/event-bus.service'
 import { boardService } from '../services/board.service'
 import { socketService } from '../services/socket.service'
 import { Dashboard } from './Dashboard'
+
 
 
 class _BoardApp extends Component {
@@ -43,10 +45,20 @@ class _BoardApp extends Component {
             console.log(err)
         }
     }
+   async componentDidUpdate(prevProps){
+        const { boardId } = this.props.match.params
+        const {loadBoard,closePopover}=this.props
+        if(prevProps.match.params.boardId!==boardId){
+            closePopover()
+            await loadBoard(boardId)
+            socketService.emit('join board', boardId)
+        }
+    }
 
     componentWillUnmount() {
         socketService.off('board updated')
         this.removeEvent();
+        closePopover()
         this.props.unsetBoard()
     }
 
@@ -143,7 +155,8 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
     loadBoard,
     onSaveBoard,
-    unsetBoard
+    unsetBoard,
+    closePopover,
 }
 
 export const BoardApp = connect(mapStateToProps, mapDispatchToProps)(_BoardApp)
