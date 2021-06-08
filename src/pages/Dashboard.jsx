@@ -5,7 +5,11 @@ import { ScreenOverlay } from '../cmps/ScreenOverlay'
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import { ReactComponent as ExclamationIcon } from '../assets/img/icons/exclamation-lg.svg'
+import { ReactComponent as ChartIcon } from '../assets/img/icons/chart.svg'
 import { BoardCharts } from '../cmps/BoardCharts'
+import { CircularProgressbar } from 'react-circular-progressbar';
+import {Loader} from '../cmps/Loader'
+import 'react-circular-progressbar/dist/styles.css';
 
 class _Dashboard extends Component {
 
@@ -87,7 +91,7 @@ class _Dashboard extends Component {
         const { labels } = this.props.board
         const allCards = this.allCards
         const cardsPerLabelMap = labels.reduce((acc, label) => {
-            if (!acc[label.title]) acc[label.title] = { count: 0, color: label.color }
+            if (!acc[label.title]) acc[label.title] = { count: 0}
             const cardsPerLabelCount = allCards.reduce((acc, card) => {
                 const labelIdx = card.labelIds.findIndex(currLabelId => currLabelId === label.id)
                 if (labelIdx > -1 && !card.isDone) acc++
@@ -96,7 +100,10 @@ class _Dashboard extends Component {
             acc[label.title].count = cardsPerLabelCount
             return acc
         }, {})
+        console.log(cardsPerLabelMap)
         return cardsPerLabelMap
+
+        
     }
 
     get cardsPerListMap() {
@@ -109,6 +116,37 @@ class _Dashboard extends Component {
         return cardsPerListMap
     }
 
+    get progressCircleStyle() {
+        return {
+            path: {
+                // stroke: ` linear-gradient(176deg, rgba(52,171,245,1) 0%, rgba(31,135,237,1) 100%)`,
+                stroke: ` #2fb4f5`,
+                background:` linear-gradient(176deg, rgba(52,171,245,1) 0%, rgba(31,135,237,1) 100%)`,
+                transition: 'stroke-dashoffset 0.5s ease 0s',
+                // transform: 'rotate(0.25turn)',
+
+                transformOrigin: 'center center',
+            },
+            trail: {
+                stroke: '#ffffff',
+                strokeLinecap: 'butt',
+                transform: 'rotate(0.25turn)',
+                transformOrigin: 'center center',
+            },
+            text: {
+                fill: '#ffffff',
+                fontSize: '25px',
+
+            },
+        }
+    }
+    get dueSoonPercentage(){
+        return this.dueSoonCardsCount/this.cardsCount*100
+    }
+    get overduePercentage(){
+        return this.overdueCardsCount/this.cardsCount*100
+    }
+
     goBackToBoard = () => {
         const { board } = this.props
         this.props.history.push(`/board/${board._id}`)
@@ -116,39 +154,38 @@ class _Dashboard extends Component {
 
     render() {
         const { chartsData } = this.state
-        if (!chartsData) return '' //LOADER
+        if (!chartsData) return <Loader/> 
         return (
             <>
                 <ScreenOverlay styleMode="heavy-dark" />
                 <section className="dashboard-container flex column">
                     <CloseRoundedIcon className="close-svg" onClick={() => this.goBackToBoard()} />
                     <div className="general-statistics flex justify-center wrap">
-                        <div className="stats">
-                            {/* <div className="logo-container flex align-center justify-center"> */}
-                            {/* </div> */}
-                            <div className="content flex align-center">
-                                <AssignmentIcon />
-                                <h3>Tasks</h3>
+
+                        <div className="stats flex justify-space-between  ">
+                            <div className="content flex  column justify-space-between">
+                               
+                                    <h3 className="flex align-center"><AssignmentIcon />All Tasks </h3>
+                                    <h4>{this.cardsCount}</h4>
                             </div>
-                                <h4>{this.cardsCount}</h4>
+                            <ChartIcon/>
                         </div>
-                        <div className="stats flex align-center">
-                            <div className="logo-container flex align-center justify-center">
-                                <QueryBuilderIcon />
+
+                        <div className="stats flex justify-space-between  ">
+                            <div className="content flex  column justify-space-between">
+                                    <h3 className="flex align-center">  <QueryBuilderIcon /> Due Soon  </h3>
+                                    <h4>{this.dueSoonCardsCount}</h4>
                             </div>
-                            <div className="content flex column full">
-                                <h3>Due soon Tasks</h3>
-                                <h4>{this.dueSoonCardsCount}</h4>
-                            </div>
+                            <CircularProgressbar value={this.dueSoonPercentage} text={`${this.dueSoonPercentage}%`} styles={this.progressCircleStyle} />
                         </div>
-                        <div className="stats flex align-center">
-                            <div className="logo-container flex align-center justify-center">
-                                <ExclamationIcon />
+
+                        <div className="stats flex justify-space-between  ">
+                            <div className="content flex  column justify-space-between">
+                               
+                                    <h3 className="flex align-center"><ExclamationIcon />Overdue </h3>
+                                    <h4>{this.overdueCardsCount}</h4>
                             </div>
-                            <div className="content flex column full">
-                                <h3>Overdue Tasks</h3>
-                                <h4>{this.overdueCardsCount}</h4>
-                            </div>
+                            <CircularProgressbar value={this.overduePercentage} text={`${this.overduePercentage}%`} styles={this.progressCircleStyle} />
                         </div>
                     </div>
                     <BoardCharts chartsData={chartsData} />

@@ -30,6 +30,7 @@ class _PopoverCreateBoard extends Component {
         }
         try {
             await  onSaveBoard(boardToSave)
+            console.log(this.props.board)
             if(this.props.board) this.props.history.push(`/board/${this.props.board._id}`)
             closePopover()
         }catch(err){

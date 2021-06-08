@@ -108,11 +108,7 @@ class _BoardHeader extends Component {
                                 value={title}
                                 onChange={this.handleChange}
                                 ref={(input) => { this.titleInput = input }}
-<<<<<<< HEAD
-                            // onBlur={this.onTitleSave}
-=======
                                  onBlur={this.onTitleSave}
->>>>>>> 8fcce47a91f932d07eeb15b8bae358beed0291f2
                             />
                         </form>
                         :
