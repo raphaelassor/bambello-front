@@ -28,8 +28,8 @@ export function loadBoard(boardId) {
 export function onSaveBoard(board) {
     return async dispatch => {
         try {
-            dispatch({ type: 'SAVE_BOARD', board })
             const savedBoard = await boardService.save(board)
+            dispatch({ type: 'SAVE_BOARD', board: savedBoard })
             socketService.emit('board newUpdate', savedBoard)
         } catch (err) {
             console.log('BoardActions: err in onSaveBoard', err)
@@ -58,12 +58,15 @@ export function togglePreviewLabels() {
     }
 }
 
+<<<<<<< HEAD
 export function setPreviewLabelClassName(className) {
     return dispatch => {
         dispatch({ type: 'SET_LABELS_CLASSNAME', className })
     }
 }
 
+=======
+>>>>>>> 6cf52b77cf71d3520d89b0ad9b30ba02c495c4e0
 export function setFilter(filterBy) {
     return dispatch => {
         dispatch({ type: 'SET_FILTER', filterBy })

@@ -1,11 +1,12 @@
 .board-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+    grid-auto-rows: 140px;
     gap: 16px;
 
     .board-preview {
         cursor: pointer;
-        height: 100px;
+        height: 100%;
         border-radius: $borderRad1;
 
         .board-preview-details {
@@ -49,9 +50,11 @@
             &:hover {
                 .board-preview-details {
                     .fa-star {
-                        transform: translateX(0%);
-                        color: rgba(255, 255, 255, 0.589);
-                        opacity: 1;
+                        &:not(.favorite){
+                            transform: translateX(0%);
+                            color: rgba(255, 255, 255, 0.589);
+                            opacity: 1;
+                        }
                     }
                 }
             }
@@ -60,8 +63,11 @@
                     transform: translateX(200%);
                     color: rgba(255, 255, 255, 0);
                     &:hover {
-                        transform: scale(1.2);
-                        color: $clr2;
+                        &:not(.favorite){
+
+                            transform: scale(1.2);
+                            color: $clr2;
+                        }
                     }
 
                     &.favorite {
