@@ -31,14 +31,11 @@ class _BoardHeader extends Component {
         this.setState({ title: target.value, inputWidth })
     }
 
-    toggleEdit = () => {
+    toggleEdit = () => { 
         const { isEdit } = this.state
-        // if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
-        const inputWidth = this.h1Title.getBoundingClientRect().width
-        if (!isEdit) this.setState({ inputWidth })
-
+        if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
+        // const inputWidth = this.h1Title.getBoundingClientRect().width
         this.setState({ isEdit: !isEdit, inputWidth: this.state.inputWidth }, () => {
-
             if (this.state.isEdit) this.titleInput.select()
         })
     }

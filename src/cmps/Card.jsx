@@ -12,6 +12,7 @@ import { openPopover } from '../store/actions/app.actions'
 import EditIcon from '@material-ui/icons/CreateOutlined'
 import { TextareaAutosize } from '@material-ui/core';
 import { eventBusService } from '../services/event-bus.service'
+import { socketService } from '../services/socket.service'
 
 class _Card extends Component {
 
@@ -30,6 +31,12 @@ class _Card extends Component {
         if (card.isArchived) return
         ev.preventDefault();
         card.isDone = !card.isDone
+        if (card.isDone) {
+            const txt = 'the due date complete'
+            const savedActivity = boardService.createActivity('marked',txt,card)
+            board.activities.unshift(savedActivity)
+            socketService.emit('app newActivity', savedActivity)
+        }
         const savedBoard = boardService.updateCardInBoard(board, card)
         onSaveBoard(savedBoard);
     }
