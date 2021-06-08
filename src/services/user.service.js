@@ -79,7 +79,6 @@ function getLoggedinUser() {
 async function getOnlineUsers() {
     try {
         const users = await getUsers()
-        console.log(users)
         const onlineUsers = users.reduce((acc,user) => {
             if (user.isOnline) {
                 acc.push(user._id)

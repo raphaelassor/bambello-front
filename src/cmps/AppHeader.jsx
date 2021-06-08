@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { socketService } from "../services/socket.service";
 import { openPopover, onLogout } from '../store/actions/app.actions'
@@ -10,7 +10,7 @@ import { ReactComponent as SearchIcon } from '../assets/img/icons/search.svg'
 import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
-import { ProfileAvatar } from './ProfileAvatar'
+// import { ProfileAvatar } from './ProfileAvatar'
 
 class _AppHeader extends Component {
 

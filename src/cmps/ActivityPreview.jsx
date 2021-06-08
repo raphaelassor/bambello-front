@@ -32,7 +32,7 @@ export class ActivityPreview extends Component {
             case 'left':
                 return `left ${activityLoc}`
             default:
-                return
+                return ''
         }
     }
 

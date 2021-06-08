@@ -46,6 +46,11 @@
         }
         .product {
             line-height: 1.5;
+
+            .product-info {
+                margin-bottom: rem(24px);
+            }
+
             h2 {
                 font-family: "SourceSans-Semibold";
                 font-size: rem(24px);
@@ -75,25 +80,39 @@
                     border-color: #0065ff;
                 }
             }
+
+            img {
+                width: 100%;
+                box-shadow: 1px 11px 20px 0px #00000036;
+            }
         }
     }
 }
+
 @media screen and (min-width: 560px) {
-    .home-container {
-        text-align: unset;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-        max-width: 525px;
-        .hero {
+    .home {
+        .home-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 85vh;
-            .hero-info {
-                a {
-                    text-align: center;
-                    line-height: 1.8;
+            margin: auto;
+            max-width: 525px;
+            .hero {
+                align-items: center;
+                min-height: 50vh;
+                .hero-info {
+                    a {
+                        text-align: center;
+                        line-height: 1.8;
+                    }
+                }
+            }
+
+            .product {
+                img {
+                    width: 90%;
                 }
             }
         }
@@ -102,9 +121,11 @@
 @media screen and (min-width: 768px) {
     .home {
         .home-container {
+            text-align: unset;
             text-align: left;
             max-width: 768px;
             .hero {
+                min-height: 85vh;
                 .hero-info {
                     margin-right: 25px;
                     h1 {
@@ -139,7 +160,7 @@
             max-width: 960px;
             .hero {
                 .hero-info {
-                    h1{
+                    h1 {
                         font-size: rem(48px);
                     }
                     padding: 0 rem(15px);
@@ -153,7 +174,7 @@
                 }
             }
             .product {
-                h2{
+                h2 {
                     font-size: rem(36px);
                 }
             }
@@ -167,21 +188,3 @@
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { HomeHeader } from '../cmps/HomeHeader'
 import heroImgUrl from '../assets/img/hero.png'
-// import { ReactComponent as GithubIcon } from '../assets/img/icons/github-icon.svg'
-import { Link } from 'react-router-dom'
+import productImgUrl from '../assets/img/bambello-homepage-product.png'
 export class Home extends Component {
-    componentDidMount() {
-    }
     render() {
         return (
             <div className="home">
@@ -26,9 +24,14 @@ export class Home extends Component {
                         </section>
                     </div>
                     <section className="product">
-                        <h2>It's more than work. It's a way of working together.</h2>
-                        <p>Start with a Bambello board, lists, and cards. Customize and expand with more features as your teamwork grows. Manage projects, organize tasks, and build team spirit—all in one place.</p>
-                        <Link to="/signup" className="clean-link" >Start doing →</Link>
+                        <div className="product-info">
+                            <h2>It's more than work. It's a way of working together.</h2>
+                            <p>Start with a Bambello board, lists, and cards. Customize and expand with more features as your teamwork grows. Manage projects, organize tasks, and build team spirit—all in one place.</p>
+                            <Link to="/signup" className="clean-link" >Start doing →</Link>
+                        </div>
+                        <div>
+                            <img src={productImgUrl} alt="" />
+                        </div>
                     </section>
                 </main>
                 {/* <footer>
