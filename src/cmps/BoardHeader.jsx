@@ -65,7 +65,7 @@ class _BoardHeader extends Component {
     get isFilterOn() {
 
         const { labels, txt, members } = this.props.filterBy
-        return labels.length || members.length || txt
+        return labels.length || members.length || txt 
     }
 
     get searchResultsCount() {
