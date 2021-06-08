@@ -98,7 +98,7 @@ class _AppHeader extends Component {
                 </div>
                 <div className="btn-header-container flex">
                     <div>
-                        <button className="btn-header" onClick={() => openPopover('CREATE_BOARD')}>
+                        <button className="btn-header wide-layout" onClick={() => openPopover('CREATE_BOARD')}>
                             <AddIcon />
                         </button>
                     </div>

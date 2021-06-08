@@ -32,16 +32,16 @@ class _DueDateDisplay extends Component {
     }
 
     onToggleCardDone = () => {
-        // this.props.toggleCardDone()
-        const { card, board, onSaveBoard } = this.props
-        card.isDone = !card.isDone;
-        if (card.isDone) {
-            const txt = 'the due date complete'
-            const savedActivity = boardService.createActivity('marked',txt,card)
-            board.activities.unshift(savedActivity)
-        }
-        const updatedBoard = boardService.updateCardInBoard(board, card)
-        onSaveBoard(updatedBoard)
+        this.props.toggleCardDone()
+        // const { card, board, onSaveBoard } = this.props
+        // card.isDone = !card.isDone;
+        // if (card.isDone) {
+        //     const txt = 'the due date complete'
+        //     const savedActivity = boardService.createActivity('marked',txt,card)
+        //     board.activities.unshift(savedActivity)
+        // }
+        // const updatedBoard = boardService.updateCardInBoard(board, card)
+        // onSaveBoard(updatedBoard)
     }
 
     get dueMsg() {
