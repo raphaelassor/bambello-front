@@ -1,21 +1,20 @@
 
 import React, { Component } from 'react'
-import { Doughnut, Bar, defaults, } from 'react-chartjs-2'
+import { Bar, defaults, } from 'react-chartjs-2'
 
 
 
 export class BoardCharts extends Component {
 
-    state={
-        gradientColor:'',
+    state = {
+        gradientColor: '',
     }
 
     componentDidMount() {
         defaults.font.size = 16
         defaults.color = '#fff'
         defaults.plugins.legend.display = false
-        setTimeout( ()=>this.setState({gradientColor:this.getGradientColor()},()=>{
-            console.log('after setState', this.state.gradientColor)}),50)
+        setTimeout(() => this.setState({ gradientColor: this.getGradientColor() }), 50)
     }
 
     get cardsPerMemberData() {
@@ -33,9 +32,9 @@ export class BoardCharts extends Component {
     }
 
 
-    get cardsPerLabelData (){
+    get cardsPerLabelData() {
         const { cardsPerLabelMap } = this.props.chartsData
-        let labels=[];
+        let labels = [];
         let values = [];
         // for (let item in cardsPerLabelMap) {
         //     if (cardsPerLabelMap[item].count > values[0]) {
@@ -44,11 +43,11 @@ export class BoardCharts extends Component {
         //         labels.unshift(item)
         //     }
         // }
-      const sortedLabels = Object.entries(cardsPerLabelMap).sort((labelA,labelB)=> labelB[1].count-labelA[1].count).slice(0,5)
-      sortedLabels.forEach(label=>{
-          labels.push(label[0])
-          values.push(label[1].count)
-      })
+        const sortedLabels = Object.entries(cardsPerLabelMap).sort((labelA, labelB) => labelB[1].count - labelA[1].count).slice(0, 5)
+        sortedLabels.forEach(label => {
+            labels.push(label[0])
+            values.push(label[1].count)
+        })
         // : Object.keys(cardsPerLabelMap)
         // Object.values(cardsPerLabelMap).map(value => value.count).sort((a, b) => a - b).slice(0, 5)
         return {
@@ -82,7 +81,7 @@ export class BoardCharts extends Component {
     }
 
     getGradientColor(canvas = this.canvas) {
-        if (!canvas) return 
+        if (!canvas) return
         const ctx = canvas.getContext("2d");
         const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 300, 0)
         gradient.addColorStop(0, '#4fa8f8');
@@ -90,7 +89,6 @@ export class BoardCharts extends Component {
         gradient.addColorStop(0.6, '#23beee');
         gradient.addColorStop(0.85, '#37c7e5');
         gradient.addColorStop(1, '#55ceda');
-        console.log('Gradient Is : ', gradient)
         return gradient
 
 

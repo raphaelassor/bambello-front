@@ -16,6 +16,11 @@
         min-height: 100vh;
         min-width: 100vw;
     }
+
+    .boards-btn {
+        position: relative;
+    }
+
     .btn-header-container {
         flex-grow: 1;
         max-width: 45%;

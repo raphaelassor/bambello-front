@@ -5,8 +5,8 @@ export function onGoogleLogin(tokenId) {
     return async dispatch => {
         try {
             const user = await userService.googleLogin(tokenId)
-            console.log(user)
             dispatch({ type: 'SET_USER', user })
+            socketService.emit('user-watch', user._id)
         } catch (err) {
             console.log('UserActions: err in login', err)
         }

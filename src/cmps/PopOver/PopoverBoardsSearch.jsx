@@ -19,7 +19,6 @@ class _PopoverBoardsSearch extends Component {
 
     get filteredBoards() {
         const regex = new RegExp(this.state.txt, 'i')
-        console.log('boards out of filter ', this.props.boards.filter(board => regex.test(board.title)))
         return this.props.boards.filter(board => regex.test(board.title))
     }
 
@@ -31,13 +30,13 @@ class _PopoverBoardsSearch extends Component {
                 <input type="text" className="pop-over-input" onChange={this.handleChange} value={txt} autoFocus />
                 {this.filteredBoards.map(board => {
                     return <NavLink key={board._id} to={`/board/${board._id}`} exact className="flex align center">
-                        <div style={{ background: board.style.background }}></div>
-                        <span style={{ background: board.style.background }}></span>
+                        <div style={{ background: `${board.style.background} center center/ cover` }}></div>
+                        <span style={{ background: `${board.style.background} center center/ cover` }}></span>
                         <span>{board.title}</span>
                     </NavLink>
                 })}
             </div>
-        </Popover>
+        </Popover >
     }
 }
 

@@ -31,11 +31,11 @@ class _BoardHeader extends Component {
         this.setState({ title: target.value, inputWidth })
     }
 
-    toggleEdit = () => { 
+    toggleEdit = () => {
         const { isEdit } = this.state
-        if (!isEdit) this.state.inputWidth = this.h1Title.getBoundingClientRect().width
-        // const inputWidth = this.h1Title.getBoundingClientRect().width
-        this.setState({ isEdit: !isEdit, inputWidth: this.state.inputWidth }, () => {
+        let { inputWidth } = this.state
+        if (!isEdit) inputWidth = this.h1Title.getBoundingClientRect().width
+        this.setState({ isEdit: !isEdit, inputWidth }, () => {
             if (this.state.isEdit) this.titleInput.select()
         })
     }
@@ -65,7 +65,7 @@ class _BoardHeader extends Component {
     get isFilterOn() {
 
         const { labels, txt, members } = this.props.filterBy
-        return labels.length || members.length || txt 
+        return labels.length || members.length || txt
     }
 
     get searchResultsCount() {
@@ -104,7 +104,7 @@ class _BoardHeader extends Component {
                                 value={title}
                                 onChange={this.handleChange}
                                 ref={(input) => { this.titleInput = input }}
-                                 onBlur={this.onTitleSave}
+                                onBlur={this.onTitleSave}
                             />
                         </form>
                         :

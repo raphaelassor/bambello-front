@@ -100,7 +100,6 @@ class _Dashboard extends Component {
             acc[label.title].count = cardsPerLabelCount
             return acc
         }, {})
-        console.log(cardsPerLabelMap)
         return cardsPerLabelMap
 
         

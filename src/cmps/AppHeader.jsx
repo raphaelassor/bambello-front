@@ -11,6 +11,7 @@ import { ReactComponent as AddIcon } from '../assets/img/icons/add.svg'
 import { ReactComponent as InfoIcon } from '../assets/img/icons/info.svg'
 import { ReactComponent as BellIcon } from '../assets/img/icons/notific-bell.svg'
 import { ProfileAvatar } from './ProfileAvatar'
+import { ElementOverlay } from "./Popover/ElementOverlay";
 
 class _AppHeader extends Component {
 
@@ -44,7 +45,7 @@ class _AppHeader extends Component {
     }
     onOpenPopover = (ev, popoverName) => {
         const { openPopover, onLogout, history, loggedInUser, closePopover } = this.props
-        const elPos = ev.target.getBoundingClientRect()
+        let elPos = ev.target.getBoundingClientRect()
         const props = popoverName === 'PROFILE' ?
             {
                 logOutUser: () => {
@@ -57,6 +58,7 @@ class _AppHeader extends Component {
                 isLoggedInUser: true
             }
             : null
+        // if (popoverName === 'BOARDS_SEARCH') elPos = { top: 6, left: 0 }
         openPopover(popoverName, elPos, props)
     }
 
@@ -79,11 +81,12 @@ class _AppHeader extends Component {
                     <Link to="/workspace" className="btn-header">
                         <HomeIcon />
                     </Link>
-                    <button className="btn-header wide-layout flex" onClick={(ev) => this.onOpenPopover(ev, 'BOARDS_SEARCH')}>
+                    <button className="boards-btn btn-header wide-layout flex" onClick={(ev) => this.onOpenPopover(ev, 'BOARDS_SEARCH')}>
                         <BoardIcon />
                         <span>
                             Boards
                         </span>
+                        <ElementOverlay />
                     </button>
                     <div className={`input-header-wrapper flex ${!isPrevInput && 'extended-input'}`} >
                         <input type="text" className="input-header" placeholder="Jump to..." onFocus={this.toggleInput} onBlur={this.toggleInput} />

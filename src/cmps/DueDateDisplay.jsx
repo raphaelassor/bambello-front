@@ -4,7 +4,6 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { ReactComponent as DropdownIcon } from '../assets/img/icons/dropdown.svg'
 import { openPopover } from '../store/actions/app.actions';
 import { connect } from 'react-redux';
-import { boardService } from '../services/board.service'
 import { onSaveBoard } from '../store/actions/board.actions'
 
 class _DueDateDisplay extends Component {
@@ -33,15 +32,6 @@ class _DueDateDisplay extends Component {
 
     onToggleCardDone = () => {
         this.props.toggleCardDone()
-        // const { card, board, onSaveBoard } = this.props
-        // card.isDone = !card.isDone;
-        // if (card.isDone) {
-        //     const txt = 'the due date complete'
-        //     const savedActivity = boardService.createActivity('marked',txt,card)
-        //     board.activities.unshift(savedActivity)
-        // }
-        // const updatedBoard = boardService.updateCardInBoard(board, card)
-        // onSaveBoard(updatedBoard)
     }
 
     get dueMsg() {
