@@ -26,10 +26,10 @@ class _CommentAdd extends Component {
     onSaveComment = (ev) => {
         if (ev.type === 'keydown' && ev.key !== 'Enter') return
         if (ev.type === 'keydown') ev.preventDefault()
-        const { loggedInUser, card, board, onSaveBoard } = this.props
+        const { card, board, onSaveBoard } = this.props
         const { txt } = this.state
-        const savedActivity = boardService.createActivity('comment', txt, loggedInUser, card)
-         socketService.emit('app newActivity',savedActivity)
+        const savedActivity = boardService.createActivity('comment', txt, card)
+        socketService.emit('app newActivity', savedActivity)
         board.activities.unshift(savedActivity)
         onSaveBoard(board)
         this.selectedInput.blur()

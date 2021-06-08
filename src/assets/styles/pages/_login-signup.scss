@@ -51,7 +51,7 @@
             }
         }
 
-        button {
+        .login-signup-btn {
             background: #61bd4f;
             background: -webkit-gradient(linear, left top, left bottom, from(#61bd4f), to(#5aac44));
             background: linear-gradient(to bottom, #61bd4f 0%, #5aac44 100%);
@@ -70,6 +70,22 @@
             color: #4d4d4d;
             font-size: 12px;
             text-align: center;
+            margin-bottom: 17px;
+        }
+
+        .google-login-btn {
+            background-color: $clr2;
+            
+            span{
+                color: $clr3;
+                font-weight: bold  !important;
+                font-size: 14px;
+            }
+
+            div{
+                display: flex;
+                align-items: center;
+            }
         }
 
         hr {

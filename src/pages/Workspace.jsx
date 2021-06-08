@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { loadBoards, onSaveBoard } from '../store/actions/board.actions'
 import { BoardList } from '../cmps/BoardList'
 import { ReactComponent as BoardIcon } from '../assets/img/icons/board.svg'
+import { Loader } from '../cmps/Loader'
 
 class _Workspace extends Component {
 
@@ -25,6 +26,7 @@ class _Workspace extends Component {
 
     render() {
         const { boards } = this.props
+        if (!boards) return <Loader />
         return (
             <section className="workspace-container flex align-flex-start justify-center ">
                 {/* <div className="side-bar">

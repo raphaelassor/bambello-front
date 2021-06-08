@@ -28,26 +28,26 @@ class _PopoverMembers extends Component {
     }
 
     toggleMember = (member) => {
-        const { card, board, loggedInUser } = this.props
+        const { card, board,loggedInUser } = this.props
         const idx = card.members.findIndex(cardMember => cardMember._id === member._id)
         let savedActivity
         if (idx === -1) {
             card.members.push(member)
             if (member._id === loggedInUser._id) {
-                savedActivity = boardService.createActivity('joined', '', loggedInUser, card)
+                savedActivity = boardService.createActivity('joined', '', card)
             } else {
-                savedActivity = boardService.createActivity('added', member.fullname, loggedInUser, card)
+                savedActivity = boardService.createActivity('added', member.fullname, card)
             }
         } else {
             card.members.splice(idx, 1)
             if (member._id === loggedInUser._id) {
-                savedActivity = boardService.createActivity('left', '', loggedInUser, card)
+                savedActivity = boardService.createActivity('left', '', card)
             } else {
-                savedActivity = boardService.createActivity('removed', member.fullname, loggedInUser, card)
+                savedActivity = boardService.createActivity('removed', member.fullname, card)
             }
-            
+
         }
-        socketService.emit('app newActivity',savedActivity)
+        socketService.emit('app newActivity', savedActivity)
         board.activities.unshift(savedActivity)
         const updatedBoard = boardService.updateCardInBoard(board, card)
         this.props.onSaveBoard(updatedBoard)

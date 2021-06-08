@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ProfileAvatar } from './ProfileAvatar'
 import Moment from 'react-moment'
 
- 
+
 export class ActivityPreview extends Component {
 
     get fullActivity() {
@@ -31,6 +31,8 @@ export class ActivityPreview extends Component {
                 return `renamed this board to ${txt}`
             case 'left':
                 return `left ${activityLoc}`
+            case 'marked':
+                return `marked ${txt} on ${activityLoc}`
             default:
                 return
         }

@@ -2,8 +2,8 @@ import io from 'socket.io-client'
 import { httpService } from './http.service'
 const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
 export const socketService = createSocketService()
-// export const socketService = createDummySocketService()
-// socketService.setup()
+
+
 var socketIsReady = false;
 function createSocketService() {
   var socket = null;
