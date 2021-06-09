@@ -13,7 +13,7 @@ export function onGoogleLogin(tokenId) {
     }
 }
 
-export function onLogin(credentials = { username: 'asaf1234', password: '1234' }) {
+export function onLogin(credentials = { username: 'adiv1234', password: '1234' }) {
     return async dispatch => {
         try {
             const user = await userService.login(credentials)

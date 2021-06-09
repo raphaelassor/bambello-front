@@ -97,7 +97,7 @@ export class _LoginSignup extends Component {
                 <p>OR</p>
                 <GoogleLogin
                     className="google-login-btn flex align-center justify-center"
-                    clientId='882164866738-fe8q1uh6fprm8fgtqq6bffcti6put4o1.apps.googleusercontent.com'
+                    clientId='882164866738-stvmet42aenidq89th06j8rg6ciarso5.apps.googleusercontent.com'
                     buttonText='Continue with Google'
                     onSuccess={this.onSuccessGoogle}
                     onFailure={this.onFailureGoogle}
