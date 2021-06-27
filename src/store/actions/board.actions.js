@@ -29,7 +29,6 @@ export function onSaveBoard(board) {
     return async dispatch => {
         try {
             const savedBoard = await boardService.save(board)
-            console.log('board: ',savedBoard)
             dispatch({ type: 'SAVE_BOARD', board: savedBoard })
             socketService.emit('board newUpdate', savedBoard)
         } catch (err) {

@@ -18,7 +18,7 @@
         overflow: auto;
     }
     &.menu {
-       margin-inline-end: 0;
+        margin-inline-end: 0;
         top: 40px;
         right: 0;
         animation: open-menu 0.1s ease-in;
@@ -31,6 +31,7 @@
         left: 24px;
         font-size: 20px;
         color: #6b778c;
+        cursor: pointer;
         &:hover {
             color: $clr4;
         }
@@ -87,7 +88,8 @@
                 position: static;
             }
         }
-        &.menu,&.menu-popovers {
+        &.menu,
+        &.menu-popovers {
             h3 {
                 flex-grow: 1;
                 line-height: 20px;
@@ -152,8 +154,7 @@
     top: 0;
     left: 0;
 }
-@include for-mobile-layout{
-  
+@include for-mobile-layout {
 }
 
 @keyframes open-menu {

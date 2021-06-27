@@ -63,6 +63,7 @@ function _ProfileAvatar({ member, size, onOpenPopover, showStatus = false, onlin
             onOpenPopover(ev, 'PROFILE', member)
         }
     }
+    
     return (
         <div className="profile-avatar" onClick={(ev) => onClickAvatar(ev)}>
             <StyledBadge

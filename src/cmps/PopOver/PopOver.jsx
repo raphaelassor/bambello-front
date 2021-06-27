@@ -14,7 +14,8 @@ export class _Popover extends Component {
 
     componentDidMount() {
         window.addEventListener('resize', () => {
-            if (window.visualViewport.width > 1000) return
+            // if (window.visualViewport.width > 1000) return
+            if (window.innerWidth > 1000) return
             this.onSetPopoverPos()
         });
         this.onSetPopoverPos()
@@ -35,7 +36,8 @@ export class _Popover extends Component {
         let { left, top } = boardService.setPopoverPos(elPos, elRect)
         if (displayMode === 'menu-popovers') {
             top = 40;
-            left = window.visualViewport.width - elRect.width;
+            left = window.innerWidth - elRect.width;
+            // left = window.visualViewport.width - elRect.width;
         }
         this.setState({ top, left })
     }

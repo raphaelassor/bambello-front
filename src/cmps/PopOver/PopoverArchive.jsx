@@ -68,13 +68,13 @@ class _PopoverArchive extends Component {
             <div className="pop-over-archive-details">
                 <BackToPrevPopover popoverName="MENU" />
                 <input type="text" className="pop-over-input" value={filterTxt} onChange={this.handleChange} autoFocus />
-                {archivedCards.map(card => {
-                    return <div>
+                {archivedCards.map((card, idx) => {
+                    return <div key={idx}>
                         <Link to={`/board/${board._id}/${this.getCardListId(card)}/${card.id}`}>
                             <Card card={card} board={board} />
                         </Link>
                         <p className="archive-card-actions">
-                            <Link onClick={() => this.onSendToBoard(card)}>Send to board</Link> - <Link onClick={() => this.onRemoveCard(card)}>Delete</Link>
+                            <button className="clean-btn" onClick={() => this.onSendToBoard(card)}>Send to board</button> - <button className="clean-btn" onClick={() => this.onRemoveCard(card)} href="">Delete</button>
                         </p>
                     </div>
                 })}

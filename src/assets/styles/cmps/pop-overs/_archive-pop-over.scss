@@ -17,7 +17,8 @@
     }
     .archive-card-actions {
         margin: 0 0 8px 8px;
-        a {
+        button {
+            background-color: unset;
             color: $clr3;
             text-decoration: underline;
             display: inline-block;
